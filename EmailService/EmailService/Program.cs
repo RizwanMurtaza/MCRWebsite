@@ -40,12 +40,30 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-// Apply database migrations automatically
-using (var scope = app.Services.CreateScope())
+// Initialize database in background task
+_ = Task.Run(async () =>
 {
-    var context = scope.ServiceProvider.GetRequiredService<EmailDbContext>();
-    context.Database.EnsureCreated();
-}
+    await Task.Delay(5000); // Wait 5 seconds after startup
+    using var scope = app.Services.CreateScope();
+    try
+    {
+        var context = scope.ServiceProvider.GetRequiredService<EmailDbContext>();
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+
+        logger.LogInformation("Attempting to ensure database is created...");
+        await context.Database.EnsureCreatedAsync();
+        logger.LogInformation("Database ensured successfully");
+
+        // Test the connection
+        var canConnect = await context.Database.CanConnectAsync();
+        logger.LogInformation($"Database connection test: {(canConnect ? "Success" : "Failed")}");
+    }
+    catch (Exception ex)
+    {
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating the database");
+    }
+});
 
 // Only use HTTPS redirection in production
 if (!app.Environment.IsDevelopment())

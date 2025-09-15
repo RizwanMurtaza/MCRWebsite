@@ -82,12 +82,14 @@ export DEBIAN_FRONTEND=noninteractive
 apt update -y
 apt install -y mysql-server nginx curl ufw
 
-# Install .NET 9
-wget -q https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb -O /tmp/packages-microsoft-prod.deb
-dpkg -i /tmp/packages-microsoft-prod.deb
-rm /tmp/packages-microsoft-prod.deb
-apt update
-apt install -y aspnetcore-runtime-9.0
+# Install .NET 9 runtime if not already installed
+if ! command -v dotnet &> /dev/null; then
+    wget -q https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb -O /tmp/packages-microsoft-prod.deb
+    dpkg -i /tmp/packages-microsoft-prod.deb
+    rm /tmp/packages-microsoft-prod.deb
+    apt update
+    apt install -y aspnetcore-runtime-9.0
+fi
 
 # Install Certbot
 apt install -y certbot python3-certbot-nginx
@@ -156,7 +158,6 @@ copy_files "./publish/" "/var/www/$PROJECT_NAME/" "Copying application files"
 
 execute_ssh "
 chown -R www-data:www-data /var/www/$PROJECT_NAME
-chmod +x /var/www/$PROJECT_NAME/$PROJECT_NAME 2>/dev/null || echo 'No executable to chmod'
 echo 'File permissions set'
 " "Setting file permissions"
 
@@ -199,7 +200,7 @@ execute_ssh "
 systemctl start nginx
 systemctl enable nginx
 
-# Create initial HTTP-only configuration
+# Create initial HTTP-only configuration for certificate validation
 cat > /etc/nginx/sites-available/$DOMAIN << 'EOF'
 server {
     listen 80;
@@ -230,15 +231,90 @@ echo 'Nginx configured for HTTP'
 # Step 8: Install SSL certificate
 print_step "Installing SSL Certificate"
 execute_ssh "
-# Get SSL certificate and automatically configure HTTPS
-certbot --nginx -d $DOMAIN --non-interactive --agree-tos --email admin@$DOMAIN --redirect
+# Get SSL certificate (webroot method to avoid auto-configuration)
+certbot certonly --webroot -w /var/www/html -d $DOMAIN --non-interactive --agree-tos --email admin@$DOMAIN
+
+# Now create the full SSL configuration
+cat > /etc/nginx/sites-available/$DOMAIN << 'EOF'
+# HTTP server - redirect to HTTPS
+server {
+    listen 80;
+    listen [::]:80;
+    server_name $DOMAIN;
+
+    # Redirect all HTTP traffic to HTTPS
+    return 301 https://\$server_name\$request_uri;
+}
+
+# HTTPS server
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name $DOMAIN;
+
+    # SSL certificate paths
+    ssl_certificate /etc/letsencrypt/live/$DOMAIN/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/$DOMAIN/privkey.pem;
+
+    # Modern SSL configuration
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
+    ssl_prefer_server_ciphers off;
+
+    # SSL session settings
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:MozSSL:10m;
+    ssl_session_tickets off;
+
+    # OCSP stapling
+    ssl_stapling on;
+    ssl_stapling_verify on;
+    ssl_trusted_certificate /etc/letsencrypt/live/$DOMAIN/chain.pem;
+
+    # Security headers
+    add_header Strict-Transport-Security \"max-age=63072000; includeSubDomains; preload\" always;
+    add_header X-Frame-Options \"SAMEORIGIN\" always;
+    add_header X-Content-Type-Options \"nosniff\" always;
+    add_header X-XSS-Protection \"1; mode=block\" always;
+    add_header Referrer-Policy \"no-referrer-when-downgrade\" always;
+
+    # Proxy settings
+    location / {
+        proxy_pass http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection keep-alive;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+        proxy_set_header X-Forwarded-Host \$host;
+        proxy_cache_bypass \$http_upgrade;
+
+        # Timeouts
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+
+        # Buffer settings
+        proxy_buffering off;
+        proxy_buffer_size 4k;
+        proxy_buffers 8 4k;
+        proxy_busy_buffers_size 8k;
+    }
+}
+EOF
+
+# Test and reload Nginx with new SSL configuration
+nginx -t
+systemctl reload nginx
 
 # Enable auto-renewal
 systemctl enable certbot.timer
 systemctl start certbot.timer
 
-echo 'SSL certificate installed and HTTPS configured'
-" "Installing Let's Encrypt SSL certificate"
+echo 'SSL certificate installed and HTTPS configured with enhanced security'
+" "Installing Let's Encrypt SSL certificate and configuring HTTPS"
 
 # Step 9: Configure firewall
 print_step "Configuring Firewall"
