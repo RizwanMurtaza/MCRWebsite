@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Service - Credentials Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s;
+            margin-right: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #ffd43b 0%, #fab005 100%);
+        }
+
+        .credentials-list {
+            margin-top: 20px;
+        }
+
+        .credential-item {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: transform 0.2s;
+        }
+
+        .credential-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .credential-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .credential-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .credential-status {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .credential-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .detail-item {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+
+        .detail-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 Email Service Admin</h1>
+            <p>Manage application email credentials</p>
+        </div>
+
+        <div id="alert-container"></div>
+
+        <!-- Add/Edit Credentials Form -->
+        <div class="card">
+            <h2 class="section-title" id="form-title">Add New Credentials</h2>
+            <form id="credentials-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="appId">App ID *</label>
+                        <input type="text" id="appId" name="appId" required placeholder="e.g., mcr-solicitors-web">
+                    </div>
+                    <div class="form-group">
+                        <label for="appName">App Name *</label>
+                        <input type="text" id="appName" name="appName" required placeholder="e.g., MCR Solicitors Website">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="smtpHost">SMTP Host *</label>
+                        <input type="text" id="smtpHost" name="smtpHost" required placeholder="e.g., smtp.gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="smtpPort">SMTP Port *</label>
+                        <input type="number" id="smtpPort" name="smtpPort" required placeholder="587" min="1" max="65535">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="smtpUsername">SMTP Username *</label>
+                        <input type="text" id="smtpUsername" name="smtpUsername" required placeholder="username@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="smtpPassword">SMTP Password *</label>
+                        <input type="password" id="smtpPassword" name="smtpPassword" required placeholder="App password or SMTP password">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fromEmail">From Email *</label>
+                        <input type="email" id="fromEmail" name="fromEmail" required placeholder="noreply@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="fromName">From Name *</label>
+                        <input type="text" id="fromName" name="fromName" required placeholder="Company Name">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="enableSsl">Enable SSL</label>
+                        <select id="enableSsl" name="enableSsl">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="isActive">Status</label>
+                        <select id="isActive" name="isActive">
+                            <option value="true">Active</option>
+                            <option value="false">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success" id="submit-btn">
+                        <span id="submit-text">Create Credentials</span>
+                        <div id="submit-spinner" class="spinner hidden" style="width: 20px; height: 20px; display: inline-block; margin-left: 10px;"></div>
+                    </button>
+                    <button type="button" class="btn" onclick="resetForm()">Clear Form</button>
+                    <button type="button" class="btn hidden" id="cancel-edit" onclick="cancelEdit()">Cancel Edit</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Credentials List -->
+        <div class="card">
+            <h2 class="section-title">Existing Credentials</h2>
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Loading credentials...</p>
+            </div>
+            <div id="credentials-container" class="credentials-list hidden"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'https://emailservice.pricesnap.co.uk/api';
+        let isEditing = false;
+        let editingAppId = null;
+
+        // Load credentials on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCredentials();
+        });
+
+        // Form submission
+        document.getElementById('credentials-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submit-btn');
+            const submitText = document.getElementById('submit-text');
+            const submitSpinner = document.getElementById('submit-spinner');
+
+            // Disable button and show spinner
+            submitBtn.disabled = true;
+            submitSpinner.classList.remove('hidden');
+
+            const formData = new FormData(this);
+            const data = {
+                appId: formData.get('appId')?.trim() || '',
+                appName: formData.get('appName')?.trim() || '',
+                smtpHost: formData.get('smtpHost')?.trim() || '',
+                smtpPort: parseInt(formData.get('smtpPort')) || 587,
+                smtpUsername: formData.get('smtpUsername')?.trim() || '',
+                smtpPassword: formData.get('smtpPassword')?.trim() || '',
+                fromEmail: formData.get('fromEmail')?.trim() || '',
+                fromName: formData.get('fromName')?.trim() || '',
+                enableSsl: formData.get('enableSsl') === 'true',
+                isActive: formData.get('isActive') === 'true'
+            };
+
+            // Validate required fields
+            if (!data.appId) {
+                showAlert('App ID is required', 'error');
+                submitBtn.disabled = false;
+                submitSpinner.classList.add('hidden');
+                return;
+            }
+
+            console.log('Sending data:', data);
+
+            try {
+                let response;
+                if (isEditing) {
+                    response = await fetch(`${API_BASE}/credentials/${editingAppId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+                } else {
+                    response = await fetch(`${API_BASE}/credentials`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+                }
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showAlert(`Credentials ${isEditing ? 'updated' : 'created'} successfully!`, 'success');
+                    resetForm();
+                    loadCredentials();
+                } else {
+                    console.error('API Error:', result);
+                    if (result.errors) {
+                        // Handle validation errors
+                        let errorMessage = 'Validation errors:\n';
+                        for (const [field, messages] of Object.entries(result.errors)) {
+                            errorMessage += `${field}: ${messages.join(', ')}\n`;
+                        }
+                        showAlert(errorMessage, 'error');
+                    } else {
+                        showAlert(result.message || `Error ${response.status}: ${response.statusText}`, 'error');
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('Network error occurred', 'error');
+            } finally {
+                // Re-enable button and hide spinner
+                submitBtn.disabled = false;
+                submitSpinner.classList.add('hidden');
+            }
+        });
+
+        async function loadCredentials() {
+            const loading = document.getElementById('loading');
+            const container = document.getElementById('credentials-container');
+
+            loading.classList.remove('hidden');
+            container.classList.add('hidden');
+
+            try {
+                const response = await fetch(`${API_BASE}/credentials`);
+                const credentials = await response.json();
+
+                if (response.ok) {
+                    displayCredentials(credentials);
+                } else {
+                    showAlert('Failed to load credentials', 'error');
+                }
+            } catch (error) {
+                console.error('Error loading credentials:', error);
+                showAlert('Network error while loading credentials', 'error');
+            } finally {
+                loading.classList.add('hidden');
+                container.classList.remove('hidden');
+            }
+        }
+
+        function displayCredentials(credentials) {
+            const container = document.getElementById('credentials-container');
+
+            if (credentials.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">No credentials found. Create your first set of credentials above.</p>';
+                return;
+            }
+
+            container.innerHTML = credentials.map(cred => `
+                <div class="credential-item">
+                    <div class="credential-header">
+                        <div class="credential-title">${cred.appName}</div>
+                        <div class="credential-status ${cred.isActive ? 'status-active' : 'status-inactive'}">
+                            ${cred.isActive ? 'Active' : 'Inactive'}
+                        </div>
+                    </div>
+
+                    <div class="credential-details">
+                        <div class="detail-item">
+                            <div class="detail-label">App ID</div>
+                            <div class="detail-value">${cred.appId}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">SMTP Host</div>
+                            <div class="detail-value">${cred.smtpHost}:${cred.smtpPort}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Username</div>
+                            <div class="detail-value">${cred.smtpUsername}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">From Email</div>
+                            <div class="detail-value">${cred.fromEmail}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">SSL Enabled</div>
+                            <div class="detail-value">${cred.enableSsl ? 'Yes' : 'No'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Created</div>
+                            <div class="detail-value">${new Date(cred.createdAt).toLocaleDateString()}</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 15px;">
+                        <button class="btn btn-warning" onclick="editCredentials('${cred.appId}')">Edit</button>
+                        <button class="btn btn-danger" onclick="deleteCredentials('${cred.appId}', '${cred.appName}')">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function editCredentials(appId) {
+            try {
+                const response = await fetch(`${API_BASE}/credentials/${appId}`);
+                const cred = await response.json();
+
+                if (response.ok) {
+                    // Populate form
+                    document.getElementById('appId').value = cred.appId;
+                    document.getElementById('appId').readOnly = true;
+                    document.getElementById('appName').value = cred.appName;
+                    document.getElementById('smtpHost').value = cred.smtpHost;
+                    document.getElementById('smtpPort').value = cred.smtpPort;
+                    document.getElementById('smtpUsername').value = cred.smtpUsername;
+                    document.getElementById('smtpPassword').value = '';
+                    document.getElementById('fromEmail').value = cred.fromEmail;
+                    document.getElementById('fromName').value = cred.fromName;
+                    document.getElementById('enableSsl').value = cred.enableSsl.toString();
+                    document.getElementById('isActive').value = cred.isActive.toString();
+
+                    // Update form state
+                    isEditing = true;
+                    editingAppId = appId;
+                    document.getElementById('form-title').textContent = 'Edit Credentials';
+                    document.getElementById('submit-text').textContent = 'Update Credentials';
+                    document.getElementById('cancel-edit').classList.remove('hidden');
+
+                    // Scroll to form
+                    document.getElementById('credentials-form').scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    showAlert('Failed to load credential details', 'error');
+                }
+            } catch (error) {
+                console.error('Error loading credential:', error);
+                showAlert('Network error while loading credential', 'error');
+            }
+        }
+
+        async function deleteCredentials(appId, appName) {
+            if (!confirm(`Are you sure you want to delete credentials for "${appName}"?\n\nThis action cannot be undone.`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/credentials/${appId}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showAlert('Credentials deleted successfully!', 'success');
+                    loadCredentials();
+                } else {
+                    showAlert(result.message || 'Failed to delete credentials', 'error');
+                }
+            } catch (error) {
+                console.error('Error deleting credentials:', error);
+                showAlert('Network error while deleting credentials', 'error');
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('credentials-form').reset();
+            document.getElementById('appId').readOnly = false;
+            document.getElementById('enableSsl').value = 'true';
+            document.getElementById('isActive').value = 'true';
+            cancelEdit();
+        }
+
+        function cancelEdit() {
+            isEditing = false;
+            editingAppId = null;
+            document.getElementById('form-title').textContent = 'Add New Credentials';
+            document.getElementById('submit-text').textContent = 'Create Credentials';
+            document.getElementById('cancel-edit').classList.add('hidden');
+            document.getElementById('appId').readOnly = false;
+        }
+
+        function showAlert(message, type) {
+            const container = document.getElementById('alert-container');
+            const alertClass = type === 'success' ? 'alert-success' : 'alert-error';
+
+            container.innerHTML = `
+                <div class="alert ${alertClass}">
+                    ${message}
+                </div>
+            `;
+
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

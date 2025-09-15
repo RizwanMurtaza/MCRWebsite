@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//m/MCR/MCR/Website/public_html/**)",
+      "Bash(findstr:*)",
+      "Bash(dir)",
+      "WebSearch",
+      "Bash(dir:*)",
+      "Read(//m/MCR/MCR/Website/NewMCRWebsite/**)",
+      "Bash(mkdir:*)",
+      "Bash(dotnet new:*)",
+      "Bash(dotnet add package:*)",
+      "Bash(dotnet build)",
+      "Bash(netstat:*)",
+      "Bash(tasklist)",
+      "Bash(dotnet run:*)",
+      "Bash(curl:*)",
+      "Bash(taskkill:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

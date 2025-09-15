@@ -1,0 +1,128 @@
+<!-- MCR Solicitors Form Integration Template -->
+<!-- Add this before the closing </body> tag on any page with forms -->
+
+<!-- Email Service Configuration -->
+<script src="js/email-config.js"></script>
+<!-- Email Integration Script -->
+<script src="js/email-integration.js"></script>
+
+<!--
+FORM INTEGRATION INSTRUCTIONS:
+
+1. CONTACT US FORMS:
+   - Use id="consultationForm" for the form element
+   - Required fields: name, email
+   - Optional fields: phone, department, comment/message
+
+   Example:
+   <form id="consultationForm" action="#" method="#">
+       <input type="text" name="name" id="name" required>
+       <input type="email" name="email" id="email" required>
+       <input type="text" name="phone" id="phone">
+       <select name="department" id="department">
+           <option value="Visas & Immigration">Visas & Immigration</option>
+           <option value="Divorce & Family Law">Divorce & Family Law</option>
+           <option value="Personal Injury">Personal Injury</option>
+       </select>
+       <textarea name="comment" id="comment" required></textarea>
+       <button type="submit">Submit</button>
+   </form>
+
+2. APPOINTMENT/ENQUIRY FORMS:
+   - Use id="appointmentForm" for the form element
+   - Required fields: name, email
+   - Optional fields: phone, department, date, time, comment/message
+
+   Example:
+   <form id="appointmentForm" action="#" method="#">
+       <input type="text" name="name" id="name" required>
+       <input type="email" name="email" id="email" required>
+       <input type="text" name="phone" id="phone">
+       <input type="date" name="date" id="date">
+       <select name="time" id="time">
+           <option value="09:00 AM">09:00 AM</option>
+           <option value="10:00 AM">10:00 AM</option>
+           <!-- more time options -->
+       </select>
+       <select name="department" id="department">
+           <option value="Visas & Immigration">Visas & Immigration</option>
+           <option value="Divorce & Family Law">Divorce & Family Law</option>
+           <option value="Personal Injury">Personal Injury</option>
+       </select>
+       <textarea name="comment" id="comment"></textarea>
+       <button type="submit">Submit</button>
+   </form>
+
+3. GENERIC FORMS:
+   - Add class="mcr-contact-form" to any form element
+   - The script will automatically detect and handle them
+
+   Example:
+   <form class="mcr-contact-form" action="#" method="#">
+       <!-- form fields -->
+   </form>
+
+4. FORM FIELD NAMES:
+   Ensure your form fields use these exact names:
+   - name (required)
+   - email (required)
+   - phone (optional)
+   - department/service (optional)
+   - comment/message/enquiry (optional)
+   - date (optional, for appointments)
+   - time (optional, for appointments)
+
+5. SUBMIT BUTTONS:
+   - Use <button type="submit">Submit</button>
+   - The script will automatically handle loading states
+
+6. SUCCESS/ERROR MESSAGES:
+   - Messages are automatically displayed above/below the form
+   - Success messages auto-hide after 5 seconds
+   - Error messages remain visible until dismissed
+
+7. EMAIL SERVICE CONFIGURATION:
+   - Ensure EmailService is running on http://localhost:5000
+   - App credentials must be configured with appId: 'mcr-solicitors-web'
+   - SMTP settings should be configured in the admin panel
+
+UPDATED FILES:
+✅ contact-us.html - Contact form integration added
+✅ book-an-appointment.html - Appointment form integration added
+✅ js/email-integration.js - Main integration script created
+
+STILL NEED TO UPDATE:
+- All other HTML files with forms (97 files found)
+- Add <script src="js/email-integration.js"></script> before </body>
+- Update form IDs/classes as needed
+
+TESTING:
+1. Start EmailService: cd EmailService/EmailService && dotnet run
+2. Configure credentials in admin panel: http://localhost:5000/admin.html
+3. Test forms on website pages
+4. Check email delivery and database logging
+-->
+
+<!-- Quick Update Script for Multiple Files -->
+<script>
+// Run this in browser console to update all forms on a page to use email integration
+(function() {
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        if (!form.classList.contains('mcr-contact-form') &&
+            form.id !== 'consultationForm' &&
+            form.id !== 'appointmentForm') {
+            form.classList.add('mcr-contact-form');
+            console.log('Added mcr-contact-form class to form:', form);
+        }
+    });
+
+    // Add email integration script if not present
+    if (!document.querySelector('script[src*="email-integration.js"]')) {
+        const script = document.createElement('script');
+        script.src = 'js/email-integration.js';
+        document.body.appendChild(script);
+        console.log('Added email integration script');
+    }
+})();
+</script>
