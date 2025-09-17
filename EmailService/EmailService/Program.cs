@@ -71,8 +71,9 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
-app.UseCors("AllowAll");
 app.UseRouting();
+
+app.UseCors("AllowAll");
 
 // Serve static files (for admin.html)
 app.UseStaticFiles();

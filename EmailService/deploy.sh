@@ -6,7 +6,7 @@
 set -e
 
 # Configuration - Edit these for different servers
-SERVER_IP="172.237.101.211"
+SERVER_IP="172.237.117.145"
 SERVER_USER="root"
 SERVER_PASSWORD="Braveheart1190!12"
 DOMAIN="emailservice.pricesnap.co.uk"
@@ -76,26 +76,109 @@ print_step "Testing SSH Connection"
 execute_ssh "echo 'Connection successful'" "Testing SSH connection"
 
 # Step 2: Install required services
-print_step "Installing Required Services"
+print_step "Installing Required Services (1-4)"
+
+# Service 1: MySQL Server
 execute_ssh "
 export DEBIAN_FRONTEND=noninteractive
 apt update -y
-apt install -y mysql-server nginx curl ufw
+apt install -y mysql-server
+if ! systemctl is-enabled mysql >/dev/null 2>&1; then
+    echo 'MySQL installation failed!'
+    exit 1
+fi
+echo 'Service 1/4: MySQL installed successfully'
+" "Installing Service 1: MySQL Server"
 
-# Install .NET 9 runtime if not already installed
-if ! command -v dotnet &> /dev/null; then
-    wget -q https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb -O /tmp/packages-microsoft-prod.deb
-    dpkg -i /tmp/packages-microsoft-prod.deb
-    rm /tmp/packages-microsoft-prod.deb
-    apt update
-    apt install -y aspnetcore-runtime-9.0
+# Service 2: Nginx Web Server
+execute_ssh "
+apt install -y nginx curl
+if ! which nginx >/dev/null 2>&1; then
+    echo 'Nginx installation failed!'
+    exit 1
+fi
+echo 'Service 2/4: Nginx installed successfully'
+" "Installing Service 2: Nginx Web Server"
+
+# Service 3: .NET 9 Runtime
+execute_ssh "
+# Install software-properties-common if not present (needed for add-apt-repository)
+apt-get install -y software-properties-common
+
+# Add the .NET backports PPA repository for .NET 9
+echo 'Adding .NET 9 backports PPA repository...'
+add-apt-repository -y ppa:dotnet/backports
+
+# Update package lists with new repository
+apt-get update -y
+
+# Install ASP.NET Core Runtime 9.0 (includes .NET Runtime)
+echo 'Installing ASP.NET Core Runtime 9.0...'
+apt-get install -y aspnetcore-runtime-9.0
+
+# Verify installation
+if command -v dotnet >/dev/null 2>&1; then
+    echo 'Successfully installed .NET!'
+    echo 'Installed .NET version:'
+    dotnet --version || true
+    echo ''
+    echo 'Installed .NET runtimes:'
+    dotnet --list-runtimes
+
+    # Double check ASP.NET Core runtime is installed
+    if ! dotnet --list-runtimes | grep -q 'Microsoft.AspNetCore.App 9'; then
+        echo 'Warning: ASP.NET Core 9 runtime not detected, attempting reinstall...'
+        apt-get install --reinstall -y aspnetcore-runtime-9.0
+        dotnet --list-runtimes
+    fi
+else
+    echo '.NET installation failed - dotnet command not found!'
+    exit 1
 fi
 
-# Install Certbot
-apt install -y certbot python3-certbot-nginx
+echo 'Service 3/4: .NET 9 Runtime installed successfully'
+" "Installing Service 3: .NET 9 Runtime"
 
-echo 'All services installed successfully'
-" "Installing MySQL, Nginx, .NET 9, and Certbot"
+# Service 4: Certbot for SSL
+execute_ssh "
+apt install -y certbot python3-certbot-nginx ufw
+if ! which certbot >/dev/null 2>&1; then
+    echo 'Certbot installation failed!'
+    exit 1
+fi
+echo 'Service 4/4: Certbot installed successfully'
+" "Installing Service 4: Certbot and UFW"
+
+# Verify all services are installed
+print_step "Verifying All Services Installation"
+execute_ssh "
+echo '=== SERVICES VERIFICATION ==='
+echo -n 'Service 1 - MySQL: '
+systemctl is-enabled mysql && echo 'INSTALLED ✓' || { echo 'FAILED ✗'; exit 1; }
+
+echo -n 'Service 2 - Nginx: '
+which nginx >/dev/null 2>&1 && echo 'INSTALLED ✓' || { echo 'FAILED ✗'; exit 1; }
+
+echo -n 'Service 3 - .NET 9: '
+if command -v dotnet >/dev/null 2>&1 && dotnet --list-runtimes | grep -q 'Microsoft.AspNetCore.App 9'; then
+    echo 'INSTALLED ✓'
+elif command -v dotnet >/dev/null 2>&1 && dotnet --list-sdks | grep -q '^9.0'; then
+    echo 'INSTALLED (SDK) ✓'
+elif command -v dotnet >/dev/null 2>&1; then
+    echo 'INSTALLED (checking version)...'
+    dotnet --version
+else
+    echo 'FAILED ✗'
+    exit 1
+fi
+
+echo -n 'Service 4 - Certbot: '
+which certbot >/dev/null 2>&1 && echo 'INSTALLED ✓' || { echo 'FAILED ✗'; exit 1; }
+
+echo ''
+echo 'All 4 services verified successfully! Proceeding with deployment...'
+echo '==========================='
+" "Verifying all 4 services are installed"
 
 # Step 3: Configure MySQL
 print_step "Configuring MySQL"
@@ -150,16 +233,24 @@ print_step "Deploying Application"
 
 execute_ssh "
 mkdir -p /var/www/$PROJECT_NAME
+rm -rf /var/www/$PROJECT_NAME/*
 chown -R root:root /var/www/$PROJECT_NAME
 echo 'Application directory prepared'
 " "Preparing application directory"
 
-copy_files "./publish/" "/var/www/$PROJECT_NAME/" "Copying application files"
+# Copy files from publish directory to application directory (flattened)
+print_status "Copying application files"
+sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no "$SERVER_USER@$SERVER_IP" "mkdir -p /tmp/publish_transfer"
+copy_files "./publish/" "/tmp/publish_transfer/" "Uploading publish files to temp directory"
 
 execute_ssh "
+cd /tmp/publish_transfer/publish
+cp -r * /var/www/$PROJECT_NAME/
+rm -rf /tmp/publish_transfer
 chown -R www-data:www-data /var/www/$PROJECT_NAME
+chmod +x /var/www/$PROJECT_NAME/$PROJECT_NAME 2>/dev/null || echo 'No executable to chmod'
 echo 'File permissions set'
-" "Setting file permissions"
+" "Moving files and setting permissions"
 
 # Step 6: Create systemd service
 print_step "Creating Systemd Service"
@@ -175,6 +266,8 @@ User=www-data
 Group=www-data
 WorkingDirectory=/var/www/$PROJECT_NAME
 ExecStart=/usr/bin/dotnet /var/www/$PROJECT_NAME/$PROJECT_NAME.dll
+KillSignal=SIGINT
+SyslogIdentifier=emailservice
 Restart=always
 RestartSec=10
 TimeoutStartSec=60
@@ -200,7 +293,7 @@ execute_ssh "
 systemctl start nginx
 systemctl enable nginx
 
-# Create initial HTTP-only configuration for certificate validation
+# Create initial HTTP-only configuration
 cat > /etc/nginx/sites-available/$DOMAIN << 'EOF'
 server {
     listen 80;
@@ -231,90 +324,15 @@ echo 'Nginx configured for HTTP'
 # Step 8: Install SSL certificate
 print_step "Installing SSL Certificate"
 execute_ssh "
-# Get SSL certificate (webroot method to avoid auto-configuration)
-certbot certonly --webroot -w /var/www/html -d $DOMAIN --non-interactive --agree-tos --email admin@$DOMAIN
-
-# Now create the full SSL configuration
-cat > /etc/nginx/sites-available/$DOMAIN << 'EOF'
-# HTTP server - redirect to HTTPS
-server {
-    listen 80;
-    listen [::]:80;
-    server_name $DOMAIN;
-
-    # Redirect all HTTP traffic to HTTPS
-    return 301 https://\$server_name\$request_uri;
-}
-
-# HTTPS server
-server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-    server_name $DOMAIN;
-
-    # SSL certificate paths
-    ssl_certificate /etc/letsencrypt/live/$DOMAIN/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/$DOMAIN/privkey.pem;
-
-    # Modern SSL configuration
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
-    ssl_prefer_server_ciphers off;
-
-    # SSL session settings
-    ssl_session_timeout 1d;
-    ssl_session_cache shared:MozSSL:10m;
-    ssl_session_tickets off;
-
-    # OCSP stapling
-    ssl_stapling on;
-    ssl_stapling_verify on;
-    ssl_trusted_certificate /etc/letsencrypt/live/$DOMAIN/chain.pem;
-
-    # Security headers
-    add_header Strict-Transport-Security \"max-age=63072000; includeSubDomains; preload\" always;
-    add_header X-Frame-Options \"SAMEORIGIN\" always;
-    add_header X-Content-Type-Options \"nosniff\" always;
-    add_header X-XSS-Protection \"1; mode=block\" always;
-    add_header Referrer-Policy \"no-referrer-when-downgrade\" always;
-
-    # Proxy settings
-    location / {
-        proxy_pass http://localhost:5000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade \$http_upgrade;
-        proxy_set_header Connection keep-alive;
-        proxy_set_header Host \$host;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto \$scheme;
-        proxy_set_header X-Forwarded-Host \$host;
-        proxy_cache_bypass \$http_upgrade;
-
-        # Timeouts
-        proxy_connect_timeout 60s;
-        proxy_send_timeout 60s;
-        proxy_read_timeout 60s;
-
-        # Buffer settings
-        proxy_buffering off;
-        proxy_buffer_size 4k;
-        proxy_buffers 8 4k;
-        proxy_busy_buffers_size 8k;
-    }
-}
-EOF
-
-# Test and reload Nginx with new SSL configuration
-nginx -t
-systemctl reload nginx
+# Get SSL certificate and automatically configure HTTPS
+certbot --nginx -d $DOMAIN --non-interactive --agree-tos --email admin@$DOMAIN --redirect
 
 # Enable auto-renewal
 systemctl enable certbot.timer
 systemctl start certbot.timer
 
-echo 'SSL certificate installed and HTTPS configured with enhanced security'
-" "Installing Let's Encrypt SSL certificate and configuring HTTPS"
+echo 'SSL certificate installed and HTTPS configured'
+" "Installing Let's Encrypt SSL certificate"
 
 # Step 9: Configure firewall
 print_step "Configuring Firewall"
@@ -332,27 +350,27 @@ ufw status
 print_step "Final Verification"
 execute_ssh "
 echo '=== DEPLOYMENT VERIFICATION ==='
+echo 'Files in application directory:'
+ls -la /var/www/$PROJECT_NAME/
+
 echo 'Service Status:'
+systemctl status emailservice --no-pager --lines=5 || echo 'Service check failed'
+
+echo 'Service Active Status:'
 systemctl is-active emailservice || echo 'Service not running'
 
-echo 'Nginx Status:'
-systemctl is-active nginx || echo 'Nginx not running'
-
-echo 'MySQL Status:'
-systemctl is-active mysql || echo 'MySQL not running'
-
 echo 'Port Check:'
-netstat -tlnp | grep ':5000' || echo 'Port 5000 not listening'
-netstat -tlnp | grep ':443' || echo 'Port 443 not listening'
+ss -tlnp | grep ':5000' || echo 'Port 5000 not listening'
 
-echo 'SSL Certificate:'
-certbot certificates | grep -A 3 'Certificate Name:' || echo 'No certificates found'
-
-echo 'Application Test:'
+echo 'Application Test (with 10 second wait):'
+sleep 10
 curl -s -I http://localhost:5000 | head -1 || echo 'Local app test failed'
 
 echo 'HTTPS Test:'
 curl -s -I https://$DOMAIN | head -1 || echo 'HTTPS test failed'
+
+echo 'Recent Service Logs:'
+journalctl -u emailservice --no-pager -n 5 --since '1 minute ago' || echo 'No recent logs'
 
 echo '=== VERIFICATION COMPLETE ==='
 " "Running final verification"

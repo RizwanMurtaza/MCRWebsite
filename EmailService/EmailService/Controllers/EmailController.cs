@@ -1,11 +1,13 @@
 using EmailService.DTOs;
 using EmailService.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 
 namespace EmailService.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors("AllowAll")]
     public class EmailController : ControllerBase
     {
         private readonly IEmailService _emailService;
