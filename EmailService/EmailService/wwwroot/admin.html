@@ -220,6 +220,11 @@
             margin: 20px auto;
         }
 
+        #submit-spinner {
+            border-width: 2px;
+            vertical-align: middle;
+        }
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -316,7 +321,7 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-success" id="submit-btn">
                         <span id="submit-text">Create Credentials</span>
-                        <div id="submit-spinner" class="spinner hidden" style="width: 20px; height: 20px; display: inline-block; margin-left: 10px;"></div>
+                        <span id="submit-spinner" class="spinner" style="width: 20px; height: 20px; margin-left: 10px; display: none;"></span>
                     </button>
                     <button type="button" class="btn" onclick="resetForm()">Clear Form</button>
                     <button type="button" class="btn hidden" id="cancel-edit" onclick="cancelEdit()">Cancel Edit</button>
@@ -336,7 +341,7 @@
     </div>
 
     <script>
-        const API_BASE = 'https://emailservice.pricesnap.co.uk/api';
+        const API_BASE = 'https://emailservice.mcrsolicitors.co.uk/api';
         let isEditing = false;
         let editingAppId = null;
 
@@ -355,7 +360,7 @@
 
             // Disable button and show spinner
             submitBtn.disabled = true;
-            submitSpinner.classList.remove('hidden');
+            submitSpinner.style.display = 'inline-block';
 
             const formData = new FormData(this);
             const data = {
@@ -375,7 +380,7 @@
             if (!data.appId) {
                 showAlert('App ID is required', 'error');
                 submitBtn.disabled = false;
-                submitSpinner.classList.add('hidden');
+                submitSpinner.style.display = 'none';
                 return;
             }
 
@@ -401,7 +406,13 @@
                     });
                 }
 
-                const result = await response.json();
+                let result;
+                try {
+                    result = await response.json();
+                } catch (jsonError) {
+                    console.error('Failed to parse response:', jsonError);
+                    result = { message: 'Invalid response from server' };
+                }
 
                 if (response.ok) {
                     showAlert(`Credentials ${isEditing ? 'updated' : 'created'} successfully!`, 'success');
@@ -422,11 +433,11 @@
                 }
             } catch (error) {
                 console.error('Error:', error);
-                showAlert('Network error occurred', 'error');
+                showAlert('Network error occurred. Please check your connection and try again.', 'error');
             } finally {
-                // Re-enable button and hide spinner
+                // Always re-enable button and hide spinner
                 submitBtn.disabled = false;
-                submitSpinner.classList.add('hidden');
+                submitSpinner.style.display = 'none';
             }
         });
 
@@ -554,7 +565,13 @@
                     method: 'DELETE'
                 });
 
-                const result = await response.json();
+                let result;
+                try {
+                    result = await response.json();
+                } catch (jsonError) {
+                    console.error('Failed to parse response:', jsonError);
+                    result = { message: 'Invalid response from server' };
+                }
 
                 if (response.ok) {
                     showAlert('Credentials deleted successfully!', 'success');

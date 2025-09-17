@@ -9,7 +9,7 @@ set -e
 SERVER_IP="172.237.117.145"
 SERVER_USER="root"
 SERVER_PASSWORD="Braveheart1190!12"
-DOMAIN="emailservice.pricesnap.co.uk"
+DOMAIN="emailservice.mcrsolicitors.co.uk"
 MYSQL_PASSWORD="rizwan321"
 PROJECT_NAME="EmailService"
 

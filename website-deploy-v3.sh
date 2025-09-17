@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Website Deployment Script V3 for pricesnap.co.uk
+# Website Deployment Script V3 for mcrsolicitors.co.uk
 # Fixed version with proper folder inclusion and Nginx configuration
 # Run from WSL on Windows to deploy to the Ubuntu server
 
@@ -12,13 +12,13 @@ set -e
 SERVER_IP="172.237.117.145"
 SERVER_USER="root"
 SERVER_PASSWORD="Braveheart1190!12"
-DOMAIN="www.pricesnap.co.uk"
-DOMAIN_WITHOUT_WWW="pricesnap.co.uk"
-ADMIN_EMAIL="admin@pricesnap.co.uk"
+DOMAIN="www.mcrsolicitors.co.uk"
+DOMAIN_WITHOUT_WWW="mcrsolicitors.co.uk"
+ADMIN_EMAIL="admin@mcrsolicitors.co.uk"
 
 # Deployment Configuration
-WEBSITE_DIR="/var/www/pricesnap"
-BACKUP_DIR="/var/backups/pricesnap"
+WEBSITE_DIR="/var/www/mcrsolicitors"
+BACKUP_DIR="/var/backups/mcrsolicitors"
 LOCAL_WEBSITE_PATH="."  # Current directory with all HTML files
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 ZIP_FILE="website_deploy_${TIMESTAMP}.zip"
@@ -96,7 +96,7 @@ copy_file_to_server() {
 
 clear
 echo -e "${BOLD}${MAGENTA}╔════════════════════════════════════════════╗${NC}"
-echo -e "${BOLD}${MAGENTA}║   FIXED DEPLOYMENT FOR PRICESNAP.CO.UK     ║${NC}"
+echo -e "${BOLD}${MAGENTA}║  DEPLOYMENT FOR MCRSOLICITORS.CO.UK        ║${NC}"
 echo -e "${BOLD}${MAGENTA}║       Version 3.0 - Complete Deploy         ║${NC}"
 echo -e "${BOLD}${MAGENTA}╚════════════════════════════════════════════╝${NC}"
 echo ""
@@ -273,6 +273,8 @@ execute_ssh "
 systemctl stop nginx || true
 
 # Remove problematic configurations
+rm -f /etc/nginx/sites-enabled/mcrsolicitors*
+rm -f /etc/nginx/sites-available/mcrsolicitors*
 rm -f /etc/nginx/sites-enabled/pricesnap*
 rm -f /etc/nginx/sites-available/pricesnap*
 rm -f /etc/nginx/sites-enabled/default
@@ -349,7 +351,7 @@ print_step "STEP 8: Configuring Web Server (HTTP First)"
 
 execute_ssh "
 # Create initial HTTP-only configuration
-cat > /etc/nginx/sites-available/pricesnap << 'EOF'
+cat > /etc/nginx/sites-available/mcrsolicitors << 'EOF'
 server {
     listen 80;
     listen [::]:80;
@@ -397,13 +399,13 @@ server {
     }
 
     # Logging
-    access_log /var/log/nginx/pricesnap_access.log;
-    error_log /var/log/nginx/pricesnap_error.log;
+    access_log /var/log/nginx/mcrsolicitors_access.log;
+    error_log /var/log/nginx/mcrsolicitors_error.log;
 }
 EOF
 
 # Enable the site
-ln -sf /etc/nginx/sites-available/pricesnap /etc/nginx/sites-enabled/
+ln -sf /etc/nginx/sites-available/mcrsolicitors /etc/nginx/sites-enabled/
 
 # Test configuration
 nginx -t
@@ -523,7 +525,7 @@ nginx -t 2>&1 | grep -E 'test is successful|syntax is ok' && echo '✅ Nginx con
 
 echo ''
 echo '=== RECENT ACCESS LOG ==='
-tail -3 /var/log/nginx/pricesnap_access.log 2>/dev/null || echo 'No access yet'
+tail -3 /var/log/nginx/mcrsolicitors_access.log 2>/dev/null || echo 'No access yet'
 " "Running verification"
 
 # Clean up local zip file
