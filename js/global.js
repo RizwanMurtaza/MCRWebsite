@@ -51,10 +51,10 @@ function initializeMenuEvents() {
             const dropdownContent = dropdown.querySelector('.dropdown-content');
             
             if (mainLink && dropdownContent) {
-                // Add mobile touch hover behavior
-                mainLink.addEventListener('touchstart', handleMobileTouchStart);
-                dropdown.addEventListener('touchend', handleMobileTouchEnd);
-                dropdown.addEventListener('mouseleave', handleMobileMouseLeave);
+                // Add mobile touch hover behavior with passive listeners
+                mainLink.addEventListener('touchstart', handleMobileTouchStart, { passive: false });
+                dropdown.addEventListener('touchend', handleMobileTouchEnd, { passive: true });
+                dropdown.addEventListener('mouseleave', handleMobileMouseLeave, { passive: true });
                 
                 // Handle secondary dropdowns (dropdown2)
                 const dropdown2Items = dropdownContent.querySelectorAll('.dropdown2');
@@ -63,9 +63,9 @@ function initializeMenuEvents() {
                     const dropdown2Content = dropdown2.querySelector('.dropdown2-content');
                     
                     if (secondaryLink && dropdown2Content) {
-                        secondaryLink.addEventListener('touchstart', handleMobileTouch2Start);
-                        dropdown2.addEventListener('touchend', handleMobileTouch2End);
-                        dropdown2.addEventListener('mouseleave', handleMobileMouseLeave2);
+                        secondaryLink.addEventListener('touchstart', handleMobileTouch2Start, { passive: false });
+                        dropdown2.addEventListener('touchend', handleMobileTouch2End, { passive: true });
+                        dropdown2.addEventListener('mouseleave', handleMobileMouseLeave2, { passive: true });
                     }
                 });
             }

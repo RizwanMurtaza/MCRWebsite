@@ -5,13 +5,13 @@
 
 window.EmailServiceConfig = {
     // Production API endpoint
-    API_BASE: 'https://localhost:5000/api',
+    API_BASE: 'https://emailservice.mcrsolicitors.co.uk/api',
 
     // Application identifier for MCR Solicitors
     APP_ID: 'mcr-solicitors-web',
 
     // Admin panel URL
-    ADMIN_URL: 'https://localhost:5000/admin.html',
+    ADMIN_URL: 'https://emailservice.mcrsolicitors.co.uk/admin.html',
 
     // Environment
     ENVIRONMENT: 'production'

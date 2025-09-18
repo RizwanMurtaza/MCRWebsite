@@ -24,7 +24,9 @@
       "Bash(tree:*)",
       "Bash(xargs ls:*)",
       "Bash(sort:*)",
-      "Bash(awk:*)"
+      "Bash(awk:*)",
+      "Bash(find:*)",
+      "Bash(powershell:*)"
     ],
     "deny": [],
     "ask": []

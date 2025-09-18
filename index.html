@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Multi-Service Law Firm in Manchester, UK - MCR Solicitors</title>
+    <title>Manchester Solicitors | Immigration, Family Law & Personal Injury | MCR Solicitors</title>
     <!-- LocalBusiness Schema Markup for Local SEO -->
     <script type="application/ld+json">
     {
@@ -140,28 +140,46 @@
     <meta name="geo.placename" content="Manchester">
     <meta name="geo.position" content="53.4407;-2.2244">
     <meta name="ICBM" content="53.4407, -2.2244">
-    <link rel="stylesheet" href="index.css" />
-    <link rel="stylesheet" href="main.css" />
+    <link rel="preload" href="index.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="index.css"></noscript>
+    <link rel="preload" href="main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="main.css"></noscript>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet"></noscript>
     <link href="Images/fav-01.ico" rel="icon" type="image/vnd.microsoft.icon">
     <style>
+        /* Critical CSS for above-the-fold content */
+        body { margin: 0; font-family: 'Rubik', sans-serif; }
+        header { background: #fff; }
+        .hero-section { min-height: 600px; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Images/welcome.jpg'); background-size: cover; background-position: center; }
+        .hero-overlay { display: flex; align-items: center; justify-content: space-between; padding: 60px 40px; gap: 40px; }
+        .hero-content { flex: 1; color: white; }
+        .hero-title { font-size: 48px; font-weight: 700; margin-bottom: 20px; line-height: 1.2; }
+        .hero-subtitle { font-size: 18px; line-height: 1.6; margin-bottom: 30px; }
+        .hero-btn { padding: 15px 30px; border-radius: 5px; font-size: 18px; font-weight: 600; text-decoration: none; background-color: #DE532A; color: white; border: 2px solid #DE532A; display: inline-block; }
+        .hero-form { flex: 0 0 400px; background: rgba(255,255,255,0.95); padding: 30px; border-radius: 10px; }
+        .sec-1-form-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; }
         .sec-1-form-input:focus {
             border-color: #ff8a66;
             box-shadow: 0 0 10px rgba(57, 107, 109, 0.2);
             background-color: rgba(255, 255, 255, 0.2);
-        
+        }
+
         /* Fix for testimonial slider */
         .testimonial-slide-wrapper .slide {
             display: none;
-        
+        }
         .testimonial-slide-wrapper .slide.active {
             display: block !important;
+        }
     </style>
-    <script src="js/global.js"></script>
+    <script src="js/global.js" defer></script>
 </head>
 
 
@@ -306,7 +324,7 @@
             </div>
 
             <div class="dropdown">
-                <a class="">Contact</a>
+                <a href="contact-us.html">Contact</a>
                 <div class="dropdown-content">
                     <a href="contact-us.html">Manchester Office</a>
                     <a href="contact-us.html">General Enquiries</a>
@@ -318,7 +336,7 @@
             </div>
 
             <div class="dropdown">
-                <a class="">Our Fees</a>
+                <a href="fees/immigration-fees.html">Our Fees</a>
                 <div class="dropdown-content">
                     <a href="fees/immigration-fees.html">Fees (UK Immigration Matters)</a>
                 </div>
@@ -344,14 +362,14 @@
                     <p>0161 466 1280</p>
                 </div>
                 <div class="head-svg-flex social-logos">
-                    <a href="https://www.facebook.com/share/16VB2Pi4fR/" target="_blank">
+                    <a href="https://www.facebook.com/share/16VB2Pi4fR/" target="_blank" aria-label="Follow MCR Solicitors on Facebook">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                             <path
                                 d="M11 0C4.94999 0 0 4.95883 0 11.0663C0 16.5884 4.02599 21.1717 9.28399 22V14.2691H6.48999V11.0663H9.28399V8.62549C9.28399 5.85341 10.923 4.32931 13.442 4.32931C14.641 4.32931 15.895 4.53915 15.895 4.53915V7.26706H14.509C13.145 7.26706 12.716 8.11746 12.716 8.98997V11.0663H15.774L15.279 14.2691H12.716V22C15.308 21.5889 17.6684 20.2611 19.3709 18.256C21.0733 16.2511 22.0059 13.701 22 11.0663C22 4.95883 17.05 0 11 0Z"
                                 fill="#DE532A" />
                         </svg>
                     </a>
-                    <a href="https://www.tiktok.com/@mcr.solicitors?_t=ZN-8unscnNLooA&_r=1" target="_blank">
+                    <a href="https://www.tiktok.com/@mcr.solicitors?_t=ZN-8unscnNLooA&_r=1" target="_blank" aria-label="Follow MCR Solicitors on TikTok">
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="22" viewBox="0 0 19 22" fill="none">
                             <path
                                 d="M9.97897 0.018342C11.1726 6.96955e-08 12.3575 0.00953778 13.5416 0C13.581 1.4901 14.1818 2.83125 15.1377 3.82465L15.1362 3.82318C16.1651 4.75569 17.5038 5.36023 18.9796 5.46295L19 5.46442V9.15921C17.6059 9.12399 16.2949 8.80044 15.1129 8.24431L15.1727 8.26926C14.601 7.99266 14.1176 7.70873 13.6583 7.39178L13.6962 7.41673C13.6874 10.0939 13.7049 12.7711 13.6779 15.4387C13.6028 16.7982 13.1537 18.0382 12.4333 19.0734L12.4479 19.0506C11.2433 20.7865 9.29212 21.9259 7.07332 21.9934H7.06311C6.97342 21.9978 6.8677 22 6.76124 22C5.49982 22 4.32078 21.6464 3.31602 21.0323L3.34518 21.0492C1.51648 19.942 0.25505 18.0477 0.0217226 15.8445L0.0188061 15.8144C0.000577342 15.3558 -0.0081725 14.8973 0.0100562 14.4483C0.367339 10.942 3.28685 8.22964 6.83562 8.22964C7.23446 8.22964 7.62528 8.26412 8.00517 8.32942L7.96434 8.32355C7.98257 9.68012 7.92788 11.0374 7.92788 12.394C7.61945 12.2817 7.26363 12.2164 6.89249 12.2164C5.53044 12.2164 4.37182 13.0924 3.94308 14.3155L3.93652 14.3375C3.83954 14.6508 3.7834 15.011 3.7834 15.3837C3.7834 15.5348 3.79288 15.6845 3.81038 15.8313L3.80892 15.8136C4.051 17.3147 5.32992 18.4475 6.87207 18.4475C6.91655 18.4475 6.9603 18.4468 7.00405 18.4446H6.99749C8.06423 18.4123 8.99025 17.8349 9.51378 16.9817L9.52107 16.9685C9.71575 16.6955 9.84919 16.3654 9.89366 16.0066L9.89439 15.9963C9.98554 14.3551 9.94908 12.7234 9.95783 11.0822C9.96658 7.38738 9.94908 3.70139 9.97606 0.0161409L9.97897 0.018342Z"
@@ -383,10 +401,14 @@
                     <form action="#" method="#" class="hero-form mcr-contact-form">
                         <input type="hidden" name="return_page" value="index.html">
                         <div class="sec-1-form-head">Get in Touch</div>
-                        <input class="sec-1-form-input" type="text" name="name" placeholder="Name" required />
-                        <input class="sec-1-form-input" type="email" name="email" placeholder="Email" required />
-                        <input class="sec-1-form-input" type="text" name="phone" placeholder="Phone Number" required />
-                        <select class="sec-1-form-input" name="department" required>
+                        <label for="contact-name" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Name</label>
+                        <input id="contact-name" class="sec-1-form-input" type="text" name="name" placeholder="Enter your name" required />
+                        <label for="contact-email" style="display: block; margin-bottom: 5px; margin-top: 15px; font-weight: bold; color: #333;">Email</label>
+                        <input id="contact-email" class="sec-1-form-input" type="email" name="email" placeholder="Enter your email" required />
+                        <label for="contact-phone" style="display: block; margin-bottom: 5px; margin-top: 15px; font-weight: bold; color: #333;">Phone Number</label>
+                        <input id="contact-phone" class="sec-1-form-input" type="text" name="phone" placeholder="Enter your phone number" required />
+                        <label for="contact-department" style="display: block; margin-bottom: 5px; margin-top: 15px; font-weight: bold; color: #333;">Department</label>
+                        <select id="contact-department" class="sec-1-form-input" name="department" required>
                             <option value="" disabled selected>Select Department</option>
                             <option value="Visas">Visas & Immigration</option>
                             <option value="Divorce">Divorce & Family Law</option>
@@ -449,7 +471,7 @@
             <div class="sec-2-left">
                 <div class="sec-2-left-bottom">
                     <div>
-                        <img class="clock-image" src="Images/manchester town hall image-01.jpg" alt="" />
+                        <img class="clock-image" src="Images/manchester town hall image-01.jpg" alt="Manchester Town Hall - MCR Solicitors Local Area" loading="lazy" width="391" height="600" />
                     </div>
                     <div>
                         <div>
@@ -523,7 +545,7 @@
                             <!-- Rating Number -->
                             <div>
                                 <div class="google-rating-number" style="font-size: 24px; font-weight: bold; color: #202124;">5.0</div>
-                                <div class="google-review-count" style="font-size: 14px; color: #5f6368;">174 reviews</div>
+                                <div class="google-review-count" style="font-size: 14px; color: #333333;">174 reviews</div>
                             </div>
                         </div>
                     </div>
@@ -539,11 +561,11 @@
                     </div>
                 </div>
                 
-                <h1>Location</h1>
+                <h2>Location</h2>
                 <div class="map-container">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1295.8028408732268!2d-2.1920947160132207!3d53.44141823133916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487bb3a2d4748a47%3A0xb9f03810ea6a232!2sMCR%20Solicitors!5e0!3m2!1sen!2suk!4v1657348500786!5m2!1sen!2suk"
-                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="MCR Solicitors Manchester Office Location Map">
                     </iframe>
                 </div>
                 
@@ -579,16 +601,16 @@
                 </div> -->
             </div>
         </div>
-        <h1 style="margin: 48px 0px;">Meet Our Team</h1>
+        <h2 style="margin: 48px 0px;">Meet Our Team</h2>
         <div class="team-carousel">
             <div class="carousel-container2">
                 <div class="carousel-track2">
                     <div class="team-card" style="position: relative;">
                         <div style="position: relative; ">
                             <img src="Images/Rectangle 49.svg" class="image-grid"
-                                style="width: 100%; height: auto; overflow: hidden; border-radius: 12px;">
+                                style="width: 100%; height: auto; overflow: hidden; border-radius: 12px;" alt="Atif Abbas - Director/Solicitor" loading="lazy">
                             <div class="tile-content">
-                                <h4>Atif Abbas</h4>
+                                <h3>Atif Abbas</h3>
                                 <p>Director / Solicitor</p>
                             </div>
                         </div>
@@ -596,9 +618,9 @@
                     <div class="team-card" style="position: relative;">
                         <div style="position: relative; ">
                             <img src="Images/team1.png" class="image-grid"
-                                style="width: 100%; height: auto; overflow: hidden; border-radius: 12px;">
+                                style="width: 100%; height: auto; overflow: hidden; border-radius: 12px;" alt="Ayesha Aslam - Director/Solicitor" loading="lazy">
                             <div class="tile-content">
-                                <h4>Ayesha Aslam</h4>
+                                <h3>Ayesha Aslam</h3>
                                 <p>Director / Solicitor</p>
                             </div>
                         </div>
@@ -606,9 +628,9 @@
                     <div class="team-card" style="position: relative;">
                         <div style="position: relative; ">
                             <img src="Images/team5.png" class="image-grid"
-                                style="width: 100%; height: auto; overflow: hidden; border-radius: 12px;">
+                                style="width: 100%; height: auto; overflow: hidden; border-radius: 12px;" alt="Sajjad Mahmood - Solicitor/Advocate (HRA)" loading="lazy">
                             <div class="tile-content">
-                                <h4>Sajjad Mahmood</h4>
+                                <h3>Sajjad Mahmood</h3>
                                 <p>Solicitor / Advocate (HRA)</p>
                             </div>
                         </div>
@@ -616,9 +638,9 @@
                     <div class="team-card" style="position: relative;">
                         <div style="position: relative; ">
                             <img src="Images/team6.png" class="image-grid"
-                                style="width: 100%; height: auto; overflow: hidden; border-radius: 12px;">
+                                style="width: 100%; height: auto; overflow: hidden; border-radius: 12px;" alt="Asad Malik - Solicitor" loading="lazy">
                             <div class="tile-content">
-                                <h4>Asad Malik</h4>
+                                <h3>Asad Malik</h3>
                                 <p>Solicitor</p>
                             </div>
                         </div>
@@ -626,9 +648,9 @@
                     <div class="team-card" style="position: relative;">
                         <div style="position: relative; ">
                             <img src="Images/team4.png" class="image-grid"
-                                style="width: 100%; height: auto; overflow: hidden; border-radius: 12px;">
+                                style="width: 100%; height: auto; overflow: hidden; border-radius: 12px;" alt="Shakra Azhar - Fee Earner" loading="lazy">
                             <div class="tile-content">
-                                <h4>Shakra Azhar</h4>
+                                <h3>Shakra Azhar</h3>
                                 <p>Fee Earner</p>
                             </div>
                         </div>
@@ -636,9 +658,9 @@
                     <div class="team-card" style="position: relative;">
                         <div style="position: relative; ">
                             <img src="Images/team3.png" class="image-grid"
-                                style="width: 100%; height: auto; overflow: hidden; border-radius: 12px;">
+                                style="width: 100%; height: auto; overflow: hidden; border-radius: 12px;" alt="Abdul Rehman - Case Worker" loading="lazy">
                             <div class="tile-content">
-                                <h4>Abdul Rehman</h4>
+                                <h3>Abdul Rehman</h3>
                                 <p>Case Worker</p>
                             </div>
                         </div>
@@ -646,9 +668,9 @@
                     <div class="team-card" style="position: relative;">
                         <div style="position: relative; ">
                             <img src="Images/team2.png" class="image-grid"
-                                style="width: 100%; height: auto; overflow: hidden; border-radius: 12px;">
+                                style="width: 100%; height: auto; overflow: hidden; border-radius: 12px;" alt="Hassan Imtisal - Accounts Manager" loading="lazy">
                             <div class="tile-content">
-                                <h4>Hassan Imtisal</h4>
+                                <h3>Hassan Imtisal</h3>
                                 <p>Accounts Manager</p>
                             </div>
                         </div>
@@ -728,9 +750,9 @@
             </script>
         </div>
         <div class="sec-5">
-            <h1 style="color: #DE532A;">
+            <h2 style="color: #DE532A;">
                 UK Visas & Immigration Solicitors
-            </h1>
+            </h2>
             <p class="p" style="margin-bottom: 24px">Our highly experienced UK immigration solicitors in Manchester
                 deal
                 with
@@ -1076,8 +1098,8 @@
             </div>
         </div>
         <div class="sec-6">
-            <h1 style="color: #DE532A;">Application Checking Service
-            </h1>
+            <h2 style="color: #DE532A;">Application Checking Service
+            </h2>
             <p class="p">
                 UK immigration & visa application checking service is for those who are completing their visa
                 application but
@@ -1102,9 +1124,9 @@
             </p>
         </div>
         <div class="sec-5">
-            <h1 style="color: #DE532A;">
+            <h2 style="color: #DE532A;">
                 Multi-Service Law Firm Manchester
-            </h1>
+            </h2>
             <p class="p" style="margin-bottom: 24px;">Our highly experienced solicitors in Manchester specialising
                 in UK
                 Immigration, Family Law, Personal
@@ -1231,7 +1253,7 @@
             </div>
         </div>
         <div class="sec-6">
-            <h1>Client Testimonials</h1>
+            <h2>Client Testimonials</h2>
             
             <div class="testimonial-slider-container">
                 <button class="nav-button prev-button" id="prevBtnt">
@@ -1256,7 +1278,7 @@
                                     <div class="rating">
                                         <span class="stars">★★★★★</span>
                                         <span class="rating-value">5.0</span>
-                                        <span style="font-size: 11px; color: #5f6368; margin-left: 8px;">via Google</span>
+                                        <span style="font-size: 11px; color: #333333; margin-left: 8px;">via Google</span>
                                     </div>
                                 </div>
                             </div>
@@ -1280,7 +1302,7 @@
                                     <div class="rating">
                                         <span class="stars">★★★★★</span>
                                         <span class="rating-value">5.0</span>
-                                        <span style="font-size: 11px; color: #5f6368; margin-left: 8px;">via Google</span>
+                                        <span style="font-size: 11px; color: #333333; margin-left: 8px;">via Google</span>
                                     </div>
                                 </div>
                             </div>
@@ -1304,7 +1326,7 @@
                                     <div class="rating">
                                         <span class="stars">★★★★★</span>
                                         <span class="rating-value">5.0</span>
-                                        <span style="font-size: 11px; color: #5f6368; margin-left: 8px;">via Google</span>
+                                        <span style="font-size: 11px; color: #333333; margin-left: 8px;">via Google</span>
                                     </div>
                                 </div>
                             </div>
@@ -1328,7 +1350,7 @@
                                     <div class="rating">
                                         <span class="stars">★★★★★</span>
                                         <span class="rating-value">5.0</span>
-                                        <span style="font-size: 11px; color: #5f6368; margin-left: 8px;">via Google</span>
+                                        <span style="font-size: 11px; color: #333333; margin-left: 8px;">via Google</span>
                                     </div>
                                 </div>
                             </div>
@@ -1352,7 +1374,7 @@
                                     <div class="rating">
                                         <span class="stars">★★★★★</span>
                                         <span class="rating-value">5.0</span>
-                                        <span style="font-size: 11px; color: #5f6368; margin-left: 8px;">via Google</span>
+                                        <span style="font-size: 11px; color: #333333; margin-left: 8px;">via Google</span>
                                     </div>
                                 </div>
                             </div>
@@ -1376,7 +1398,7 @@
                                     <div class="rating">
                                         <span class="stars">★★★★★</span>
                                         <span class="rating-value">5.0</span>
-                                        <span style="font-size: 11px; color: #5f6368; margin-left: 8px;">via Google</span>
+                                        <span style="font-size: 11px; color: #333333; margin-left: 8px;">via Google</span>
                                     </div>
                                 </div>
                             </div>
@@ -1464,13 +1486,13 @@
                 startAutoSlide();
             </script>
             
-            <!-- Load Google Reviews -->
-            <script src="google-reviews-direct.js"></script>
+            <!-- Load Google Reviews - Disabled for local testing (requires server) -->
+            <!-- <script src="google-reviews-direct.js" defer></script> -->
 
         </div>
         <!-- <div class="sec-4">
             <div>
-                <h1 style="color: #DE532A;">Frequently Asked Questions</h1>
+                <h2 style="color: #DE532A;">Frequently Asked Questions</h2>
                 <div id="faq-list" class="faq-container">
                     <div class="faq-item">
                         <div class="faq-question">
@@ -1584,12 +1606,12 @@
         <div class="footer-img">
             <h2>Lexcel Accredited</h2>
             <p>MCR Solicitors have been accredited with the Law Society (England and Wales) award, Lexcel.</p>
-            <a href="lexcel-accredited.html" target="_blank"><img src="Images/footerpic1.png" alt="Lexcel Accredited Logo" class="footer-accreditation-img"></a>
+            <a href="lexcel-accredited.html" target="_blank"><img src="Images/footerpic1.png" alt="Lexcel Accredited Logo" class="footer-accreditation-img" loading="lazy"></a>
         </div>
         <div class="footer-img">
             <h2>Regulated by SRA</h2>
             <p>Authorised and regulated by the Solicitors Regulation Authority<br>under SRA ID: 648878</p>
-            <a href="https://yoshki.com/validate.aspx?083082065+069110103108105115104067111108111117114+068101102097117108116046112110103+104116116112115058047047119119119046109099114115111108105099105116111114115046099111046117107047" target="_blank"><img src="Images/Screenshot 2025-03-27 185444.png" alt="SRA Regulated Logo" class="footer-accreditation-img"></a>
+            <a href="https://yoshki.com/validate.aspx?083082065+069110103108105115104067111108111117114+068101102097117108116046112110103+104116116112115058047047119119119046109099114115111108105099105116111114115046099111046117107047" target="_blank"><img src="Images/Screenshot 2025-03-27 185444.png" alt="SRA Regulated Logo" class="footer-accreditation-img" loading="lazy"></a>
         </div>
     </div>
     <div class="footer-bottom">
@@ -1634,8 +1656,8 @@
             document.getElementById('cookieConsent').style.display = 'none';
         }
     </script>
-    <script src="js/email-config.js"></script>
-    <script src="js/email-integration.js"></script>
+    <script src="js/email-config.js" defer></script>
+    <script src="js/email-integration.js" defer></script>
 </body>
 
 </html>
