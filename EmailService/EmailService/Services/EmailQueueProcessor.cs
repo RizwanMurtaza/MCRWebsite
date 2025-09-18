@@ -53,8 +53,10 @@ namespace EmailService.Services
             var dbContext = scope.ServiceProvider.GetRequiredService<EmailDbContext>();
 
             // Get pending emails ordered by priority and creation date
+            // Exclude emails that failed due to credential errors (don't retry those)
             var pendingEmails = await dbContext.EmailQueueItems
-                .Where(e => e.Status == "Pending" || (e.Status == "Failed" && e.RetryCount < e.MaxRetries))
+                .Where(e => e.Status == "Pending" ||
+                           (e.Status == "Failed" && e.RetryCount < e.MaxRetries && !e.IsCredentialError))
                 .OrderByDescending(e => e.Priority == "High" ? 3 : e.Priority == "Normal" ? 2 : 1)
                 .ThenBy(e => e.CreatedAt)
                 .Take(10) // Process 10 emails at a time
@@ -121,10 +123,26 @@ namespace EmailService.Services
                 emailItem.RetryCount++;
                 emailItem.LastError = ex.Message;
 
-                if (emailItem.RetryCount >= emailItem.MaxRetries)
+                // Check if this is a credential error (authentication/authorization failures)
+                var isCredentialError = IsCredentialError(ex);
+                if (isCredentialError)
+                {
+                    emailItem.IsCredentialError = true;
+                    emailItem.FailureReason = "CredentialError";
+                    emailItem.Status = "Failed";
+                    emailItem.FailedAt = DateTime.UtcNow;
+
+                    _logger.LogError(ex, $"Email failed due to credential error for {emailItem.ToEmail} (AppId: {emailItem.AppId}). Will not retry.");
+                    await LogToDatabase("CredentialError", "Error",
+                        $"Email failed due to credential error for {emailItem.ToEmail} (AppId: {emailItem.AppId}): {ex.Message}",
+                        emailQueueItemId: emailItem.Id, appId: emailItem.AppId,
+                        exceptionType: ex.GetType().Name, stackTrace: ex.StackTrace);
+                }
+                else if (emailItem.RetryCount >= emailItem.MaxRetries)
                 {
                     emailItem.Status = "Failed";
                     emailItem.FailedAt = DateTime.UtcNow;
+                    emailItem.FailureReason = "MaxRetriesExceeded";
 
                     _logger.LogError(ex, $"Email permanently failed after {emailItem.RetryCount} attempts to {emailItem.ToEmail}");
                     await LogToDatabase("EmailFailed", "Error",
@@ -135,6 +153,7 @@ namespace EmailService.Services
                 else
                 {
                     emailItem.Status = "Failed";
+                    emailItem.FailureReason = "TemporaryError";
 
                     _logger.LogWarning($"Email failed (attempt {emailItem.RetryCount}/{emailItem.MaxRetries}) to {emailItem.ToEmail}: {ex.Message}");
                     await LogToDatabase("RetryAttempt", "Warning",
@@ -212,6 +231,47 @@ namespace EmailService.Services
             }
 
             await smtpClient.SendMailAsync(mailMessage);
+        }
+
+        private bool IsCredentialError(Exception ex)
+        {
+            // Check for common credential-related exceptions and error messages
+            var errorMessage = ex.Message?.ToLowerInvariant() ?? "";
+            var innerMessage = ex.InnerException?.Message?.ToLowerInvariant() ?? "";
+
+            // SMTP Authentication errors
+            if (ex is SmtpException smtpEx)
+            {
+                // Check SMTP status codes for authentication failures
+                return smtpEx.StatusCode == SmtpStatusCode.MailboxBusy ||
+                       smtpEx.StatusCode == SmtpStatusCode.InsufficientStorage ||
+                       smtpEx.StatusCode == SmtpStatusCode.ClientNotPermitted;
+            }
+
+            // Check for common authentication error messages
+            var credentialErrorKeywords = new[]
+            {
+                "authentication failed",
+                "authentication failure",
+                "invalid username or password",
+                "invalid credentials",
+                "access denied",
+                "unauthorized",
+                "login failed",
+                "authentication error",
+                "bad username or password",
+                "invalid user name or password",
+                "smtp auth failed",
+                "535", // SMTP auth failed status code
+                "534", // Authentication mechanism is too weak
+                "530", // Authentication required
+                "authentication required",
+                "mailbox unavailable",
+                "permission denied"
+            };
+
+            return credentialErrorKeywords.Any(keyword =>
+                errorMessage.Contains(keyword) || innerMessage.Contains(keyword));
         }
 
         private async Task LogToDatabase(string eventName, string logLevel, string message,

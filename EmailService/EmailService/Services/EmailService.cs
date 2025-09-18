@@ -84,6 +84,9 @@ namespace EmailService.Services
                 {
                     AppId = appId,
                     ToEmail = toEmail,
+                    ToName = "",
+                    CcEmail = "",
+                    BccEmail = "",
                     Subject = subject,
                     Body = body,
                     IsHtml = true,
@@ -91,9 +94,12 @@ namespace EmailService.Services
                     Priority = "Normal",
                     EmailType = emailType,
                     CreatedAt = DateTime.UtcNow,
-                    ClientIp = httpContext?.Connection?.RemoteIpAddress?.ToString(),
-                    UserAgent = httpContext?.Request?.Headers["User-Agent"].ToString(),
-                    RequestId = Guid.NewGuid().ToString()
+                    ClientIp = httpContext?.Connection?.RemoteIpAddress?.ToString() ?? "",
+                    UserAgent = httpContext?.Request?.Headers["User-Agent"].ToString() ?? "",
+                    RequestId = Guid.NewGuid().ToString(),
+                    AttachmentPaths = "",
+                    LastError = "",
+                    FailureReason = ""
                 };
 
                 await _context.EmailQueueItems.AddAsync(emailQueueItem);

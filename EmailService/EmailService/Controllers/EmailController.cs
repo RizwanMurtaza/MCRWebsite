@@ -33,10 +33,11 @@ namespace EmailService.Controllers
 
                 if (result)
                 {
-                    return Ok(new { success = true, message = "Contact form submitted successfully" });
+                    return Ok(new { success = true, message = "Contact form submitted and queued for delivery" });
                 }
 
-                return StatusCode(500, new { success = false, message = "Failed to send email" });
+                // More specific error message - check if it's credentials or something else
+                return StatusCode(500, new { success = false, message = "Failed to queue email - check credentials and database connection" });
             }
             catch (Exception ex)
             {
@@ -59,10 +60,11 @@ namespace EmailService.Controllers
 
                 if (result)
                 {
-                    return Ok(new { success = true, message = "Enquiry submitted successfully" });
+                    return Ok(new { success = true, message = "Enquiry submitted and queued for delivery" });
                 }
 
-                return StatusCode(500, new { success = false, message = "Failed to send email" });
+                // More specific error message - check if it's credentials or something else
+                return StatusCode(500, new { success = false, message = "Failed to queue email - check credentials and database connection" });
             }
             catch (Exception ex)
             {
@@ -92,10 +94,10 @@ namespace EmailService.Controllers
 
                 if (result)
                 {
-                    return Ok(new { success = true, message = "Email sent successfully" });
+                    return Ok(new { success = true, message = "Email queued for delivery successfully" });
                 }
 
-                return StatusCode(500, new { success = false, message = "Failed to send email" });
+                return StatusCode(500, new { success = false, message = "Failed to queue email for delivery" });
             }
             catch (Exception ex)
             {

@@ -71,5 +71,10 @@ namespace EmailService.Models
 
         [MaxLength(50)]
         public string EmailType { get; set; } = "General"; // General, ContactUs, Enquiry, etc.
+
+        [MaxLength(100)]
+        public string FailureReason { get; set; } // CredentialError, NetworkError, etc.
+
+        public bool IsCredentialError { get; set; } = false; // If true, don't retry
     }
 }

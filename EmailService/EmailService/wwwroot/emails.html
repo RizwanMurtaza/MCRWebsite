@@ -409,6 +409,37 @@
             overflow-x: auto;
             font-size: 0.9rem;
         }
+
+        .failure-reason {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .failure-reason.credential-error {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .failure-reason:not(.credential-error) {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .email-checkbox {
+            cursor: pointer;
+        }
+
+        .email-checkbox:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        #select-all {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -450,6 +481,18 @@
             <div class="refresh-info">
                 Auto-refresh: <span id="refresh-timer">30</span>s
                 <button class="btn btn-sm" onclick="refreshData()">Refresh Now</button>
+            </div>
+
+            <!-- Bulk Actions -->
+            <div class="filters" id="bulk-actions" style="display:none;">
+                <div class="filter-group">
+                    <label>Bulk Actions (Failed Emails)</label>
+                    <div style="display: flex; gap: 10px; margin-top: 5px;">
+                        <button class="btn btn-success btn-sm" onclick="retryAllFailedEmails()">Retry All Failed</button>
+                        <button class="btn btn-success btn-sm" onclick="retrySelectedEmails()">Retry Selected</button>
+                        <button class="btn btn-secondary btn-sm" onclick="clearSelection()">Clear Selection</button>
+                    </div>
+                </div>
             </div>
 
             <!-- Filters -->
@@ -633,6 +676,10 @@
             document.getElementById('filter-level-group').style.display =
                 tab === 'process-logs' ? 'block' : 'none';
 
+            // Show/hide bulk actions for queue tab only
+            document.getElementById('bulk-actions').style.display =
+                tab === 'queue' ? 'block' : 'none';
+
             refreshData();
         }
 
@@ -705,18 +752,22 @@
             // Create headers based on tab
             let headers = [];
             if (currentTab === 'queue') {
-                headers = ['ID', 'To Email', 'Subject', 'Status', 'Priority', 'Retries', 'Created', 'Actions'];
+                headers = ['Select', 'ID', 'To Email', 'Subject', 'Status', 'Priority', 'Retries', 'Failure Reason', 'Created', 'Actions'];
             } else if (currentTab === 'logs') {
-                headers = ['ID', 'To Email', 'Subject', 'Type', 'Status', 'Created', 'Sent At'];
+                headers = ['ID', 'To Email', 'Subject', 'Type', 'Status', 'Error', 'Created', 'Sent At', 'Actions'];
             } else if (currentTab === 'process-logs') {
                 headers = ['ID', 'Level', 'Event', 'Message', 'App ID', 'Created'];
             }
 
             // Create header row
             const headerRow = document.createElement('tr');
-            headers.forEach(h => {
+            headers.forEach((h, index) => {
                 const th = document.createElement('th');
-                th.textContent = h;
+                if (h === 'Select' && currentTab === 'queue') {
+                    th.innerHTML = '<input type="checkbox" id="select-all" onchange="toggleSelectAll()">';
+                } else {
+                    th.textContent = h;
+                }
                 headerRow.appendChild(th);
             });
             header.appendChild(headerRow);
@@ -726,28 +777,44 @@
                 const row = document.createElement('tr');
 
                 if (currentTab === 'queue') {
+                    const isRetryable = item.status === 'Failed' && !item.isCredentialError;
+                    const failureReasonText = item.failureReason || '-';
+                    const failureReasonClass = item.isCredentialError ? 'credential-error' : '';
+
                     row.innerHTML = `
+                        <td><input type="checkbox" class="email-checkbox" value="${item.id}" ${item.status === 'Failed' ? '' : 'disabled'}></td>
                         <td>${item.id}</td>
                         <td>${item.toEmail}</td>
                         <td>${truncate(item.subject, 50)}</td>
                         <td><span class="status-badge ${item.status.toLowerCase()}">${item.status}</span></td>
                         <td><span class="priority-badge ${item.priority.toLowerCase()}">${item.priority}</span></td>
-                        <td>${item.retryCount}</td>
+                        <td>${item.retryCount}/${item.maxRetries}</td>
+                        <td><span class="failure-reason ${failureReasonClass}" title="${item.lastError || ''}">${failureReasonText}</span></td>
                         <td>${formatDate(item.createdAt)}</td>
                         <td class="action-buttons">
                             <button class="btn btn-sm" onclick="viewDetails(${item.id}, 'queue')">View</button>
-                            ${item.status === 'Failed' ? `<button class="btn btn-sm btn-success" onclick="retryEmail(${item.id})">Retry</button>` : ''}
+                            ${item.status === 'Failed' ? (isRetryable ?
+                                `<button class="btn btn-sm btn-success" onclick="retryEmail(${item.id})">Retry</button>` :
+                                `<button class="btn btn-sm btn-secondary" disabled title="Cannot retry credential errors">No Retry</button>`) : ''}
                         </td>
                     `;
                 } else if (currentTab === 'logs') {
+                    const errorMessage = item.errorMessage || '-';
+                    const canRetry = item.status === 'Failed';
+
                     row.innerHTML = `
                         <td>${item.id}</td>
                         <td>${item.toEmail}</td>
                         <td>${truncate(item.subject, 50)}</td>
                         <td>${item.emailType}</td>
                         <td><span class="status-badge ${item.status.toLowerCase()}">${item.status}</span></td>
+                        <td><span class="failure-reason" title="${errorMessage}">${truncate(errorMessage, 30)}</span></td>
                         <td>${formatDate(item.createdAt)}</td>
                         <td>${item.sentAt ? formatDate(item.sentAt) : '-'}</td>
+                        <td class="action-buttons">
+                            <button class="btn btn-sm" onclick="viewEmailDetails(${item.id}, 'logs')">View</button>
+                            ${canRetry ? `<button class="btn btn-sm btn-success" onclick="retryFromEmailLog(${item.id})">Retry</button>` : ''}
+                        </td>
                     `;
                 } else if (currentTab === 'process-logs') {
                     row.innerHTML = `
@@ -784,12 +851,14 @@
                         method: 'POST'
                     });
 
+                    const result = await response.json();
+
                     if (response.ok) {
                         alert('Email queued for retry');
                         refreshData();
                         loadStatistics();
                     } else {
-                        alert('Failed to retry email');
+                        alert(result.error || 'Failed to retry email');
                     }
                 } catch (error) {
                     console.error('Error retrying email:', error);
@@ -798,9 +867,270 @@
             }
         }
 
+        async function retryAllFailedEmails() {
+            const appId = document.getElementById('filter-appid').value;
+
+            if (confirm('Are you sure you want to retry ALL failed emails? This will exclude credential errors.')) {
+                try {
+                    let url = `${API_BASE}/emailqueue/queue/retry-failed`;
+                    if (appId) url += `?appId=${appId}`;
+
+                    const response = await fetch(url, {
+                        method: 'POST'
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        alert(`Successfully queued ${result.count} failed emails for retry`);
+                        refreshData();
+                        loadStatistics();
+                    } else {
+                        alert(result.error || 'Failed to retry emails');
+                    }
+                } catch (error) {
+                    console.error('Error retrying failed emails:', error);
+                    alert('Error retrying failed emails');
+                }
+            }
+        }
+
+        async function retrySelectedEmails() {
+            const checkboxes = document.querySelectorAll('.email-checkbox:checked');
+            const selectedIds = Array.from(checkboxes).map(cb => parseInt(cb.value));
+
+            if (selectedIds.length === 0) {
+                alert('Please select emails to retry');
+                return;
+            }
+
+            if (confirm(`Are you sure you want to retry ${selectedIds.length} selected emails?`)) {
+                try {
+                    const response = await fetch(`${API_BASE}/emailqueue/queue/retry-bulk`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(selectedIds)
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        let message = `Successfully queued ${result.retried} emails for retry`;
+                        if (result.skippedCredentialErrors > 0) {
+                            message += `\n(Skipped ${result.skippedCredentialErrors} emails with credential errors)`;
+                        }
+                        alert(message);
+                        clearSelection();
+                        refreshData();
+                        loadStatistics();
+                    } else {
+                        alert(result.error || 'Failed to retry selected emails');
+                    }
+                } catch (error) {
+                    console.error('Error retrying selected emails:', error);
+                    alert('Error retrying selected emails');
+                }
+            }
+        }
+
+        function toggleSelectAll() {
+            const selectAll = document.getElementById('select-all');
+            const checkboxes = document.querySelectorAll('.email-checkbox:not(:disabled)');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = selectAll.checked;
+            });
+        }
+
+        function clearSelection() {
+            const checkboxes = document.querySelectorAll('.email-checkbox');
+            const selectAll = document.getElementById('select-all');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+
+            if (selectAll) {
+                selectAll.checked = false;
+            }
+        }
+
+        async function retryFromEmailLog(id) {
+            if (confirm('Are you sure you want to retry this email from the log?')) {
+                try {
+                    const response = await fetch(`${API_BASE}/emailqueue/logs/${id}/retry`, {
+                        method: 'POST'
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        alert(`Email re-queued for retry successfully!\nNew Queue ID: ${result.newQueueId}`);
+                        refreshData();
+                        loadStatistics();
+                    } else {
+                        alert(result.error || 'Failed to retry email from log');
+                    }
+                } catch (error) {
+                    console.error('Error retrying email from log:', error);
+                    alert('Error retrying email from log');
+                }
+            }
+        }
+
+        async function viewEmailDetails(id, type) {
+            try {
+                let url = `${API_BASE}/emailqueue/${type}?page=1&pageSize=1`;
+
+                if (type === 'queue') {
+                    // For queue items, we need to filter by ID
+                    const response = await fetch(`${API_BASE}/emailqueue/queue`);
+                    const data = await response.json();
+                    const item = data.items.find(i => i.id === id);
+                    if (item) {
+                        showDetailModal(item, type);
+                    } else {
+                        alert('Email details not found');
+                    }
+                } else if (type === 'logs') {
+                    // For logs, similar approach
+                    const response = await fetch(`${API_BASE}/emailqueue/logs`);
+                    const data = await response.json();
+                    const item = data.items.find(i => i.id === id);
+                    if (item) {
+                        showDetailModal(item, type);
+                    } else {
+                        alert('Email log details not found');
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading details:', error);
+                alert('Error loading email details');
+            }
+        }
+
+        function showDetailModal(item, type) {
+            const modal = document.getElementById('detailModal');
+            const modalBody = document.getElementById('modal-body');
+
+            let detailsHtml = '';
+
+            if (type === 'queue') {
+                detailsHtml = `
+                    <div class="detail-row">
+                        <div class="detail-label">Queue ID:</div>
+                        <div class="detail-value">${item.id}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">App ID:</div>
+                        <div class="detail-value">${item.appId}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">To Email:</div>
+                        <div class="detail-value">${item.toEmail}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Subject:</div>
+                        <div class="detail-value">${item.subject}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Status:</div>
+                        <div class="detail-value"><span class="status-badge ${item.status.toLowerCase()}">${item.status}</span></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Priority:</div>
+                        <div class="detail-value"><span class="priority-badge ${item.priority.toLowerCase()}">${item.priority}</span></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Retry Count:</div>
+                        <div class="detail-value">${item.retryCount}/${item.maxRetries}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Failure Reason:</div>
+                        <div class="detail-value">${item.failureReason || '-'}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Credential Error:</div>
+                        <div class="detail-value">${item.isCredentialError ? 'Yes' : 'No'}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Created:</div>
+                        <div class="detail-value">${formatDate(item.createdAt)}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Processed:</div>
+                        <div class="detail-value">${item.processedAt ? formatDate(item.processedAt) : '-'}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Sent:</div>
+                        <div class="detail-value">${item.sentAt ? formatDate(item.sentAt) : '-'}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Failed:</div>
+                        <div class="detail-value">${item.failedAt ? formatDate(item.failedAt) : '-'}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Last Error:</div>
+                        <div class="detail-value"><pre>${item.lastError || 'None'}</pre></div>
+                    </div>
+                `;
+            } else if (type === 'logs') {
+                detailsHtml = `
+                    <div class="detail-row">
+                        <div class="detail-label">Log ID:</div>
+                        <div class="detail-value">${item.id}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">App ID:</div>
+                        <div class="detail-value">${item.appId}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">To Email:</div>
+                        <div class="detail-value">${item.toEmail}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">From Email:</div>
+                        <div class="detail-value">${item.fromEmail || '-'}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Subject:</div>
+                        <div class="detail-value">${item.subject}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Email Type:</div>
+                        <div class="detail-value">${item.emailType}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Status:</div>
+                        <div class="detail-value"><span class="status-badge ${item.status.toLowerCase()}">${item.status}</span></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Created:</div>
+                        <div class="detail-value">${formatDate(item.createdAt)}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Sent:</div>
+                        <div class="detail-value">${item.sentAt ? formatDate(item.sentAt) : '-'}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Error Message:</div>
+                        <div class="detail-value"><pre>${item.errorMessage || 'None'}</pre></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Metadata:</div>
+                        <div class="detail-value"><pre>${item.metadata || 'None'}</pre></div>
+                    </div>
+                `;
+            }
+
+            modalBody.innerHTML = detailsHtml;
+            modal.style.display = 'block';
+        }
+
         async function viewDetails(id, type) {
-            // Implementation for viewing detailed information
-            alert(`View details for ${type} item ${id} - Feature coming soon!`);
+            await viewEmailDetails(id, type);
         }
 
         function closeModal() {
