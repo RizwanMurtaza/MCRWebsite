@@ -18,11 +18,101 @@ namespace EmailService.Controllers
             _logger = logger;
         }
 
+        [HttpGet("status")]
+        public IActionResult GetStatus()
+        {
+            var controllers = new[]
+            {
+                "CredentialsController",
+                "EmailController",
+                "EmailQueueController"
+            };
+
+            return Ok(new
+            {
+                timestamp = DateTime.UtcNow,
+                version = "2.0.0",
+                availableControllers = controllers,
+                hasEmailQueueController = true,
+                message = "EmailService is running with EmailQueue support"
+            });
+        }
+
+        [HttpGet("health")]
+        public async Task<IActionResult> GetHealthStatus()
+        {
+            try
+            {
+                _logger.LogInformation("Health check requested");
+
+                var canConnect = await _context.Database.CanConnectAsync();
+                var connectionString = _context.Database.GetConnectionString();
+
+                // Mask password in connection string for security
+                var maskedConnectionString = connectionString;
+                if (!string.IsNullOrEmpty(maskedConnectionString) && maskedConnectionString.Contains("Password="))
+                {
+                    var passwordStart = maskedConnectionString.IndexOf("Password=") + 9;
+                    var passwordEnd = maskedConnectionString.IndexOf(';', passwordStart);
+                    if (passwordEnd == -1) passwordEnd = maskedConnectionString.Length;
+                    maskedConnectionString = maskedConnectionString.Substring(0, passwordStart) + "****" + maskedConnectionString.Substring(passwordEnd);
+                }
+
+                var healthStatus = new
+                {
+                    timestamp = DateTime.UtcNow,
+                    environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Unknown",
+                    database = new
+                    {
+                        canConnect,
+                        connectionString = maskedConnectionString,
+                        provider = "MySQL"
+                    },
+                    status = canConnect ? "Healthy" : "Unhealthy"
+                };
+
+                if (canConnect)
+                {
+                    _logger.LogInformation("Health check successful - Database connected");
+                    return Ok(healthStatus);
+                }
+                else
+                {
+                    _logger.LogError("Health check failed - Cannot connect to database");
+                    return StatusCode(503, healthStatus);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Health check error: {ErrorMessage}", ex.Message);
+                return StatusCode(503, new
+                {
+                    timestamp = DateTime.UtcNow,
+                    status = "Error",
+                    error = ex.Message,
+                    type = ex.GetType().Name
+                });
+            }
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAllCredentials()
         {
             try
             {
+                _logger.LogInformation("Attempting to get all credentials from database");
+
+                // Test database connection first
+                if (!await _context.Database.CanConnectAsync())
+                {
+                    _logger.LogError("Cannot connect to database");
+                    return StatusCode(500, new {
+                        success = false,
+                        message = "Database connection failed",
+                        details = "Unable to connect to the database server"
+                    });
+                }
+
                 var credentials = await _context.AppCredentials
                     .Select(ac => new
                     {
@@ -41,12 +131,40 @@ namespace EmailService.Controllers
                     })
                     .ToListAsync();
 
+                _logger.LogInformation($"Successfully retrieved {credentials.Count} credentials");
                 return Ok(credentials);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting credentials");
-                return StatusCode(500, new { success = false, message = "Internal server error" });
+                _logger.LogError(ex, "Error getting credentials: {ErrorMessage}", ex.Message);
+
+                // Return more detailed error information
+                object errorResponse;
+
+                // In production, don't expose internal details unless in Debug mode
+                if (_logger.IsEnabled(LogLevel.Debug))
+                {
+                    errorResponse = new
+                    {
+                        success = false,
+                        message = "Failed to retrieve credentials",
+                        error = ex.Message,
+                        type = ex.GetType().Name,
+                        stackTrace = ex.StackTrace
+                    };
+                }
+                else
+                {
+                    errorResponse = new
+                    {
+                        success = false,
+                        message = "Failed to retrieve credentials",
+                        error = ex.Message,
+                        type = ex.GetType().Name
+                    };
+                }
+
+                return StatusCode(500, errorResponse);
             }
         }
 

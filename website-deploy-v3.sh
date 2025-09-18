@@ -143,6 +143,8 @@ zip -r "$ZIP_FILE" \
     *.txt \
     *.xml \
     *.ico \
+    sitemap.xml \
+    robots.txt \
     british-citizenship/ \
     business-investment-visas/ \
     family-law/ \

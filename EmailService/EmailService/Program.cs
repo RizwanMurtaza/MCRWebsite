@@ -9,14 +9,17 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 // Configure Entity Framework with MySQL
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? "Server=localhost;Database=EmailServiceDb;User=root;Password=;";
-
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    
 builder.Services.AddDbContext<EmailDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // Register services
 builder.Services.AddScoped<IEmailService, EmailService.Services.EmailService>();
+builder.Services.AddHttpContextAccessor();
+
+// Register background service
+builder.Services.AddHostedService<EmailQueueProcessor>();
 
 // Add logging
 builder.Services.AddLogging();
@@ -50,13 +53,39 @@ _ = Task.Run(async () =>
         var context = scope.ServiceProvider.GetRequiredService<EmailDbContext>();
         var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
-        logger.LogInformation("Attempting to ensure database is created...");
-        await context.Database.EnsureCreatedAsync();
-        logger.LogInformation("Database ensured successfully");
+        logger.LogInformation("Attempting to create database and apply migrations...");
 
-        // Test the connection
+        // Check if database exists first
         var canConnect = await context.Database.CanConnectAsync();
-        logger.LogInformation($"Database connection test: {(canConnect ? "Success" : "Failed")}");
+        if (!canConnect)
+        {
+            logger.LogInformation("Database does not exist, creating with migrations...");
+
+            // Create database and apply all migrations
+            await context.Database.MigrateAsync();
+            logger.LogInformation("Database created and migrations applied successfully");
+        }
+        else
+        {
+            logger.LogInformation("Database exists, checking for pending migrations...");
+
+            // Database exists, just apply pending migrations
+            var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
+            if (pendingMigrations.Any())
+            {
+                logger.LogInformation($"Found {pendingMigrations.Count()} pending migrations, applying...");
+                await context.Database.MigrateAsync();
+                logger.LogInformation("Pending migrations applied successfully");
+            }
+            else
+            {
+                logger.LogInformation("No pending migrations found, database is up to date");
+            }
+        }
+
+        // Final connection test
+        var finalConnectionTest = await context.Database.CanConnectAsync();
+        logger.LogInformation($"Final database connection test: {(finalConnectionTest ? "Success" : "Failed")}");
     }
     catch (Exception ex)
     {
@@ -82,5 +111,8 @@ app.MapControllers();
 
 // Redirect root URL to admin panel
 app.MapGet("/", () => Results.Redirect("/admin.html"));
+
+// Add route for emails monitoring page
+app.MapGet("/emails", () => Results.Redirect("/emails.html"));
 
 app.Run();

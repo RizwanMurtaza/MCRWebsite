@@ -5,6 +5,7 @@ using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
 using System.Text.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace EmailService.Services
 {
@@ -12,11 +13,13 @@ namespace EmailService.Services
     {
         private readonly EmailDbContext _context;
         private readonly ILogger<EmailService> _logger;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public EmailService(EmailDbContext context, ILogger<EmailService> logger)
+        public EmailService(EmailDbContext context, ILogger<EmailService> logger, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _logger = logger;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<bool> SendContactUsEmailAsync(ContactUsRequest request)
@@ -46,74 +49,110 @@ namespace EmailService.Services
 
         public async Task<bool> SendEmailAsync(string appId, string toEmail, string subject, string body, string emailType, string? metadata = null)
         {
-            var emailLog = new EmailLog
-            {
-                AppId = appId,
-                ToEmail = toEmail,
-                Subject = subject,
-                Body = body,
-                EmailType = emailType,
-                Status = "Pending",
-                Metadata = metadata
-            };
-
             try
             {
-                // Get app credentials
+                // Check if credentials exist and are active
                 var credentials = await _context.AppCredentials
                     .FirstOrDefaultAsync(ac => ac.AppId == appId && ac.IsActive);
 
                 if (credentials == null)
                 {
-                    emailLog.Status = "Failed";
-                    emailLog.ErrorMessage = "App credentials not found or inactive";
-                    await _context.EmailLogs.AddAsync(emailLog);
+                    _logger.LogError($"App credentials not found or inactive for appId: {appId}");
+
+                    // Log the failure
+                    var failedLog = new EmailLog
+                    {
+                        AppId = appId,
+                        ToEmail = toEmail,
+                        Subject = subject,
+                        Body = body,
+                        EmailType = emailType,
+                        Status = "Failed",
+                        ErrorMessage = "App credentials not found or inactive",
+                        Metadata = metadata
+                    };
+                    await _context.EmailLogs.AddAsync(failedLog);
                     await _context.SaveChangesAsync();
                     return false;
                 }
 
-                // Create email message
-                var message = new MimeMessage();
-                message.From.Add(new MailboxAddress(credentials.FromName, credentials.FromEmail));
-                message.To.Add(new MailboxAddress("", toEmail));
-                message.Subject = subject;
+                // Get HTTP context info
+                var httpContext = _httpContextAccessor.HttpContext;
 
-                var bodyBuilder = new BodyBuilder
+                // Add to email queue for background processing
+                var emailQueueItem = new EmailQueueItem
                 {
-                    HtmlBody = body
+                    AppId = appId,
+                    ToEmail = toEmail,
+                    Subject = subject,
+                    Body = body,
+                    IsHtml = true,
+                    Status = "Pending",
+                    Priority = "Normal",
+                    EmailType = emailType,
+                    CreatedAt = DateTime.UtcNow,
+                    ClientIp = httpContext?.Connection?.RemoteIpAddress?.ToString(),
+                    UserAgent = httpContext?.Request?.Headers["User-Agent"].ToString(),
+                    RequestId = Guid.NewGuid().ToString()
                 };
-                message.Body = bodyBuilder.ToMessageBody();
 
-                // Send email
-                using var client = new SmtpClient();
-                // For port 587, use STARTTLS. For port 465, use SSL
-                var secureSocketOptions = credentials.SmtpPort == 587
-                    ? MailKit.Security.SecureSocketOptions.StartTls
-                    : (credentials.EnableSsl ? MailKit.Security.SecureSocketOptions.SslOnConnect : MailKit.Security.SecureSocketOptions.None);
+                await _context.EmailQueueItems.AddAsync(emailQueueItem);
 
-                await client.ConnectAsync(credentials.SmtpHost, credentials.SmtpPort, secureSocketOptions);
-                await client.AuthenticateAsync(credentials.SmtpUsername, credentials.SmtpPassword);
-                await client.SendAsync(message);
-                await client.DisconnectAsync(true);
+                // Also create an email log entry for tracking
+                var emailLog = new EmailLog
+                {
+                    AppId = appId,
+                    ToEmail = toEmail,
+                    Subject = subject,
+                    Body = body,
+                    EmailType = emailType,
+                    Status = "Pending",
+                    Metadata = metadata,
+                    FromEmail = credentials.FromEmail
+                };
 
-                // Update log
-                emailLog.Status = "Sent";
-                emailLog.SentAt = DateTime.UtcNow;
-                emailLog.FromEmail = credentials.FromEmail;
+                await _context.EmailLogs.AddAsync(emailLog);
+                await _context.SaveChangesAsync();
 
-                _logger.LogInformation($"Email sent successfully to {toEmail} for app {appId}");
+                _logger.LogInformation($"Email queued successfully for {toEmail} (AppId: {appId}, QueueId: {emailQueueItem.Id})");
+
+                // Log to process log
+                var processLog = new EmailProcessLog
+                {
+                    EmailQueueItemId = emailQueueItem.Id,
+                    AppId = appId,
+                    LogLevel = "Info",
+                    Event = "EmailQueued",
+                    Message = $"Email queued for {toEmail} with subject: {subject}",
+                    ProcessName = "EmailService",
+                    CreatedAt = DateTime.UtcNow
+                };
+                await _context.EmailProcessLogs.AddAsync(processLog);
+                await _context.SaveChangesAsync();
+
+                return true; // Return true as email is successfully queued
             }
             catch (Exception ex)
             {
-                emailLog.Status = "Failed";
-                emailLog.ErrorMessage = ex.Message;
-                _logger.LogError(ex, $"Failed to send email to {toEmail} for app {appId}");
+                _logger.LogError(ex, $"Failed to queue email for {toEmail} (AppId: {appId})");
+
+                // Log the failure
+                var failedLog = new EmailLog
+                {
+                    AppId = appId,
+                    ToEmail = toEmail,
+                    Subject = subject,
+                    Body = body,
+                    EmailType = emailType,
+                    Status = "Failed",
+                    ErrorMessage = $"Failed to queue email: {ex.Message}",
+                    Metadata = metadata
+                };
+                await _context.EmailLogs.AddAsync(failedLog);
+                await _context.SaveChangesAsync();
+
+                return false;
             }
-
-            await _context.EmailLogs.AddAsync(emailLog);
-            await _context.SaveChangesAsync();
-
-            return emailLog.Status == "Sent";
         }
 
 

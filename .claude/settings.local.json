@@ -15,7 +15,16 @@
       "Bash(tasklist)",
       "Bash(dotnet run:*)",
       "Bash(curl:*)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "Bash(grep:*)",
+      "Bash(for:*)",
+      "Bash(do echo \"=== $dir ===\")",
+      "Bash(ls:*)",
+      "Bash(done)",
+      "Bash(tree:*)",
+      "Bash(xargs ls:*)",
+      "Bash(sort:*)",
+      "Bash(awk:*)"
     ],
     "deny": [],
     "ask": []

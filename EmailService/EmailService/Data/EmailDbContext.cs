@@ -11,6 +11,8 @@ namespace EmailService.Data
 
         public DbSet<EmailLog> EmailLogs { get; set; }
         public DbSet<AppCredentials> AppCredentials { get; set; }
+        public DbSet<EmailQueueItem> EmailQueueItems { get; set; }
+        public DbSet<EmailProcessLog> EmailProcessLogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,6 +31,24 @@ namespace EmailService.Data
                 entity.HasIndex(e => e.AppId).IsUnique();
                 entity.HasIndex(e => e.AppName);
                 entity.HasIndex(e => e.IsActive);
+            });
+
+            modelBuilder.Entity<EmailQueueItem>(entity =>
+            {
+                entity.HasIndex(e => e.AppId);
+                entity.HasIndex(e => e.Status);
+                entity.HasIndex(e => e.Priority);
+                entity.HasIndex(e => e.CreatedAt);
+                entity.HasIndex(e => new { e.Status, e.Priority, e.CreatedAt });
+            });
+
+            modelBuilder.Entity<EmailProcessLog>(entity =>
+            {
+                entity.HasIndex(e => e.EmailQueueItemId);
+                entity.HasIndex(e => e.AppId);
+                entity.HasIndex(e => e.LogLevel);
+                entity.HasIndex(e => e.Event);
+                entity.HasIndex(e => e.CreatedAt);
             });
         }
     }

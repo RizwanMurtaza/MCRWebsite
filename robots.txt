@@ -1,0 +1,30 @@
+User-agent: *
+Allow: /
+
+# Block specific files and directories
+Disallow: /EmailService/
+Disallow: /*.sh$
+Disallow: /*.md$
+Disallow: /.git/
+Disallow: /.claude/
+Disallow: /keywords.txt
+Disallow: /keywords1.txt
+Disallow: /form-integration-template.html
+
+# Allow important files
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /*.css
+Allow: /*.js
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.ico
+
+# Sitemap location
+Sitemap: https://www.mcrsolicitors.co.uk/sitemap.xml
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
