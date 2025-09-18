@@ -144,6 +144,8 @@
     <noscript><link rel="stylesheet" href="index.css"></noscript>
     <link rel="preload" href="main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="main.css"></noscript>
+    <!-- Critical resource preloads -->
+    <link rel="preload" href="Images/welcome.jpg" as="image" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -157,7 +159,13 @@
         /* Critical CSS for above-the-fold content */
         body { margin: 0; font-family: 'Rubik', sans-serif; }
         header { background: #fff; }
-        .hero-section { min-height: 600px; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Images/welcome.jpg'); background-size: cover; background-position: center; }
+        .hero-section {
+            min-height: 600px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Images/welcome.jpg');
+            background-size: cover;
+            background-position: center;
+            /* Preload hint for critical background image */
+        }
         .hero-overlay { display: flex; align-items: center; justify-content: space-between; padding: 60px 40px; gap: 40px; }
         .hero-content { flex: 1; color: white; }
         .hero-title { font-size: 48px; font-weight: 700; margin-bottom: 20px; line-height: 1.2; }
@@ -188,9 +196,9 @@
 <header>
     <div class="top-head">
         <a href="index.html">
-            <img style="height: 90px;" src="Images/mcr_logo-01.png" alt="MCR Solicitors Logo" />
+            <img style="height: 90px;" src="Images/mcr_logo-01.png" alt="MCR Solicitors Logo" width="169" height="90" fetchpriority="high" />
         </a>
-        <img src="Images/banner-01.jpg" alt="Banner" class="banner-image" />
+        <img src="Images/banner-01.jpg" alt="Banner" class="banner-image" width="330" height="41" fetchpriority="high" />
     </div>
     <div class="down-head">
         <div class="head-a">

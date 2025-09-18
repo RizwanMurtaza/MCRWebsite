@@ -112,69 +112,216 @@ print_step "STEP 1: Testing Server Connection"
 execute_ssh "echo 'Connection successful'" "Testing SSH connection"
 
 # ===========================
-# STEP 2: CREATE ZIP ARCHIVE
+# STEP 2: MINIFY AND CREATE ZIP ARCHIVE
 # ===========================
-print_step "STEP 2: Creating Website Archive"
+print_step "STEP 2: Minifying Files and Creating Website Archive"
 
-# Check if zip is installed
+# Check if required tools are installed
 if ! command -v zip &> /dev/null; then
     print_warning "Installing zip utility..."
     sudo apt update && sudo apt install -y zip
 fi
 
-# List folders to include
-print_status "Identifying website content..."
-echo "Folders to deploy:"
-for dir in british-citizenship business-investment-visas family-law fees Images immigration-applications indefinite-leave-to-remain-ilr js personal-injury-claim student-visas-uk uk-family-visas uk-work-visas visitor-visas-uk; do
+# Create temporary build directory
+BUILD_DIR="./build_temp_${TIMESTAMP}"
+mkdir -p "$BUILD_DIR"
+
+print_status "Starting minification process..."
+
+# Temporarily disable exit on error for minification
+set +e
+
+# Function to minify HTML
+minify_html() {
+    local input="$1"
+    local output="$2"
+
+    # Simple and safe HTML minification
+    cat "$input" | \
+    sed 's/<!--[^>]*-->//g' | \
+    sed '/^[[:space:]]*$/d' | \
+    sed 's/^[[:space:]]*//g' | \
+    sed 's/[[:space:]]*$//g' | \
+    sed 's/[[:space:]]\+/ /g' > "$output"
+
+    # Verify output was created
+    if [ ! -f "$output" ] || [ ! -s "$output" ]; then
+        # Fallback: just copy the file if minification fails
+        cp "$input" "$output"
+    fi
+}
+
+# Function to minify CSS
+minify_css() {
+    local input="$1"
+    local output="$2"
+
+    # Simple CSS minification
+    cat "$input" | \
+    sed 's|/\*.*\*/||g' | \
+    sed '/^[[:space:]]*$/d' | \
+    sed 's/^[[:space:]]*//g' | \
+    sed 's/[[:space:]]*$//g' | \
+    sed 's/[[:space:]]\+/ /g' > "$output"
+
+    # Verify output was created
+    if [ ! -f "$output" ] || [ ! -s "$output" ]; then
+        cp "$input" "$output"
+    fi
+}
+
+# Function to minify JavaScript
+minify_js() {
+    local input="$1"
+    local output="$2"
+
+    # Basic JS minification
+    cat "$input" | \
+    sed 's|//.*$||g' | \
+    sed 's|/\*.*\*/||g' | \
+    sed '/^[[:space:]]*$/d' | \
+    sed 's/^[[:space:]]*//g' | \
+    sed 's/[[:space:]]*$//g' > "$output"
+
+    # Verify output was created
+    if [ ! -f "$output" ] || [ ! -s "$output" ]; then
+        cp "$input" "$output"
+    fi
+}
+
+# Copy and minify HTML files
+HTML_COUNT=0
+TOTAL_HTML=$(find . -name "*.html" -not -path "./EmailService/*" -not -path "./build_temp_*" | wc -l)
+print_status "Minifying HTML files... (0/$TOTAL_HTML)"
+
+# Process HTML files one by one
+find . -name "*.html" -not -path "./EmailService/*" -not -path "./build_temp_*" | while read -r file; do
+    rel_path="${file#./}"
+    dir_name=$(dirname "$rel_path")
+    base_name=$(basename "$file")
+
+    echo "  Processing: $rel_path"
+    mkdir -p "$BUILD_DIR/$dir_name"
+
+    if [[ "$base_name" == *.min.html ]]; then
+        if cp "$file" "$BUILD_DIR/$rel_path" 2>/dev/null; then
+            echo "  → Copied: $rel_path"
+        else
+            echo "  ✗ Failed to copy: $rel_path"
+            continue
+        fi
+    else
+        if minify_html "$file" "$BUILD_DIR/$rel_path" 2>/dev/null; then
+            echo "  → Minified: $rel_path"
+        else
+            echo "  ✗ Failed to minify: $rel_path, copying instead"
+            cp "$file" "$BUILD_DIR/$rel_path"
+        fi
+    fi
+    ((HTML_COUNT++))
+
+    # Show progress every 10 files
+    if ((HTML_COUNT % 10 == 0)); then
+        echo "[INFO] Processed $HTML_COUNT/$TOTAL_HTML HTML files..."
+    fi
+done
+
+# Count actual processed files since the counter doesn't work in subshell
+PROCESSED_HTML=$(find "$BUILD_DIR" -name "*.html" | wc -l)
+echo ""
+print_success "$PROCESSED_HTML HTML files processed"
+
+# Copy and minify CSS files
+CSS_COUNT=0
+print_status "Minifying CSS files..."
+for css in *.css; do
+    if [ -f "$css" ]; then
+        if [[ "$css" == *.min.css ]]; then
+            cp "$css" "$BUILD_DIR/$css"
+        else
+            minify_css "$css" "$BUILD_DIR/$css"
+        fi
+        ((CSS_COUNT++))
+    fi
+done
+echo " ✓ $CSS_COUNT CSS files processed"
+
+# Copy and minify JavaScript files
+JS_COUNT=0
+TOTAL_JS=$(find . -name "*.js" -not -path "./EmailService/*" -not -path "./build_temp_*" | wc -l)
+print_status "Minifying JavaScript files... (0/$TOTAL_JS)"
+mkdir -p "$BUILD_DIR/js"
+
+# Process JavaScript files
+find . -name "*.js" -not -path "./EmailService/*" -not -path "./build_temp_*" | while read -r file; do
+    rel_path="${file#./}"
+    dir_name=$(dirname "$rel_path")
+
+    mkdir -p "$BUILD_DIR/$dir_name"
+
+    if [[ "$(basename "$file")" == *.min.js ]]; then
+        cp "$file" "$BUILD_DIR/$rel_path"
+        echo "  → Copied: $rel_path"
+    else
+        minify_js "$file" "$BUILD_DIR/$rel_path"
+        echo "  → Minified: $rel_path"
+    fi
+    ((JS_COUNT++))
+done
+
+PROCESSED_JS=$(find "$BUILD_DIR" -name "*.js" | wc -l)
+echo ""
+print_success "$PROCESSED_JS JavaScript files processed"
+
+# Copy images and other static files
+print_status "Copying static assets..."
+for dir in Images british-citizenship business-investment-visas family-law fees immigration-applications indefinite-leave-to-remain-ilr personal-injury-claim student-visas-uk uk-family-visas uk-work-visas visitor-visas-uk; do
     if [ -d "$dir" ]; then
+        cp -r "$dir" "$BUILD_DIR/"
         echo "  ✓ $dir"
     fi
 done
 
-# Count files for progress tracking
-FILE_COUNT=$(find . -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.gif" -o -name "*.svg" -o -name "*.ico" \) | grep -v EmailService | wc -l)
-print_success "Found $FILE_COUNT files to deploy"
+# Copy other necessary files
+for file in robots.txt sitemap.xml .htaccess favicon.ico *.ico; do
+    if [ -f "$file" ]; then
+        cp "$file" "$BUILD_DIR/"
+    fi
+done
 
-# Create deployment package with ALL content
-print_status "Creating deployment archive..."
+# Count total files
+FILE_COUNT=$(find "$BUILD_DIR" -type f | wc -l)
+ORIGINAL_SIZE=$(du -sh . | cut -f1)
+MINIFIED_SIZE=$(du -sh "$BUILD_DIR" | cut -f1)
+print_success "Minification complete: $FILE_COUNT files (Original: $ORIGINAL_SIZE → Minified: $MINIFIED_SIZE)"
 
-# Remove old zip if exists
-rm -f "$ZIP_FILE"
+# Re-enable exit on error
+set -e
 
-# Create comprehensive zip with all website content
-zip -r "$ZIP_FILE" \
-    *.html \
-    *.css \
-    *.js \
-    *.txt \
-    *.xml \
-    *.ico \
-    sitemap.xml \
-    robots.txt \
-    british-citizenship/ \
-    business-investment-visas/ \
-    family-law/ \
-    fees/ \
-    Images/ \
-    immigration-applications/ \
-    indefinite-leave-to-remain-ilr/ \
-    js/ \
-    personal-injury-claim/ \
-    student-visas-uk/ \
-    uk-family-visas/ \
-    uk-work-visas/ \
-    visitor-visas-uk/ \
-    -x "*.sh" \
-    -x "*.md" \
-    -x "EmailService/*" \
-    -x "*.zip" \
-    -x ".git/*" \
-    -x ".claude/*" \
-    2>/dev/null || true
+# Create deployment package from minified content
+print_status "Creating deployment archive with minified content..."
+
+cd "$BUILD_DIR"
+echo "  → Compressing $FILE_COUNT files into archive..."
+zip -r "../$ZIP_FILE" . -q &
+ZIP_PID=$!
+
+# Show progress while zip is running
+while kill -0 $ZIP_PID 2>/dev/null; do
+    echo -n "."
+    sleep 1
+done
+wait $ZIP_PID
+echo ""
+
+cd ..
 
 # Check zip file size
 ZIP_SIZE=$(du -h "$ZIP_FILE" | cut -f1)
-print_success "Created deployment archive: $ZIP_FILE (Size: $ZIP_SIZE)"
+print_success "Created optimized deployment archive: $ZIP_FILE (Size: $ZIP_SIZE)"
+
+# Clean up build directory
+rm -rf "$BUILD_DIR"
 
 # ===========================
 # STEP 3: BACKUP EXISTING SITE
@@ -214,9 +361,9 @@ print_status "This may take a moment depending on file size and connection speed
 copy_file_to_server "$ZIP_FILE" "/tmp/$ZIP_FILE" "Uploading website archive ($ZIP_SIZE)"
 
 # ===========================
-# STEP 5: DEPLOY WEBSITE
+# STEP 5: DEPLOY WEBSITE WITH GZIP
 # ===========================
-print_step "STEP 5: Deploying Website Files"
+print_step "STEP 5: Deploying Website Files with Compression"
 
 execute_ssh "
 echo 'Preparing deployment...'
@@ -238,19 +385,50 @@ unzip -q /tmp/$ZIP_FILE
 # Clean up zip file
 rm -f /tmp/$ZIP_FILE
 
+# Create pre-compressed gzip versions for better performance
+echo 'Creating gzip compressed versions for nginx...'
+GZIP_COUNT=0
+find $WEBSITE_DIR -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.xml' -o -name '*.json' \) | while read -r file; do
+    gzip -c \"\$file\" > \"\$file.gz\"
+    ((GZIP_COUNT++))
+done
+echo \"✓ Created \$GZIP_COUNT pre-compressed files\"
+
+# Update nginx configuration for gzip static
+echo 'Configuring nginx for compression...'
+if ! grep -q 'gzip_static' /etc/nginx/sites-available/mcrsolicitors; then
+    # Add gzip_static configuration
+    sed -i '/location \/ {/a\\
+    gzip_static on;\\
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml text/javascript;\\
+    gzip_comp_level 6;\\
+    gzip_vary on;' /etc/nginx/sites-available/mcrsolicitors
+    echo '✓ Nginx gzip configuration added'
+fi
+
 # Set proper permissions
 echo 'Setting file permissions...'
 chown -R www-data:www-data $WEBSITE_DIR
 find $WEBSITE_DIR -type d -exec chmod 755 {} \;
 find $WEBSITE_DIR -type f -exec chmod 644 {} \;
 
+# Calculate size reduction
+UNCOMPRESSED_SIZE=\$(find $WEBSITE_DIR -type f -not -name '*.gz' -exec du -b {} \; | awk '{sum+=\$1} END {print sum}')
+COMPRESSED_SIZE=\$(find $WEBSITE_DIR -name '*.gz' -exec du -b {} \; | awk '{sum+=\$1} END {print sum}')
+
+if [ \"\$UNCOMPRESSED_SIZE\" -gt 0 ] && [ \"\$COMPRESSED_SIZE\" -gt 0 ]; then
+    REDUCTION=\$(( 100 - (COMPRESSED_SIZE * 100 / UNCOMPRESSED_SIZE) ))
+    echo \"✓ Compression achieved \${REDUCTION}% size reduction\"
+fi
+
 # Count deployed files
 echo ''
 echo '=== DEPLOYMENT STATISTICS ==='
-echo \"HTML files: \$(find $WEBSITE_DIR -name '*.html' | wc -l)\"
-echo \"CSS files: \$(find $WEBSITE_DIR -name '*.css' | wc -l)\"
-echo \"JS files: \$(find $WEBSITE_DIR -name '*.js' | wc -l)\"
+echo \"HTML files: \$(find $WEBSITE_DIR -name '*.html' -not -name '*.gz' | wc -l)\"
+echo \"CSS files: \$(find $WEBSITE_DIR -name '*.css' -not -name '*.gz' | wc -l)\"
+echo \"JS files: \$(find $WEBSITE_DIR -name '*.js' -not -name '*.gz' | wc -l)\"
 echo \"Image files: \$(find $WEBSITE_DIR \( -name '*.jpg' -o -name '*.png' -o -name '*.gif' -o -name '*.jpeg' \) | wc -l)\"
+echo \"Pre-compressed files: \$(find $WEBSITE_DIR -name '*.gz' | wc -l)\"
 echo \"Directories: \$(find $WEBSITE_DIR -type d | wc -l)\"
 echo \"Total files: \$(find $WEBSITE_DIR -type f | wc -l)\"
 echo \"Total size: \$(du -sh $WEBSITE_DIR | cut -f1)\"
@@ -260,8 +438,8 @@ echo 'Deployed directories:'
 ls -d $WEBSITE_DIR/*/ 2>/dev/null | xargs -n1 basename | sed 's/^/  ✓ /'
 
 echo ''
-echo '✓ Website files deployed successfully!'
-" "Deploying website files"
+echo '✓ Website files deployed with optimization!'
+" "Deploying website files with compression"
 
 # ===========================
 # STEP 6: RESTART NGINX
