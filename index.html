@@ -146,6 +146,7 @@
     <noscript><link rel="stylesheet" href="main.css"></noscript>
     <!-- Critical resource preloads -->
     <link rel="preload" href="Images/welcome.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="Images/mcr_logo-01.png" as="image" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -691,6 +692,7 @@
             </div>
             <script>
                 let currentIndex = 0;
+                let cachedCardWidth = null;
 
                 function generateDots() {
                     const dotsContainer = document.querySelector('.carousel-dots2');
@@ -718,6 +720,13 @@
                     return 4; // Desktop: Show 4 employees per slide
                 }
 
+                function updateCachedCardWidth() {
+                    const teamCards = document.querySelectorAll('.team-card');
+                    if (teamCards.length > 0) {
+                        cachedCardWidth = teamCards[0].offsetWidth;
+                    }
+                }
+
                 function moveToSlide(index) {
                     const track = document.querySelector('.carousel-track2');
                     const teamCards = document.querySelectorAll('.team-card');
@@ -726,8 +735,13 @@
                     if (index < 0 || index >= totalSlides) return;
 
                     currentIndex = index;
-                    const cardWidth = teamCards[0].offsetWidth; // Get exact width of one employee card
-                    const translateX = -currentIndex * cardWidth * getCardsPerSlide(); // Move full slide width
+
+                    // Use cached width to avoid forced reflow
+                    if (cachedCardWidth === null) {
+                        updateCachedCardWidth();
+                    }
+
+                    const translateX = -currentIndex * cachedCardWidth * getCardsPerSlide(); // Move full slide width
 
                     track.style.transform = `translateX(${translateX}px)`;
 
@@ -745,8 +759,11 @@
 
                 // Recalculate slides on window resize
                 window.onload = () => {
+                    updateCachedCardWidth(); // Cache initial width
                     generateDots();
                     window.addEventListener('resize', () => {
+                        cachedCardWidth = null; // Clear cache on resize
+                        updateCachedCardWidth(); // Re-cache width
                         generateDots();
                         moveToSlide(0); // Reset position on resize
                     });

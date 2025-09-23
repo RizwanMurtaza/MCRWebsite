@@ -52,7 +52,7 @@ function initializeMenuEvents() {
             
             if (mainLink && dropdownContent) {
                 // Add mobile touch hover behavior with passive listeners
-                mainLink.addEventListener('touchstart', handleMobileTouchStart, { passive: false });
+                mainLink.addEventListener('touchstart', handleMobileTouchStart, { passive: true });
                 dropdown.addEventListener('touchend', handleMobileTouchEnd, { passive: true });
                 dropdown.addEventListener('mouseleave', handleMobileMouseLeave, { passive: true });
                 
@@ -63,7 +63,7 @@ function initializeMenuEvents() {
                     const dropdown2Content = dropdown2.querySelector('.dropdown2-content');
                     
                     if (secondaryLink && dropdown2Content) {
-                        secondaryLink.addEventListener('touchstart', handleMobileTouch2Start, { passive: false });
+                        secondaryLink.addEventListener('touchstart', handleMobileTouch2Start, { passive: true });
                         dropdown2.addEventListener('touchend', handleMobileTouch2End, { passive: true });
                         dropdown2.addEventListener('mouseleave', handleMobileMouseLeave2, { passive: true });
                     }
@@ -78,8 +78,8 @@ function initializeMenuEvents() {
         if (!hamburger || getComputedStyle(hamburger).display === 'none') {
             return; // Desktop mode, use normal behavior
         }
-        
-        event.preventDefault(); // Prevent navigation on touch
+
+        // Note: preventDefault() removed for passive listener performance
         const dropdown = event.target.closest('.dropdown');
         
         // Clear any existing hover states
@@ -115,9 +115,8 @@ function initializeMenuEvents() {
         if (!hamburger || getComputedStyle(hamburger).display === 'none') {
             return;
         }
-        
-        event.preventDefault();
-        event.stopPropagation(); // Prevent parent dropdown from being affected
+
+        // Note: preventDefault() and stopPropagation() removed for passive listener performance
         const dropdown2 = event.target.closest('.dropdown2');
         
         // Clear other dropdown2 hover states
@@ -183,8 +182,8 @@ function initializeMenuEvents() {
                 });
             }
         }
-    });
-    
+    }, { passive: true });
+
     // Also handle click events for non-touch devices
     document.addEventListener('click', function(event) {
         const menu = document.querySelector('.head-a');

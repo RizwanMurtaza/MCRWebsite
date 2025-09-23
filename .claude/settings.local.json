@@ -26,7 +26,15 @@
       "Bash(sort:*)",
       "Bash(awk:*)",
       "Bash(find:*)",
-      "Bash(powershell:*)"
+      "Bash(powershell:*)",
+      "Bash(dos2unix:*)",
+      "WebFetch(domain:pagespeed.web.dev)",
+      "WebFetch(domain:www.mcrsolicitors.co.uk)",
+      "Bash(bash:*)",
+      "Bash(del \"M:\\MCRWebsite\\fix-logo-dimensions.ps1\")",
+      "Bash(node:*)",
+      "Read(//m/MCR-Umbraco/Umbraco/**)",
+      "Bash(del:*)"
     ],
     "deny": [],
     "ask": []
