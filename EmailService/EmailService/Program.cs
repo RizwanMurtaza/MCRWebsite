@@ -16,6 +16,7 @@ builder.Services.AddDbContext<EmailDbContext>(options =>
 
 // Register services
 builder.Services.AddScoped<IEmailService, EmailService.Services.EmailService>();
+builder.Services.AddScoped<IEmailService, EmailService.Services.SIPEmailService>();
 builder.Services.AddHttpContextAccessor();
 
 // Register background service
