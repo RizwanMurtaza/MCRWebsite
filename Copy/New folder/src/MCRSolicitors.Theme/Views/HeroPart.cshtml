@@ -1,0 +1,53 @@
+@model MCRSolicitors.Theme.ViewModels.HeroPartViewModel
+
+<section class="mcr-hero" @(Model.BackgroundImageUrl != null ? $"style=\"background-image: url('{Model.BackgroundImageUrl}')\"" : "")>
+    <div class="hero-overlay"></div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text">
+                @if (!string.IsNullOrEmpty(Model.Subtitle))
+                {
+                    <span class="hero-subtitle">@Model.Subtitle</span>
+                }
+                <h1 class="hero-title">@Model.Title</h1>
+                @if (!string.IsNullOrEmpty(Model.Description))
+                {
+                    <p class="hero-description">@Model.Description</p>
+                }
+                <div class="hero-buttons">
+                    <a href="@Model.PrimaryButtonUrl" class="btn btn-primary btn-lg">
+                        @Model.PrimaryButtonText
+                    </a>
+                    @if (!string.IsNullOrEmpty(Model.SecondaryButtonText))
+                    {
+                        <a href="@Model.SecondaryButtonUrl" class="btn btn-outline btn-lg">
+                            @Model.SecondaryButtonText
+                        </a>
+                    }
+                </div>
+                @if (Model.ShowTrustIndicators)
+                {
+                    <div class="hero-trust-indicators">
+                        <div class="trust-indicator">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>SRA Regulated</span>
+                        </div>
+                        <div class="trust-indicator">
+                            <i class="fas fa-star"></i>
+                            <span>4.9 Star Rating</span>
+                        </div>
+                        <div class="trust-indicator">
+                            <i class="fas fa-users"></i>
+                            <span>5000+ Clients</span>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="hero-shape">
+        <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 50L60 45.7C120 41 240 33 360 33.3C480 33 600 41 720 50C840 58 960 67 1080 62.5C1200 58 1320 41 1380 33.3L1440 25V100H1380C1320 100 1200 100 1080 100C960 100 840 100 720 100C600 100 480 100 360 100C240 100 120 100 60 100H0V50Z" fill="white"/>
+        </svg>
+    </div>
+</section>

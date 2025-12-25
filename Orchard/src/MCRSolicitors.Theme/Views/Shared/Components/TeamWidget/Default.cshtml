@@ -1,0 +1,59 @@
+@model MCRSolicitors.Theme.ViewComponents.TeamWidgetViewModel
+
+<section class="team-section">
+    <div class="container">
+        @if (!string.IsNullOrEmpty(Model.SectionTitle) || !string.IsNullOrEmpty(Model.SectionSubtitle))
+        {
+            <div class="section-header text-center">
+                @if (!string.IsNullOrEmpty(Model.SectionTitle))
+                {
+                    <h2>@Model.SectionTitle</h2>
+                }
+                @if (!string.IsNullOrEmpty(Model.SectionSubtitle))
+                {
+                    <p>@Model.SectionSubtitle</p>
+                }
+            </div>
+        }
+        <div class="row">
+            @foreach (var member in Model.Members)
+            {
+                <div class="col-lg-3 col-md-4 col-6 team-member-item">
+                    <div class="card h-100">
+                        @if (!string.IsNullOrEmpty(member.Photo))
+                        {
+                            <img src="@member.Photo" class="card-img-top" alt="@member.Name" />
+                        }
+                        <div class="card-body text-center">
+                            @if (!string.IsNullOrEmpty(member.Name))
+                            {
+                                <h4 class="member-name">@member.Name</h4>
+                            }
+                            @if (!string.IsNullOrEmpty(member.Role))
+                            {
+                                <p class="member-role">@member.Role</p>
+                            }
+                            @if (!string.IsNullOrEmpty(member.Bio))
+                            {
+                                <p class="member-bio">@member.Bio</p>
+                            }
+                            @if (!string.IsNullOrEmpty(member.LinkedInUrl) || !string.IsNullOrEmpty(member.EmailAddress))
+                            {
+                                <div class="member-social">
+                                    @if (!string.IsNullOrEmpty(member.LinkedInUrl))
+                                    {
+                                        <a href="@member.LinkedInUrl" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(member.EmailAddress))
+                                    {
+                                        <a href="mailto:@member.EmailAddress" class="social-link"><i class="fas fa-envelope"></i></a>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

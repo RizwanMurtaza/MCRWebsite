@@ -1,0 +1,33 @@
+@model MCRSolicitors.Theme.ViewComponents.FeaturesWidgetViewModel
+
+<section class="features-section" @(string.IsNullOrEmpty(Model.BackgroundColor) ? "" : $"style=\"background-color: {Model.BackgroundColor};\"")>
+    <div class="container">
+        @if (!string.IsNullOrEmpty(Model.SectionTitle))
+        {
+            <h2 class="section-title text-center mb-4">@Model.SectionTitle</h2>
+        }
+        <div class="row">
+            @foreach (var item in Model.Items)
+            {
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="feature-item">
+                        @if (!string.IsNullOrEmpty(item.IconClass))
+                        {
+                            <div class="feature-icon"><i class="@item.IconClass"></i></div>
+                        }
+                        <div class="feature-text">
+                            @if (!string.IsNullOrEmpty(item.Title))
+                            {
+                                <h4>@item.Title</h4>
+                            }
+                            @if (!string.IsNullOrEmpty(item.Description))
+                            {
+                                <p>@item.Description</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

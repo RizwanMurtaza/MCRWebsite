@@ -1,0 +1,7 @@
+@model MCRSolicitors.Theme.ViewComponents.ContentWidgetViewModel
+
+<section class="content-section @Model.SectionClass">
+    <div class="container @Model.ContainerClass">
+        @Html.Raw(Model.HtmlContent)
+    </div>
+</section>

@@ -1,0 +1,43 @@
+@model MCRSolicitors.Theme.Models.ServicesSectionViewModel
+
+<section class="mcr-services-section">
+    <div class="container">
+        <div class="section-header">
+            @if (!string.IsNullOrEmpty(Model.SectionSubtitle))
+            {
+                <span class="section-subtitle">@Model.SectionSubtitle</span>
+            }
+            <h2 class="section-title">@Model.SectionTitle</h2>
+            @if (!string.IsNullOrEmpty(Model.SectionDescription))
+            {
+                <p class="section-description">@Model.SectionDescription</p>
+            }
+        </div>
+
+        <div class="services-grid" data-columns="@Model.ColumnsPerRow">
+            @foreach (var service in Model.Services)
+            {
+                <div class="service-card @(service.Style.ToString().ToLower())">
+                    <div class="service-icon">
+                        <i class="@service.IconClass"></i>
+                    </div>
+                    <h3 class="service-title">@service.Title</h3>
+                    <p class="service-description">@service.Description</p>
+                    <a href="@service.Url" class="service-link">
+                        @service.CtaText
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            }
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.CtaUrl))
+        {
+            <div class="section-cta">
+                <a href="@Model.CtaUrl" class="btn btn-secondary">
+                    @Model.CtaText
+                </a>
+            </div>
+        }
+    </div>
+</section>

@@ -1,0 +1,54 @@
+@inject OrchardCore.Settings.ISiteService SiteService
+@{
+    var settings = await SiteService.GetSiteSettingsAsync();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="MCR Solicitors - Expert Legal Services in Manchester. Family Law, Immigration, Conveyancing, Wills & Probate, Personal Injury, and Employment Law." />
+    <title>@RenderTitleSegments(settings?.SiteName ?? "MCR Solicitors")</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/MCRSolicitors.Theme/images/favicon.ico" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Theme Styles -->
+    <link rel="stylesheet" href="/MCRSolicitors.Theme/css/theme.css" />
+
+    <!-- Orchard Core Resources -->
+    <resources type="Meta" />
+    <resources type="HeadLink" />
+    <resources type="Stylesheet" />
+    <resources type="HeadScript" />
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    @await Component.InvokeAsync("Navigation")
+
+    <main class="mcr-main" role="main">
+        @await RenderBodyAsync()
+
+        <zone name="Content" />
+    </main>
+
+    @await Component.InvokeAsync("Footer")
+
+    <!-- Theme Scripts -->
+    <script src="/MCRSolicitors.Theme/js/theme.js"></script>
+
+    <!-- Orchard Core Resources -->
+    <resources type="FootScript" />
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

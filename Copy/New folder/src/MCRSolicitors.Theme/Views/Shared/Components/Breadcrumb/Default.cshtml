@@ -1,0 +1,31 @@
+@model MCRSolicitors.Theme.Models.BreadcrumbViewModel
+
+@if (Model.Items.Any())
+{
+    <nav class="mcr-breadcrumb" aria-label="Breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">
+                @for (int i = 0; i < Model.Items.Count; i++)
+                {
+                    var item = Model.Items[i];
+                    <li class="breadcrumb-item @(item.IsActive ? "active" : "")"
+                        itemprop="itemListElement"
+                        itemscope
+                        itemtype="https://schema.org/ListItem">
+                        @if (item.IsActive)
+                        {
+                            <span itemprop="name">@item.Name</span>
+                        }
+                        else
+                        {
+                            <a href="@item.Url" itemprop="item">
+                                <span itemprop="name">@item.Name</span>
+                            </a>
+                        }
+                        <meta itemprop="position" content="@(i + 1)" />
+                    </li>
+                }
+            </ol>
+        </div>
+    </nav>
+}

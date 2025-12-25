@@ -1,0 +1,50 @@
+@model MCRSolicitors.Theme.ViewComponents.ServicesWidgetViewModel
+
+<section class="services-section">
+    <div class="container">
+        @if (!string.IsNullOrEmpty(Model.SectionTitle) || !string.IsNullOrEmpty(Model.SectionSubtitle))
+        {
+            <div class="section-header text-center">
+                @if (!string.IsNullOrEmpty(Model.SectionTitle))
+                {
+                    <h2>@Model.SectionTitle</h2>
+                }
+                @if (!string.IsNullOrEmpty(Model.SectionSubtitle))
+                {
+                    <p>@Model.SectionSubtitle</p>
+                }
+            </div>
+        }
+        <div class="row">
+            @foreach (var item in Model.Items)
+            {
+                <div class="col-lg-4 col-md-6 service-card">
+                    <div class="card h-100">
+                        @if (!string.IsNullOrEmpty(item.Image))
+                        {
+                            <img src="@item.Image" class="card-img-top" alt="@item.Title" />
+                        }
+                        <div class="card-body text-center">
+                            @if (!string.IsNullOrEmpty(item.IconClass))
+                            {
+                                <div class="service-icon"><i class="@item.IconClass"></i></div>
+                            }
+                            @if (!string.IsNullOrEmpty(item.Title))
+                            {
+                                <h3>@item.Title</h3>
+                            }
+                            @if (!string.IsNullOrEmpty(item.Description))
+                            {
+                                <p>@item.Description</p>
+                            }
+                            @if (!string.IsNullOrEmpty(item.LinkUrl))
+                            {
+                                <a href="@item.LinkUrl" class="btn btn-outline-primary">@item.LinkText</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

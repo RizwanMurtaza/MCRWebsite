@@ -1,0 +1,470 @@
+/* ============================================
+   Starter Theme - Configurable Base Theme
+   CSS Variables set dynamically from Layout.cshtml
+   ============================================ */
+
+/* === CSS Variables (defaults, overridden in Layout) === */
+:root {
+    --primary-color: #DE532A;
+    --primary-hover: #c44a25;
+    --font-heading: 'Rubik', sans-serif;
+    --font-body: 'Montserrat', sans-serif;
+
+    /* Fixed variables */
+    --white: #ffffff;
+    --black: #1a1a1a;
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --gray-300: #dee2e6;
+    --gray-600: #6c757d;
+    --gray-800: #343a40;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.2);
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --transition: 0.3s ease;
+}
+
+/* === Reset & Base === */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--gray-800);
+    background-color: var(--white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--black);
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 2rem; }
+h4 { font-size: 1.5rem; }
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+a:hover {
+    color: var(--primary-hover);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* === Container === */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* === Buttons === */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.btn--primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+.btn--primary:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    color: var(--white);
+}
+
+.btn--outline {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn--outline:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.btn--lg {
+    padding: 16px 32px;
+    font-size: 1.125rem;
+}
+
+.btn--sm {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+}
+
+/* === Header / Navigation === */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: var(--white);
+    box-shadow: var(--shadow-sm);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+}
+
+.nav__logo {
+    display: flex;
+    align-items: center;
+}
+
+.nav__logo-img {
+    height: 50px;
+    width: auto;
+}
+
+.nav__logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--black);
+}
+
+.nav__menu {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav__link {
+    font-weight: 500;
+    color: var(--gray-800);
+    transition: color var(--transition);
+}
+
+.nav__link:hover,
+.nav__link.active {
+    color: var(--primary-color);
+}
+
+.nav__cta {
+    margin-left: 1rem;
+}
+
+.nav__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.nav__toggle-bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--black);
+    transition: var(--transition);
+}
+
+/* === Hero Section === */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gray-100);
+    background-size: cover;
+    background-position: center;
+    padding-top: 80px;
+}
+
+.hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
+}
+
+.hero__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.hero__title {
+    font-size: 3.5rem;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+}
+
+.hero__subtitle {
+    font-size: 1.25rem;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+/* === CTA Section === */
+.cta {
+    background-color: var(--primary-color);
+    padding: 5rem 0;
+}
+
+.cta__content {
+    text-align: center;
+}
+
+.cta__title {
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.cta__text {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+}
+
+.cta__buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta .btn--primary {
+    background-color: var(--white);
+    color: var(--primary-color);
+    border-color: var(--white);
+}
+
+.cta .btn--primary:hover {
+    background-color: transparent;
+    color: var(--white);
+}
+
+.cta .btn--outline {
+    border-color: var(--white);
+    color: var(--white);
+}
+
+.cta .btn--outline:hover {
+    background-color: var(--white);
+    color: var(--primary-color);
+}
+
+/* === Footer === */
+.footer {
+    background-color: var(--gray-800);
+    color: var(--gray-200);
+    padding: 4rem 0 2rem;
+}
+
+.footer__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.footer__logo {
+    height: 50px;
+    width: auto;
+    margin-bottom: 1rem;
+}
+
+.footer__title {
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.footer__heading {
+    color: var(--white);
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer__text {
+    color: var(--gray-300);
+    line-height: 1.8;
+}
+
+.footer__contact {
+    list-style: none;
+}
+
+.footer__contact li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.footer__contact a {
+    color: var(--gray-300);
+}
+
+.footer__contact a:hover {
+    color: var(--primary-color);
+}
+
+.footer__icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.footer__social {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    color: var(--white);
+    transition: all var(--transition);
+}
+
+.footer__social-link:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.footer__social-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+.footer__badges {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 2rem;
+}
+
+.footer__badges img {
+    height: 60px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+    transition: opacity var(--transition);
+}
+
+.footer__badges img:hover {
+    opacity: 1;
+}
+
+.footer__bottom {
+    text-align: center;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+}
+
+/* === Responsive === */
+@media (max-width: 992px) {
+    .footer__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+
+    .nav__menu {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        flex-direction: column;
+        background-color: var(--white);
+        padding: 2rem;
+        transform: translateX(100%);
+        transition: transform var(--transition);
+    }
+
+    .nav__menu.active {
+        transform: translateX(0);
+    }
+
+    .nav__toggle {
+        display: flex;
+    }
+
+    .nav__cta {
+        margin-left: 0;
+        margin-top: 1rem;
+    }
+
+    .hero__title {
+        font-size: 2.5rem;
+    }
+
+    .hero__subtitle {
+        font-size: 1rem;
+    }
+
+    .footer__grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer__contact li {
+        justify-content: center;
+    }
+
+    .footer__social {
+        justify-content: center;
+    }
+}

@@ -1,0 +1,26 @@
+@model MCRSolicitors.Theme.ViewComponents.StatsWidgetViewModel
+
+<section class="stats-section" @(string.IsNullOrEmpty(Model.BackgroundColor) ? "" : $"style=\"background-color: {Model.BackgroundColor};\"")>
+    <div class="container">
+        @if (!string.IsNullOrEmpty(Model.SectionTitle))
+        {
+            <h2 class="section-title text-center mb-4">@Model.SectionTitle</h2>
+        }
+        <div class="row">
+            @foreach (var item in Model.Items)
+            {
+                <div class="col-md-3 col-6 stat-item">
+                    @if (!string.IsNullOrEmpty(item.IconClass))
+                    {
+                        <div class="stat-icon"><i class="@item.IconClass"></i></div>
+                    }
+                    <div class="stat-value">@item.Prefix@item.Value@item.Suffix</div>
+                    @if (!string.IsNullOrEmpty(item.Label))
+                    {
+                        <div class="stat-label">@item.Label</div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</section>

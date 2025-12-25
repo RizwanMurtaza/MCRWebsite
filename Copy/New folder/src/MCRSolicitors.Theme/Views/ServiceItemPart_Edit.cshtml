@@ -1,0 +1,37 @@
+@model MCRSolicitors.Theme.ViewModels.ServiceItemPartViewModel
+
+<fieldset class="form-group">
+    <label asp-for="Title" class="form-label">Service Title</label>
+    <input asp-for="Title" class="form-control" placeholder="e.g., Immigration Law" />
+    <span class="hint">The name of the service</span>
+</fieldset>
+
+<fieldset class="form-group">
+    <label asp-for="Description" class="form-label">Description</label>
+    <textarea asp-for="Description" class="form-control" rows="3" placeholder="Brief description of the service"></textarea>
+    <span class="hint">A short summary of what this service covers</span>
+</fieldset>
+
+<fieldset class="form-group">
+    <label asp-for="IconClass" class="form-label">Icon Class</label>
+    <input asp-for="IconClass" class="form-control" placeholder="e.g., fas fa-globe" />
+    <span class="hint">Font Awesome icon class (e.g., fas fa-globe, fas fa-users)</span>
+</fieldset>
+
+<fieldset class="form-group">
+    <label asp-for="Url" class="form-label">Service Page URL</label>
+    <input asp-for="Url" class="form-control" placeholder="e.g., /services/immigration" />
+    <span class="hint">Link to the full service page</span>
+</fieldset>
+
+<fieldset class="form-group">
+    <label asp-for="CtaText" class="form-label">Button Text</label>
+    <input asp-for="CtaText" class="form-control" placeholder="e.g., Learn More" />
+    <span class="hint">Text for the call-to-action button</span>
+</fieldset>
+
+<fieldset class="form-group">
+    <label asp-for="DisplayOrder" class="form-label">Display Order</label>
+    <input asp-for="DisplayOrder" type="number" class="form-control" min="0" />
+    <span class="hint">Lower numbers appear first</span>
+</fieldset>

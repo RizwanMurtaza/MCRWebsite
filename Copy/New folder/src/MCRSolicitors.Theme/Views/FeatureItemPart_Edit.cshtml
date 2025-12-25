@@ -1,0 +1,25 @@
+@model MCRSolicitors.Theme.ViewModels.FeatureItemPartViewModel
+
+<fieldset class="form-group">
+    <label asp-for="Title" class="form-label">Feature Title</label>
+    <input asp-for="Title" class="form-control" placeholder="e.g., Free Initial Consultation" />
+    <span class="hint">The name of the feature or benefit</span>
+</fieldset>
+
+<fieldset class="form-group">
+    <label asp-for="Description" class="form-label">Description</label>
+    <textarea asp-for="Description" class="form-control" rows="3" placeholder="Explain this feature"></textarea>
+    <span class="hint">Why this feature matters to clients</span>
+</fieldset>
+
+<fieldset class="form-group">
+    <label asp-for="IconClass" class="form-label">Icon Class</label>
+    <input asp-for="IconClass" class="form-control" placeholder="e.g., fas fa-check" />
+    <span class="hint">Font Awesome icon class (e.g., fas fa-shield-alt, fas fa-comments)</span>
+</fieldset>
+
+<fieldset class="form-group">
+    <label asp-for="DisplayOrder" class="form-label">Display Order</label>
+    <input asp-for="DisplayOrder" type="number" class="form-control" min="0" />
+    <span class="hint">Lower numbers appear first</span>
+</fieldset>

@@ -1,0 +1,180 @@
+@model MCRSolicitors.Theme.Models.ContactSectionViewModel
+
+<section class="mcr-contact-section" id="contact">
+    <div class="container">
+        <div class="section-header">
+            @if (!string.IsNullOrEmpty(Model.SectionSubtitle))
+            {
+                <span class="section-subtitle">@Model.SectionSubtitle</span>
+            }
+            <h2 class="section-title">@Model.SectionTitle</h2>
+            @if (!string.IsNullOrEmpty(Model.SectionDescription))
+            {
+                <p class="section-description">@Model.SectionDescription</p>
+            }
+        </div>
+
+        <div class="contact-wrapper @Model.Layout.ToString().ToLower()">
+            @if (Model.ShowContactForm)
+            {
+                <div class="contact-form-container">
+                    <div class="contact-form-card">
+                        <h3 class="form-title">Send Us a Message</h3>
+                        <p class="form-description">Complete the form below and we'll get back to you within 24 hours.</p>
+
+                        <form class="contact-form" id="contactForm" method="post" action="/contact/submit">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName" class="form-label">First Name <span class="required">*</span></label>
+                                    <input type="text" id="firstName" name="firstName" class="form-control" required placeholder="Enter your first name" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName" class="form-label">Last Name <span class="required">*</span></label>
+                                    <input type="text" id="lastName" name="lastName" class="form-control" required placeholder="Enter your last name" />
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email Address <span class="required">*</span></label>
+                                    <input type="email" id="email" name="email" class="form-control" required placeholder="your.email@example.com" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="07XXX XXXXXX" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="service" class="form-label">Area of Law <span class="required">*</span></label>
+                                <select id="service" name="service" class="form-control" required>
+                                    <option value="">Select a service...</option>
+                                    <option value="immigration">Immigration Law</option>
+                                    <option value="family">Family Law</option>
+                                    <option value="personal-injury">Personal Injury</option>
+                                    <option value="conveyancing">Conveyancing</option>
+                                    <option value="wills-probate">Wills & Probate</option>
+                                    <option value="employment">Employment Law</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message" class="form-label">Your Message <span class="required">*</span></label>
+                                <textarea id="message" name="message" class="form-control" rows="5" required placeholder="Please describe your legal matter..."></textarea>
+                            </div>
+
+                            <div class="form-group form-checkbox">
+                                <input type="checkbox" id="consent" name="consent" required />
+                                <label for="consent" class="checkbox-label">
+                                    I consent to MCR Solicitors processing my personal data in accordance with the
+                                    <a href="/privacy-policy" target="_blank">Privacy Policy</a>. <span class="required">*</span>
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Send Message
+                                </button>
+                            </div>
+
+                            <p class="form-note">
+                                <i class="fas fa-lock"></i>
+                                Your information is secure and will never be shared with third parties.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            }
+
+            <div class="contact-info-container">
+                <div class="contact-info-card">
+                    <h3 class="info-title">Contact Information</h3>
+
+                    <ul class="contact-details-list">
+                        <li class="contact-detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="detail-content">
+                                <strong>Our Office</strong>
+                                <address>
+                                    @Model.ContactDetails.Address<br />
+                                    @if (!string.IsNullOrEmpty(Model.ContactDetails.AddressLine2))
+                                    {
+                                        @Model.ContactDetails.AddressLine2<br />
+                                    }
+                                    @Model.ContactDetails.City<br />
+                                    @Model.ContactDetails.PostCode
+                                </address>
+                            </div>
+                        </li>
+                        <li class="contact-detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="detail-content">
+                                <strong>Phone</strong>
+                                <a href="tel:@Model.ContactDetails.Phone.Replace(" ", "")">@Model.ContactDetails.Phone</a>
+                            </div>
+                        </li>
+                        <li class="contact-detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="detail-content">
+                                <strong>Email</strong>
+                                <a href="mailto:@Model.ContactDetails.Email">@Model.ContactDetails.Email</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    @if (Model.ContactDetails.OpeningHours.Any())
+                    {
+                        <div class="opening-hours">
+                            <h4 class="hours-title">
+                                <i class="fas fa-clock"></i>
+                                Opening Hours
+                            </h4>
+                            <ul class="hours-list">
+                                @foreach (var hours in Model.ContactDetails.OpeningHours)
+                                {
+                                    <li>
+                                        <span class="day">@hours.Key</span>
+                                        <span class="time">@hours.Value</span>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+
+                    <div class="emergency-contact">
+                        <h4><i class="fas fa-exclamation-circle"></i> Urgent Legal Matter?</h4>
+                        <p>For urgent matters outside office hours, please call our emergency line.</p>
+                        <a href="tel:@Model.ContactDetails.Phone.Replace(" ", "")" class="btn btn-outline">
+                            <i class="fas fa-phone"></i>
+                            Call Now
+                        </a>
+                    </div>
+                </div>
+
+                @if (Model.ShowMap && !string.IsNullOrEmpty(Model.MapEmbedUrl))
+                {
+                    <div class="contact-map">
+                        <iframe
+                            src="@Model.MapEmbedUrl"
+                            width="100%"
+                            height="300"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="MCR Solicitors Location">
+                        </iframe>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,24 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+@* Hero Section *@
+@await Component.InvokeAsync("Hero")
+
+@* Services Section *@
+@await Component.InvokeAsync("ServicesSection")
+
+@* Features / Why Choose Us *@
+@await Component.InvokeAsync("FeatureSection")
+
+@* Stats Section *@
+@await Component.InvokeAsync("StatsSection")
+
+@* Testimonials Section *@
+@await Component.InvokeAsync("TestimonialSection")
+
+@* Blog Section *@
+@await Component.InvokeAsync("BlogSection")
+
+@* CTA Section *@
+@await Component.InvokeAsync("CtaSection")

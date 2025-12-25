@@ -1,0 +1,109 @@
+@model MCRSolicitors.Theme.Models.FooterViewModel
+
+<footer class="mcr-footer">
+    <div class="footer-main">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Company Info -->
+                <div class="footer-section footer-about">
+                    <a href="/" class="footer-logo">
+                        <img src="@Model.LogoUrl" alt="@Model.LogoAlt" />
+                    </a>
+                    <p class="footer-description">@Model.CompanyDescription</p>
+
+                    <!-- Social Links -->
+                    <div class="footer-social">
+                        @foreach (var social in Model.SocialLinks)
+                        {
+                            <a href="@social.Url" target="_blank" rel="noopener" aria-label="@social.Platform" class="social-link">
+                                <i class="@social.IconClass"></i>
+                            </a>
+                        }
+                    </div>
+                </div>
+
+                <!-- Link Sections -->
+                @foreach (var linkSection in Model.LinkSections)
+                {
+                    <div class="footer-section">
+                        <h3 class="footer-title">@linkSection.Title</h3>
+                        <ul class="footer-links">
+                            @foreach (var link in linkSection.Links)
+                            {
+                                <li>
+                                    <a href="@link.Url" @(link.IsExternal ? "target=_blank rel=noopener" : "")>
+                                        @link.Text
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+
+                <!-- Contact Info -->
+                <div class="footer-section footer-contact">
+                    <h3 class="footer-title">Contact Us</h3>
+                    <ul class="contact-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>@Model.Contact.Address</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:@Model.Contact.Phone.Replace(" ", "")">@Model.Contact.Phone</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>@Model.Contact.OpeningHours</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accreditations -->
+    <div class="footer-accreditations">
+        <div class="container">
+            <div class="accreditations-content">
+                @foreach (var badge in Model.Accreditations)
+                {
+                    if (!string.IsNullOrEmpty(badge.LinkUrl))
+                    {
+                        <a href="@badge.LinkUrl" class="accreditation-badge" @(badge.LinkUrl.StartsWith("http") ? "target=_blank rel=noopener" : "")>
+                            <img src="@badge.ImageUrl" alt="@badge.AltText" loading="lazy" />
+                        </a>
+                    }
+                    else
+                    {
+                        <div class="accreditation-badge">
+                            <img src="@badge.ImageUrl" alt="@badge.AltText" loading="lazy" />
+                        </div>
+                    }
+                }
+                <div class="sra-info">
+                    <p>Authorised and regulated by the Solicitors Regulation Authority</p>
+                    <p>SRA No: @Model.SraNumber</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="footer-bottom-content">
+                <p class="copyright">@Model.CopyrightText</p>
+                <div class="footer-bottom-links">
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/terms">Terms of Service</a>
+                    <a href="/sitemap">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,17 @@
+@model MCRSolicitors.Theme.Models.PageHeroViewModel
+
+<section class="mcr-page-hero" @(Model.BackgroundImageUrl != null ? $"style=\"background-image: url('{Model.BackgroundImageUrl}'); background-size: cover; background-position: center;\"" : "")>
+    @if (Model.ShowPattern)
+    {
+        <div class="hero-overlay"></div>
+    }
+    <div class="container">
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">@Model.Title</h1>
+            @if (!string.IsNullOrEmpty(Model.Description))
+            {
+                <p class="page-hero-description">@Model.Description</p>
+            }
+        </div>
+    </div>
+</section>

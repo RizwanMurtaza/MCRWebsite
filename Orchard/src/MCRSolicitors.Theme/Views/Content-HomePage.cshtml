@@ -1,0 +1,70 @@
+@using OrchardCore.ContentManagement
+@using System.Text.Json
+@{
+    var contentItem = Model.ContentItem as ContentItem;
+    dynamic content = contentItem?.Content;
+
+    // SEO from content fields using dynamic access
+    string? metaTitle = content?.HomePage?.MetaTitle?.Text;
+    string? metaDescription = content?.HomePage?.MetaDescription?.Text;
+    string? metaKeywords = content?.HomePage?.MetaKeywords?.Text;
+
+    if (!string.IsNullOrEmpty(metaTitle)) { ViewData["Title"] = metaTitle; }
+    if (!string.IsNullOrEmpty(metaDescription)) { ViewData["MetaDescription"] = metaDescription; }
+    if (!string.IsNullOrEmpty(metaKeywords)) { ViewData["MetaKeywords"] = metaKeywords; }
+
+    // Get widgets from FlowPart using dynamic access
+    var widgetList = new List<dynamic>();
+    if (content?.FlowPart?.Widgets != null)
+    {
+        foreach (var widget in content.FlowPart.Widgets)
+        {
+            widgetList.Add(widget);
+        }
+    }
+}
+
+@foreach (var widget in widgetList)
+{
+    string widgetType = widget.ContentType?.ToString() ?? "";
+
+    @switch (widgetType)
+    {
+        case "HeroWidget":
+            @await Component.InvokeAsync("HeroWidget", new { widgetData = widget })
+            break;
+        case "PageHeroWidget":
+            @await Component.InvokeAsync("PageHeroWidget", new { widgetData = widget })
+            break;
+        case "StatsWidget":
+            @await Component.InvokeAsync("StatsWidget", new { widgetData = widget })
+            break;
+        case "ServicesWidget":
+            @await Component.InvokeAsync("ServicesWidget", new { widgetData = widget })
+            break;
+        case "FeaturesWidget":
+            @await Component.InvokeAsync("FeaturesWidget", new { widgetData = widget })
+            break;
+        case "CtaWidget":
+            @await Component.InvokeAsync("CtaWidget", new { widgetData = widget })
+            break;
+        case "TestimonialsWidget":
+            @await Component.InvokeAsync("TestimonialsWidget", new { widgetData = widget })
+            break;
+        case "TeamWidget":
+            @await Component.InvokeAsync("TeamWidget", new { widgetData = widget })
+            break;
+        case "FaqWidget":
+            @await Component.InvokeAsync("FaqWidget", new { widgetData = widget })
+            break;
+        case "ContentWidget":
+            @await Component.InvokeAsync("ContentWidget", new { widgetData = widget })
+            break;
+        default:
+            @* Fallback for unknown widget types *@
+            <div class="unknown-widget">
+                <p>Unknown widget type: @widgetType</p>
+            </div>
+            break;
+    }
+}

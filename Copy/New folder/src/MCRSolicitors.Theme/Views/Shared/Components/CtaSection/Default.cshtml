@@ -1,0 +1,67 @@
+@model MCRSolicitors.Theme.Models.CtaSectionViewModel
+
+@{
+    var styleClass = Model.Style switch
+    {
+        MCRSolicitors.Theme.Models.CtaStyle.Card => "cta-card",
+        MCRSolicitors.Theme.Models.CtaStyle.FullWidth => "cta-fullwidth",
+        MCRSolicitors.Theme.Models.CtaStyle.Split => "cta-split",
+        _ => "cta-banner"
+    };
+}
+
+<section class="mcr-cta-section @styleClass" style="@(Model.BackgroundImageUrl != null ? $"background-image: url('{Model.BackgroundImageUrl}');" : "") @(Model.BackgroundColor != null ? $"background-color: {Model.BackgroundColor};" : "")">
+    <div class="cta-overlay"></div>
+    <div class="container">
+        <div class="cta-content">
+            <div class="cta-text">
+                @if (!string.IsNullOrEmpty(Model.Subtitle))
+                {
+                    <span class="cta-subtitle">@Model.Subtitle</span>
+                }
+                <h2 class="cta-title">@Model.Title</h2>
+                <p class="cta-description">@Model.Description</p>
+
+                @if (Model.ShowContactInfo)
+                {
+                    <div class="cta-contact-info">
+                        @if (!string.IsNullOrEmpty(Model.PhoneNumber))
+                        {
+                            <a href="tel:@Model.PhoneNumber.Replace(" ", "")" class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span>@Model.PhoneNumber</span>
+                            </a>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Email))
+                        {
+                            <a href="mailto:@Model.Email" class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>@Model.Email</span>
+                            </a>
+                        }
+                    </div>
+                }
+            </div>
+
+            <div class="cta-buttons">
+                <a href="@Model.PrimaryButton.Url" class="btn btn-primary btn-lg">
+                    @if (!string.IsNullOrEmpty(Model.PrimaryButton.IconClass))
+                    {
+                        <i class="@Model.PrimaryButton.IconClass"></i>
+                    }
+                    @Model.PrimaryButton.Text
+                </a>
+                @if (Model.SecondaryButton != null)
+                {
+                    <a href="@Model.SecondaryButton.Url" class="btn btn-outline-light btn-lg">
+                        @if (!string.IsNullOrEmpty(Model.SecondaryButton.IconClass))
+                        {
+                            <i class="@Model.SecondaryButton.IconClass"></i>
+                        }
+                        @Model.SecondaryButton.Text
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,53 @@
+@model MCRSolicitors.Theme.Models.FeatureSectionViewModel
+
+@{
+    var layoutClass = Model.Layout switch
+    {
+        MCRSolicitors.Theme.Models.FeatureLayout.List => "layout-list",
+        MCRSolicitors.Theme.Models.FeatureLayout.Alternating => "layout-alternating",
+        MCRSolicitors.Theme.Models.FeatureLayout.IconList => "layout-icon-list",
+        _ => "layout-grid"
+    };
+}
+
+<section class="mcr-features-section @layoutClass">
+    <div class="container">
+        <div class="features-wrapper @(Model.ImageUrl != null ? "with-image" : "")">
+            <div class="features-content">
+                <div class="section-header text-left">
+                    @if (!string.IsNullOrEmpty(Model.SectionSubtitle))
+                    {
+                        <span class="section-subtitle">@Model.SectionSubtitle</span>
+                    }
+                    <h2 class="section-title">@Model.SectionTitle</h2>
+                    @if (!string.IsNullOrEmpty(Model.SectionDescription))
+                    {
+                        <p class="section-description">@Model.SectionDescription</p>
+                    }
+                </div>
+
+                <div class="features-list">
+                    @foreach (var feature in Model.Features)
+                    {
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="@feature.IconClass"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3 class="feature-title">@feature.Title</h3>
+                                <p class="feature-description">@feature.Description</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <div class="features-image @Model.ImagePosition.ToString().ToLower()">
+                    <img src="@Model.ImageUrl" alt="@Model.SectionTitle" loading="lazy" />
+                </div>
+            }
+        </div>
+    </div>
+</section>

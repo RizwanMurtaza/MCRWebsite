@@ -1,0 +1,68 @@
+@model MCRSolicitors.Theme.Models.HeroViewModel
+
+@{
+    var heroClass = Model.Style switch
+    {
+        MCRSolicitors.Theme.Models.HeroStyle.WithImage => "hero-with-image",
+        MCRSolicitors.Theme.Models.HeroStyle.FullWidth => "hero-fullwidth",
+        MCRSolicitors.Theme.Models.HeroStyle.Centered => "hero-centered",
+        _ => "hero-default"
+    };
+}
+
+<section class="mcr-hero @heroClass" style="@(Model.BackgroundImageUrl != null ? $"background-image: url('{Model.BackgroundImageUrl}');" : "") @(Model.BackgroundColor != null ? $"background-color: {Model.BackgroundColor};" : "")">
+    <div class="hero-overlay"></div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text">
+                @if (!string.IsNullOrEmpty(Model.Subtitle))
+                {
+                    <span class="hero-subtitle">@Model.Subtitle</span>
+                }
+                <h1 class="hero-title">@Model.Title</h1>
+                @if (!string.IsNullOrEmpty(Model.Description))
+                {
+                    <p class="hero-description">@Model.Description</p>
+                }
+
+                <div class="hero-buttons">
+                    <a href="@Model.PrimaryButton.Url" class="btn btn-primary btn-lg">
+                        @if (!string.IsNullOrEmpty(Model.PrimaryButton.IconClass))
+                        {
+                            <i class="@Model.PrimaryButton.IconClass"></i>
+                        }
+                        @Model.PrimaryButton.Text
+                    </a>
+                    @if (Model.SecondaryButton != null)
+                    {
+                        <a href="@Model.SecondaryButton.Url" class="btn btn-outline btn-lg">
+                            @if (!string.IsNullOrEmpty(Model.SecondaryButton.IconClass))
+                            {
+                                <i class="@Model.SecondaryButton.IconClass"></i>
+                            }
+                            @Model.SecondaryButton.Text
+                        </a>
+                    }
+                </div>
+
+                @if (Model.ShowTrustIndicators && Model.TrustIndicators.Any())
+                {
+                    <div class="hero-trust-indicators">
+                        @foreach (var indicator in Model.TrustIndicators)
+                        {
+                            <div class="trust-indicator">
+                                <i class="@indicator.Icon"></i>
+                                <span>@indicator.Text</span>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="hero-shape">
+        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white"/>
+        </svg>
+    </div>
+</section>

@@ -1,0 +1,85 @@
+@model MCRSolicitors.Theme.Models.TestimonialSectionViewModel
+
+@{
+    var layoutClass = Model.Layout switch
+    {
+        MCRSolicitors.Theme.Models.TestimonialLayout.Grid => "layout-grid",
+        MCRSolicitors.Theme.Models.TestimonialLayout.Featured => "layout-featured",
+        MCRSolicitors.Theme.Models.TestimonialLayout.Masonry => "layout-masonry",
+        _ => "layout-carousel"
+    };
+}
+
+<section class="mcr-testimonials-section @layoutClass">
+    <div class="container">
+        <div class="section-header">
+            @if (!string.IsNullOrEmpty(Model.SectionSubtitle))
+            {
+                <span class="section-subtitle">@Model.SectionSubtitle</span>
+            }
+            <h2 class="section-title">@Model.SectionTitle</h2>
+        </div>
+
+        <div class="testimonials-wrapper">
+            <div class="testimonials-container">
+                @foreach (var testimonial in Model.Testimonials)
+                {
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            <i class="fas fa-quote-left quote-icon"></i>
+                            <p>@testimonial.Quote</p>
+                        </div>
+
+                        @if (Model.ShowRating)
+                        {
+                            <div class="testimonial-rating">
+                                @for (int i = 0; i < 5; i++)
+                                {
+                                    <i class="@(i < testimonial.Rating ? "fas" : "far") fa-star"></i>
+                                }
+                            </div>
+                        }
+
+                        <div class="testimonial-author">
+                            @if (!string.IsNullOrEmpty(testimonial.ClientImage))
+                            {
+                                <img src="@testimonial.ClientImage" alt="@testimonial.ClientName" class="author-image" />
+                            }
+                            else
+                            {
+                                <div class="author-initials">
+                                    @(string.Join("", testimonial.ClientName.Split(' ').Take(2).Select(s => s[0])))
+                                </div>
+                            }
+                            <div class="author-info">
+                                <span class="author-name">@testimonial.ClientName</span>
+                                @if (!string.IsNullOrEmpty(testimonial.CaseType))
+                                {
+                                    <span class="author-case">@testimonial.CaseType</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @if (Model.Layout == MCRSolicitors.Theme.Models.TestimonialLayout.Carousel && Model.Testimonials.Count > 1)
+            {
+                <div class="testimonial-nav">
+                    <button class="nav-btn prev" aria-label="Previous testimonial">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="testimonial-dots">
+                        @for (int i = 0; i < Model.Testimonials.Count; i++)
+                        {
+                            <button class="dot @(i == 0 ? "active" : "")" aria-label="Go to testimonial @(i + 1)"></button>
+                        }
+                    </div>
+                    <button class="nav-btn next" aria-label="Next testimonial">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</section>

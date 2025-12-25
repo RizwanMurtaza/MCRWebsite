@@ -1,0 +1,763 @@
+{
+  "name": "MCR Solicitors Content",
+  "displayName": "MCR Solicitors Website Content",
+  "description": "Seeds ALL content for MCR Solicitors website",
+  "author": "MCR Solicitors",
+  "website": "https://www.mcrsolicitors.co.uk",
+  "version": "1.0.0",
+  "issetuprecipe": false,
+  "categories": ["content"],
+  "tags": ["content", "seed"],
+  "steps": [
+    {
+      "name": "Content",
+      "data": [
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9j0k",
+          "ContentType": "HeroSection",
+          "DisplayText": "Main Hero Section",
+          "Latest": true,
+          "Published": true,
+          "HeroPart": {
+            "Title": "Immigration & Family Law Specialists in Manchester",
+            "Subtitle": "Expert Legal Representation",
+            "Description": "MCR Solicitors provides expert legal representation in Immigration, Family Law, and Personal Injury. Our experienced Manchester-based team offers free consultations and clear, honest advice to help you achieve the best possible outcome.",
+            "PrimaryButtonText": "Free Consultation",
+            "PrimaryButtonUrl": "/contact",
+            "SecondaryButtonText": "Our Services",
+            "SecondaryButtonUrl": "/services",
+            "BackgroundImageUrl": null,
+            "ShowTrustIndicators": true
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9j1k",
+          "ContentType": "ServiceItem",
+          "DisplayText": "Immigration Law",
+          "Latest": true,
+          "Published": true,
+          "ServiceItemPart": {
+            "Title": "Immigration Law",
+            "Description": "Expert guidance through all UK immigration matters including visa applications, asylum claims, ILR, and British citizenship.",
+            "IconClass": "fas fa-globe",
+            "Url": "/services/immigration",
+            "CtaText": "Explore Immigration Services",
+            "DisplayOrder": 1
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9j2k",
+          "ContentType": "ServiceItem",
+          "DisplayText": "Family Law",
+          "Latest": true,
+          "Published": true,
+          "ServiceItemPart": {
+            "Title": "Family Law",
+            "Description": "Compassionate support for divorce, child custody, financial settlements, domestic violence cases, and family disputes.",
+            "IconClass": "fas fa-users",
+            "Url": "/services/family-law",
+            "CtaText": "Explore Family Law Services",
+            "DisplayOrder": 2
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9j3k",
+          "ContentType": "ServiceItem",
+          "DisplayText": "Personal Injury",
+          "Latest": true,
+          "Published": true,
+          "ServiceItemPart": {
+            "Title": "Personal Injury",
+            "Description": "No win, no fee representation for road traffic accidents, workplace injuries, medical negligence, and criminal injuries.",
+            "IconClass": "fas fa-user-injured",
+            "Url": "/services/personal-injury",
+            "CtaText": "Explore Personal Injury Claims",
+            "DisplayOrder": 3
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9j4k",
+          "ContentType": "StatItem",
+          "DisplayText": "Years Experience",
+          "Latest": true,
+          "Published": true,
+          "StatItemPart": {
+            "Value": "15",
+            "Suffix": "+",
+            "Prefix": "",
+            "Label": "Years Experience",
+            "IconClass": "fas fa-calendar-check",
+            "DisplayOrder": 1
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9j5k",
+          "ContentType": "StatItem",
+          "DisplayText": "Clients Helped",
+          "Latest": true,
+          "Published": true,
+          "StatItemPart": {
+            "Value": "5000",
+            "Suffix": "+",
+            "Prefix": "",
+            "Label": "Clients Helped",
+            "IconClass": "fas fa-users",
+            "DisplayOrder": 2
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9j6k",
+          "ContentType": "StatItem",
+          "DisplayText": "Success Rate",
+          "Latest": true,
+          "Published": true,
+          "StatItemPart": {
+            "Value": "95",
+            "Suffix": "%",
+            "Prefix": "",
+            "Label": "Success Rate",
+            "IconClass": "fas fa-trophy",
+            "DisplayOrder": 3
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9j7k",
+          "ContentType": "StatItem",
+          "DisplayText": "Google Rating",
+          "Latest": true,
+          "Published": true,
+          "StatItemPart": {
+            "Value": "4.9",
+            "Suffix": "",
+            "Prefix": "",
+            "Label": "Google Rating",
+            "IconClass": "fas fa-star",
+            "DisplayOrder": 4
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9j8k",
+          "ContentType": "FeatureItem",
+          "DisplayText": "SRA Regulated Firm",
+          "Latest": true,
+          "Published": true,
+          "FeatureItemPart": {
+            "Title": "SRA Regulated Firm",
+            "Description": "Fully regulated by the Solicitors Regulation Authority (SRA #648878), ensuring the highest professional standards.",
+            "IconClass": "fas fa-shield-alt",
+            "DisplayOrder": 1
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9j9k",
+          "ContentType": "FeatureItem",
+          "DisplayText": "Free Initial Consultation",
+          "Latest": true,
+          "Published": true,
+          "FeatureItemPart": {
+            "Title": "Free Initial Consultation",
+            "Description": "Discuss your case with no obligation. We'll assess your situation and explain your options clearly.",
+            "IconClass": "fas fa-comments",
+            "DisplayOrder": 2
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9k0k",
+          "ContentType": "FeatureItem",
+          "DisplayText": "No Win, No Fee",
+          "Latest": true,
+          "Published": true,
+          "FeatureItemPart": {
+            "Title": "No Win, No Fee",
+            "Description": "For eligible personal injury cases, you only pay if we win. No upfront costs or hidden fees.",
+            "IconClass": "fas fa-pound-sign",
+            "DisplayOrder": 3
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9k1k",
+          "ContentType": "FeatureItem",
+          "DisplayText": "Multilingual Team",
+          "Latest": true,
+          "Published": true,
+          "FeatureItemPart": {
+            "Title": "Multilingual Team",
+            "Description": "We speak your language. Our diverse team can assist in multiple languages including Urdu, Punjabi, and Arabic.",
+            "IconClass": "fas fa-language",
+            "DisplayOrder": 4
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9k2k",
+          "ContentType": "FeatureItem",
+          "DisplayText": "Legal Aid Available",
+          "Latest": true,
+          "Published": true,
+          "FeatureItemPart": {
+            "Title": "Legal Aid Available",
+            "Description": "We accept Legal Aid for qualifying immigration and family law cases. Ask about your eligibility.",
+            "IconClass": "fas fa-hand-holding-usd",
+            "DisplayOrder": 5
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9k3k",
+          "ContentType": "FeatureItem",
+          "DisplayText": "Fast & Responsive",
+          "Latest": true,
+          "Published": true,
+          "FeatureItemPart": {
+            "Title": "Fast & Responsive",
+            "Description": "We respond to enquiries within 24 hours and keep you updated throughout your case.",
+            "IconClass": "fas fa-bolt",
+            "DisplayOrder": 6
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9k4k",
+          "ContentType": "Testimonial",
+          "DisplayText": "Fatima A. - Spouse Visa",
+          "Latest": true,
+          "Published": true,
+          "TestimonialItemPart": {
+            "Quote": "MCR Solicitors helped me reunite with my family after a stressful spouse visa application. Their knowledge of immigration law is exceptional, and they kept me informed every step of the way. I cannot recommend them highly enough.",
+            "ClientName": "Fatima A.",
+            "CaseType": "Spouse Visa Application",
+            "ClientImageUrl": null,
+            "Rating": 5,
+            "DisplayOrder": 1
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9k5k",
+          "ContentType": "Testimonial",
+          "DisplayText": "Rebecca T. - Divorce",
+          "Latest": true,
+          "Published": true,
+          "TestimonialItemPart": {
+            "Quote": "Going through a divorce was incredibly difficult, but the family law team at MCR made the process as smooth as possible. They fought for a fair outcome for me and my children. Professional, compassionate, and highly skilled.",
+            "ClientName": "Rebecca T.",
+            "CaseType": "Divorce & Child Arrangements",
+            "ClientImageUrl": null,
+            "Rating": 5,
+            "DisplayOrder": 2
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9k6k",
+          "ContentType": "Testimonial",
+          "DisplayText": "David M. - Workplace Injury",
+          "Latest": true,
+          "Published": true,
+          "TestimonialItemPart": {
+            "Quote": "After my accident at work, MCR Solicitors took on my case on a no win, no fee basis. They secured compensation that covered all my medical costs and lost earnings. Their personal injury team truly cares about their clients.",
+            "ClientName": "David M.",
+            "CaseType": "Workplace Injury Claim",
+            "ClientImageUrl": null,
+            "Rating": 5,
+            "DisplayOrder": 3
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9k7k",
+          "ContentType": "Testimonial",
+          "DisplayText": "Anonymous - Asylum",
+          "Latest": true,
+          "Published": true,
+          "TestimonialItemPart": {
+            "Quote": "The asylum process was terrifying, but MCR Solicitors gave me hope. They prepared my case meticulously and represented me with passion. I am now safe in the UK thanks to their dedication.",
+            "ClientName": "Anonymous",
+            "CaseType": "Asylum Application",
+            "ClientImageUrl": null,
+            "Rating": 5,
+            "DisplayOrder": 4
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9k8k",
+          "ContentType": "Testimonial",
+          "DisplayText": "Mohammed K. - ILR",
+          "Latest": true,
+          "Published": true,
+          "TestimonialItemPart": {
+            "Quote": "I was worried about my ILR application after previous refusals. MCR Solicitors reviewed my case, identified the issues, and helped me prepare a successful application. Finally, I have peace of mind.",
+            "ClientName": "Mohammed K.",
+            "CaseType": "Indefinite Leave to Remain",
+            "ClientImageUrl": null,
+            "Rating": 5,
+            "DisplayOrder": 5
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9k9k",
+          "ContentType": "Testimonial",
+          "DisplayText": "Sarah L. - Road Accident",
+          "Latest": true,
+          "Published": true,
+          "TestimonialItemPart": {
+            "Quote": "After being hit by a car while crossing the road, I didn't know where to turn. MCR Solicitors handled everything from dealing with the insurance company to arranging my medical appointments. Highly professional service.",
+            "ClientName": "Sarah L.",
+            "CaseType": "Road Traffic Accident",
+            "ClientImageUrl": null,
+            "Rating": 5,
+            "DisplayOrder": 6
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9m0k",
+          "ContentType": "CtaSection",
+          "DisplayText": "Main CTA Section",
+          "Latest": true,
+          "Published": true,
+          "CtaPart": {
+            "Subtitle": "Get Expert Legal Help Today",
+            "Title": "Ready to Discuss Your Case?",
+            "Description": "Get in touch today for a free, no-obligation consultation with one of our expert solicitors.",
+            "PrimaryButtonText": "Book Free Consultation",
+            "PrimaryButtonUrl": "/contact",
+            "SecondaryButtonText": "Call 0161 804 7777",
+            "SecondaryButtonUrl": "tel:01618047777",
+            "Style": "Banner",
+            "ShowContactInfo": true,
+            "PhoneNumber": "0161 804 7777",
+            "Email": "info@mcrsolicitors.co.uk"
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9m1k",
+          "ContentType": "ServicePage",
+          "DisplayText": "Immigration Law",
+          "Latest": true,
+          "Published": true,
+          "ServiceDetailPart": {
+            "Title": "Immigration Law",
+            "Slug": "immigration",
+            "ShortDescription": "Expert UK immigration advice for visa applications, asylum claims, appeals, and citizenship.",
+            "FullDescription": "<p>MCR Solicitors provides comprehensive immigration law services to individuals, families, and businesses across Manchester and the UK.</p>",
+            "IconClass": "fas fa-globe",
+            "MetaDescription": "Expert immigration solicitors in Manchester. Free consultation. Legal Aid available.",
+            "Category": "Immigration",
+            "DisplayOrder": 1
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9m2k",
+          "ContentType": "ServicePage",
+          "DisplayText": "Spouse Visas",
+          "Latest": true,
+          "Published": true,
+          "ServiceDetailPart": {
+            "Title": "Spouse & Partner Visas",
+            "Slug": "spouse-visa",
+            "ShortDescription": "Reunite with your loved ones in the UK with our expert spouse visa services.",
+            "FullDescription": "<p>Our immigration team specialises in spouse and partner visa applications, helping families reunite.</p>",
+            "IconClass": "fas fa-heart",
+            "Category": "Immigration",
+            "DisplayOrder": 2
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9m3k",
+          "ContentType": "ServicePage",
+          "DisplayText": "Asylum Claims",
+          "Latest": true,
+          "Published": true,
+          "ServiceDetailPart": {
+            "Title": "Asylum & Refugee Claims",
+            "Slug": "asylum",
+            "ShortDescription": "Compassionate legal support for those seeking protection in the UK.",
+            "FullDescription": "<p>Our asylum solicitors provide compassionate, expert support throughout the asylum process.</p>",
+            "IconClass": "fas fa-hands-helping",
+            "Category": "Immigration",
+            "DisplayOrder": 3
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9m4k",
+          "ContentType": "ServicePage",
+          "DisplayText": "ILR Applications",
+          "Latest": true,
+          "Published": true,
+          "ServiceDetailPart": {
+            "Title": "Indefinite Leave to Remain",
+            "Slug": "ilr",
+            "ShortDescription": "Secure your permanent residence status in the UK.",
+            "FullDescription": "<p>ILR allows you to live and work in the UK without time restrictions.</p>",
+            "IconClass": "fas fa-home",
+            "Category": "Immigration",
+            "DisplayOrder": 4
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9m5k",
+          "ContentType": "ServicePage",
+          "DisplayText": "British Citizenship",
+          "Latest": true,
+          "Published": true,
+          "ServiceDetailPart": {
+            "Title": "British Citizenship",
+            "Slug": "citizenship",
+            "ShortDescription": "Become a British citizen with our expert naturalisation services.",
+            "FullDescription": "<p>British citizenship gives you the right to live, work, and vote in the UK permanently.</p>",
+            "IconClass": "fas fa-passport",
+            "Category": "Immigration",
+            "DisplayOrder": 5
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9m6k",
+          "ContentType": "ServicePage",
+          "DisplayText": "Family Law",
+          "Latest": true,
+          "Published": true,
+          "ServiceDetailPart": {
+            "Title": "Family Law",
+            "Slug": "family-law",
+            "ShortDescription": "Compassionate family law support for divorce, children matters, and settlements.",
+            "FullDescription": "<p>Our family law solicitors provide compassionate support through difficult times.</p>",
+            "IconClass": "fas fa-users",
+            "MetaDescription": "Expert family law solicitors in Manchester. Free consultation available.",
+            "Category": "FamilyLaw",
+            "DisplayOrder": 10
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9m7k",
+          "ContentType": "ServicePage",
+          "DisplayText": "Divorce",
+          "Latest": true,
+          "Published": true,
+          "ServiceDetailPart": {
+            "Title": "Divorce & Separation",
+            "Slug": "divorce",
+            "ShortDescription": "Expert divorce solicitors to guide you through separation with dignity.",
+            "FullDescription": "<p>Our divorce solicitors handle all aspects of marital breakdown.</p>",
+            "IconClass": "fas fa-file-signature",
+            "Category": "FamilyLaw",
+            "DisplayOrder": 11
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9m8k",
+          "ContentType": "ServicePage",
+          "DisplayText": "Child Custody",
+          "Latest": true,
+          "Published": true,
+          "ServiceDetailPart": {
+            "Title": "Child Custody & Arrangements",
+            "Slug": "child-custody",
+            "ShortDescription": "Protecting your children's best interests in custody disputes.",
+            "FullDescription": "<p>We help parents reach agreements with children's welfare at the forefront.</p>",
+            "IconClass": "fas fa-child",
+            "Category": "FamilyLaw",
+            "DisplayOrder": 12
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9m9k",
+          "ContentType": "ServicePage",
+          "DisplayText": "Domestic Violence",
+          "Latest": true,
+          "Published": true,
+          "ServiceDetailPart": {
+            "Title": "Domestic Violence Protection",
+            "Slug": "domestic-violence",
+            "ShortDescription": "Urgent legal protection for victims of domestic abuse.",
+            "FullDescription": "<p>We can help you obtain emergency protection orders.</p>",
+            "IconClass": "fas fa-shield-alt",
+            "Category": "FamilyLaw",
+            "DisplayOrder": 13
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9n0k",
+          "ContentType": "ServicePage",
+          "DisplayText": "Personal Injury",
+          "Latest": true,
+          "Published": true,
+          "ServiceDetailPart": {
+            "Title": "Personal Injury",
+            "Slug": "personal-injury",
+            "ShortDescription": "No win, no fee personal injury claims.",
+            "FullDescription": "<p>Our personal injury solicitors work on a no win, no fee basis.</p>",
+            "IconClass": "fas fa-user-injured",
+            "MetaDescription": "No win, no fee personal injury solicitors in Manchester.",
+            "Category": "PersonalInjury",
+            "DisplayOrder": 20
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9n1k",
+          "ContentType": "ServicePage",
+          "DisplayText": "Road Accidents",
+          "Latest": true,
+          "Published": true,
+          "ServiceDetailPart": {
+            "Title": "Road Traffic Accidents",
+            "Slug": "road-accidents",
+            "ShortDescription": "Expert claims handling for car, motorcycle, and pedestrian accidents.",
+            "FullDescription": "<p>We help victims claim compensation on a no win, no fee basis.</p>",
+            "IconClass": "fas fa-car-crash",
+            "Category": "PersonalInjury",
+            "DisplayOrder": 21
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9n2k",
+          "ContentType": "ServicePage",
+          "DisplayText": "Workplace Injuries",
+          "Latest": true,
+          "Published": true,
+          "ServiceDetailPart": {
+            "Title": "Workplace Injuries",
+            "Slug": "workplace-injury",
+            "ShortDescription": "Claiming compensation for accidents and injuries at work.",
+            "FullDescription": "<p>If you've been injured at work, you may have a claim for compensation.</p>",
+            "IconClass": "fas fa-hard-hat",
+            "Category": "PersonalInjury",
+            "DisplayOrder": 22
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9n3k",
+          "ContentType": "ServicePage",
+          "DisplayText": "Medical Negligence",
+          "Latest": true,
+          "Published": true,
+          "ServiceDetailPart": {
+            "Title": "Medical Negligence",
+            "Slug": "medical-negligence",
+            "ShortDescription": "Holding healthcare providers accountable for substandard care.",
+            "FullDescription": "<p>Our medical negligence solicitors investigate complex cases.</p>",
+            "IconClass": "fas fa-hospital",
+            "Category": "PersonalInjury",
+            "DisplayOrder": 23
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9n4k",
+          "ContentType": "FaqItem",
+          "DisplayText": "Spouse visa time",
+          "Latest": true,
+          "Published": true,
+          "FaqItemPart": {
+            "Question": "How long does a UK spouse visa application take?",
+            "Answer": "Standard processing time is around 12 weeks. Priority services are available.",
+            "Category": "Immigration",
+            "DisplayOrder": 1
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9n5k",
+          "ContentType": "FaqItem",
+          "DisplayText": "Spouse visa income",
+          "Latest": true,
+          "Published": true,
+          "FaqItemPart": {
+            "Question": "What is the minimum income requirement for a spouse visa?",
+            "Answer": "The sponsoring partner must earn at least £29,000 per year (as of April 2024).",
+            "Category": "Immigration",
+            "DisplayOrder": 2
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9n6k",
+          "ContentType": "FaqItem",
+          "DisplayText": "Divorce duration",
+          "Latest": true,
+          "Published": true,
+          "FaqItemPart": {
+            "Question": "How long does a divorce take in the UK?",
+            "Answer": "The minimum time is 26 weeks under no-fault divorce law.",
+            "Category": "FamilyLaw",
+            "DisplayOrder": 1
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9n7k",
+          "ContentType": "FaqItem",
+          "DisplayText": "No win no fee",
+          "Latest": true,
+          "Published": true,
+          "FaqItemPart": {
+            "Question": "What does 'no win, no fee' mean?",
+            "Answer": "You don't pay legal fees if your claim is unsuccessful.",
+            "Category": "PersonalInjury",
+            "DisplayOrder": 1
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9n8k",
+          "ContentType": "TeamMember",
+          "DisplayText": "Rizwan Ahmed",
+          "Latest": true,
+          "Published": true,
+          "TeamMemberPart": {
+            "Name": "Rizwan Ahmed",
+            "Role": "Managing Partner",
+            "Bio": "Rizwan founded MCR Solicitors with a vision to provide accessible, high-quality legal services. With over 15 years of experience in immigration law.",
+            "PhotoUrl": null,
+            "Email": "rizwan@mcrsolicitors.co.uk",
+            "DisplayOrder": 1
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9n9k",
+          "ContentType": "TeamMember",
+          "DisplayText": "Sarah Thompson",
+          "Latest": true,
+          "Published": true,
+          "TeamMemberPart": {
+            "Name": "Sarah Thompson",
+            "Role": "Head of Family Law",
+            "Bio": "Sarah brings 12 years of family law experience. Known for her compassionate approach.",
+            "PhotoUrl": null,
+            "Email": "sarah@mcrsolicitors.co.uk",
+            "DisplayOrder": 2
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9o0k",
+          "ContentType": "TeamMember",
+          "DisplayText": "James Wilson",
+          "Latest": true,
+          "Published": true,
+          "TeamMemberPart": {
+            "Name": "James Wilson",
+            "Role": "Personal Injury Specialist",
+            "Bio": "James has recovered millions in compensation for injury victims.",
+            "PhotoUrl": null,
+            "Email": "james@mcrsolicitors.co.uk",
+            "DisplayOrder": 3
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9o1k",
+          "ContentType": "TeamMember",
+          "DisplayText": "Amina Patel",
+          "Latest": true,
+          "Published": true,
+          "TeamMemberPart": {
+            "Name": "Amina Patel",
+            "Role": "Immigration Solicitor",
+            "Bio": "Amina specialises in complex immigration cases. Fluent in Urdu and Punjabi.",
+            "PhotoUrl": null,
+            "Email": "amina@mcrsolicitors.co.uk",
+            "DisplayOrder": 4
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9o2k",
+          "ContentType": "CompanyValue",
+          "DisplayText": "Client First",
+          "Latest": true,
+          "Published": true,
+          "CompanyValuePart": {
+            "Title": "Client First",
+            "Description": "Your interests are at the heart of everything we do.",
+            "IconClass": "fas fa-user-check",
+            "DisplayOrder": 1
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9o3k",
+          "ContentType": "CompanyValue",
+          "DisplayText": "Integrity",
+          "Latest": true,
+          "Published": true,
+          "CompanyValuePart": {
+            "Title": "Integrity",
+            "Description": "We provide honest advice. Transparency builds trust.",
+            "IconClass": "fas fa-balance-scale",
+            "DisplayOrder": 2
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9o4k",
+          "ContentType": "CompanyValue",
+          "DisplayText": "Excellence",
+          "Latest": true,
+          "Published": true,
+          "CompanyValuePart": {
+            "Title": "Excellence",
+            "Description": "We strive for the highest standards in every case.",
+            "IconClass": "fas fa-award",
+            "DisplayOrder": 3
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9o5k",
+          "ContentType": "CompanyValue",
+          "DisplayText": "Accessibility",
+          "Latest": true,
+          "Published": true,
+          "CompanyValuePart": {
+            "Title": "Accessibility",
+            "Description": "Quality legal advice should be accessible to everyone.",
+            "IconClass": "fas fa-door-open",
+            "DisplayOrder": 4
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9o6k",
+          "ContentType": "Accreditation",
+          "DisplayText": "SRA Regulated",
+          "Latest": true,
+          "Published": true,
+          "AccreditationPart": {
+            "Name": "Solicitors Regulation Authority",
+            "Description": "Regulated by the SRA (Firm Number 648878)",
+            "ImageUrl": "/images/sra-logo.png",
+            "LinkUrl": "https://www.sra.org.uk/",
+            "DisplayOrder": 1
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9o7k",
+          "ContentType": "Accreditation",
+          "DisplayText": "Legal Aid Agency",
+          "Latest": true,
+          "Published": true,
+          "AccreditationPart": {
+            "Name": "Legal Aid Agency",
+            "Description": "Authorised Legal Aid Provider",
+            "ImageUrl": "/images/legal-aid-logo.png",
+            "LinkUrl": "https://www.gov.uk/legal-aid",
+            "DisplayOrder": 2
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9o8k",
+          "ContentType": "Accreditation",
+          "DisplayText": "The Law Society",
+          "Latest": true,
+          "Published": true,
+          "AccreditationPart": {
+            "Name": "The Law Society",
+            "Description": "Member of The Law Society of England and Wales",
+            "ImageUrl": "/images/law-society-logo.png",
+            "LinkUrl": "https://www.lawsociety.org.uk/",
+            "DisplayOrder": 3
+          }
+        },
+        {
+          "ContentItemId": "4a1b2c3d4e5f6g7h8i9o9k",
+          "ContentType": "Office",
+          "DisplayText": "Manchester Office",
+          "Latest": true,
+          "Published": true,
+          "OfficePart": {
+            "Name": "Manchester Head Office",
+            "Address": "123 Deansgate",
+            "City": "Manchester",
+            "PostCode": "M3 2BW",
+            "Phone": "0161 804 7777",
+            "Email": "info@mcrsolicitors.co.uk",
+            "OpeningHours": "Mon-Fri: 9am-5:30pm, Sat: 10am-2pm (by appt)",
+            "IsPrimary": true
+          }
+        }
+      ]
+    }
+  ]
+}

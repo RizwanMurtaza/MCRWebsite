@@ -1,0 +1,77 @@
+@model MCRSolicitors.Theme.ViewComponents.NavigationViewModel
+@{
+    // Use LogoUrl from CMS or fallback to theme logo
+    var logoUrl = !string.IsNullOrEmpty(Model.LogoUrl) ? Model.LogoUrl : "/MCRSolicitors.Theme/images/mcr_logo.png";
+}
+
+<nav class="navbar navbar-expand-lg navbar-dark mcr-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="@logoUrl" alt="@Model.SiteName" class="navbar-logo" />
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavigation">
+            <ul class="navbar-nav ms-auto">
+                @foreach (var item in Model.MenuItems)
+                {
+                    @if (item.HasChildren)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="@item.Url" id="nav-@item.Id" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                @if (!string.IsNullOrEmpty(item.IconClass))
+                                {
+                                    <i class="@item.IconClass"></i>
+                                }
+                                @item.Title
+                            </a>
+                            <ul class="dropdown-menu @(item.IsMegaMenu ? "dropdown-menu-mega" : "")" aria-labelledby="nav-@item.Id">
+                                @foreach (var child in item.Children)
+                                {
+                                    <li>
+                                        <a class="dropdown-item" href="@child.Url" @(child.OpenInNewTab ? "target=\"_blank\" rel=\"noopener\"" : "")>
+                                            @if (!string.IsNullOrEmpty(child.IconClass))
+                                            {
+                                                <i class="@child.IconClass me-2"></i>
+                                            }
+                                            @child.Title
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@item.Url" @(item.OpenInNewTab ? "target=\"_blank\" rel=\"noopener\"" : "")>
+                                @if (!string.IsNullOrEmpty(item.IconClass))
+                                {
+                                    <i class="@item.IconClass"></i>
+                                }
+                                @item.Title
+                            </a>
+                        </li>
+                    }
+                }
+            </ul>
+
+            @if (!string.IsNullOrEmpty(Model.PhoneNumber))
+            {
+                <div class="navbar-contact d-none d-lg-flex">
+                    <a href="tel:@Model.PhoneNumber.Replace(" ", "").Replace("-", "")" class="nav-phone">
+                        <i class="fas fa-phone"></i> @Model.PhoneNumber
+                    </a>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.CtaButtonText))
+            {
+                <a href="@Model.CtaButtonUrl" class="btn btn-primary nav-cta ms-3">@Model.CtaButtonText</a>
+            }
+        </div>
+    </div>
+</nav>

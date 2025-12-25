@@ -1,0 +1,82 @@
+@using OrchardCore.Settings
+@using Starter.Theme.Services.Abstractions
+@inject ISiteService SiteService
+@inject IThemeSettingsService ThemeSettings
+@{
+    var site = await SiteService.GetSiteSettingsAsync();
+    var settings = await ThemeSettings.GetSettingsAsync();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@RenderTitleSegments(site.SiteName, " - ")</title>
+    <meta name="description" content="@settings.HeroSubtitle" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="~/Starter.Theme/images/favicon.ico" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Theme CSS with dynamic variables -->
+    <style>
+        :root {
+            --primary-color: @settings.PrimaryColor;
+            --primary-hover: @GetHoverColor(settings.PrimaryColor);
+            --font-heading: @settings.HeadingFont;
+            --font-body: @settings.BodyFont;
+        }
+    </style>
+    <link rel="stylesheet" href="~/Starter.Theme/css/theme.css" />
+
+    <resources type="HeadScript" />
+    <resources type="HeadLink" />
+    <resources type="Stylesheet" />
+</head>
+<body>
+    <!-- Navigation -->
+    @await Component.InvokeAsync("Navigation")
+
+    <!-- Main Content -->
+    <main>
+        @await RenderBodyAsync()
+    </main>
+
+    <!-- Footer -->
+    @await Component.InvokeAsync("Footer")
+
+    <!-- Scripts -->
+    <script src="~/Starter.Theme/js/theme.js"></script>
+    <resources type="FootScript" />
+</body>
+</html>
+
+@functions {
+    string GetHoverColor(string hexColor)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(hexColor) || !hexColor.StartsWith("#") || hexColor.Length != 7)
+                return "#c44a25";
+
+            var r = Convert.ToInt32(hexColor.Substring(1, 2), 16);
+            var g = Convert.ToInt32(hexColor.Substring(3, 2), 16);
+            var b = Convert.ToInt32(hexColor.Substring(5, 2), 16);
+
+            r = Math.Max(0, r - 20);
+            g = Math.Max(0, g - 20);
+            b = Math.Max(0, b - 20);
+
+            return $"#{r:X2}{g:X2}{b:X2}";
+        }
+        catch
+        {
+            return "#c44a25";
+        }
+    }
+}

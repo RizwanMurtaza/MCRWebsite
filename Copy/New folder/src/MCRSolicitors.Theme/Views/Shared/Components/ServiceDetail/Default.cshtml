@@ -1,0 +1,119 @@
+@model MCRSolicitors.Theme.Models.ServiceDetailViewModel
+@inject MCRSolicitors.Theme.Services.Abstractions.ISiteSettingsService SiteSettings
+
+<section class="mcr-service-detail">
+    <div class="container">
+        <div class="service-detail-content">
+            <article class="service-main">
+                @* Service Introduction *@
+                <div class="service-intro">
+                    <p class="lead">@Model.Description</p>
+                </div>
+
+                @* Main Content Sections *@
+                @foreach (var contentSection in Model.ContentSections)
+                {
+                    <h2>@contentSection.Title</h2>
+                    @Html.Raw(contentSection.HtmlContent)
+                }
+
+                @* Benefits Section *@
+                @if (Model.Benefits.Any())
+                {
+                    <div class="service-benefits">
+                        <h2>Why Choose MCR Solicitors</h2>
+                        <div class="benefits-grid">
+                            @foreach (var benefit in Model.Benefits)
+                            {
+                                <div class="benefit-item">
+                                    <div class="benefit-icon">
+                                        <i class="@benefit.IconClass"></i>
+                                    </div>
+                                    <div class="benefit-content">
+                                        <h4>@benefit.Title</h4>
+                                        <p>@benefit.Description</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+
+                @* FAQ Section *@
+                @if (Model.Faqs.Any())
+                {
+                    <div class="service-faqs">
+                        <h2>Frequently Asked Questions</h2>
+                        <div class="faq-list">
+                            @foreach (var faq in Model.Faqs)
+                            {
+                                <details class="faq-item">
+                                    <summary class="faq-question">
+                                        @faq.Question
+                                        <i class="fas fa-chevron-down"></i>
+                                    </summary>
+                                    <div class="faq-answer">
+                                        <p>@faq.Answer</p>
+                                    </div>
+                                </details>
+                            }
+                        </div>
+                    </div>
+                }
+            </article>
+
+            <aside class="service-sidebar">
+                @* Related Services *@
+                @if (Model.RelatedServices.Any())
+                {
+                    <div class="sidebar-card">
+                        <h4 class="sidebar-title">@Model.CategoryTitle Services</h4>
+                        <ul class="sidebar-links">
+                            @foreach (var related in Model.RelatedServices)
+                            {
+                                <li>
+                                    <a href="@related.Url" class="@(related.IsActive ? "active" : "")">
+                                        @related.Title
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+
+                @* CTA Card *@
+                <div class="sidebar-card cta">
+                    <h4>Free Consultation</h4>
+                    <p>Get expert advice on your @Model.Title.ToLower() case. We're here to help.</p>
+                    <a href="tel:@SiteSettings.GetPhoneNumber().Replace(" ", "")" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-phone"></i>
+                        @SiteSettings.GetPhoneNumber()
+                    </a>
+                </div>
+
+                @* Contact Info Card *@
+                <div class="sidebar-card">
+                    <h4 class="sidebar-title">Get In Touch</h4>
+                    <ul class="sidebar-contact">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:@SiteSettings.GetEmail()">@SiteSettings.GetEmail()</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>@SiteSettings.GetAddress()</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Fri: 9am-5:30pm</span>
+                        </li>
+                    </ul>
+                    <a href="/contact" class="btn btn-secondary">
+                        Contact Us
+                    </a>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>

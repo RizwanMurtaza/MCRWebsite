@@ -1,0 +1,131 @@
+@model Starter.Theme.ViewModels.ThemeSettingsViewModel
+
+<fieldset class="mb-3">
+    <legend>@T["Branding"]</legend>
+
+    <div class="mb-3">
+        <label asp-for="SiteName" class="form-label">@T["Site Name"]</label>
+        <input asp-for="SiteName" class="form-control" />
+        <span class="hint">@T["The name of your website displayed in the header and footer."]</span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="LogoUrl" class="form-label">@T["Logo URL"]</label>
+        <input asp-for="LogoUrl" class="form-control" placeholder="/media/logo.png" />
+        <span class="hint">@T["URL to your logo image. Upload via Media and paste the URL here."]</span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PrimaryColor" class="form-label">@T["Primary Color"]</label>
+        <div class="input-group">
+            <input type="color" asp-for="PrimaryColor" class="form-control form-control-color" style="width: 60px;" />
+            <input type="text" asp-for="PrimaryColor" class="form-control" placeholder="#DE532A" />
+        </div>
+        <span class="hint">@T["Main brand color used for buttons, links, and accents."]</span>
+    </div>
+</fieldset>
+
+<fieldset class="mb-3">
+    <legend>@T["Typography"]</legend>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="HeadingFont" class="form-label">@T["Heading Font"]</label>
+            <input asp-for="HeadingFont" class="form-control" placeholder="'Rubik', sans-serif" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="BodyFont" class="form-label">@T["Body Font"]</label>
+            <input asp-for="BodyFont" class="form-control" placeholder="'Montserrat', sans-serif" />
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="mb-3">
+    <legend>@T["Contact Information"]</legend>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Phone" class="form-label">@T["Phone Number"]</label>
+            <input asp-for="Phone" class="form-control" placeholder="0161 123 4567" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Email" class="form-label">@T["Email Address"]</label>
+            <input asp-for="Email" class="form-control" type="email" placeholder="info@example.com" />
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Address" class="form-label">@T["Address"]</label>
+        <textarea asp-for="Address" class="form-control" rows="2" placeholder="123 Street Name, City, Postcode"></textarea>
+    </div>
+</fieldset>
+
+<fieldset class="mb-3">
+    <legend>@T["Social Media"]</legend>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="FacebookUrl" class="form-label">@T["Facebook URL"]</label>
+            <input asp-for="FacebookUrl" class="form-control" placeholder="https://facebook.com/yourpage" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="TwitterUrl" class="form-label">@T["Twitter URL"]</label>
+            <input asp-for="TwitterUrl" class="form-control" placeholder="https://twitter.com/yourhandle" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="LinkedInUrl" class="form-label">@T["LinkedIn URL"]</label>
+            <input asp-for="LinkedInUrl" class="form-control" placeholder="https://linkedin.com/company/yourcompany" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="InstagramUrl" class="form-label">@T["Instagram URL"]</label>
+            <input asp-for="InstagramUrl" class="form-control" placeholder="https://instagram.com/yourhandle" />
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="mb-3">
+    <legend>@T["Hero Section"]</legend>
+
+    <div class="mb-3">
+        <label asp-for="HeroTitle" class="form-label">@T["Hero Title"]</label>
+        <input asp-for="HeroTitle" class="form-control" placeholder="Welcome to Our Website" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="HeroSubtitle" class="form-label">@T["Hero Subtitle"]</label>
+        <textarea asp-for="HeroSubtitle" class="form-control" rows="2" placeholder="A brief description of your services..."></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="HeroBackgroundUrl" class="form-label">@T["Hero Background Image URL"]</label>
+        <input asp-for="HeroBackgroundUrl" class="form-control" placeholder="/media/hero-bg.jpg" />
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="HeroButtonText" class="form-label">@T["Button Text"]</label>
+            <input asp-for="HeroButtonText" class="form-control" placeholder="Contact Us" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="HeroButtonUrl" class="form-label">@T["Button URL"]</label>
+            <input asp-for="HeroButtonUrl" class="form-control" placeholder="/contact" />
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="mb-3">
+    <legend>@T["Footer"]</legend>
+
+    <div class="mb-3">
+        <label asp-for="FooterAbout" class="form-label">@T["Footer About Text"]</label>
+        <textarea asp-for="FooterAbout" class="form-control" rows="3" placeholder="A brief description about your company..."></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="FooterBadgesHtml" class="form-label">@T["Footer Badges HTML"]</label>
+        <textarea asp-for="FooterBadgesHtml" class="form-control" rows="4" placeholder="<img src='/media/badge1.png' alt='Badge' />"></textarea>
+        <span class="hint">@T["HTML for accreditation badges, logos, etc. displayed in footer."]</span>
+    </div>
+</fieldset>

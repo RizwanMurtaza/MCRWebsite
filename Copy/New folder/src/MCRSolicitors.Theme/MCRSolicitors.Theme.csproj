@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>MCRSolicitors.Theme</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Recipes\*.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OrchardCore.Theme.Targets" Version="2.2.1" />
+    <PackageReference Include="OrchardCore.Recipes.Core" Version="2.2.1" />
+    <PackageReference Include="OrchardCore.ContentManagement" Version="2.2.1" />
+    <PackageReference Include="OrchardCore.ContentManagement.Display" Version="2.2.1" />
+    <PackageReference Include="OrchardCore.ContentTypes.Abstractions" Version="2.2.1" />
+    <PackageReference Include="OrchardCore.DisplayManagement" Version="2.2.1" />
+    <PackageReference Include="OrchardCore.ResourceManagement" Version="2.2.1" />
+    <PackageReference Include="OrchardCore.Menu" Version="2.2.1" />
+    <PackageReference Include="OrchardCore.Navigation" Version="2.2.1" />
+    <PackageReference Include="OrchardCore.Data.Abstractions" Version="2.2.1" />
+  </ItemGroup>
+
+</Project>

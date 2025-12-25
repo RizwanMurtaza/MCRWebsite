@@ -1,0 +1,63 @@
+@model MCRSolicitors.Theme.ViewModels.HeroPartViewModel
+
+<fieldset class="form-group">
+    <label asp-for="Title" class="form-label">Title</label>
+    <input asp-for="Title" class="form-control" placeholder="Enter hero title" />
+    <span class="hint">The main headline for the hero section</span>
+</fieldset>
+
+<fieldset class="form-group">
+    <label asp-for="Subtitle" class="form-label">Subtitle</label>
+    <input asp-for="Subtitle" class="form-control" placeholder="Enter subtitle" />
+    <span class="hint">Appears above the title</span>
+</fieldset>
+
+<fieldset class="form-group">
+    <label asp-for="Description" class="form-label">Description</label>
+    <textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter description"></textarea>
+    <span class="hint">Supporting text below the title</span>
+</fieldset>
+
+<div class="row">
+    <div class="col-md-6">
+        <fieldset class="form-group">
+            <label asp-for="PrimaryButtonText" class="form-label">Primary Button Text</label>
+            <input asp-for="PrimaryButtonText" class="form-control" placeholder="e.g., Free Consultation" />
+        </fieldset>
+    </div>
+    <div class="col-md-6">
+        <fieldset class="form-group">
+            <label asp-for="PrimaryButtonUrl" class="form-label">Primary Button URL</label>
+            <input asp-for="PrimaryButtonUrl" class="form-control" placeholder="e.g., /contact" />
+        </fieldset>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <fieldset class="form-group">
+            <label asp-for="SecondaryButtonText" class="form-label">Secondary Button Text (Optional)</label>
+            <input asp-for="SecondaryButtonText" class="form-control" placeholder="e.g., Our Services" />
+        </fieldset>
+    </div>
+    <div class="col-md-6">
+        <fieldset class="form-group">
+            <label asp-for="SecondaryButtonUrl" class="form-label">Secondary Button URL</label>
+            <input asp-for="SecondaryButtonUrl" class="form-control" placeholder="e.g., /services" />
+        </fieldset>
+    </div>
+</div>
+
+<fieldset class="form-group">
+    <label asp-for="BackgroundImageUrl" class="form-label">Background Image URL (Optional)</label>
+    <input asp-for="BackgroundImageUrl" class="form-control" placeholder="e.g., /images/hero-bg.jpg" />
+    <span class="hint">Leave empty for default gradient background</span>
+</fieldset>
+
+<fieldset class="form-group">
+    <div class="form-check">
+        <input asp-for="ShowTrustIndicators" type="checkbox" class="form-check-input" />
+        <label asp-for="ShowTrustIndicators" class="form-check-label">Show Trust Indicators</label>
+    </div>
+    <span class="hint">Display trust badges like SRA Regulated, Client Count, etc.</span>
+</fieldset>

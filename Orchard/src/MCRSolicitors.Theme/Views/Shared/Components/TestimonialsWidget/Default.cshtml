@@ -1,0 +1,68 @@
+@model MCRSolicitors.Theme.ViewComponents.TestimonialsWidgetViewModel
+
+<section class="testimonials-section">
+    <div class="container">
+        @if (!string.IsNullOrEmpty(Model.SectionTitle) || !string.IsNullOrEmpty(Model.SectionSubtitle))
+        {
+            <div class="section-header text-center">
+                @if (!string.IsNullOrEmpty(Model.SectionTitle))
+                {
+                    <h2>@Model.SectionTitle</h2>
+                }
+                @if (!string.IsNullOrEmpty(Model.SectionSubtitle))
+                {
+                    <p>@Model.SectionSubtitle</p>
+                }
+            </div>
+        }
+        <div class="row">
+            @foreach (var item in Model.Items)
+            {
+                <div class="col-lg-4 col-md-6 testimonial-item">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            @if (!string.IsNullOrEmpty(item.Rating))
+                            {
+                                <div class="testimonial-rating">
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                    <span class="rating-value">@item.Rating</span>
+                                    @if (!string.IsNullOrEmpty(item.Source))
+                                    {
+                                        <span class="rating-source">@item.Source</span>
+                                    }
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(item.Quote))
+                            {
+                                <p class="testimonial-quote">"@item.Quote"</p>
+                            }
+                            <div class="testimonial-author">
+                                @if (!string.IsNullOrEmpty(item.AuthorImage))
+                                {
+                                    <img src="@item.AuthorImage" alt="@item.AuthorName" class="author-image" />
+                                }
+                                else if (!string.IsNullOrEmpty(item.AuthorName))
+                                {
+                                    <div class="author-initial">@item.AuthorName.Substring(0, 1)</div>
+                                }
+                                <div class="author-info">
+                                    @if (!string.IsNullOrEmpty(item.AuthorName))
+                                    {
+                                        <strong class="author-name">@item.AuthorName</strong>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.AuthorRole))
+                                    {
+                                        <span class="author-role">@item.AuthorRole</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

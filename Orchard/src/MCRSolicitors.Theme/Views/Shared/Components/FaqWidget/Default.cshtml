@@ -1,0 +1,36 @@
+@model MCRSolicitors.Theme.ViewComponents.FaqWidgetViewModel
+
+<section class="faq-section">
+    <div class="container">
+        @if (!string.IsNullOrEmpty(Model.SectionTitle) || !string.IsNullOrEmpty(Model.SectionSubtitle))
+        {
+            <div class="section-header text-center">
+                @if (!string.IsNullOrEmpty(Model.SectionTitle))
+                {
+                    <h2>@Model.SectionTitle</h2>
+                }
+                @if (!string.IsNullOrEmpty(Model.SectionSubtitle))
+                {
+                    <p>@Model.SectionSubtitle</p>
+                }
+            </div>
+        }
+        <div class="accordion" id="faqAccordion">
+            @foreach (var item in Model.Items)
+            {
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="heading-@item.ItemId">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@item.ItemId" aria-expanded="false" aria-controls="collapse-@item.ItemId">
+                            @item.Question
+                        </button>
+                    </h3>
+                    <div id="collapse-@item.ItemId" class="accordion-collapse collapse" aria-labelledby="heading-@item.ItemId" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            @Html.Raw(item.Answer)
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

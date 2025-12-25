@@ -1,0 +1,1087 @@
+/*
+Theme Name: Astra Child - MCR Solicitors
+Template: astra
+Version: 1.0
+Description: Custom child theme for MCR Solicitors
+*/
+
+/* Import parent theme styles */
+@import url("../astra/style.css");
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Rubik:ital,wght@0,300..900;1,300..900&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+/* CSS Variables */
+:root {
+    --primary-color: #DE532A;
+    --primary-hover: #C74520;
+    --secondary-bg: #FFF6F3;
+    --dark-footer: #282828;
+    --text-dark: #333333;
+    --text-light: #666666;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Rubik', sans-serif;
+    color: var(--text-dark);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Links */
+a {
+    color: var(--primary-color);
+}
+
+a:hover {
+    color: var(--primary-hover);
+}
+
+/* Primary Buttons */
+.wp-block-button__link,
+.ast-button,
+button[type="submit"],
+input[type="submit"] {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: #fff !important;
+    border-radius: 5px;
+    padding: 12px 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.wp-block-button__link:hover,
+.ast-button:hover,
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+    background-color: var(--primary-hover) !important;
+    border-color: var(--primary-hover) !important;
+}
+
+/* ========================================
+   STICKY HEADER WITH MEGA MENU
+   ======================================== */
+
+/* Make header sticky */
+.ast-primary-header-bar,
+#ast-desktop-header,
+.ast-above-header-bar,
+header.site-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 999 !important;
+    background-color: #fff !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+/* Header scrolled state */
+.ast-header-sticked {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+}
+
+/* Header Styles */
+.ast-primary-header-bar {
+    border-bottom: 2px solid #f0f0f0;
+    padding: 5px 0 !important;
+}
+
+/* Ensure navigation is always visible */
+.ast-nav-menu,
+.main-header-menu,
+#ast-desktop-header,
+.ast-desktop-header-content,
+.site-header-primary-section-left,
+.site-header-primary-section-right,
+.ast-builder-menu {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.ast-nav-menu,
+.main-header-menu {
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation - Match original website colors */
+.ast-nav-menu a,
+.main-header-menu a,
+.ast-header-sections-navigation a {
+    color: var(--primary-color) !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    font-family: "Rubik", sans-serif !important;
+    text-transform: capitalize;
+    letter-spacing: 0.3px;
+    padding: 12px 15px !important;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Nav link underline animation */
+.ast-nav-menu > li > a::after,
+.main-header-menu > li > a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 8px;
+    left: 50%;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.ast-nav-menu > li:hover > a::after,
+.main-header-menu > li:hover > a::after,
+.ast-nav-menu > li.current-menu-item > a::after,
+.main-header-menu > li.current-menu-item > a::after {
+    width: 70%;
+    left: 15%;
+}
+
+.ast-nav-menu a:hover,
+.main-header-menu a:hover {
+    color: var(--primary-hover) !important;
+    transform: translateY(-1px);
+}
+
+/* Current page highlight */
+.ast-nav-menu .current-menu-item > a,
+.main-header-menu .current-menu-item > a,
+.ast-nav-menu .current-menu-ancestor > a,
+.main-header-menu .current-menu-ancestor > a {
+    color: var(--primary-hover) !important;
+}
+
+/* Dropdown/Sub-menu Styles - Mega Menu Effect */
+.ast-nav-menu .sub-menu,
+.main-header-menu .sub-menu,
+.ast-nav-menu .children {
+    background: linear-gradient(to bottom, #ffffff, #fafafa) !important;
+    border-top: 3px solid var(--primary-color) !important;
+    border-radius: 0 0 5px 5px !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15) !important;
+    min-width: 220px !important;
+    padding: 0 !important;
+    margin-top: 0 !important;
+}
+
+.ast-nav-menu .sub-menu li,
+.main-header-menu .sub-menu li {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.ast-nav-menu .sub-menu li:last-child,
+.main-header-menu .sub-menu li:last-child {
+    border-bottom: none;
+}
+
+.ast-nav-menu .sub-menu a,
+.main-header-menu .sub-menu a {
+    color: var(--text-dark) !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    padding: 12px 20px !important;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Left border animation on hover */
+.ast-nav-menu .sub-menu a::before,
+.main-header-menu .sub-menu a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background-color: var(--primary-color);
+    transform: translateX(-10px);
+    transition: transform 0.3s ease;
+}
+
+.ast-nav-menu .sub-menu a:hover::before,
+.main-header-menu .sub-menu a:hover::before {
+    transform: translateX(0);
+}
+
+.ast-nav-menu .sub-menu a:hover,
+.main-header-menu .sub-menu a:hover {
+    background-color: var(--secondary-bg) !important;
+    color: var(--primary-color) !important;
+    padding-left: 28px !important;
+}
+
+/* Second level dropdown (sub-sub-menu) */
+.ast-nav-menu .sub-menu .sub-menu,
+.main-header-menu .sub-menu .sub-menu {
+    border-left: 3px solid var(--primary-color) !important;
+    border-top: none !important;
+    border-radius: 0 5px 5px 0 !important;
+    left: 100% !important;
+    top: -3px !important;
+}
+
+/* Arrow indicator for items with children */
+.ast-nav-menu .menu-item-has-children > a::after,
+.main-header-menu .menu-item-has-children > a::after {
+    content: '' !important;
+}
+
+.ast-nav-menu .sub-menu .menu-item-has-children > a::after {
+    content: '›' !important;
+    position: absolute;
+    right: 15px;
+    font-size: 18px;
+    color: var(--primary-color);
+}
+
+/* Dropdown animation - Drop from top with medium speed */
+.ast-nav-menu .sub-menu,
+.main-header-menu .sub-menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+}
+
+.ast-nav-menu li:hover > .sub-menu,
+.main-header-menu li:hover > .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: scaleY(1);
+}
+
+/* Sub-submenu animation - slide from left */
+.ast-nav-menu .sub-menu .sub-menu,
+.main-header-menu .sub-menu .sub-menu {
+    transform: scaleX(0) !important;
+    transform-origin: left center !important;
+}
+
+.ast-nav-menu .sub-menu li:hover > .sub-menu,
+.main-header-menu .sub-menu li:hover > .sub-menu {
+    transform: scaleX(1) !important;
+}
+
+/* Hide default page title on homepage */
+.home .entry-title {
+    display: none;
+}
+
+/* Remove gray background from content area */
+.ast-separate-container,
+.ast-separate-container .ast-article-single,
+.ast-separate-container .ast-article-post,
+.ast-separate-container .ast-comment-list li.depth-1,
+.ast-separate-container .comment-respond,
+.ast-page-builder-template .site-content > .ast-container,
+body.ast-separate-container {
+    background: #fff !important;
+}
+
+.site-content,
+.ast-container,
+#primary,
+#content,
+.content-area {
+    background: #fff !important;
+}
+
+/* Remove site title text - only show logo */
+.site-title,
+.site-description,
+.ast-site-title-wrap .site-title,
+.ast-site-identity .site-title {
+    display: none !important;
+}
+
+/* Fix menu to single line */
+.main-header-menu,
+.ast-nav-menu,
+.ast-flex.main-header-container {
+    flex-wrap: nowrap !important;
+}
+
+.ast-primary-header-bar .site-primary-header-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ast-nav-menu {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 5px;
+}
+
+.ast-nav-menu li {
+    white-space: nowrap;
+}
+
+.ast-nav-menu a {
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+}
+
+/* Header layout fix */
+.ast-header-break-point .main-header-bar {
+    padding: 10px 0;
+}
+
+#ast-desktop-header .ast-primary-header-bar {
+    padding: 0 20px;
+}
+
+/* Service Cards */
+.service-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 30px;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.service-card:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+
+.service-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+/* Why Choose Us Section */
+.why-choose-item {
+    text-align: center;
+    padding: 20px;
+}
+
+.why-choose-item h4 {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+/* Footer Styles - Exact match */
+.site-footer,
+footer.site-footer {
+    background-color: var(--dark-footer) !important;
+    color: #fff;
+    padding: 0;
+}
+
+.mcr-footer {
+    background-color: #282828;
+    color: #fff;
+    padding: 40px 0 0 0;
+}
+
+.mcr-footer-main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px 20px;
+    gap: 30px;
+}
+
+.mcr-footer-main > div {
+    flex: 1;
+    min-width: 200px;
+}
+
+.mcr-footer h2 {
+    color: var(--primary-color);
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.mcr-footer a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.mcr-footer a:hover {
+    color: var(--primary-color);
+}
+
+.mcr-footer p {
+    color: #ccc;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.mcr-footer-img img {
+    max-width: 150px;
+    margin-top: 15px;
+}
+
+.mcr-footer-bottom {
+    background-color: #1a1a1a;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #333;
+}
+
+.mcr-footer-bottom p {
+    color: #999;
+    font-size: 12px;
+    line-height: 1.8;
+    max-width: 1200px;
+    margin: 0 auto 15px auto;
+}
+
+.mcr-footer-bottom .copyright {
+    color: #fff;
+    font-size: 14px;
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .mcr-footer-main {
+        flex-direction: column;
+    }
+
+    .mcr-footer-main > div {
+        min-width: 100%;
+        margin-bottom: 30px;
+    }
+}
+
+/* Hero Section Improvements */
+.hero-section {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/wp-content/uploads/2025/12/welcome.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    padding: 60px 20px;
+}
+
+.hero-section h1 {
+    color: #fff;
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero-section p {
+    font-size: 18px;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+}
+
+/* Testimonials */
+.testimonial-card {
+    background: var(--secondary-bg);
+    padding: 30px;
+    border-radius: 10px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.testimonial-card .stars {
+    color: #fbbc04;
+    font-size: 20px;
+}
+
+/* Google Reviews Badge */
+.google-reviews-badge {
+    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* Contact Info Styling */
+.contact-info p {
+    margin-bottom: 15px;
+}
+
+.contact-info strong {
+    color: var(--primary-color);
+}
+
+/* Map Container */
+.map-container iframe {
+    border-radius: 10px;
+    width: 100%;
+}
+
+/* Astra Theme Overrides */
+.ast-separate-container .ast-article-single {
+    background: transparent;
+    padding: 0;
+}
+
+.ast-separate-container .site-main {
+    padding: 0;
+}
+
+/* Remove sidebar on homepage */
+.home .site-content {
+    width: 100%;
+}
+
+/* Full width content */
+.ast-page-builder-template .site-content > .ast-container {
+    max-width: 100%;
+    padding: 0;
+}
+
+/* ========================================
+   SERVICE PAGE TEMPLATE STYLES
+   ======================================== */
+
+/* Page wrapper for service pages */
+.mcr-page-wrapper {
+    width: 100%;
+}
+
+/* Breadcrumb Navigation - Simple horizontal bar */
+.mcr-breadcrumb {
+    background-color: var(--primary-color);
+    padding: 15px 20px;
+    width: 100%;
+}
+
+.mcr-breadcrumb-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.mcr-breadcrumb a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.mcr-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.mcr-breadcrumb .separator {
+    color: rgba(255,255,255,0.7);
+    margin: 0 5px;
+}
+
+.mcr-breadcrumb .current {
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Service Page Container */
+.mcr-service-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    gap: 40px;
+}
+
+.mcr-service-main {
+    flex: 2;
+    min-width: 300px;
+}
+
+.mcr-service-sidebar {
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+}
+
+/* Service Content Styles */
+.mcr-service-content h1 {
+    color: var(--text-dark);
+    font-size: 32px;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.mcr-service-content h2 {
+    color: var(--text-dark);
+    font-size: 26px;
+    margin: 30px 0 15px 0;
+}
+
+.mcr-service-content h3 {
+    color: var(--text-dark);
+    font-size: 22px;
+    margin: 25px 0 12px 0;
+}
+
+.mcr-service-content p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-light);
+    margin-bottom: 15px;
+}
+
+.mcr-service-content ul,
+.mcr-service-content ol {
+    margin: 15px 0 20px 20px;
+}
+
+.mcr-service-content li {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-light);
+    margin-bottom: 8px;
+}
+
+/* Blue highlight boxes - matching original */
+.mcr-service-content .highlight-box,
+.mcr-service-content .fee-blue {
+    background-color: #e8f4fc;
+    border-left: 4px solid #2196F3;
+    padding: 20px;
+    margin: 25px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.mcr-service-content .highlight-box h4,
+.mcr-service-content .fee-blue h4 {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.mcr-service-content .highlight-box a,
+.mcr-service-content .fee-blue a {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Enquiry Form Sidebar */
+.mcr-enquiry-form {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.mcr-enquiry-form h2 {
+    color: var(--text-dark);
+    font-size: 22px;
+    margin: 0 0 20px 0;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.mcr-contact-form .form-group {
+    margin-bottom: 15px;
+}
+
+.mcr-contact-form label {
+    display: block;
+    font-size: 14px;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.mcr-contact-form input,
+.mcr-contact-form select,
+.mcr-contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: 'Rubik', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+.mcr-contact-form input:focus,
+.mcr-contact-form select:focus,
+.mcr-contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.mcr-submit-btn {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.mcr-submit-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Sidebar Contact Info */
+.mcr-sidebar-contact {
+    background: var(--secondary-bg);
+    border-radius: 10px;
+    padding: 25px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.mcr-sidebar-contact h3 {
+    color: var(--primary-color);
+    font-size: 18px;
+    margin: 0 0 15px 0;
+}
+
+.mcr-sidebar-contact p {
+    font-size: 14px;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.mcr-sidebar-contact .phone-link {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.mcr-sidebar-contact a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.mcr-sidebar-contact a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Service Page */
+@media (max-width: 900px) {
+    .mcr-service-container {
+        flex-direction: column;
+    }
+
+    .mcr-service-sidebar {
+        max-width: 100%;
+    }
+
+    .mcr-service-content h1 {
+        font-size: 26px;
+    }
+}
+
+/* ========================================
+   WPForms Override Styles
+   ======================================== */
+
+.mcr-enquiry-form .wpforms-container {
+    margin: 0;
+}
+
+.mcr-enquiry-form .wpforms-field-label {
+    font-size: 14px !important;
+    color: var(--text-dark) !important;
+    font-weight: 500 !important;
+}
+
+.mcr-enquiry-form .wpforms-field input,
+.mcr-enquiry-form .wpforms-field select,
+.mcr-enquiry-form .wpforms-field textarea {
+    border: 1px solid #ddd !important;
+    border-radius: 5px !important;
+    padding: 12px !important;
+}
+
+.mcr-enquiry-form .wpforms-submit-container button {
+    width: 100% !important;
+    background-color: var(--primary-color) !important;
+    border-radius: 5px !important;
+}
+
+/* Form Success/Error Messages */
+.mcr-form-success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.mcr-form-error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* ========================================
+   MOBILE RESPONSIVE STYLES
+   ======================================== */
+
+/* Tablet - smaller nav text */
+@media (max-width: 1100px) {
+    .ast-nav-menu > li > a,
+    .main-header-menu > li > a {
+        font-size: 12px !important;
+        padding: 10px 6px !important;
+    }
+}
+
+/* Medium screens - horizontal scrolling nav */
+@media (max-width: 921px) {
+    /* Header structure */
+    .ast-primary-header-bar {
+        padding: 10px !important;
+    }
+
+    .ast-primary-header-bar .site-primary-header-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    /* Logo row */
+    .site-branding,
+    .ast-site-identity {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .site-logo img,
+    .custom-logo,
+    .ast-site-identity img {
+        max-height: 50px !important;
+        width: auto !important;
+    }
+
+    /* Navigation as horizontal scroll */
+    .ast-builder-menu,
+    .ast-nav-menu,
+    .main-header-menu,
+    nav.site-navigation {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        padding: 5px 0 !important;
+        margin: 0 -10px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    /* Hide scrollbar but keep functionality */
+    .ast-nav-menu::-webkit-scrollbar,
+    .main-header-menu::-webkit-scrollbar {
+        height: 3px;
+    }
+
+    .ast-nav-menu::-webkit-scrollbar-thumb,
+    .main-header-menu::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 3px;
+    }
+
+    /* Nav items on mobile - no wrap */
+    .ast-nav-menu > li,
+    .main-header-menu > li {
+        flex-shrink: 0;
+    }
+
+    .ast-nav-menu > li > a,
+    .main-header-menu > li > a {
+        font-size: 12px !important;
+        padding: 8px 10px !important;
+        white-space: nowrap;
+    }
+
+    /* Dropdowns on mobile - position below */
+    .ast-nav-menu .sub-menu,
+    .main-header-menu .sub-menu {
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        min-width: 200px !important;
+        z-index: 1000;
+    }
+
+    .ast-nav-menu .sub-menu .sub-menu,
+    .main-header-menu .sub-menu .sub-menu {
+        top: 0 !important;
+        left: 100% !important;
+    }
+}
+
+/* Small phones - even smaller text */
+@media (max-width: 600px) {
+    .ast-nav-menu > li > a,
+    .main-header-menu > li > a {
+        font-size: 11px !important;
+        padding: 8px 8px !important;
+    }
+
+    .site-logo img,
+    .custom-logo,
+    .ast-site-identity img {
+        max-height: 40px !important;
+    }
+}
+
+/* Small screens and phones */
+@media (max-width: 768px) {
+    /* Hero section mobile */
+    .mcr-hero-section {
+        min-height: auto !important;
+        padding: 40px 20px !important;
+    }
+
+    .mcr-hero-section > div {
+        flex-direction: column !important;
+    }
+
+    .mcr-hero-section h1 {
+        font-size: 28px !important;
+        line-height: 1.3 !important;
+    }
+
+    .mcr-hero-section p {
+        font-size: 15px !important;
+    }
+
+    /* Hero form on mobile - stack below content */
+    .mcr-hero-form {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        margin-top: 30px;
+    }
+
+    /* Services grid mobile */
+    div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Team section mobile */
+    .home div[style*="minmax(200px"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px !important;
+    }
+
+    /* Section headings mobile */
+    h2[style*="font-size: 32px"] {
+        font-size: 24px !important;
+    }
+
+    /* Contact section mobile */
+    div[style*="grid-template-columns: repeat(auto-fit, minmax(300px"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Google Reviews badge mobile */
+    div[style*="max-width: 600px"][style*="margin: 0 auto"] {
+        margin: 30px 15px !important;
+        padding: 20px !important;
+    }
+
+    /* Why Choose Us cards mobile */
+    div[style*="minmax(220px"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Page content padding */
+    div[style*="max-width: 1200px"][style*="padding: 60px"] {
+        padding: 40px 15px !important;
+    }
+
+    /* Breadcrumb mobile */
+    .mcr-breadcrumb {
+        padding: 12px 15px !important;
+        font-size: 13px !important;
+    }
+
+    /* Service page mobile */
+    .mcr-service-content h1 {
+        font-size: 24px !important;
+    }
+
+    .mcr-service-content {
+        padding: 20px !important;
+    }
+
+    /* Forms mobile */
+    .mcr-enquiry-form {
+        padding: 20px !important;
+    }
+
+    .mcr-enquiry-form h2 {
+        font-size: 18px !important;
+    }
+
+    /* Footer mobile */
+    .mcr-footer-main {
+        padding: 30px 15px !important;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    /* Hero section extra small */
+    .mcr-hero-section h1 {
+        font-size: 24px !important;
+    }
+
+    .mcr-hero-section p {
+        font-size: 14px !important;
+    }
+
+    /* Team grid single column on very small */
+    .home div[style*="minmax(200px"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Why Choose Us single column */
+    div[style*="minmax(220px"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Buttons mobile */
+    a[style*="padding: 15px 30px"],
+    a[style*="padding: 15px 35px"] {
+        padding: 12px 25px !important;
+        font-size: 15px !important;
+    }
+
+    /* Service cards padding */
+    div[style*="padding: 30px"][style*="border-radius: 10px"] {
+        padding: 20px !important;
+    }
+}

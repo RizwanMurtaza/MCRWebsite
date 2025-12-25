@@ -1,0 +1,17 @@
+@model ThemeSettingsPart
+
+<section class="hero" style="@(!string.IsNullOrEmpty(Model.HeroBackgroundUrl) ? $"background-image: url('{Model.HeroBackgroundUrl}');" : "")">
+    <div class="hero__overlay"></div>
+    <div class="container">
+        <div class="hero__content">
+            <h1 class="hero__title">@Model.HeroTitle</h1>
+            <p class="hero__subtitle">@Model.HeroSubtitle</p>
+            @if (!string.IsNullOrEmpty(Model.HeroButtonText))
+            {
+                <a href="@(Model.HeroButtonUrl ?? "#contact")" class="btn btn--primary btn--lg">
+                    @Model.HeroButtonText
+                </a>
+            }
+        </div>
+    </div>
+</section>

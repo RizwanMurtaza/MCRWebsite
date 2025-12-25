@@ -1,0 +1,89 @@
+@model MCRSolicitors.Theme.Models.NavigationViewModel
+
+<header class="mcr-header">
+    <div class="mcr-topbar">
+        <div class="container">
+            <div class="topbar-content">
+                <div class="topbar-contact">
+                    <a href="mailto:info@mcrsolicitors.co.uk" class="topbar-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@mcrsolicitors.co.uk</span>
+                    </a>
+                    <a href="tel:@Model.PhoneNumber.Replace(" ", "")" class="topbar-link">
+                        <i class="fas fa-phone"></i>
+                        <span>@Model.PhoneDisplay</span>
+                    </a>
+                </div>
+                <div class="topbar-social">
+                    <a href="https://facebook.com/mcrsolicitors" target="_blank" rel="noopener" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://twitter.com/mcrsolicitors" target="_blank" rel="noopener" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://linkedin.com/company/mcrsolicitors" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="mcr-navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <a href="@Model.HomeUrl" class="navbar-brand">
+                    <img src="@Model.LogoUrl" alt="@Model.LogoAlt" class="navbar-logo" />
+                </a>
+
+                <button class="navbar-toggler" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-menu">
+                    <ul class="navbar-nav">
+                        @foreach (var item in Model.MenuItems)
+                        {
+                            <li class="nav-item @(item.HasChildren ? "has-dropdown" : "") @(item.IsActive ? "active" : "")">
+                                @if (item.HasChildren)
+                                {
+                                    <a href="@item.Url" class="nav-link dropdown-toggle">
+                                        @item.Title
+                                        <i class="fas fa-chevron-down"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        @foreach (var child in item.Children)
+                                        {
+                                            <li>
+                                                <a href="@child.Url" class="dropdown-item @(child.IsActive ? "active" : "")">
+                                                    @if (!string.IsNullOrEmpty(child.IconClass))
+                                                    {
+                                                        <i class="@child.IconClass"></i>
+                                                    }
+                                                    @child.Title
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <a href="@item.Url" class="nav-link" @(item.IsExternal ? "target=_blank rel=noopener" : "")>
+                                        @item.Title
+                                    </a>
+                                }
+                            </li>
+                        }
+                    </ul>
+
+                    @if (Model.ShowCtaButton)
+                    {
+                        <a href="@Model.CtaUrl" class="btn btn-primary navbar-cta">
+                            @Model.CtaText
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

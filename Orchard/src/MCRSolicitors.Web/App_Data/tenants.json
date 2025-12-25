@@ -1,0 +1,13 @@
+{
+  "Default": {
+    "VersionId": "4kzewcvf8cbeh74zw8kt6a05c1",
+    "TenantId": "4y6ykypthe9h027wsmh9mhzmme",
+    "State": "Running"
+  },
+  "MCR": {
+    "VersionId": "4mr1hr21t9qnhtnhxyy5d639w2",
+    "TenantId": "40aqk5w0qgsa0ycz2mwck988mv",
+    "RequestUrlHost": "mcrsolicitors.localhost:5001",
+    "State": "Running"
+  }
+}

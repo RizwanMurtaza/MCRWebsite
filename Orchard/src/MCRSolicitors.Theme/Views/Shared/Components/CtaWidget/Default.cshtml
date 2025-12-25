@@ -1,0 +1,44 @@
+@model MCRSolicitors.Theme.ViewComponents.CtaWidgetViewModel
+
+<section class="cta-section" style="@(string.IsNullOrEmpty(Model.BackgroundColor) ? "" : $"background-color: {Model.BackgroundColor};") @(string.IsNullOrEmpty(Model.BackgroundImage) ? "" : $"background-image: url('{Model.BackgroundImage}');")">
+    <div class="container text-center">
+        @if (!string.IsNullOrEmpty(Model.Subtitle))
+        {
+            <p class="cta-subtitle">@Model.Subtitle</p>
+        }
+        @if (!string.IsNullOrEmpty(Model.Title))
+        {
+            <h2>@Model.Title</h2>
+        }
+        @if (!string.IsNullOrEmpty(Model.Description))
+        {
+            <p>@Model.Description</p>
+        }
+        @if (!string.IsNullOrEmpty(Model.PrimaryButtonText) || !string.IsNullOrEmpty(Model.SecondaryButtonText))
+        {
+            <div class="cta-buttons">
+                @if (!string.IsNullOrEmpty(Model.PrimaryButtonText))
+                {
+                    <a href="@Model.PrimaryButtonUrl" class="btn btn-primary btn-lg">@Model.PrimaryButtonText</a>
+                }
+                @if (!string.IsNullOrEmpty(Model.SecondaryButtonText))
+                {
+                    <a href="@Model.SecondaryButtonUrl" class="btn btn-outline-light btn-lg">@Model.SecondaryButtonText</a>
+                }
+            </div>
+        }
+        @if (Model.ShowContactInfo && (!string.IsNullOrEmpty(Model.PhoneNumber) || !string.IsNullOrEmpty(Model.Email)))
+        {
+            <div class="cta-contact mt-4">
+                @if (!string.IsNullOrEmpty(Model.PhoneNumber))
+                {
+                    <span><i class="fas fa-phone"></i> <a href="tel:@Model.PhoneNumber.Replace(" ", "")">@Model.PhoneNumber</a></span>
+                }
+                @if (!string.IsNullOrEmpty(Model.Email))
+                {
+                    <span class="ms-3"><i class="fas fa-envelope"></i> <a href="mailto:@Model.Email">@Model.Email</a></span>
+                }
+            </div>
+        }
+    </div>
+</section>

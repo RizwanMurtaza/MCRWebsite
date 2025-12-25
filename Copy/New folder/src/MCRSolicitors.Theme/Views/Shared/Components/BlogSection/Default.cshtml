@@ -1,0 +1,85 @@
+@model MCRSolicitors.Theme.Models.BlogSectionViewModel
+
+@{
+    var layoutClass = Model.Layout switch
+    {
+        MCRSolicitors.Theme.Models.BlogLayout.List => "layout-list",
+        MCRSolicitors.Theme.Models.BlogLayout.Featured => "layout-featured",
+        MCRSolicitors.Theme.Models.BlogLayout.Masonry => "layout-masonry",
+        _ => "layout-grid"
+    };
+}
+
+<section class="mcr-blog-section @layoutClass">
+    <div class="container">
+        <div class="section-header">
+            @if (!string.IsNullOrEmpty(Model.SectionSubtitle))
+            {
+                <span class="section-subtitle">@Model.SectionSubtitle</span>
+            }
+            <h2 class="section-title">@Model.SectionTitle</h2>
+        </div>
+
+        <div class="blog-grid" data-columns="@Model.ColumnsPerRow">
+            @foreach (var post in Model.Posts)
+            {
+                <article class="blog-card">
+                    @if (!string.IsNullOrEmpty(post.FeaturedImage))
+                    {
+                        <a href="@post.Url" class="blog-image">
+                            <img src="@post.FeaturedImage" alt="@post.Title" loading="lazy" />
+                        </a>
+                    }
+                    else
+                    {
+                        <div class="blog-image placeholder">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                    }
+
+                    <div class="blog-content">
+                        @if (!string.IsNullOrEmpty(post.Category))
+                        {
+                            <span class="blog-category">@post.Category</span>
+                        }
+
+                        <h3 class="blog-title">
+                            <a href="@post.Url">@post.Title</a>
+                        </h3>
+
+                        <p class="blog-excerpt">@post.Excerpt</p>
+
+                        <div class="blog-meta">
+                            <span class="blog-date">
+                                <i class="far fa-calendar"></i>
+                                @post.PublishedDate.ToString("MMM dd, yyyy")
+                            </span>
+                            @if (post.ReadTimeMinutes > 0)
+                            {
+                                <span class="blog-read-time">
+                                    <i class="far fa-clock"></i>
+                                    @post.ReadTimeMinutes min read
+                                </span>
+                            }
+                        </div>
+
+                        <a href="@post.Url" class="blog-link">
+                            Read More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            }
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.ViewAllUrl))
+        {
+            <div class="section-cta">
+                <a href="@Model.ViewAllUrl" class="btn btn-secondary">
+                    @Model.ViewAllText
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        }
+    </div>
+</section>

@@ -1,0 +1,24 @@
+@model ThemeSettingsPart
+
+<section class="cta">
+    <div class="container">
+        <div class="cta__content">
+            <h2 class="cta__title">Ready to Get Started?</h2>
+            <p class="cta__text">Contact us today to discuss your needs.</p>
+            <div class="cta__buttons">
+                @if (!string.IsNullOrEmpty(Model.Phone))
+                {
+                    <a href="tel:@Model.Phone.Replace(" ", "")" class="btn btn--primary btn--lg">
+                        Call @Model.Phone
+                    </a>
+                }
+                @if (!string.IsNullOrEmpty(Model.Email))
+                {
+                    <a href="mailto:@Model.Email" class="btn btn--outline btn--lg">
+                        Email Us
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</section>

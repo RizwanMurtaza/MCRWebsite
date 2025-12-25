@@ -1,0 +1,37 @@
+@model MCRSolicitors.Theme.Models.StatsSectionViewModel
+
+@{
+    var layoutClass = Model.Layout switch
+    {
+        MCRSolicitors.Theme.Models.StatsLayout.Vertical => "layout-vertical",
+        MCRSolicitors.Theme.Models.StatsLayout.Grid => "layout-grid",
+        _ => "layout-horizontal"
+    };
+}
+
+<section class="mcr-stats-section @layoutClass" style="@(Model.BackgroundImageUrl != null ? $"background-image: url('{Model.BackgroundImageUrl}');" : "") @(Model.BackgroundColor != null ? $"background-color: {Model.BackgroundColor};" : "")">
+    <div class="stats-overlay"></div>
+    <div class="container">
+        @if (!string.IsNullOrEmpty(Model.SectionTitle))
+        {
+            <h2 class="stats-title">@Model.SectionTitle</h2>
+        }
+        <div class="stats-grid">
+            @foreach (var stat in Model.Stats)
+            {
+                <div class="stat-item">
+                    @if (!string.IsNullOrEmpty(stat.IconClass))
+                    {
+                        <i class="stat-icon @stat.IconClass"></i>
+                    }
+                    <div class="stat-value">
+                        <span class="stat-prefix">@stat.Prefix</span>
+                        <span class="stat-number" data-count="@stat.Value">@stat.Value</span>
+                        <span class="stat-suffix">@stat.Suffix</span>
+                    </div>
+                    <div class="stat-label">@stat.Label</div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

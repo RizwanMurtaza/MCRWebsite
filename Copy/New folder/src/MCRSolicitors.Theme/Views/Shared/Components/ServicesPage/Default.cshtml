@@ -1,0 +1,56 @@
+@model MCRSolicitors.Theme.Models.ServicesPageViewModel
+
+<section class="mcr-services-page">
+    <div class="container">
+        @foreach (var category in Model.Categories)
+        {
+            <div class="services-category" id="@category.Id">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="@category.IconClass"></i>
+                    </div>
+                    <h2 class="category-title">@category.Title</h2>
+                    <p class="category-description">@category.Description</p>
+                </div>
+
+                <div class="services-list">
+                    @foreach (var service in category.Services)
+                    {
+                        <a href="@service.Url" class="service-detail-card @(service.IsFeatured ? "featured" : "")">
+                            <div class="card-icon">
+                                <i class="@service.IconClass"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">@service.Title</h3>
+                                <p class="card-description">@service.Description</p>
+                                @if (service.Features.Any())
+                                {
+                                    <div class="card-features">
+                                        @foreach (var feature in service.Features.Take(4))
+                                        {
+                                            <span class="feature-tag">
+                                                <i class="fas fa-check"></i>
+                                                @feature
+                                            </span>
+                                        }
+                                    </div>
+                                }
+                                <span class="card-link">
+                                    Learn More
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
+                            </div>
+                        </a>
+                    }
+                </div>
+
+                <div class="category-cta">
+                    <a href="@category.Url" class="btn btn-secondary">
+                        View All @category.Title Services
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</section>

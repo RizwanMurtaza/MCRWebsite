@@ -1,0 +1,36 @@
+@model ThemeSettingsPart
+
+<header class="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="nav__logo">
+                @if (!string.IsNullOrEmpty(Model.LogoUrl))
+                {
+                    <img src="@Model.LogoUrl" alt="@Model.SiteName" class="nav__logo-img" />
+                }
+                else
+                {
+                    <span class="nav__logo-text">@Model.SiteName</span>
+                }
+            </a>
+
+            <button class="nav__toggle" aria-label="Toggle navigation" id="navToggle">
+                <span class="nav__toggle-bar"></span>
+                <span class="nav__toggle-bar"></span>
+                <span class="nav__toggle-bar"></span>
+            </button>
+
+            <div class="nav__menu" id="navMenu">
+                <!-- Uses Orchard Core Menu System -->
+                <zone name="Navigation" />
+
+                @if (!string.IsNullOrEmpty(Model.Phone))
+                {
+                    <a href="tel:@Model.Phone.Replace(" ", "")" class="nav__cta btn btn--primary">
+                        Call @Model.Phone
+                    </a>
+                }
+            </div>
+        </nav>
+    </div>
+</header>
