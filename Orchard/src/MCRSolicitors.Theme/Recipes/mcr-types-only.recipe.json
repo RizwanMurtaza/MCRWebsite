@@ -406,8 +406,10 @@
           "Name": "ContentWidget",
           "Settings": {},
           "ContentPartFieldDefinitionRecords": [
-            { "FieldName": "TextField", "Name": "SectionClass", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section CSS Class", "Position": "0" } } },
-            { "FieldName": "TextField", "Name": "ContainerClass", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Container CSS Class", "Position": "1" } } }
+            { "FieldName": "TextField", "Name": "SectionTitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Title", "Position": "0" } } },
+            { "FieldName": "HtmlField", "Name": "Content", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Content", "Position": "1", "Editor": "Wysiwyg" }, "HtmlFieldSettings": { "SanitizeHtml": false } } },
+            { "FieldName": "TextField", "Name": "SectionClass", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section CSS Class", "Position": "2" } } },
+            { "FieldName": "TextField", "Name": "ContainerClass", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Container CSS Class", "Position": "3" } } }
           ]
         },
         {

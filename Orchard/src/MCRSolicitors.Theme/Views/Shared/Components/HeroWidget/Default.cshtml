@@ -1,10 +1,9 @@
 @model MCRSolicitors.Theme.ViewComponents.HeroWidgetViewModel
 
 <section class="hero-section" @(string.IsNullOrEmpty(Model.BackgroundImage) ? "" : $"style=\"background-image: url('{Model.BackgroundImage}');\"")>
-    <div class="hero-overlay"></div>
     <div class="container">
-        <div class="row">
-            <div class="@(Model.ShowContactForm ? "col-lg-6" : "col-lg-12") hero-content">
+        <div class="hero-inner">
+            <div class="hero-content">
                 @if (!string.IsNullOrEmpty(Model.Title))
                 {
                     <h1 class="hero-title">@Model.Title</h1>
@@ -18,36 +17,49 @@
                     <div class="hero-buttons">
                         @if (!string.IsNullOrEmpty(Model.PrimaryButtonText))
                         {
-                            <a href="@Model.PrimaryButtonUrl" class="btn btn-primary btn-lg">@Model.PrimaryButtonText</a>
+                            <a href="@Model.PrimaryButtonUrl" class="hero-btn primary">@Model.PrimaryButtonText</a>
                         }
                         @if (!string.IsNullOrEmpty(Model.SecondaryButtonText))
                         {
-                            <a href="@Model.SecondaryButtonUrl" class="btn btn-outline-light btn-lg">@Model.SecondaryButtonText</a>
+                            <a href="@Model.SecondaryButtonUrl" class="hero-btn secondary">@Model.SecondaryButtonText</a>
                         }
                     </div>
                 }
             </div>
             @if (Model.ShowContactForm)
             {
-                <div class="col-lg-6 hero-form-wrapper">
-                    <div class="hero-form">
-                        <h3>@Model.FormTitle</h3>
-                        <form action="/contact" method="post" class="contact-form">
-                            <div class="form-group">
-                                <input type="text" name="name" class="form-control" placeholder="Your Name" required />
-                            </div>
-                            <div class="form-group">
-                                <input type="email" name="email" class="form-control" placeholder="Your Email" required />
-                            </div>
-                            <div class="form-group">
-                                <input type="tel" name="phone" class="form-control" placeholder="Your Phone" />
-                            </div>
-                            <div class="form-group">
-                                <textarea name="message" class="form-control" rows="3" placeholder="Your Message"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
-                        </form>
-                    </div>
+                <div class="hero-form-wrapper">
+                    <form action="/contact" method="post" class="hero-form">
+                        <div class="hero-form-title">@Model.FormTitle</div>
+                        <div class="form-group">
+                            <label for="contact-name">Name</label>
+                            <input id="contact-name" class="form-control" type="text" name="name" placeholder="Enter your name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email</label>
+                            <input id="contact-email" class="form-control" type="email" name="email" placeholder="Enter your email" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-phone">Phone Number</label>
+                            <input id="contact-phone" class="form-control" type="tel" name="phone" placeholder="Enter your phone number" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-department">Department</label>
+                            <select id="contact-department" class="form-control" name="department" required>
+                                <option value="" disabled selected>Select Department</option>
+                                <option value="Visas">Visas & Immigration</option>
+                                <option value="Divorce">Divorce & Family Law</option>
+                                <option value="Personal">Personal Injury</option>
+                                <option value="Litigation">Litigation & Disputes</option>
+                                <option value="Debt">Debt & Insolvency</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message" class="form-control" name="message" placeholder="Enter your message" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-submit">Get Free Consultation</button>
+                    </form>
                 </div>
             }
         </div>

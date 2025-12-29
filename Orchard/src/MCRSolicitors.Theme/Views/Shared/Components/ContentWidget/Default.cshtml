@@ -2,6 +2,10 @@
 
 <section class="content-section @Model.SectionClass">
     <div class="container @Model.ContainerClass">
+        @if (!string.IsNullOrEmpty(Model.SectionTitle))
+        {
+            <h2 class="section-title">@Model.SectionTitle</h2>
+        }
         @Html.Raw(Model.HtmlContent)
     </div>
 </section>
