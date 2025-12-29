@@ -2,7 +2,7 @@
 @using System.Text.Json
 @{
     var contentItem = Model.ContentItem as ContentItem;
-    dynamic content = contentItem?.Content;
+    dynamic? content = contentItem?.Content;
 
     // SEO from content fields using dynamic access
     string? metaTitle = content?.HomePage?.MetaTitle?.Text;
@@ -15,11 +15,16 @@
 
     // Get widgets from FlowPart using dynamic access
     var widgetList = new List<dynamic>();
+    var hasTeamWidget = false;
     if (content?.FlowPart?.Widgets != null)
     {
         foreach (var widget in content.FlowPart.Widgets)
         {
             widgetList.Add(widget);
+            if (widget.ContentType?.ToString() == "TeamWidget")
+            {
+                hasTeamWidget = true;
+            }
         }
     }
 }
@@ -60,6 +65,9 @@
         case "ContentWidget":
             @await Component.InvokeAsync("ContentWidget", new { widgetData = widget })
             break;
+        case "ContactFormWidget":
+            @await Component.InvokeAsync("ContactFormWidget", new { widgetData = widget })
+            break;
         default:
             @* Fallback for unknown widget types *@
             <div class="unknown-widget">
@@ -67,4 +75,10 @@
             </div>
             break;
     }
+}
+
+@* Render Team section if not in FlowPart - inject after Testimonials or before CTA *@
+@if (!hasTeamWidget)
+{
+    @await Component.InvokeAsync("TeamWidget", new { widgetData = (object?)null })
 }

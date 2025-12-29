@@ -1,0 +1,467 @@
+{
+  "name": "MCRTypes",
+  "displayName": "MCR Content Types",
+  "description": "Content type definitions for MCR Solicitors widgets",
+  "author": "MCR Solicitors",
+  "version": "1.0.0",
+  "issetuprecipe": false,
+  "categories": ["content"],
+  "tags": ["mcr", "types"],
+  "steps": [
+    {
+      "name": "feature",
+      "enable": [
+        "OrchardCore.Contents",
+        "OrchardCore.ContentFields",
+        "OrchardCore.Title",
+        "OrchardCore.Autoroute",
+        "OrchardCore.Html",
+        "OrchardCore.Media",
+        "OrchardCore.Widgets",
+        "OrchardCore.Flows",
+        "MCRSolicitors.Theme"
+      ]
+    },
+    {
+      "name": "themes",
+      "Site": "MCRSolicitors.Theme"
+    },
+    {
+      "name": "ContentDefinition",
+      "ContentTypes": [
+        {
+          "Name": "HomePage",
+          "DisplayName": "Home Page",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Creatable": true,
+              "Listable": true,
+              "Draftable": true,
+              "Versionable": true,
+              "Securable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "TitlePart", "Name": "TitlePart", "Settings": { "ContentTypePartSettings": { "Position": "0" } } },
+            { "PartName": "AutoroutePart", "Name": "AutoroutePart", "Settings": { "ContentTypePartSettings": { "Position": "1" }, "AutoroutePartSettings": { "AllowCustomPath": true, "ShowHomepageOption": true } } },
+            { "PartName": "HomePage", "Name": "HomePage", "Settings": { "ContentTypePartSettings": { "Position": "2" } } },
+            { "PartName": "FlowPart", "Name": "FlowPart", "Settings": { "ContentTypePartSettings": { "Position": "3" }, "FlowPartSettings": { "ContainedContentTypes": ["HeroWidget", "PageHeroWidget", "StatsWidget", "ServicesWidget", "FeaturesWidget", "CtaWidget", "TestimonialsWidget", "TeamWidget", "FaqWidget", "ContentWidget", "ContactFormWidget"] } } }
+          ]
+        },
+        {
+          "Name": "ContentPage",
+          "DisplayName": "Content Page",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Creatable": true,
+              "Listable": true,
+              "Draftable": true,
+              "Versionable": true,
+              "Securable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "TitlePart", "Name": "TitlePart", "Settings": { "ContentTypePartSettings": { "Position": "0" } } },
+            { "PartName": "AutoroutePart", "Name": "AutoroutePart", "Settings": { "ContentTypePartSettings": { "Position": "1" }, "AutoroutePartSettings": { "AllowCustomPath": true, "Pattern": "{{ ContentItem | display_text | slugify }}" } } },
+            { "PartName": "ContentPage", "Name": "ContentPage", "Settings": { "ContentTypePartSettings": { "Position": "2" } } },
+            { "PartName": "FlowPart", "Name": "FlowPart", "Settings": { "ContentTypePartSettings": { "Position": "3" }, "FlowPartSettings": { "ContainedContentTypes": ["HeroWidget", "PageHeroWidget", "StatsWidget", "ServicesWidget", "FeaturesWidget", "CtaWidget", "TestimonialsWidget", "TeamWidget", "FaqWidget", "ContentWidget", "ContactFormWidget"] } } }
+          ]
+        },
+        {
+          "Name": "HeroWidget",
+          "DisplayName": "Hero Section",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "HeroWidget", "Name": "HeroWidget", "Settings": {} }
+          ]
+        },
+        {
+          "Name": "PageHeroWidget",
+          "DisplayName": "Page Hero Section",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "PageHeroWidget", "Name": "PageHeroWidget", "Settings": {} }
+          ]
+        },
+        {
+          "Name": "StatsWidget",
+          "DisplayName": "Stats Section",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "StatsWidget", "Name": "StatsWidget", "Settings": {} },
+            { "PartName": "BagPart", "Name": "BagPart", "Settings": { "BagPartSettings": { "ContainedContentTypes": ["StatItem"] } } }
+          ]
+        },
+        {
+          "Name": "StatItem",
+          "DisplayName": "Stat Item",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "StatItem", "Name": "StatItem", "Settings": {} }
+          ]
+        },
+        {
+          "Name": "ServicesWidget",
+          "DisplayName": "Services Section",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "ServicesWidget", "Name": "ServicesWidget", "Settings": {} },
+            { "PartName": "BagPart", "Name": "BagPart", "Settings": { "BagPartSettings": { "ContainedContentTypes": ["ServiceItem"] } } }
+          ]
+        },
+        {
+          "Name": "ServiceItem",
+          "DisplayName": "Service Item",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "ServiceItem", "Name": "ServiceItem", "Settings": {} }
+          ]
+        },
+        {
+          "Name": "FeaturesWidget",
+          "DisplayName": "Features Section",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "FeaturesWidget", "Name": "FeaturesWidget", "Settings": {} },
+            { "PartName": "BagPart", "Name": "BagPart", "Settings": { "BagPartSettings": { "ContainedContentTypes": ["FeatureItem"] } } }
+          ]
+        },
+        {
+          "Name": "FeatureItem",
+          "DisplayName": "Feature Item",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "FeatureItem", "Name": "FeatureItem", "Settings": {} }
+          ]
+        },
+        {
+          "Name": "CtaWidget",
+          "DisplayName": "Call to Action Section",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "CtaWidget", "Name": "CtaWidget", "Settings": {} }
+          ]
+        },
+        {
+          "Name": "TestimonialsWidget",
+          "DisplayName": "Testimonials Section",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "TestimonialsWidget", "Name": "TestimonialsWidget", "Settings": {} },
+            { "PartName": "BagPart", "Name": "BagPart", "Settings": { "BagPartSettings": { "ContainedContentTypes": ["TestimonialItem"] } } }
+          ]
+        },
+        {
+          "Name": "TestimonialItem",
+          "DisplayName": "Testimonial Item",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "TestimonialItem", "Name": "TestimonialItem", "Settings": {} }
+          ]
+        },
+        {
+          "Name": "TeamWidget",
+          "DisplayName": "Team Section",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "TeamWidget", "Name": "TeamWidget", "Settings": {} },
+            { "PartName": "BagPart", "Name": "BagPart", "Settings": { "BagPartSettings": { "ContainedContentTypes": ["TeamMemberItem"] } } }
+          ]
+        },
+        {
+          "Name": "TeamMemberItem",
+          "DisplayName": "Team Member Item",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "TeamMemberItem", "Name": "TeamMemberItem", "Settings": {} }
+          ]
+        },
+        {
+          "Name": "ContentWidget",
+          "DisplayName": "Content Section",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "ContentWidget", "Name": "ContentWidget", "Settings": {} },
+            { "PartName": "HtmlBodyPart", "Name": "HtmlBodyPart", "Settings": { "ContentTypePartSettings": { "Position": "10" }, "HtmlBodyPartSettings": { "Editor": "Wysiwyg", "SanitizeHtml": false } } }
+          ]
+        },
+        {
+          "Name": "ContactFormWidget",
+          "DisplayName": "Contact Form Section",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "ContactFormWidget", "Name": "ContactFormWidget", "Settings": {} }
+          ]
+        },
+        {
+          "Name": "FaqWidget",
+          "DisplayName": "FAQ Section",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "FaqWidget", "Name": "FaqWidget", "Settings": {} },
+            { "PartName": "BagPart", "Name": "BagPart", "Settings": { "BagPartSettings": { "ContainedContentTypes": ["FaqItem"] } } }
+          ]
+        },
+        {
+          "Name": "FaqItem",
+          "DisplayName": "FAQ Item",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "FaqItem", "Name": "FaqItem", "Settings": {} }
+          ]
+        },
+        {
+          "Name": "MenuItem",
+          "DisplayName": "Menu Item",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Creatable": true,
+              "Listable": true,
+              "Draftable": true,
+              "Versionable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "TitlePart", "Name": "TitlePart", "Settings": { "ContentTypePartSettings": { "Position": "0" } } },
+            { "PartName": "MenuItem", "Name": "MenuItem", "Settings": { "ContentTypePartSettings": { "Position": "1" } } }
+          ]
+        },
+        {
+          "Name": "NavigationSettings",
+          "DisplayName": "Navigation Settings",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Creatable": true,
+              "Listable": true,
+              "Draftable": true,
+              "Versionable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "TitlePart", "Name": "TitlePart", "Settings": { "ContentTypePartSettings": { "Position": "0" } } },
+            { "PartName": "NavigationSettings", "Name": "NavigationSettings", "Settings": { "ContentTypePartSettings": { "Position": "1" } } }
+          ]
+        }
+      ],
+      "ContentParts": [
+        {
+          "Name": "HomePage",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "MetaTitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "SEO Meta Title", "Position": "0" } } },
+            { "FieldName": "TextField", "Name": "MetaDescription", "Settings": { "ContentPartFieldSettings": { "DisplayName": "SEO Meta Description", "Position": "1", "Editor": "TextArea" } } },
+            { "FieldName": "TextField", "Name": "MetaKeywords", "Settings": { "ContentPartFieldSettings": { "DisplayName": "SEO Keywords", "Position": "2" } } }
+          ]
+        },
+        {
+          "Name": "ContentPage",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "MetaTitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "SEO Meta Title", "Position": "0" } } },
+            { "FieldName": "TextField", "Name": "MetaDescription", "Settings": { "ContentPartFieldSettings": { "DisplayName": "SEO Meta Description", "Position": "1", "Editor": "TextArea" } } },
+            { "FieldName": "TextField", "Name": "MetaKeywords", "Settings": { "ContentPartFieldSettings": { "DisplayName": "SEO Keywords", "Position": "2" } } },
+            { "FieldName": "TextField", "Name": "CanonicalUrl", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Canonical URL", "Position": "3" } } }
+          ]
+        },
+        {
+          "Name": "HeroWidget",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "Title", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Title", "Position": "0" }, "TextFieldSettings": { "Required": true } } },
+            { "FieldName": "TextField", "Name": "Subtitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Subtitle", "Position": "1", "Editor": "TextArea" } } },
+            { "FieldName": "MediaField", "Name": "BackgroundImage", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Background Image", "Position": "2" }, "MediaFieldSettings": { "Multiple": false } } },
+            { "FieldName": "TextField", "Name": "PrimaryButtonText", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Primary Button Text", "Position": "3" } } },
+            { "FieldName": "TextField", "Name": "PrimaryButtonUrl", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Primary Button URL", "Position": "4" } } },
+            { "FieldName": "TextField", "Name": "SecondaryButtonText", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Secondary Button Text", "Position": "5" } } },
+            { "FieldName": "TextField", "Name": "SecondaryButtonUrl", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Secondary Button URL", "Position": "6" } } },
+            { "FieldName": "BooleanField", "Name": "ShowContactForm", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Show Contact Form", "Position": "7" }, "BooleanFieldSettings": { "Label": "Display contact form beside hero content" } } },
+            { "FieldName": "TextField", "Name": "FormTitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Form Title", "Position": "8" } } }
+          ]
+        },
+        {
+          "Name": "PageHeroWidget",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "Title", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Title", "Position": "0" }, "TextFieldSettings": { "Required": true } } },
+            { "FieldName": "TextField", "Name": "Subtitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Subtitle", "Position": "1" } } },
+            { "FieldName": "BooleanField", "Name": "ShowBreadcrumb", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Show Breadcrumb", "Position": "2" }, "BooleanFieldSettings": { "DefaultValue": true, "Label": "Show breadcrumb navigation" } } },
+            { "FieldName": "MediaField", "Name": "BackgroundImage", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Background Image", "Position": "3" }, "MediaFieldSettings": { "Multiple": false } } }
+          ]
+        },
+        {
+          "Name": "StatsWidget",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "SectionTitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Title", "Position": "0" } } },
+            { "FieldName": "TextField", "Name": "BackgroundColor", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Background Color", "Position": "1" } } }
+          ]
+        },
+        {
+          "Name": "StatItem",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "Value", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Value", "Position": "0" }, "TextFieldSettings": { "Required": true } } },
+            { "FieldName": "TextField", "Name": "Prefix", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Prefix", "Position": "1" } } },
+            { "FieldName": "TextField", "Name": "Suffix", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Suffix", "Position": "2" } } },
+            { "FieldName": "TextField", "Name": "Label", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Label", "Position": "3" }, "TextFieldSettings": { "Required": true } } },
+            { "FieldName": "TextField", "Name": "IconClass", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Icon Class (Font Awesome)", "Position": "4" } } }
+          ]
+        },
+        {
+          "Name": "ServicesWidget",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "SectionTitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Title", "Position": "0" } } },
+            { "FieldName": "TextField", "Name": "SectionSubtitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Subtitle", "Position": "1" } } }
+          ]
+        },
+        {
+          "Name": "ServiceItem",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "Title", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Title", "Position": "0" }, "TextFieldSettings": { "Required": true } } },
+            { "FieldName": "TextField", "Name": "Description", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Description", "Position": "1", "Editor": "TextArea" } } },
+            { "FieldName": "TextField", "Name": "IconClass", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Icon Class (Font Awesome)", "Position": "2" } } },
+            { "FieldName": "MediaField", "Name": "Image", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Image", "Position": "3" }, "MediaFieldSettings": { "Multiple": false } } },
+            { "FieldName": "TextField", "Name": "LinkUrl", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Link URL", "Position": "4" } } },
+            { "FieldName": "TextField", "Name": "LinkText", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Link Text", "Position": "5" } } }
+          ]
+        },
+        {
+          "Name": "FeaturesWidget",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "SectionTitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Title", "Position": "0" } } },
+            { "FieldName": "TextField", "Name": "BackgroundColor", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Background Color", "Position": "1" } } }
+          ]
+        },
+        {
+          "Name": "FeatureItem",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "Title", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Title", "Position": "0" }, "TextFieldSettings": { "Required": true } } },
+            { "FieldName": "TextField", "Name": "Description", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Description", "Position": "1", "Editor": "TextArea" } } },
+            { "FieldName": "TextField", "Name": "IconClass", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Icon Class (Font Awesome)", "Position": "2" } } }
+          ]
+        },
+        {
+          "Name": "CtaWidget",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "Subtitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Subtitle", "Position": "0" } } },
+            { "FieldName": "TextField", "Name": "Title", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Title", "Position": "1" }, "TextFieldSettings": { "Required": true } } },
+            { "FieldName": "TextField", "Name": "Description", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Description", "Position": "2", "Editor": "TextArea" } } },
+            { "FieldName": "TextField", "Name": "PrimaryButtonText", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Primary Button Text", "Position": "3" } } },
+            { "FieldName": "TextField", "Name": "PrimaryButtonUrl", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Primary Button URL", "Position": "4" } } },
+            { "FieldName": "TextField", "Name": "SecondaryButtonText", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Secondary Button Text", "Position": "5" } } },
+            { "FieldName": "TextField", "Name": "SecondaryButtonUrl", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Secondary Button URL", "Position": "6" } } },
+            { "FieldName": "BooleanField", "Name": "ShowContactInfo", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Show Contact Info", "Position": "7" }, "BooleanFieldSettings": { "Label": "Display phone and email" } } },
+            { "FieldName": "TextField", "Name": "PhoneNumber", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Phone Number", "Position": "8" } } },
+            { "FieldName": "TextField", "Name": "Email", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Email", "Position": "9" } } },
+            { "FieldName": "TextField", "Name": "BackgroundColor", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Background Color", "Position": "10" } } },
+            { "FieldName": "MediaField", "Name": "BackgroundImage", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Background Image", "Position": "11" }, "MediaFieldSettings": { "Multiple": false } } }
+          ]
+        },
+        {
+          "Name": "TestimonialsWidget",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "SectionTitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Title", "Position": "0" } } },
+            { "FieldName": "TextField", "Name": "SectionSubtitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Subtitle", "Position": "1" } } }
+          ]
+        },
+        {
+          "Name": "TestimonialItem",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "Quote", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Quote", "Position": "0", "Editor": "TextArea" }, "TextFieldSettings": { "Required": true } } },
+            { "FieldName": "TextField", "Name": "AuthorName", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Author Name", "Position": "1" }, "TextFieldSettings": { "Required": true } } },
+            { "FieldName": "TextField", "Name": "AuthorRole", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Author Role/Company", "Position": "2" } } },
+            { "FieldName": "MediaField", "Name": "AuthorImage", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Author Image", "Position": "3" }, "MediaFieldSettings": { "Multiple": false } } },
+            { "FieldName": "TextField", "Name": "Rating", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Rating (e.g. 5.0)", "Position": "4" } } },
+            { "FieldName": "TextField", "Name": "Source", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Source (e.g. via Google)", "Position": "5" } } }
+          ]
+        },
+        {
+          "Name": "TeamWidget",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "SectionTitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Title", "Position": "0" } } },
+            { "FieldName": "TextField", "Name": "SectionSubtitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Subtitle", "Position": "1" } } }
+          ]
+        },
+        {
+          "Name": "TeamMemberItem",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "Name", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Name", "Position": "0" }, "TextFieldSettings": { "Required": true } } },
+            { "FieldName": "TextField", "Name": "Role", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Role/Title", "Position": "1" } } },
+            { "FieldName": "TextField", "Name": "Bio", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Bio", "Position": "2", "Editor": "TextArea" } } },
+            { "FieldName": "MediaField", "Name": "Photo", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Photo", "Position": "3" }, "MediaFieldSettings": { "Multiple": false } } },
+            { "FieldName": "TextField", "Name": "LinkedInUrl", "Settings": { "ContentPartFieldSettings": { "DisplayName": "LinkedIn URL", "Position": "4" } } },
+            { "FieldName": "TextField", "Name": "EmailAddress", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Email Address", "Position": "5" } } }
+          ]
+        },
+        {
+          "Name": "ContentWidget",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "SectionClass", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section CSS Class", "Position": "0" } } },
+            { "FieldName": "TextField", "Name": "ContainerClass", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Container CSS Class", "Position": "1" } } }
+          ]
+        },
+        {
+          "Name": "FaqWidget",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "SectionTitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Title", "Position": "0" } } },
+            { "FieldName": "TextField", "Name": "SectionSubtitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Subtitle", "Position": "1" } } }
+          ]
+        },
+        {
+          "Name": "FaqItem",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "Question", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Question", "Position": "0" }, "TextFieldSettings": { "Required": true } } },
+            { "FieldName": "TextField", "Name": "Answer", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Answer", "Position": "1", "Editor": "TextArea" } } }
+          ]
+        },
+        {
+          "Name": "ContactFormWidget",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "FormTitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Form Title", "Position": "0" } } },
+            { "FieldName": "TextField", "Name": "FormSubtitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Form Subtitle", "Position": "1" } } },
+            { "FieldName": "TextField", "Name": "RecipientEmail", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Recipient Email", "Position": "2" } } },
+            { "FieldName": "TextField", "Name": "SuccessMessage", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Success Message", "Position": "3" } } },
+            { "FieldName": "BooleanField", "Name": "ShowMap", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Show Google Map", "Position": "4" }, "BooleanFieldSettings": { "DefaultValue": true, "Label": "Display Google Maps iframe" } } },
+            { "FieldName": "TextField", "Name": "MapEmbedUrl", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Map Embed URL", "Position": "5" } } }
+          ]
+        },
+        {
+          "Name": "MenuItem",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "Title", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Menu Title", "Position": "0" }, "TextFieldSettings": { "Required": true } } },
+            { "FieldName": "TextField", "Name": "Url", "Settings": { "ContentPartFieldSettings": { "DisplayName": "URL", "Position": "1" }, "TextFieldSettings": { "Required": true } } },
+            { "FieldName": "TextField", "Name": "IconClass", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Icon Class (Font Awesome)", "Position": "2" } } },
+            { "FieldName": "NumericField", "Name": "DisplayOrder", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Display Order", "Position": "3" }, "NumericFieldSettings": { "DefaultValue": 0, "Minimum": 0, "Maximum": 999 } } },
+            { "FieldName": "BooleanField", "Name": "OpenInNewTab", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Open in New Tab", "Position": "4" }, "BooleanFieldSettings": { "Label": "Open link in new browser tab" } } },
+            { "FieldName": "TextField", "Name": "ParentId", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Parent Menu Item ID", "Position": "5", "Description": "Leave empty for top-level menu items" } } },
+            { "FieldName": "BooleanField", "Name": "IsMegaMenu", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Is Mega Menu", "Position": "6" }, "BooleanFieldSettings": { "Label": "Display children as mega menu" } } }
+          ]
+        },
+        {
+          "Name": "NavigationSettings",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "MediaField", "Name": "Logo", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Site Logo", "Position": "0" }, "MediaFieldSettings": { "Multiple": false } } },
+            { "FieldName": "TextField", "Name": "PhoneNumber", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Phone Number", "Position": "1" } } },
+            { "FieldName": "TextField", "Name": "CtaButtonText", "Settings": { "ContentPartFieldSettings": { "DisplayName": "CTA Button Text", "Position": "2" } } },
+            { "FieldName": "TextField", "Name": "CtaButtonUrl", "Settings": { "ContentPartFieldSettings": { "DisplayName": "CTA Button URL", "Position": "3" } } }
+          ]
+        }
+      ]
+    }
+  ]
+}

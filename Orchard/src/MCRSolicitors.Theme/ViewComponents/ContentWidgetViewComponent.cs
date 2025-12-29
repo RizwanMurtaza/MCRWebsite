@@ -11,7 +11,8 @@ public class ContentWidgetViewComponent : WidgetViewComponentBase
         {
             SectionClass = GetTextField(widget, "ContentWidget", "SectionClass") ?? "",
             ContainerClass = GetTextField(widget, "ContentWidget", "ContainerClass") ?? "",
-            HtmlContent = GetHtmlField(widget, "HtmlBodyPart", "Html") ?? ""
+            // HtmlBodyPart stores HTML directly in .Html property (not nested like TextField)
+            HtmlContent = GetHtmlBodyPart(widget) ?? ""
         };
 
         return View(model);

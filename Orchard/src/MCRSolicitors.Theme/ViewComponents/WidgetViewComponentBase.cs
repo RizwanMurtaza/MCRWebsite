@@ -311,4 +311,24 @@ public abstract class WidgetViewComponentBase : ViewComponent
             return null;
         }
     }
+
+    /// <summary>
+    /// Get HTML content directly from HtmlBodyPart (structure: HtmlBodyPart.Html)
+    /// This is different from GetHtmlField which expects HtmlBodyPart.FieldName.Html
+    /// </summary>
+    protected static string? GetHtmlBodyPart(dynamic? widgetData)
+    {
+        if (widgetData == null) return null;
+        try
+        {
+            dynamic? part = GetDynamicValue(widgetData, "HtmlBodyPart");
+            if (part == null) return null;
+            dynamic? html = GetDynamicValue(part, "Html");
+            return html?.ToString();
+        }
+        catch
+        {
+            return null;
+        }
+    }
 }

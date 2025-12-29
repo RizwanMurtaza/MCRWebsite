@@ -1,4 +1,15 @@
 @model MCRSolicitors.Theme.ViewComponents.TeamWidgetViewModel
+@{
+    // Group members into slides (4 per slide for desktop carousel)
+    var membersPerSlide = 4;
+    var slides = Model.Members
+        .Select((member, index) => new { member, index })
+        .GroupBy(x => x.index / membersPerSlide)
+        .Select(g => g.Select(x => x.member).ToList())
+        .ToList();
+
+    var carouselId = "teamCarousel";
+}
 
 <section class="team-section">
     <div class="container">
@@ -15,45 +26,98 @@
                 }
             </div>
         }
-        <div class="row">
-            @foreach (var member in Model.Members)
-            {
-                <div class="col-lg-3 col-md-4 col-6 team-member-item">
-                    <div class="card h-100">
-                        @if (!string.IsNullOrEmpty(member.Photo))
-                        {
-                            <img src="@member.Photo" class="card-img-top" alt="@member.Name" />
-                        }
-                        <div class="card-body text-center">
-                            @if (!string.IsNullOrEmpty(member.Name))
-                            {
-                                <h4 class="member-name">@member.Name</h4>
-                            }
-                            @if (!string.IsNullOrEmpty(member.Role))
-                            {
-                                <p class="member-role">@member.Role</p>
-                            }
-                            @if (!string.IsNullOrEmpty(member.Bio))
-                            {
-                                <p class="member-bio">@member.Bio</p>
-                            }
-                            @if (!string.IsNullOrEmpty(member.LinkedInUrl) || !string.IsNullOrEmpty(member.EmailAddress))
-                            {
-                                <div class="member-social">
-                                    @if (!string.IsNullOrEmpty(member.LinkedInUrl))
-                                    {
-                                        <a href="@member.LinkedInUrl" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
-                                    }
-                                    @if (!string.IsNullOrEmpty(member.EmailAddress))
-                                    {
-                                        <a href="mailto:@member.EmailAddress" class="social-link"><i class="fas fa-envelope"></i></a>
-                                    }
-                                </div>
-                            }
-                        </div>
-                    </div>
+
+        @if (slides.Count > 0)
+        {
+            <div id="@carouselId" class="carousel slide team-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+                <!-- Carousel Indicators -->
+                <div class="carousel-indicators">
+                    @for (int i = 0; i < slides.Count; i++)
+                    {
+                        <button type="button" data-bs-target="#@carouselId" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-current="@(i == 0 ? "true" : "false")" aria-label="Slide @(i + 1)"></button>
+                    }
                 </div>
-            }
-        </div>
+
+                <!-- Carousel Slides -->
+                <div class="carousel-inner">
+                    @for (int slideIndex = 0; slideIndex < slides.Count; slideIndex++)
+                    {
+                        var slide = slides[slideIndex];
+                        <div class="carousel-item @(slideIndex == 0 ? "active" : "")">
+                            <div class="row justify-content-center">
+                                @foreach (var member in slide)
+                                {
+                                    <div class="col-lg-3 col-md-4 col-6 team-member-item">
+                                        <div class="team-card">
+                                            @if (!string.IsNullOrEmpty(member.Photo))
+                                            {
+                                                <div class="member-photo">
+                                                    <img src="@member.Photo" alt="@member.Name" />
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="member-photo placeholder-photo">
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                            }
+                                            <div class="member-info">
+                                                @if (!string.IsNullOrEmpty(member.Name))
+                                                {
+                                                    <h4 class="member-name">@member.Name</h4>
+                                                }
+                                                @if (!string.IsNullOrEmpty(member.Role))
+                                                {
+                                                    <p class="member-role">@member.Role</p>
+                                                }
+                                                @if (!string.IsNullOrEmpty(member.Bio))
+                                                {
+                                                    <p class="member-bio">@member.Bio</p>
+                                                }
+                                                @if (!string.IsNullOrEmpty(member.LinkedInUrl) || !string.IsNullOrEmpty(member.EmailAddress))
+                                                {
+                                                    <div class="member-social">
+                                                        @if (!string.IsNullOrEmpty(member.LinkedInUrl))
+                                                        {
+                                                            <a href="@member.LinkedInUrl" target="_blank" rel="noopener" class="social-link"><i class="fab fa-linkedin"></i></a>
+                                                        }
+                                                        @if (!string.IsNullOrEmpty(member.EmailAddress))
+                                                        {
+                                                            <a href="mailto:@member.EmailAddress" class="social-link"><i class="fas fa-envelope"></i></a>
+                                                        }
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- Carousel Controls -->
+                @if (slides.Count > 1)
+                {
+                    <button class="carousel-control-prev" type="button" data-bs-target="#@carouselId" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#@carouselId" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                }
+            </div>
+        }
+        else
+        {
+            <!-- Fallback: show static grid if no members -->
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="text-muted">Team members coming soon.</p>
+                </div>
+            </div>
+        }
     </div>
 </section>

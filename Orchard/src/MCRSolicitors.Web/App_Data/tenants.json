@@ -1,12 +1,12 @@
 {
   "Default": {
-    "VersionId": "4kzewcvf8cbeh74zw8kt6a05c1",
-    "TenantId": "4y6ykypthe9h027wsmh9mhzmme",
+    "VersionId": "4hxdfy0e9bgr6y63g1zteejcn1",
+    "TenantId": "48gmr95rcesyrxffr24bevd7xn",
     "State": "Running"
   },
   "MCR": {
-    "VersionId": "4mr1hr21t9qnhtnhxyy5d639w2",
-    "TenantId": "40aqk5w0qgsa0ycz2mwck988mv",
+    "VersionId": "4szpv4kg1q5axtdmaxnfaq4cn5",
+    "TenantId": "4nrmwc0jq5rvz7m2x4ppmv1dmv",
     "RequestUrlHost": "mcrsolicitors.localhost:5001",
     "State": "Running"
   }

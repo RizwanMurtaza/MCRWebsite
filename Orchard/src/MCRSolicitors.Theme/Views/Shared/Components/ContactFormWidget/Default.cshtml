@@ -1,0 +1,255 @@
+@model MCRSolicitors.Theme.ViewComponents.ContactFormWidgetViewModel
+
+<section class="contact-form-section @Model.SectionClass">
+    <div class="container py-5">
+        @if (!string.IsNullOrEmpty(Model.FormTitle))
+        {
+            <h1>@Model.FormTitle</h1>
+        }
+        @if (!string.IsNullOrEmpty(Model.FormSubtitle))
+        {
+            <p class="lead mb-4">@Model.FormSubtitle</p>
+        }
+
+        <div id="contact-success-message" class="alert alert-success" style="display: none;">
+            @Model.SuccessMessage
+        </div>
+        <div id="contact-error-message" class="alert alert-danger" style="display: none;"></div>
+
+        <div class="cta-form-contact">
+            <form id="contactForm" method="post" action="/contact/submit">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="recipientEmail" value="@Model.RecipientEmail" />
+
+                <div class="form-group">
+                    <label for="contact-name">* Name</label>
+                    <input class="sec-1-form-inputcta" type="text" name="name" id="contact-name"
+                           placeholder="Enter Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-email">* Email</label>
+                    <input class="sec-1-form-inputcta" type="email" name="email" id="contact-email"
+                           placeholder="Enter Email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-phone">Phone Number</label>
+                    <input class="sec-1-form-inputcta" type="text" name="phone" id="contact-phone"
+                           placeholder="Enter Phone Number">
+                </div>
+
+                @if (Model.ShowDepartment)
+                {
+                    <div class="form-group">
+                        <label for="contact-department">* Department</label>
+                        <select class="sec-1-form-input-contact" name="department" id="contact-department" required>
+                            <option value="" disabled selected>Select Department</option>
+                            <option value="Visas">Visas & Immigration</option>
+                            <option value="Divorce">Divorce & Family Law</option>
+                            <option value="Personal">Personal Injury</option>
+                            <option value="Litigation">Litigation & Disputes</option>
+                            <option value="Debt">Debt & Insolvency</option>
+                        </select>
+                    </div>
+                }
+
+                <div class="form-group">
+                    <label for="contact-message">* Message (briefly explain your legal matter)</label>
+                    <textarea class="sec-1-form-textcta" name="message" id="contact-message" rows="8"
+                              placeholder="Enter your message" required></textarea>
+                </div>
+
+                <div>
+                    <button type="submit" class="cta-btn" id="contact-submit-btn">Submit</button>
+                </div>
+            </form>
+
+            @if (Model.ShowMap && !string.IsNullOrEmpty(Model.MapEmbedUrl))
+            {
+                <div class="map-container-contact2">
+                    <iframe src="@Model.MapEmbedUrl"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .contact-form-section .cta-form-contact {
+        display: flex;
+        gap: 24px;
+    }
+
+    .contact-form-section .cta-form-contact form {
+        border-radius: 12px;
+        padding: 32px;
+        background-color: var(--mcr-white, #fff);
+        width: 50%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border: 1px solid var(--mcr-gray-200, #f0f0f0);
+    }
+
+    .contact-form-section .form-group {
+        margin-bottom: 1.25rem;
+    }
+
+    .contact-form-section .form-group label {
+        display: block;
+        font-weight: 500;
+        color: var(--mcr-gray-700, #444);
+        font-size: 0.875rem;
+        font-family: var(--font-body, 'Montserrat', sans-serif);
+        margin-bottom: 0.375rem;
+    }
+
+    .contact-form-section .sec-1-form-inputcta,
+    .contact-form-section .sec-1-form-textcta,
+    .contact-form-section .sec-1-form-input-contact {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--mcr-gray-300, #e0e0e0);
+        border-radius: 8px;
+        background: var(--mcr-white, #fff);
+        color: var(--mcr-gray-800, #333);
+        font-size: 0.9375rem;
+        font-family: var(--font-body, 'Montserrat', sans-serif);
+        transition: all 0.2s ease;
+    }
+
+    .contact-form-section .sec-1-form-inputcta:focus,
+    .contact-form-section .sec-1-form-textcta:focus,
+    .contact-form-section .sec-1-form-input-contact:focus {
+        border-color: var(--mcr-primary, #DE532A);
+        box-shadow: 0 0 0 3px rgba(222, 83, 42, 0.1);
+        outline: none;
+    }
+
+    .contact-form-section .sec-1-form-inputcta::placeholder,
+    .contact-form-section .sec-1-form-textcta::placeholder {
+        color: var(--mcr-gray-400, #ccc);
+    }
+
+    .contact-form-section .sec-1-form-textcta {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .contact-form-section .sec-1-form-input-contact {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        padding-right: 2.5rem;
+    }
+
+    .contact-form-section .sec-1-form-input-contact option {
+        color: var(--mcr-gray-800, #333);
+    }
+
+    .contact-form-section .cta-btn {
+        padding: 0.875rem 1.5rem;
+        background: var(--mcr-primary, #DE532A);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        font-family: var(--font-body, 'Montserrat', sans-serif);
+        width: 100%;
+        margin-top: 0.5rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .contact-form-section .cta-btn:hover {
+        background: var(--mcr-primary-hover, #C74520);
+    }
+
+    .contact-form-section .cta-btn:disabled {
+        background: var(--mcr-gray-400, #ccc);
+        cursor: not-allowed;
+    }
+
+    .contact-form-section .map-container-contact2 {
+        width: 50%;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .contact-form-section .map-container-contact2 iframe {
+        width: 100%;
+        height: 100%;
+        min-height: 400px;
+        border: none;
+    }
+
+    @@media (max-width: 992px) {
+        .contact-form-section .cta-form-contact {
+            flex-direction: column;
+        }
+
+        .contact-form-section .cta-form-contact form,
+        .contact-form-section .map-container-contact2 {
+            width: 100%;
+        }
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('contact-submit-btn');
+    const successMsg = document.getElementById('contact-success-message');
+    const errorMsg = document.getElementById('contact-error-message');
+
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'RequestVerificationToken': formData.get('__RequestVerificationToken')
+                    }
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    successMsg.style.display = 'block';
+                    form.reset();
+
+                    // Hide success message after 5 seconds
+                    setTimeout(function() {
+                        successMsg.style.display = 'none';
+                    }, 5000);
+                } else {
+                    errorMsg.textContent = result.message || 'An error occurred. Please try again.';
+                    errorMsg.style.display = 'block';
+                }
+            } catch (error) {
+                errorMsg.textContent = 'An error occurred. Please try again.';
+                errorMsg.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit';
+            }
+        });
+    }
+});
+</script>

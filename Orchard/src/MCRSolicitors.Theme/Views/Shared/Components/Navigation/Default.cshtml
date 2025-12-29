@@ -1,13 +1,14 @@
 @model MCRSolicitors.Theme.ViewComponents.NavigationViewModel
-@{
-    // Use LogoUrl from CMS or fallback to theme logo
-    var logoUrl = !string.IsNullOrEmpty(Model.LogoUrl) ? Model.LogoUrl : "/MCRSolicitors.Theme/images/mcr_logo.png";
-}
 
 <nav class="navbar navbar-expand-lg navbar-dark mcr-navbar">
     <div class="container">
         <a class="navbar-brand" href="/">
-            <img src="@logoUrl" alt="@Model.SiteName" class="navbar-logo" />
+            <div class="mcr-logo">
+                <div class="mcr-logo-text">
+                    <span class="mcr-logo-mc">MC</span><span class="mcr-logo-r">R</span>
+                </div>
+                <div class="mcr-logo-tagline">SOLICITORS</div>
+            </div>
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">

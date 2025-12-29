@@ -1,0 +1,80 @@
+{
+  "name": "MCRTestWidget2",
+  "displayName": "MCR Test Widget 2",
+  "description": "Test page with widget",
+  "author": "",
+  "website": "",
+  "version": "",
+  "issetuprecipe": false,
+  "categories": [],
+  "tags": [],
+  "steps": [
+    {
+      "name": "Content",
+      "data": [
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "ContentPage",
+          "DisplayText": "Test With Widget 2",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": {
+            "Title": "Test With Widget 2"
+          },
+          "AutoroutePart": {
+            "Path": "test-with-widget-2"
+          },
+          "ContentPage": {
+            "MetaTitle": {
+              "Text": "Test With Widget 2"
+            },
+            "MetaDescription": {
+              "Text": "Test page with widget"
+            },
+            "MetaKeywords": {
+              "Text": "test"
+            }
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "4testherow1dget123456789ab",
+                "ContentItemVersionId": null,
+                "ContentType": "PageHeroWidget",
+                "DisplayText": null,
+                "Latest": false,
+                "Published": false,
+                "ModifiedUtc": "2025-12-29T17:17:13.9590858Z",
+                "PublishedUtc": null,
+                "CreatedUtc": null,
+                "Owner": null,
+                "Author": "admin",
+                "PageHeroWidget": {
+                  "Title": {
+                    "Text": "Test Hero Title"
+                  },
+                  "Subtitle": {
+                    "Text": "Test subtitle"
+                  },
+                  "ShowBreadcrumb": {
+                    "Value": true
+                  },
+                  "BackgroundImage": {
+                    "Paths": [],
+                    "MediaTexts": []
+                  }
+                },
+                "FlowMetadata": {
+                  "Alignment": "Justify",
+                  "Size": 100
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

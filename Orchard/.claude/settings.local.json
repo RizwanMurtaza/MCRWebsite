@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(dotnet build:*)",
+      "Bash(ls -la \"M:\\\\MCRWebsite\\\\Orchard\\\\src\\\\MCRSolicitors.Theme\\\\Views\\\\Admin\"\" 2>&1 || echo \"Directory does not exist \")",
+      "Bash(powershell -Command \"Select-String -Path ''M:\\\\MCRWebsite\\\\Orchard\\\\src\\\\MCRSolicitors.Theme\\\\Recipes\\\\mcr-content.recipe.json'' -Pattern ''Employer'' -Context 0,0 | Select-Object -First 5\")",
+      "Bash(powershell -Command \"\\(Get-Content ''M:\\\\MCRWebsite\\\\Orchard\\\\src\\\\MCRSolicitors.Theme\\\\Recipes\\\\mcr-content.recipe.json'' -Raw\\) -match ''Request an Appointment.*?</form>'' | Out-Null; $Matches[0].Substring\\(0, 500\\)\")",
+      "Bash(powershell -Command \"Select-String -Path ''M:\\\\MCRWebsite\\\\Orchard\\\\src\\\\MCRSolicitors.Theme\\\\Recipes\\\\mcr-content.recipe.json'' -Pattern ''ContentTypeDefinition'' -Context 0,30 | Select-Object -First 3\")",
+      "Bash(powershell -Command \"Select-String -Path ''M:\\\\MCRWebsite\\\\Orchard\\\\src\\\\MCRSolicitors.Theme\\\\Recipes\\\\mcr-content.recipe.json'' -Pattern ''ContentTypes'' -Context 0,5 | Select-Object -First 2\")",
+      "Bash(powershell -Command:*)",
+      "Bash(dotnet clean:*)",
+      "Bash(Select-Object -Last 20)",
+      "Bash(tasklist:*)",
+      "Bash(timeout:*)",
+      "Bash(curl -k \"https://mcrsolicitors.localhost:5001/admin/mcr/emergency-reset?key=mcr-reset-2024\")",
+      "Bash(taskkill:*)",
+      "Bash(dotnet run:*)",
+      "Bash(node:*)",
+      "Bash(findstr:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(cd:*)",
+      "Bash(del \"m:\\\\MCRWebsite\\\\Orchard\\\\add-widgets.js\")",
+      "Bash(git -C \"m:/MCRWebsite/Orchard\" checkout -- src/MCRSolicitors.Theme/Recipes/mcr-content.recipe.json)"
+    ]
+  }
+}

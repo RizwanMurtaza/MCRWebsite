@@ -59,12 +59,6 @@ public class NavigationViewComponent : ViewComponent
                 .ToList();
         }
 
-        // Use default menu items if none exist in CMS
-        if (topLevelItems.Count == 0)
-        {
-            topLevelItems = GetDefaultMenuItems();
-        }
-
         var model = new NavigationViewModel
         {
             SiteName = site.SiteName ?? "MCR Solicitors",
@@ -76,57 +70,6 @@ public class NavigationViewComponent : ViewComponent
         };
 
         return View(model);
-    }
-
-    private List<MenuItemViewModel> GetDefaultMenuItems()
-    {
-        return new List<MenuItemViewModel>
-        {
-            new MenuItemViewModel { Id = "home", Title = "Home", Url = "/", DisplayOrder = 1 },
-            new MenuItemViewModel
-            {
-                Id = "immigration",
-                Title = "Immigration",
-                Url = "/immigration",
-                DisplayOrder = 2,
-                Children = new List<MenuItemViewModel>
-                {
-                    new MenuItemViewModel { Id = "visa-uk", Title = "UK Visa Applications", Url = "/immigration/uk-visa", DisplayOrder = 1 },
-                    new MenuItemViewModel { Id = "spouse-visa", Title = "Spouse Visa", Url = "/immigration/spouse-visa", DisplayOrder = 2 },
-                    new MenuItemViewModel { Id = "work-visa", Title = "Work Visa", Url = "/immigration/work-visa", DisplayOrder = 3 },
-                    new MenuItemViewModel { Id = "asylum", Title = "Asylum & Refugees", Url = "/immigration/asylum", DisplayOrder = 4 },
-                    new MenuItemViewModel { Id = "appeals", Title = "Immigration Appeals", Url = "/immigration/appeals", DisplayOrder = 5 }
-                }
-            },
-            new MenuItemViewModel
-            {
-                Id = "family-law",
-                Title = "Family Law",
-                Url = "/family-law",
-                DisplayOrder = 3,
-                Children = new List<MenuItemViewModel>
-                {
-                    new MenuItemViewModel { Id = "divorce", Title = "Divorce", Url = "/family-law/divorce", DisplayOrder = 1 },
-                    new MenuItemViewModel { Id = "child-custody", Title = "Child Custody", Url = "/family-law/child-custody", DisplayOrder = 2 },
-                    new MenuItemViewModel { Id = "prenuptial", Title = "Prenuptial Agreements", Url = "/family-law/prenuptial", DisplayOrder = 3 }
-                }
-            },
-            new MenuItemViewModel
-            {
-                Id = "personal-injury",
-                Title = "Personal Injury",
-                Url = "/personal-injury",
-                DisplayOrder = 4,
-                Children = new List<MenuItemViewModel>
-                {
-                    new MenuItemViewModel { Id = "accident-claims", Title = "Accident Claims", Url = "/personal-injury/accident-claims", DisplayOrder = 1 },
-                    new MenuItemViewModel { Id = "medical-negligence", Title = "Medical Negligence", Url = "/personal-injury/medical-negligence", DisplayOrder = 2 },
-                    new MenuItemViewModel { Id = "workplace-injury", Title = "Workplace Injury", Url = "/personal-injury/workplace-injury", DisplayOrder = 3 }
-                }
-            },
-            new MenuItemViewModel { Id = "about", Title = "About Us", Url = "/about-us", DisplayOrder = 5 },
-            new MenuItemViewModel { Id = "contact", Title = "Contact", Url = "/contact-us", DisplayOrder = 6 }
-        };
     }
 
     private string? GetFieldValue(ContentItem? item, string partName, string fieldName)
