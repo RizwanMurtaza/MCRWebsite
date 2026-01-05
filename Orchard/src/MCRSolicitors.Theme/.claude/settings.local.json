@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(dotnet sln:*)"
+      "Bash(dotnet sln:*)",
+      "Bash(dir:*)",
+      "Bash(ls -la \"m:\\\\MCRWebsite\\\\Orchard\\\\src\\\\MCR.Theme\"\" | grep -v \"^d \")",
+      "Bash(ls:*)",
+      "Bash(del:*)"
     ]
   }
 }

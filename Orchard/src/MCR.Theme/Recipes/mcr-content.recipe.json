@@ -1,0 +1,760 @@
+{
+  "name": "MCR Theme Content",
+  "displayName": "MCR Theme - All Content",
+  "description": "Creates all sample content including settings, menu, footer, and homepage",
+  "author": "MCR Solicitors",
+  "website": "https://mcrsolicitors.co.uk",
+  "version": "1.0.0",
+  "issetuprecipe": false,
+  "categories": ["Content"],
+  "tags": ["mcr", "solicitors", "content", "settings", "menu", "footer", "homepage"],
+  "steps": [
+    {
+      "name": "custom-settings",
+      "SocialLinksSettings": {
+        "ContentType": "SocialLinksSettings",
+        "SocialLinksSettings": {
+          "PhoneNumber": { "Text": "+441615522617" },
+          "PhoneNumberDisplay": { "Text": "0161 552 2617" },
+          "Email": { "Text": "info@mcrsolicitors.co.uk" },
+          "BusinessHours": { "Text": "Mon - Fri: 9:00 AM - 5:30 PM" },
+          "Address": { "Text": "Manchester, UK" },
+          "ShowTopBar": { "Value": true },
+          "ShowPhone": { "Value": true },
+          "ShowEmail": { "Value": true },
+          "ShowHours": { "Value": true },
+          "ShowAddress": { "Value": false },
+          "FacebookUrl": { "Text": "https://facebook.com/mcrsolicitors" },
+          "TwitterUrl": { "Text": "https://twitter.com/mcrsolicitors" },
+          "LinkedInUrl": { "Text": "https://linkedin.com/company/mcrsolicitors" },
+          "InstagramUrl": { "Text": "" },
+          "TikTokUrl": { "Text": "" },
+          "YouTubeUrl": { "Text": "" },
+          "ShowSocialIcons": { "Value": true }
+        }
+      },
+      "NavigationSettings": {
+        "ContentType": "NavigationSettings",
+        "NavigationSettings": {
+          "LogoAlt": { "Text": "MCR Solicitors - Expert Legal Services" },
+          "LogoWidth": { "Value": 180 },
+          "LogoHeight": { "Value": 50 },
+          "SiteName": { "Text": "MCR Solicitors" },
+          "CtaButtonText": { "Text": "Free Consultation" },
+          "CtaButtonUrl": { "Text": "/contact-us" },
+          "ShowCtaButton": { "Value": true }
+        }
+      },
+      "FooterSettings": {
+        "ContentType": "FooterSettings",
+        "FooterSettings": {
+          "CompanyName": { "Text": "MCR Solicitors" },
+          "CompanyDescription": { "Text": "MCR Solicitors is a trading name of MCR Solicitors Limited, a company registered in England and Wales (Company No. 12345678). Registered Office: Manchester, UK. VAT Registration No: GB 123 4567 89." },
+          "ShowCompanyDescription": { "Value": true },
+          "CopyrightText": { "Text": "© 2024 MCR Solicitors. All Rights Reserved." },
+          "CopyrightYear": { "Value": 2024 }
+        }
+      },
+      "SiteWideSettings": {
+        "ContentType": "SiteWideSettings",
+        "SiteWideSettings": {
+          "DefaultMetaTitle": { "Text": "MCR Solicitors" },
+          "DefaultMetaDescription": { "Text": "Expert legal services in Manchester. Specialists in immigration, family law, and personal injury. Free consultation available." },
+          "DefaultMetaKeywords": { "Text": "solicitors manchester, immigration lawyer, family law, personal injury claims, legal services" },
+          "OgSiteName": { "Text": "MCR Solicitors" },
+          "OgImageAlt": { "Text": "MCR Solicitors - Expert Legal Services" },
+          "TwitterHandle": { "Text": "@mcrsolicitors" },
+          "ThemeColor": { "Text": "#1a365d" },
+          "OrganizationName": { "Text": "MCR Solicitors" },
+          "OrganizationAddress": { "Text": "Manchester, United Kingdom" },
+          "OrganizationPhone": { "Text": "+44 161 552 2617" },
+          "OrganizationEmail": { "Text": "info@mcrsolicitors.co.uk" }
+        }
+      }
+    },
+    {
+      "name": "content",
+      "data": [
+        {
+          "ContentItemId": "mainmenu00000000001",
+          "ContentType": "Menu",
+          "DisplayText": "Main Menu",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Main Menu" },
+          "AliasPart": { "Alias": "main-menu" },
+          "MenuPart": {},
+          "MenuItemsListPart": {
+            "MenuItems": [
+              {
+                "ContentType": "LinkMenuItem",
+                "ContentItemId": "linkmenu001home00001",
+                "LinkMenuItemPart": {
+                  "Name": "Home",
+                  "Url": "~/"
+                }
+              },
+              {
+                "ContentType": "LinkMenuItem",
+                "ContentItemId": "linkmenu002immigrat1",
+                "LinkMenuItemPart": {
+                  "Name": "Immigration",
+                  "Url": "~/immigration"
+                },
+                "MenuItemsListPart": {
+                  "MenuItems": [
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu003familyvi",
+                      "LinkMenuItemPart": { "Name": "Family Visas UK", "Url": "~/uk-family-visas" }
+                    },
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu004workvis1",
+                      "LinkMenuItemPart": { "Name": "Work Visas UK", "Url": "~/uk-work-visas" }
+                    },
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu005business",
+                      "LinkMenuItemPart": { "Name": "Business Visas UK", "Url": "~/business-investment-visas" }
+                    },
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu006visitor1",
+                      "LinkMenuItemPart": { "Name": "Visitor Visas UK", "Url": "~/visitor-visas-uk" }
+                    },
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu007ilr00001",
+                      "LinkMenuItemPart": { "Name": "Settle in the UK (ILR)", "Url": "~/indefinite-leave-to-remain-ilr" }
+                    },
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu008british1",
+                      "LinkMenuItemPart": { "Name": "British Citizenship", "Url": "~/british-citizenship" }
+                    },
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu009student1",
+                      "LinkMenuItemPart": { "Name": "Student Visas UK", "Url": "~/student-visas-uk" }
+                    },
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu010other001",
+                      "LinkMenuItemPart": { "Name": "Other Immigration", "Url": "~/other-immigration-applications" }
+                    }
+                  ]
+                }
+              },
+              {
+                "ContentType": "LinkMenuItem",
+                "ContentItemId": "linkmenu011familyla",
+                "LinkMenuItemPart": {
+                  "Name": "Family Law",
+                  "Url": "~/family-law"
+                },
+                "MenuItemsListPart": {
+                  "MenuItems": [
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu012divorce1",
+                      "LinkMenuItemPart": { "Name": "Getting a Divorce", "Url": "~/getting-a-divorce" }
+                    },
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu013judicia1",
+                      "LinkMenuItemPart": { "Name": "Judicial Separation", "Url": "~/judicial-separation" }
+                    },
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu014financi1",
+                      "LinkMenuItemPart": { "Name": "Divorce Financial Settlement", "Url": "~/divorce-financial-settlement" }
+                    },
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu015childor1",
+                      "LinkMenuItemPart": { "Name": "Child Arrangement Orders", "Url": "~/child-arrangement-orders" }
+                    },
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu016nonmole1",
+                      "LinkMenuItemPart": { "Name": "Non-Molestation Orders", "Url": "~/non-molestation-occupation-orders" }
+                    },
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu017prenup01",
+                      "LinkMenuItemPart": { "Name": "Prenuptial Agreements", "Url": "~/prenuptial-agreements" }
+                    }
+                  ]
+                }
+              },
+              {
+                "ContentType": "LinkMenuItem",
+                "ContentItemId": "linkmenu018persona1",
+                "LinkMenuItemPart": {
+                  "Name": "Personal Injury",
+                  "Url": "~/personal-injury"
+                },
+                "MenuItemsListPart": {
+                  "MenuItems": [
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu019roadtra1",
+                      "LinkMenuItemPart": { "Name": "Road Traffic Accidents", "Url": "~/road-traffic-accident-claims" }
+                    },
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu020acciden1",
+                      "LinkMenuItemPart": { "Name": "Accident at Work", "Url": "~/accident-at-work-claims" }
+                    },
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu021whiplas",
+                      "LinkMenuItemPart": { "Name": "Whiplash Injury", "Url": "~/whiplash-injury-claims" }
+                    },
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu022medical1",
+                      "LinkMenuItemPart": { "Name": "Medical Negligence", "Url": "~/medical-negligence-claims" }
+                    },
+                    {
+                      "ContentType": "LinkMenuItem",
+                      "ContentItemId": "linkmenu023slipstr1",
+                      "LinkMenuItemPart": { "Name": "Slips, Trips & Falls", "Url": "~/slips-trips-falls-claims" }
+                    }
+                  ]
+                }
+              },
+              {
+                "ContentType": "LinkMenuItem",
+                "ContentItemId": "linkmenu024aboutus1",
+                "LinkMenuItemPart": {
+                  "Name": "About Us",
+                  "Url": "~/about-us"
+                }
+              },
+              {
+                "ContentType": "LinkMenuItem",
+                "ContentItemId": "linkmenu025contact1",
+                "LinkMenuItemPart": {
+                  "Name": "Contact",
+                  "Url": "~/contact-us"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "footercol001services",
+          "ContentType": "FooterColumn",
+          "DisplayText": "Legal Services",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Legal Services" },
+          "FooterColumn": {
+            "Title": { "Text": "LEGAL SERVICES" },
+            "DisplayOrder": { "Value": 1 }
+          },
+          "FooterItems": {
+            "ContentItems": [
+              {
+                "ContentItemId": "footeritem001visa001",
+                "ContentType": "FooterItem",
+                "FooterItem": {
+                  "ItemType": { "Text": "link" },
+                  "Text": { "Text": "Visas & Immigration" },
+                  "Url": { "Text": "/immigration" },
+                  "DisplayOrder": { "Value": 1 },
+                  "OpenInNewTab": { "Value": false }
+                }
+              },
+              {
+                "ContentItemId": "footeritem002divorce",
+                "ContentType": "FooterItem",
+                "FooterItem": {
+                  "ItemType": { "Text": "link" },
+                  "Text": { "Text": "Divorce & Family Law" },
+                  "Url": { "Text": "/family-law" },
+                  "DisplayOrder": { "Value": 2 },
+                  "OpenInNewTab": { "Value": false }
+                }
+              },
+              {
+                "ContentItemId": "footeritem003injury1",
+                "ContentType": "FooterItem",
+                "FooterItem": {
+                  "ItemType": { "Text": "link" },
+                  "Text": { "Text": "Personal Injury" },
+                  "Url": { "Text": "/personal-injury" },
+                  "DisplayOrder": { "Value": 3 },
+                  "OpenInNewTab": { "Value": false }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "footercol002legal001",
+          "ContentType": "FooterColumn",
+          "DisplayText": "Legal",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Legal" },
+          "FooterColumn": {
+            "Title": { "Text": "LEGAL" },
+            "DisplayOrder": { "Value": 2 }
+          },
+          "FooterItems": {
+            "ContentItems": [
+              {
+                "ContentItemId": "footeritem004complai",
+                "ContentType": "FooterItem",
+                "FooterItem": {
+                  "ItemType": { "Text": "link" },
+                  "Text": { "Text": "Complaints Procedure" },
+                  "Url": { "Text": "/complaints-procedure" },
+                  "DisplayOrder": { "Value": 1 },
+                  "OpenInNewTab": { "Value": false }
+                }
+              },
+              {
+                "ContentItemId": "footeritem005privacy",
+                "ContentType": "FooterItem",
+                "FooterItem": {
+                  "ItemType": { "Text": "link" },
+                  "Text": { "Text": "Privacy Policy" },
+                  "Url": { "Text": "/privacy-policy" },
+                  "DisplayOrder": { "Value": 2 },
+                  "OpenInNewTab": { "Value": false }
+                }
+              },
+              {
+                "ContentItemId": "footeritem006disclai",
+                "ContentType": "FooterItem",
+                "FooterItem": {
+                  "ItemType": { "Text": "link" },
+                  "Text": { "Text": "Disclaimer" },
+                  "Url": { "Text": "/disclaimer" },
+                  "DisplayOrder": { "Value": 3 },
+                  "OpenInNewTab": { "Value": false }
+                }
+              },
+              {
+                "ContentItemId": "footeritem007cookie1",
+                "ContentType": "FooterItem",
+                "FooterItem": {
+                  "ItemType": { "Text": "link" },
+                  "Text": { "Text": "Cookie Policy" },
+                  "Url": { "Text": "/cookie-policy" },
+                  "DisplayOrder": { "Value": 4 },
+                  "OpenInNewTab": { "Value": false }
+                }
+              },
+              {
+                "ContentItemId": "footeritem008enquiri",
+                "ContentType": "FooterItem",
+                "FooterItem": {
+                  "ItemType": { "Text": "link" },
+                  "Text": { "Text": "General enquiries" },
+                  "Url": { "Text": "/contact-us" },
+                  "DisplayOrder": { "Value": 5 },
+                  "OpenInNewTab": { "Value": false }
+                }
+              },
+              {
+                "ContentItemId": "footeritem009contact",
+                "ContentType": "FooterItem",
+                "FooterItem": {
+                  "ItemType": { "Text": "link" },
+                  "Text": { "Text": "Contact us" },
+                  "Url": { "Text": "/contact-us" },
+                  "DisplayOrder": { "Value": 6 },
+                  "OpenInNewTab": { "Value": false }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "footercol003lexcel01",
+          "ContentType": "FooterColumn",
+          "DisplayText": "Lexcel Accredited",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Lexcel Accredited" },
+          "FooterColumn": {
+            "Title": { "Text": "LEXCEL ACCREDITED" },
+            "DisplayOrder": { "Value": 3 }
+          },
+          "FooterItems": {
+            "ContentItems": [
+              {
+                "ContentItemId": "footeritem010lextext",
+                "ContentType": "FooterItem",
+                "FooterItem": {
+                  "ItemType": { "Text": "text" },
+                  "Text": { "Text": "MCR Solicitors have been accredited with the Law Society (England and Wales) award, Lexcel." },
+                  "DisplayOrder": { "Value": 1 }
+                }
+              },
+              {
+                "ContentItemId": "footeritem011leximg1",
+                "ContentType": "FooterItem",
+                "FooterItem": {
+                  "ItemType": { "Text": "image" },
+                  "ImageWidth": { "Value": 120 },
+                  "ImageHeight": { "Value": 80 },
+                  "ImageAlt": { "Text": "Lexcel Accredited Badge" },
+                  "DisplayOrder": { "Value": 2 }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "footercol004sra00001",
+          "ContentType": "FooterColumn",
+          "DisplayText": "Regulated by SRA",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Regulated by SRA" },
+          "FooterColumn": {
+            "Title": { "Text": "REGULATED BY SRA" },
+            "DisplayOrder": { "Value": 4 }
+          },
+          "FooterItems": {
+            "ContentItems": [
+              {
+                "ContentItemId": "footeritem012sratext",
+                "ContentType": "FooterItem",
+                "FooterItem": {
+                  "ItemType": { "Text": "text" },
+                  "Text": { "Text": "Authorised and regulated by the Solicitors Regulation Authority under SRA ID: 648878" },
+                  "DisplayOrder": { "Value": 1 }
+                }
+              },
+              {
+                "ContentItemId": "footeritem013sraimg1",
+                "ContentType": "FooterItem",
+                "FooterItem": {
+                  "ItemType": { "Text": "image" },
+                  "ImageWidth": { "Value": 120 },
+                  "ImageHeight": { "Value": 80 },
+                  "ImageAlt": { "Text": "Solicitors Regulation Authority Badge" },
+                  "DisplayOrder": { "Value": 2 }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "homepage000000001",
+          "ContentType": "HomePage",
+          "DisplayText": "Home",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Home" },
+          "AutoroutePart": { "Path": "", "SetHomepage": true },
+          "HomePage": {
+            "HeroBackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" },
+            "HeroSlideInterval": { "Value": 5000 },
+            "ShowHeroForm": { "Value": true },
+            "HeroFormTitle": { "Text": "Request a Callback" },
+            "HeroFormRecipientEmail": { "Text": "info@mcrsolicitors.co.uk" },
+            "ShowHeroDepartment": { "Value": false },
+            "HeroAutoPlay": { "Value": true },
+            "HeroShowIndicators": { "Value": true },
+            "ServicesSectionTitle": { "Text": "Our Legal Services" },
+            "ServicesSectionSubtitle": { "Text": "We provide comprehensive legal support across multiple practice areas" },
+            "ShowServicesSection": { "Value": true },
+            "TestimonialsSectionTitle": { "Text": "What Our Clients Say" },
+            "TestimonialsSectionSubtitle": { "Text": "Read testimonials from clients we have helped" },
+            "ShowTestimonialsSection": { "Value": true },
+            "FeaturesSectionTitle": { "Text": "Why Choose Us" },
+            "FeaturesSectionSubtitle": { "Text": "Trusted legal expertise with a personal approach" },
+            "ShowFeaturesSection": { "Value": true },
+            "CtaSectionTitle": { "Text": "Need Legal Advice?" },
+            "CtaSectionText": { "Text": "Contact us today for a free initial consultation. Our expert solicitors are ready to help you with your legal matters." },
+            "CtaButtonText": { "Text": "Contact Us Now" },
+            "CtaButtonUrl": { "Text": "/contact-us" },
+            "ShowCtaSection": { "Value": true },
+            "TeamSectionTitle": { "Text": "Meet Our Team" },
+            "TeamSectionSubtitle": { "Text": "Experienced legal professionals dedicated to your success" },
+            "ShowTeamSection": { "Value": true }
+          },
+          "HeroBannerSlides": {
+            "ContentItems": [
+              {
+                "ContentItemId": "heroslide00000001",
+                "ContentType": "HeroBannerSlide",
+                "HeroBannerSlide": {
+                  "Headline": { "Text": "Expert Legal Services You Can Trust" },
+                  "Subheadline": { "Text": "Award-winning solicitors providing professional legal advice for immigration, family law, and personal injury matters across Manchester and the UK." },
+                  "PrimaryButtonText": { "Text": "Free Consultation" },
+                  "PrimaryButtonUrl": { "Text": "/contact-us" },
+                  "SecondaryButtonText": { "Text": "Our Services" },
+                  "SecondaryButtonUrl": { "Text": "#services" },
+                  "DisplayOrder": { "Value": 1 }
+                }
+              },
+              {
+                "ContentItemId": "heroslide00000002",
+                "ContentType": "HeroBannerSlide",
+                "HeroBannerSlide": {
+                  "Headline": { "Text": "Immigration & Visa Specialists" },
+                  "Subheadline": { "Text": "Navigate complex UK immigration law with confidence. From family visas to business sponsorship, our experts guide you through every step of your journey." },
+                  "PrimaryButtonText": { "Text": "Immigration Services" },
+                  "PrimaryButtonUrl": { "Text": "/immigration" },
+                  "SecondaryButtonText": { "Text": "Book Consultation" },
+                  "SecondaryButtonUrl": { "Text": "/contact-us" },
+                  "DisplayOrder": { "Value": 2 }
+                }
+              },
+              {
+                "ContentItemId": "heroslide00000003",
+                "ContentType": "HeroBannerSlide",
+                "HeroBannerSlide": {
+                  "Headline": { "Text": "Compassionate Family Law Support" },
+                  "Subheadline": { "Text": "Sensitive handling of divorce, child arrangements, and financial settlements. We put families first and work to achieve the best outcomes for you." },
+                  "PrimaryButtonText": { "Text": "Family Law Services" },
+                  "PrimaryButtonUrl": { "Text": "/family-law" },
+                  "SecondaryButtonText": { "Text": "Speak to a Solicitor" },
+                  "SecondaryButtonUrl": { "Text": "/contact-us" },
+                  "DisplayOrder": { "Value": 3 }
+                }
+              },
+              {
+                "ContentItemId": "heroslide00000004",
+                "ContentType": "HeroBannerSlide",
+                "HeroBannerSlide": {
+                  "Headline": { "Text": "No Win, No Fee Personal Injury Claims" },
+                  "Subheadline": { "Text": "Suffered an accident that wasn't your fault? Get the compensation you deserve with zero financial risk. We only get paid when you win." },
+                  "PrimaryButtonText": { "Text": "Start Your Claim" },
+                  "PrimaryButtonUrl": { "Text": "/personal-injury" },
+                  "SecondaryButtonText": { "Text": "Learn More" },
+                  "SecondaryButtonUrl": { "Text": "#services" },
+                  "DisplayOrder": { "Value": 4 }
+                }
+              }
+            ]
+          },
+          "ServiceCards": {
+            "ContentItems": [
+              {
+                "ContentItemId": "servicecard00001",
+                "ContentType": "ServiceCard",
+                "ServiceCard": {
+                  "Title": { "Text": "Immigration Law" },
+                  "Description": { "Text": "Expert visa and immigration advice for individuals and businesses. We handle all types of UK visa applications." },
+                  "IconClass": { "Text": "fas fa-passport" },
+                  "LinkUrl": { "Text": "/immigration" },
+                  "LinkText": { "Text": "Learn More" },
+                  "DisplayOrder": { "Value": 1 }
+                }
+              },
+              {
+                "ContentItemId": "servicecard00002",
+                "ContentType": "ServiceCard",
+                "ServiceCard": {
+                  "Title": { "Text": "Family Law" },
+                  "Description": { "Text": "Compassionate support through divorce, child arrangements, and financial settlements. We put families first." },
+                  "IconClass": { "Text": "fas fa-users" },
+                  "LinkUrl": { "Text": "/family-law" },
+                  "LinkText": { "Text": "Learn More" },
+                  "DisplayOrder": { "Value": 2 }
+                }
+              },
+              {
+                "ContentItemId": "servicecard00003",
+                "ContentType": "ServiceCard",
+                "ServiceCard": {
+                  "Title": { "Text": "Personal Injury" },
+                  "Description": { "Text": "No win, no fee claims for accidents and injuries. Get the compensation you deserve." },
+                  "IconClass": { "Text": "fas fa-user-injured" },
+                  "LinkUrl": { "Text": "/personal-injury" },
+                  "LinkText": { "Text": "Learn More" },
+                  "DisplayOrder": { "Value": 3 }
+                }
+              }
+            ]
+          },
+          "Testimonials": {
+            "ContentItems": [
+              {
+                "ContentItemId": "testimonial0001",
+                "ContentType": "Testimonial",
+                "Testimonial": {
+                  "Quote": { "Text": "MCR Solicitors handled my spouse visa application with incredible professionalism. They kept me informed throughout the process and my visa was approved first time!" },
+                  "AuthorName": { "Text": "Sarah M." },
+                  "AuthorTitle": { "Text": "Manchester" },
+                  "Rating": { "Value": 5 },
+                  "DisplayOrder": { "Value": 1 }
+                }
+              },
+              {
+                "ContentItemId": "testimonial0002",
+                "ContentType": "Testimonial",
+                "Testimonial": {
+                  "Quote": { "Text": "During a very difficult divorce, the team at MCR provided compassionate and expert guidance. They fought for what was fair and achieved an excellent outcome." },
+                  "AuthorName": { "Text": "James T." },
+                  "AuthorTitle": { "Text": "Stockport" },
+                  "Rating": { "Value": 5 },
+                  "DisplayOrder": { "Value": 2 }
+                }
+              },
+              {
+                "ContentItemId": "testimonial0003",
+                "ContentType": "Testimonial",
+                "Testimonial": {
+                  "Quote": { "Text": "After my accident at work, MCR Solicitors secured compensation that helped me through my recovery. Professional service from start to finish." },
+                  "AuthorName": { "Text": "David K." },
+                  "AuthorTitle": { "Text": "Salford" },
+                  "Rating": { "Value": 5 },
+                  "DisplayOrder": { "Value": 3 }
+                }
+              }
+            ]
+          },
+          "FeatureBoxes": {
+            "ContentItems": [
+              {
+                "ContentItemId": "featurebox0001",
+                "ContentType": "FeatureBox",
+                "FeatureBox": {
+                  "Title": { "Text": "Lexcel Accredited" },
+                  "Description": { "Text": "Awarded the Law Society's Lexcel quality mark for excellence in legal practice management" },
+                  "IconClass": { "Text": "fas fa-award" },
+                  "DisplayOrder": { "Value": 1 }
+                }
+              },
+              {
+                "ContentItemId": "featurebox0002",
+                "ContentType": "FeatureBox",
+                "FeatureBox": {
+                  "Title": { "Text": "SRA Regulated" },
+                  "Description": { "Text": "Fully authorised and regulated by the Solicitors Regulation Authority" },
+                  "IconClass": { "Text": "fas fa-shield-alt" },
+                  "DisplayOrder": { "Value": 2 }
+                }
+              },
+              {
+                "ContentItemId": "featurebox0003",
+                "ContentType": "FeatureBox",
+                "FeatureBox": {
+                  "Title": { "Text": "Free Consultation" },
+                  "Description": { "Text": "Get expert legal advice with no obligation. We offer free initial consultations for all enquiries" },
+                  "IconClass": { "Text": "fas fa-comments" },
+                  "DisplayOrder": { "Value": 3 }
+                }
+              },
+              {
+                "ContentItemId": "featurebox0004",
+                "ContentType": "FeatureBox",
+                "FeatureBox": {
+                  "Title": { "Text": "Multilingual Team" },
+                  "Description": { "Text": "Our solicitors speak multiple languages to serve our diverse client base" },
+                  "IconClass": { "Text": "fas fa-globe" },
+                  "DisplayOrder": { "Value": 4 }
+                }
+              }
+            ]
+          },
+          "TeamMembers": {
+            "ContentItems": [
+              {
+                "ContentItemId": "teammember00001",
+                "ContentType": "TeamMember",
+                "TeamMember": {
+                  "Name": { "Text": "David Richardson" },
+                  "Role": { "Text": "Managing Partner" },
+                  "Bio": { "Text": "Over 25 years of experience in immigration and family law. David leads our team with a commitment to excellence and client care." },
+                  "Photo": { "Paths": ["team1.jpg"] },
+                  "LinkedInUrl": { "Text": "https://www.linkedin.com/company/mcrsolicitors" },
+                  "EmailAddress": { "Text": "david@mcrsolicitors.co.uk" },
+                  "DisplayOrder": { "Value": 1 }
+                }
+              },
+              {
+                "ContentItemId": "teammember00002",
+                "ContentType": "TeamMember",
+                "TeamMember": {
+                  "Name": { "Text": "Sarah Ahmed" },
+                  "Role": { "Text": "Senior Immigration Solicitor" },
+                  "Bio": { "Text": "Specialist in complex immigration cases including asylum, human rights, and business visas. Fluent in Urdu and Punjabi." },
+                  "Photo": { "Paths": ["team2.jpg"] },
+                  "LinkedInUrl": { "Text": "https://www.linkedin.com/company/mcrsolicitors" },
+                  "EmailAddress": { "Text": "sarah@mcrsolicitors.co.uk" },
+                  "DisplayOrder": { "Value": 2 }
+                }
+              },
+              {
+                "ContentItemId": "teammember00003",
+                "ContentType": "TeamMember",
+                "TeamMember": {
+                  "Name": { "Text": "James O'Connor" },
+                  "Role": { "Text": "Family Law Partner" },
+                  "Bio": { "Text": "Expert in divorce, child custody, and financial settlements. Known for his compassionate approach to sensitive family matters." },
+                  "Photo": { "Paths": ["team3.jpg"] },
+                  "LinkedInUrl": { "Text": "https://www.linkedin.com/company/mcrsolicitors" },
+                  "EmailAddress": { "Text": "james@mcrsolicitors.co.uk" },
+                  "DisplayOrder": { "Value": 3 }
+                }
+              },
+              {
+                "ContentItemId": "teammember00004",
+                "ContentType": "TeamMember",
+                "TeamMember": {
+                  "Name": { "Text": "Emma Williams" },
+                  "Role": { "Text": "Personal Injury Solicitor" },
+                  "Bio": { "Text": "Dedicated to securing fair compensation for accident victims. Handles workplace injuries, road accidents, and medical negligence claims." },
+                  "Photo": { "Paths": ["team4.jpg"] },
+                  "LinkedInUrl": { "Text": "https://www.linkedin.com/company/mcrsolicitors" },
+                  "EmailAddress": { "Text": "emma@mcrsolicitors.co.uk" },
+                  "DisplayOrder": { "Value": 4 }
+                }
+              },
+              {
+                "ContentItemId": "teammember00005",
+                "ContentType": "TeamMember",
+                "TeamMember": {
+                  "Name": { "Text": "Mohammed Ali" },
+                  "Role": { "Text": "Immigration Caseworker" },
+                  "Bio": { "Text": "Provides vital support on immigration applications. Multilingual with fluency in Arabic, Urdu, and Hindi." },
+                  "Photo": { "Paths": ["team5.jpg"] },
+                  "LinkedInUrl": { "Text": "https://www.linkedin.com/company/mcrsolicitors" },
+                  "EmailAddress": { "Text": "mohammed@mcrsolicitors.co.uk" },
+                  "DisplayOrder": { "Value": 5 }
+                }
+              },
+              {
+                "ContentItemId": "teammember00006",
+                "ContentType": "TeamMember",
+                "TeamMember": {
+                  "Name": { "Text": "Lisa Chen" },
+                  "Role": { "Text": "Legal Secretary" },
+                  "Bio": { "Text": "Ensures smooth case management and client communications. First point of contact for all enquiries." },
+                  "Photo": { "Paths": ["team6.jpg"] },
+                  "LinkedInUrl": { "Text": "https://www.linkedin.com/company/mcrsolicitors" },
+                  "EmailAddress": { "Text": "lisa@mcrsolicitors.co.uk" },
+                  "DisplayOrder": { "Value": 6 }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "name": "MCR Theme Workflows",
+  "displayName": "MCR Theme - Workflow Definitions",
+  "description": "Workflow definitions for contact form submission handling with email notifications",
+  "author": "MCR Solicitors",
+  "website": "https://mcrsolicitors.co.uk",
+  "version": "1.0.0",
+  "issetuprecipe": false,
+  "categories": ["Workflows"],
+  "tags": ["mcr", "solicitors", "workflow", "contact", "email"],
+  "steps": [
+    {
+      "name": "WorkflowType",
+      "data": [
+        {
+          "WorkflowTypeId": "contactformworkflow001",
+          "Name": "Contact Form Submission",
+          "IsEnabled": true,
+          "IsSingleton": false,
+          "LockTimeout": 0,
+          "LockExpiration": 0,
+          "DeleteFinishedWorkflows": true,
+          "Activities": [
+            {
+              "ActivityId": "httprequestevent001",
+              "Name": "HttpRequestEvent",
+              "X": 10,
+              "Y": 100,
+              "IsStart": true,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": "Contact Form POST"
+                },
+                "HttpMethod": "POST",
+                "Url": "/workflows/invoke/contact-form-workflow",
+                "ValidateAntiforgeryToken": false,
+                "TokenLifeSpan": 0,
+                "FormLocationKey": ""
+              }
+            },
+            {
+              "ActivityId": "validaterecaptcha001",
+              "Name": "ValidateReCaptchaTask",
+              "X": 320,
+              "Y": 100,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": "Validate ReCaptcha"
+                }
+              }
+            },
+            {
+              "ActivityId": "emailtoadmin001",
+              "Name": "EmailTask",
+              "X": 640,
+              "Y": 50,
+              "IsStart": false,
+              "Properties": {
+                "Sender": {
+                  "Expression": ""
+                },
+                "Author": {
+                  "Expression": "MCR Solicitors Website"
+                },
+                "Recipients": {
+                  "Expression": "{{ Request.Form[\"recipientEmail\"] | default: \"info@mcrsolicitors.co.uk\" }}"
+                },
+                "ReplyTo": {
+                  "Expression": "{{ Request.Form.email }}"
+                },
+                "Subject": {
+                  "Expression": "New Contact Form - {{ Request.Form.department | default: \"General Enquiry\" }}"
+                },
+                "Body": {
+                  "Expression": "<!DOCTYPE html>\n<html>\n<head>\n<style>\nbody { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }\n.header { background: linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%); color: white; padding: 25px; text-align: center; }\n.header h2 { margin: 0; font-size: 24px; }\n.content { padding: 30px; background: #fff; }\n.field { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }\n.field:last-child { border-bottom: none; }\n.label { font-weight: bold; color: #0d2137; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }\n.value { margin-top: 8px; font-size: 16px; color: #333; }\n.value a { color: #b8860b; text-decoration: none; }\n.message-box { background: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 10px; white-space: pre-wrap; }\n.footer { background: #f5f5f5; padding: 20px; font-size: 12px; color: #666; text-align: center; }\n.urgent { background: #fff3cd; border: 1px solid #ffc107; padding: 15px; border-radius: 8px; margin-top: 20px; }\n</style>\n</head>\n<body>\n<div class=\"header\">\n<h2>New Contact Form Submission</h2>\n</div>\n<div class=\"content\">\n<div class=\"field\">\n<div class=\"label\">Name</div>\n<div class=\"value\">{{ Request.Form.name }}</div>\n</div>\n<div class=\"field\">\n<div class=\"label\">Email</div>\n<div class=\"value\"><a href=\"mailto:{{ Request.Form.email }}\">{{ Request.Form.email }}</a></div>\n</div>\n<div class=\"field\">\n<div class=\"label\">Phone</div>\n<div class=\"value\"><a href=\"tel:{{ Request.Form.phone }}\">{{ Request.Form.phone }}</a></div>\n</div>\n{% if Request.Form.department and Request.Form.department != \"\" %}\n<div class=\"field\">\n<div class=\"label\">Department</div>\n<div class=\"value\">{{ Request.Form.department }}</div>\n</div>\n{% endif %}\n<div class=\"field\">\n<div class=\"label\">Message</div>\n<div class=\"message-box\">{{ Request.Form.message }}</div>\n</div>\n<div class=\"urgent\">\n<strong>ACTION REQUIRED:</strong> Please respond to this enquiry within 24 hours.\n</div>\n</div>\n<div class=\"footer\">\n<p>This message was sent from the MCR Solicitors website contact form.</p>\n<p>Submitted: {{ \"now\" | date: \"%A, %d %B %Y at %H:%M\" }}</p>\n</div>\n</body>\n</html>"
+                },
+                "IsHtmlBody": true,
+                "Bcc": {
+                  "Expression": ""
+                },
+                "Cc": {
+                  "Expression": ""
+                },
+                "ActivityMetadata": {
+                  "Title": "Email to Admin"
+                }
+              }
+            },
+            {
+              "ActivityId": "emailtouser001",
+              "Name": "EmailTask",
+              "X": 640,
+              "Y": 200,
+              "IsStart": false,
+              "Properties": {
+                "Sender": {
+                  "Expression": ""
+                },
+                "Author": {
+                  "Expression": "MCR Solicitors"
+                },
+                "Recipients": {
+                  "Expression": "{{ Request.Form.email }}"
+                },
+                "ReplyTo": {
+                  "Expression": "info@mcrsolicitors.co.uk"
+                },
+                "Subject": {
+                  "Expression": "Thank you for contacting MCR Solicitors"
+                },
+                "Body": {
+                  "Expression": "<!DOCTYPE html>\n<html>\n<head>\n<style>\nbody { font-family: Arial, sans-serif; line-height: 1.8; color: #333; }\n.header { background: linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%); color: white; padding: 30px; text-align: center; }\n.header h2 { margin: 0; font-size: 24px; }\n.content { padding: 40px 30px; background: #fff; }\n.greeting { font-size: 18px; margin-bottom: 20px; }\n.message { margin-bottom: 25px; }\n.summary { background: #f8f9fa; padding: 25px; border-radius: 8px; margin: 25px 0; border-left: 4px solid #b8860b; }\n.summary h3 { margin-top: 0; color: #0d2137; font-size: 16px; }\n.summary ul { margin: 15px 0 0 0; padding-left: 20px; }\n.summary li { margin-bottom: 10px; }\n.cta { background: #0d2137; color: white; padding: 20px; border-radius: 8px; text-align: center; margin: 25px 0; }\n.cta p { margin: 0 0 10px 0; }\n.cta a { color: #b8860b; font-weight: bold; font-size: 18px; text-decoration: none; }\n.signature { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }\n.footer { background: #f5f5f5; padding: 25px; font-size: 12px; color: #666; text-align: center; }\n.footer p { margin: 5px 0; }\n</style>\n</head>\n<body>\n<div class=\"header\">\n<h2>Thank You for Contacting Us</h2>\n</div>\n<div class=\"content\">\n<p class=\"greeting\">Dear {{ Request.Form.name }},</p>\n<p class=\"message\">Thank you for getting in touch with MCR Solicitors. We have received your enquiry and a member of our team will respond to you within <strong>24 hours</strong>.</p>\n<div class=\"summary\">\n<h3>Your Submission Details:</h3>\n<ul>\n{% if Request.Form.department and Request.Form.department != \"\" %}\n<li><strong>Department:</strong> {{ Request.Form.department }}</li>\n{% endif %}\n<li><strong>Message:</strong> {{ Request.Form.message | truncate: 150 }}</li>\n</ul>\n</div>\n<div class=\"cta\">\n<p>If your matter is urgent, please call us directly:</p>\n<a href=\"tel:+441614661280\">0161 466 1280</a>\n</div>\n<div class=\"signature\">\n<p>Kind regards,</p>\n<p><strong>MCR Solicitors Team</strong></p>\n</div>\n</div>\n<div class=\"footer\">\n<p><strong>MCR LAW ASSOCIATES LIMITED</strong> trading as <strong>MCR SOLICITORS</strong></p>\n<p>First Floor, 1024 Stockport Road, Manchester, M19 3WX</p>\n<p>Authorised and regulated by the Solicitors Regulation Authority - SRA ID: 648878</p>\n<p style=\"margin-top: 15px; font-size: 11px;\">This email and any attachments are confidential and intended solely for the addressee.</p>\n</div>\n</body>\n</html>"
+                },
+                "IsHtmlBody": true,
+                "Bcc": {
+                  "Expression": ""
+                },
+                "Cc": {
+                  "Expression": ""
+                },
+                "ActivityMetadata": {
+                  "Title": "Email to User (Confirmation)"
+                }
+              }
+            },
+            {
+              "ActivityId": "httpresponse001",
+              "Name": "HttpResponseTask",
+              "X": 960,
+              "Y": 100,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": "Success Response"
+                },
+                "HttpStatusCode": 200,
+                "Content": {
+                  "Expression": "{\"success\": true, \"message\": \"Thank you! Your message has been sent successfully.\"}"
+                },
+                "ContentType": "application/json"
+              }
+            },
+            {
+              "ActivityId": "httpresponseerror001",
+              "Name": "HttpResponseTask",
+              "X": 320,
+              "Y": 280,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": "Captcha Error Response"
+                },
+                "HttpStatusCode": 400,
+                "Content": {
+                  "Expression": "{\"success\": false, \"message\": \"Please complete the captcha verification.\"}"
+                },
+                "ContentType": "application/json"
+              }
+            }
+          ],
+          "Transitions": [
+            {
+              "Id": 0,
+              "SourceActivityId": "httprequestevent001",
+              "SourceOutcomeName": "Done",
+              "DestinationActivityId": "validaterecaptcha001"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "validaterecaptcha001",
+              "SourceOutcomeName": "Valid",
+              "DestinationActivityId": "emailtoadmin001"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "validaterecaptcha001",
+              "SourceOutcomeName": "Invalid",
+              "DestinationActivityId": "httpresponseerror001"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "emailtoadmin001",
+              "SourceOutcomeName": "Done",
+              "DestinationActivityId": "emailtouser001"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "emailtouser001",
+              "SourceOutcomeName": "Done",
+              "DestinationActivityId": "httpresponse001"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

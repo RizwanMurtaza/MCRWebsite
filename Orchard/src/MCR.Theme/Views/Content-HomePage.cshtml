@@ -5,17 +5,19 @@
     var serviceCards = contentItem?.Content["ServiceCards"]?["ContentItems"];
     var testimonials = contentItem?.Content["Testimonials"]?["ContentItems"];
     var featureBoxes = contentItem?.Content["FeatureBoxes"]?["ContentItems"];
+    var heroBannerSlides = contentItem?.Content["HeroBannerSlides"]?["ContentItems"];
+    var teamMembers = contentItem?.Content["TeamMembers"]?["ContentItems"];
 
-    // Hero Section
-    var heroTitle = homePart?["HeroTitle"]?["Text"]?.ToString();
-    var heroSubtitle = homePart?["HeroSubtitle"]?["Text"]?.ToString();
+    // Hero Banner Settings
     var heroBackgroundImage = GetMediaPath(homePart?["HeroBackgroundImage"]);
-    var heroPrimaryButtonText = homePart?["HeroPrimaryButtonText"]?["Text"]?.ToString();
-    var heroPrimaryButtonUrl = homePart?["HeroPrimaryButtonUrl"]?["Text"]?.ToString();
-    var heroSecondaryButtonText = homePart?["HeroSecondaryButtonText"]?["Text"]?.ToString();
-    var heroSecondaryButtonUrl = homePart?["HeroSecondaryButtonUrl"]?["Text"]?.ToString();
-    var showHeroForm = homePart?["ShowHeroForm"]?["Value"]?.ToObject<bool>() ?? false;
+    var heroBackgroundColor = homePart?["HeroBackgroundColor"]?["Text"]?.ToString();
+    var heroSlideInterval = GetIntValue(homePart?["HeroSlideInterval"]?["Value"], 5000);
+    var showHeroForm = GetBoolValue(homePart?["ShowHeroForm"]?["Value"]);
     var heroFormTitle = homePart?["HeroFormTitle"]?["Text"]?.ToString();
+    var heroFormRecipientEmail = homePart?["HeroFormRecipientEmail"]?["Text"]?.ToString();
+    var showHeroDepartment = GetBoolValue(homePart?["ShowHeroDepartment"]?["Value"]);
+    var heroAutoPlay = GetBoolValue(homePart?["HeroAutoPlay"]?["Value"], true);
+    var heroShowIndicators = GetBoolValue(homePart?["HeroShowIndicators"]?["Value"], true);
 
     // Services Section
     var servicesSectionTitle = homePart?["ServicesSectionTitle"]?["Text"]?.ToString();
@@ -39,6 +41,11 @@
     var ctaButtonUrl = homePart?["CtaButtonUrl"]?["Text"]?.ToString();
     var showCtaSection = homePart?["ShowCtaSection"]?["Value"]?.ToObject<bool>() ?? false;
     var ctaBackgroundImage = GetMediaPath(homePart?["CtaBackgroundImage"]);
+
+    // Team Section
+    var teamSectionTitle = homePart?["TeamSectionTitle"]?["Text"]?.ToString();
+    var teamSectionSubtitle = homePart?["TeamSectionSubtitle"]?["Text"]?.ToString();
+    var showTeamSection = homePart?["ShowTeamSection"]?["Value"]?.ToObject<bool>() ?? false;
 }
 
 @functions {
@@ -58,65 +65,315 @@
         }
         return null;
     }
+
+    bool GetBoolValue(dynamic value, bool defaultValue = false)
+    {
+        if (value == null) return defaultValue;
+        try
+        {
+            return value?.ToObject<bool>() ?? defaultValue;
+        }
+        catch
+        {
+            return defaultValue;
+        }
+    }
+
+    int GetIntValue(dynamic value, int defaultValue)
+    {
+        if (value == null) return defaultValue;
+        try
+        {
+            var decimalValue = value?.ToObject<decimal?>();
+            return decimalValue.HasValue ? (int)decimalValue.Value : defaultValue;
+        }
+        catch
+        {
+            return defaultValue;
+        }
+    }
 }
 
-@* Hero Section *@
-@if (!string.IsNullOrEmpty(heroTitle))
+@* Hero Banner Section with Rotating Slides *@
+@{
+    var heroId = "hero-home-" + Guid.NewGuid().ToString("N").Substring(0, 8);
+    var hasSlides = heroBannerSlides != null && ((IEnumerable<dynamic>)heroBannerSlides).Any();
+
+    // Build background style
+    var backgroundStyle = "";
+    if (!string.IsNullOrEmpty(heroBackgroundImage))
+    {
+        backgroundStyle = $"background-image: url('{heroBackgroundImage}'); background-size: cover; background-position: center;";
+    }
+    else if (!string.IsNullOrEmpty(heroBackgroundColor))
+    {
+        backgroundStyle = $"background: {heroBackgroundColor};";
+    }
+
+    // Parse slides
+    var slides = new List<dynamic>();
+    if (heroBannerSlides != null)
+    {
+        foreach (var slideItem in heroBannerSlides)
+        {
+            slides.Add(slideItem);
+        }
+        slides = slides.OrderBy(s => GetIntValue(s["HeroBannerSlide"]?["DisplayOrder"]?["Value"], 1)).ToList();
+    }
+    var slideCount = slides.Count;
+}
+
+@if (hasSlides)
 {
-    <section class="hero-section" @(string.IsNullOrEmpty(heroBackgroundImage) ? "" : $"style=\"background-image: url('{heroBackgroundImage}');\"")>
+    <section class="hero-banner @(showHeroForm ? "hero-with-form" : "")" id="@heroId" style="@backgroundStyle">
+        <div class="hero-overlay"></div>
         <div class="container">
-            <div class="hero-inner">
-                <div class="hero-content">
-                    <h1 class="hero-title">@heroTitle</h1>
-                    @if (!string.IsNullOrEmpty(heroSubtitle))
+            <div class="hero-content-wrapper">
+                @* Left side - Rotating content *@
+                <div class="hero-text-content">
+                    <div class="hero-slider" data-autoplay="@heroAutoPlay.ToString().ToLower()" data-interval="@heroSlideInterval">
+                        @foreach (var (slide, index) in slides.Select((s, i) => (s, i)))
+                        {
+                            var slidePart = slide["HeroBannerSlide"];
+                            var headline = slidePart?["Headline"]?["Text"]?.ToString();
+                            var subheadline = slidePart?["Subheadline"]?["Text"]?.ToString();
+                            var primaryBtnText = slidePart?["PrimaryButtonText"]?["Text"]?.ToString();
+                            var primaryBtnUrl = slidePart?["PrimaryButtonUrl"]?["Text"]?.ToString();
+                            var secondaryBtnText = slidePart?["SecondaryButtonText"]?["Text"]?.ToString();
+                            var secondaryBtnUrl = slidePart?["SecondaryButtonUrl"]?["Text"]?.ToString();
+
+                            <div class="hero-slide @(index == 0 ? "active" : "")" data-index="@index">
+                                @if (!string.IsNullOrEmpty(headline))
+                                {
+                                    <h1 class="hero-headline">@headline</h1>
+                                }
+                                @if (!string.IsNullOrEmpty(subheadline))
+                                {
+                                    <p class="hero-subheadline">@subheadline</p>
+                                }
+                                <div class="hero-buttons">
+                                    @if (!string.IsNullOrEmpty(primaryBtnText) && !string.IsNullOrEmpty(primaryBtnUrl))
+                                    {
+                                        <a href="@primaryBtnUrl" class="btn btn-cta btn-lg">@primaryBtnText</a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(secondaryBtnText) && !string.IsNullOrEmpty(secondaryBtnUrl))
+                                    {
+                                        <a href="@secondaryBtnUrl" class="btn btn-outline-light btn-lg">@secondaryBtnText</a>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    @if (heroShowIndicators && slideCount > 1)
                     {
-                        <p class="hero-subtitle">@heroSubtitle</p>
-                    }
-                    @if (!string.IsNullOrEmpty(heroPrimaryButtonText) || !string.IsNullOrEmpty(heroSecondaryButtonText))
-                    {
-                        <div class="hero-buttons">
-                            @if (!string.IsNullOrEmpty(heroPrimaryButtonText))
+                        <div class="hero-indicators">
+                            @for (var i = 0; i < slideCount; i++)
                             {
-                                <a href="@heroPrimaryButtonUrl" class="btn btn-primary btn-lg">@heroPrimaryButtonText</a>
-                            }
-                            @if (!string.IsNullOrEmpty(heroSecondaryButtonText))
-                            {
-                                <a href="@heroSecondaryButtonUrl" class="btn btn-outline-light btn-lg">@heroSecondaryButtonText</a>
+                                <button class="hero-indicator @(i == 0 ? "active" : "")" data-slide="@i" aria-label="Go to slide @(i + 1)"></button>
                             }
                         </div>
                     }
                 </div>
+
+                @* Right side - Contact Form *@
                 @if (showHeroForm)
                 {
                     <div class="hero-form-wrapper">
-                        <form id="heroContactForm" action="/contact" method="post" class="hero-form">
+                        <div class="hero-contact-form">
                             @if (!string.IsNullOrEmpty(heroFormTitle))
                             {
-                                <div class="hero-form-title">@heroFormTitle</div>
+                                <h3 class="hero-form-title">@heroFormTitle</h3>
                             }
-                            <div class="form-group">
-                                <label for="contact-name">Name <span class="required">*</span></label>
-                                <input id="contact-name" class="form-control" type="text" name="name" placeholder="Enter your name" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="contact-email">Email <span class="required">*</span></label>
-                                <input id="contact-email" class="form-control" type="email" name="email" placeholder="Enter your email" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="contact-phone">Phone <span class="required">*</span></label>
-                                <input id="contact-phone" class="form-control" type="tel" name="phone" placeholder="Enter your phone" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="contact-message">Message</label>
-                                <textarea id="contact-message" class="form-control" name="message" placeholder="How can we help?" rows="3"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Send Message</button>
-                        </form>
+
+                            <form id="hero-contact-form-@heroId"
+                                  method="post"
+                                  action="/workflows/Invoke?token=CfDJ8LOemXJtfbxMhgsh7X12NS7s7KqS5-1_LjnSBh1xuERMhDjv4fCv1hHfSPNto_muh1mco1pLqRfo-0gfZcVVKOKBFh0y-O2E6kBBwGZcBAHNTmRCrv08PREVrLk5vedIODMnhRB5DANDzlcHYt9PmwV7dHi2WaU1lALWNlPybVaL1vN8puGwxq0QShAlhkQx2Dl7jVO6g0q_vPSUFOjaK502oT4WvXlDQPpzlO7SqPl4"
+                                  class="mcr-hero-form">
+                                @Html.AntiForgeryToken()
+
+                                @if (!string.IsNullOrEmpty(heroFormRecipientEmail))
+                                {
+                                    <input type="hidden" name="recipientEmail" value="@heroFormRecipientEmail" />
+                                }
+
+                                <div class="form-group">
+                                    <label for="name-@heroId" class="form-label">Name <span class="required">*</span></label>
+                                    <input type="text" class="form-control" id="name-@heroId" name="name" required
+                                           placeholder="Enter your name" autocomplete="name" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email-@heroId" class="form-label">Email <span class="required">*</span></label>
+                                    <input type="email" class="form-control" id="email-@heroId" name="email" required
+                                           placeholder="Enter your email" autocomplete="email" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone-@heroId" class="form-label">Phone <span class="required">*</span></label>
+                                    <input type="tel" class="form-control" id="phone-@heroId" name="phone" required
+                                           placeholder="Enter your phone" autocomplete="tel" />
+                                </div>
+
+                                @if (showHeroDepartment)
+                                {
+                                    <div class="form-group">
+                                        <label for="department-@heroId" class="form-label">Department</label>
+                                        <select class="form-select" id="department-@heroId" name="department">
+                                            <option disabled selected value="">Select Department</option>
+                                            <option value="Visas">Visas &amp; Immigration</option>
+                                            <option value="Divorce">Divorce &amp; Family Law</option>
+                                            <option value="Personal">Personal Injury</option>
+                                            <option value="Litigation">Litigation &amp; Disputes</option>
+                                            <option value="Debt">Debt &amp; Insolvency</option>
+                                        </select>
+                                    </div>
+                                }
+
+                                <div class="form-group">
+                                    <label for="message-@heroId" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message-@heroId" name="message" rows="3"
+                                              placeholder="How can we help?"></textarea>
+                                </div>
+
+                                <div class="form-group recaptcha-group">
+                                    @await DisplayAsync(await New.ReCaptcha())
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-hero-submit">
+                                        <span class="btn-text">Send Message</span>
+                                        <span class="btn-loading" style="display:none;">
+                                            <i class="fas fa-spinner fa-spin"></i> Sending...
+                                        </span>
+                                    </button>
+                                </div>
+
+                                <div class="form-messages">
+                                    <div class="alert alert-success" style="display:none;" role="alert">
+                                        <i class="fas fa-check-circle me-2"></i>
+                                        <span class="message-text">Thank you! We'll be in touch soon.</span>
+                                    </div>
+                                    <div class="alert alert-danger" style="display:none;" role="alert">
+                                        <i class="fas fa-exclamation-circle me-2"></i>
+                                        <span class="message-text"></span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 }
             </div>
         </div>
     </section>
+
+    <script>
+    (function() {
+        const heroSection = document.getElementById('@heroId');
+        if (!heroSection) return;
+
+        const slider = heroSection.querySelector('.hero-slider');
+        if (!slider) return;
+
+        const slides = slider.querySelectorAll('.hero-slide');
+        const indicators = heroSection.querySelectorAll('.hero-indicator');
+        const autoplay = slider.dataset.autoplay === 'true';
+        const interval = parseInt(slider.dataset.interval) || 5000;
+
+        if (slides.length <= 1) return;
+
+        let currentSlide = 0;
+        let slideTimer = null;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            indicators.forEach((indicator, i) => {
+                indicator.classList.toggle('active', i === index);
+            });
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            const next = (currentSlide + 1) % slides.length;
+            showSlide(next);
+        }
+
+        function startAutoplay() {
+            if (autoplay && slides.length > 1) {
+                slideTimer = setInterval(nextSlide, interval);
+            }
+        }
+
+        function stopAutoplay() {
+            if (slideTimer) {
+                clearInterval(slideTimer);
+                slideTimer = null;
+            }
+        }
+
+        // Indicator click handlers
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                stopAutoplay();
+                showSlide(index);
+                startAutoplay();
+            });
+        });
+
+        // Pause on hover
+        heroSection.addEventListener('mouseenter', stopAutoplay);
+        heroSection.addEventListener('mouseleave', startAutoplay);
+
+        // Start autoplay
+        startAutoplay();
+
+        // Hero form submission
+        const heroForm = heroSection.querySelector('.mcr-hero-form');
+        if (heroForm) {
+            heroForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const btnText = heroForm.querySelector('.btn-text');
+                const btnLoading = heroForm.querySelector('.btn-loading');
+                const submitBtn = heroForm.querySelector('button[type="submit"]');
+                const successAlert = heroForm.querySelector('.alert-success');
+                const errorAlert = heroForm.querySelector('.alert-danger');
+                const errorMsg = errorAlert.querySelector('.message-text');
+
+                // Show loading state
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'inline';
+                submitBtn.disabled = true;
+                successAlert.style.display = 'none';
+                errorAlert.style.display = 'none';
+
+                try {
+                    const formData = new FormData(heroForm);
+                    const response = await fetch(heroForm.action, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        successAlert.style.display = 'flex';
+                        heroForm.reset();
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    errorMsg.textContent = 'Sorry, there was an error. Please try again.';
+                    errorAlert.style.display = 'flex';
+                } finally {
+                    btnText.style.display = 'inline';
+                    btnLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+    })();
+    </script>
 }
 
 @* Services Section *@
@@ -229,6 +486,135 @@
                     </div>
                 }
             </div>
+        </div>
+    </section>
+}
+
+@* Team Section *@
+@if (showTeamSection && teamMembers != null)
+{
+    var teamCarouselId = "teamCarousel-" + Guid.NewGuid().ToString("N").Substring(0, 8);
+    var teamList = new List<dynamic>();
+    foreach (var member in teamMembers)
+    {
+        teamList.Add(member);
+    }
+    teamList = teamList.OrderBy(m => GetIntValue(m["TeamMember"]?["DisplayOrder"]?["Value"], 1)).ToList();
+
+    // Group members into slides (4 per slide for desktop carousel)
+    var membersPerSlide = 4;
+    var teamSlides = teamList
+        .Select((member, index) => new { member, index })
+        .GroupBy(x => x.index / membersPerSlide)
+        .Select(g => g.Select(x => x.member).ToList())
+        .ToList();
+
+    <section class="team-section section">
+        <div class="container">
+            @if (!string.IsNullOrEmpty(teamSectionTitle) || !string.IsNullOrEmpty(teamSectionSubtitle))
+            {
+                <div class="section-header text-center">
+                    @if (!string.IsNullOrEmpty(teamSectionTitle))
+                    {
+                        <h2 class="section-title">@teamSectionTitle</h2>
+                    }
+                    @if (!string.IsNullOrEmpty(teamSectionSubtitle))
+                    {
+                        <p class="section-subtitle">@teamSectionSubtitle</p>
+                    }
+                </div>
+            }
+
+            @if (teamSlides.Count > 0)
+            {
+                <div id="@teamCarouselId" class="carousel slide team-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+                    @* Carousel Indicators *@
+                    <div class="carousel-indicators">
+                        @for (int i = 0; i < teamSlides.Count; i++)
+                        {
+                            <button type="button" data-bs-target="#@teamCarouselId" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-current="@(i == 0 ? "true" : "false")" aria-label="Slide @(i + 1)"></button>
+                        }
+                    </div>
+
+                    @* Carousel Slides *@
+                    <div class="carousel-inner">
+                        @for (int slideIndex = 0; slideIndex < teamSlides.Count; slideIndex++)
+                        {
+                            var slide = teamSlides[slideIndex];
+                            <div class="carousel-item @(slideIndex == 0 ? "active" : "")">
+                                <div class="row justify-content-center">
+                                    @foreach (var member in slide)
+                                    {
+                                        var memberName = member["TeamMember"]?["Name"]?["Text"]?.ToString();
+                                        var memberRole = member["TeamMember"]?["Role"]?["Text"]?.ToString();
+                                        var memberBio = member["TeamMember"]?["Bio"]?["Text"]?.ToString();
+                                        var memberPhoto = GetMediaPath(member["TeamMember"]?["Photo"]);
+                                        var memberLinkedIn = member["TeamMember"]?["LinkedInUrl"]?["Text"]?.ToString();
+                                        var memberEmail = member["TeamMember"]?["EmailAddress"]?["Text"]?.ToString();
+
+                                        <div class="col-lg-3 col-md-4 col-6 team-member-item">
+                                            <div class="team-card">
+                                                @if (!string.IsNullOrEmpty(memberPhoto))
+                                                {
+                                                    <div class="member-photo">
+                                                        <img src="@memberPhoto" alt="@memberName" loading="lazy" />
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="member-photo placeholder-photo">
+                                                        <i class="fas fa-user"></i>
+                                                    </div>
+                                                }
+                                                <div class="member-info">
+                                                    @if (!string.IsNullOrEmpty(memberName))
+                                                    {
+                                                        <h4 class="member-name">@memberName</h4>
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(memberRole))
+                                                    {
+                                                        <p class="member-role">@memberRole</p>
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(memberBio))
+                                                    {
+                                                        <p class="member-bio">@memberBio</p>
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(memberLinkedIn) || !string.IsNullOrEmpty(memberEmail))
+                                                    {
+                                                        <div class="member-social">
+                                                            @if (!string.IsNullOrEmpty(memberLinkedIn))
+                                                            {
+                                                                <a href="@memberLinkedIn" target="_blank" rel="noopener" class="social-link"><i class="fab fa-linkedin"></i></a>
+                                                            }
+                                                            @if (!string.IsNullOrEmpty(memberEmail))
+                                                            {
+                                                                <a href="mailto:@memberEmail" class="social-link"><i class="fas fa-envelope"></i></a>
+                                                            }
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    @* Carousel Controls *@
+                    @if (teamSlides.Count > 1)
+                    {
+                        <button class="carousel-control-prev" type="button" data-bs-target="#@teamCarouselId" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#@teamCarouselId" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    }
+                </div>
+            }
         </div>
     </section>
 }

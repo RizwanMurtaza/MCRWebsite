@@ -1,0 +1,259 @@
+@model MCR.Theme.ViewComponents.HeroBannerWidgetViewModel
+
+@{
+    var heroId = "hero-" + Guid.NewGuid().ToString("N").Substring(0, 8);
+    var hasSlides = Model.Slides.Any();
+    var slideCount = Model.Slides.Count;
+
+    // Build background style
+    var backgroundStyle = "";
+    if (!string.IsNullOrEmpty(Model.BackgroundImage))
+    {
+        backgroundStyle = $"background-image: url('{Model.BackgroundImage}'); background-size: cover; background-position: center;";
+    }
+    else if (!string.IsNullOrEmpty(Model.BackgroundColor))
+    {
+        backgroundStyle = $"background: {Model.BackgroundColor};";
+    }
+}
+
+<section class="hero-banner @(Model.ShowContactForm ? "hero-with-form" : "")" id="@heroId" style="@backgroundStyle">
+    <div class="hero-overlay"></div>
+    <div class="container">
+        <div class="hero-content-wrapper">
+            @* Left side - Rotating content *@
+            <div class="hero-text-content">
+                @if (hasSlides)
+                {
+                    <div class="hero-slider" data-autoplay="@Model.AutoPlay.ToString().ToLower()" data-interval="@Model.SlideInterval">
+                        @foreach (var (slide, index) in Model.Slides.Select((s, i) => (s, i)))
+                        {
+                            <div class="hero-slide @(index == 0 ? "active" : "")" data-index="@index">
+                                @if (!string.IsNullOrEmpty(slide.Headline))
+                                {
+                                    <h1 class="hero-headline">@slide.Headline</h1>
+                                }
+                                @if (!string.IsNullOrEmpty(slide.Subheadline))
+                                {
+                                    <p class="hero-subheadline">@slide.Subheadline</p>
+                                }
+                                <div class="hero-buttons">
+                                    @if (!string.IsNullOrEmpty(slide.PrimaryButtonText) && !string.IsNullOrEmpty(slide.PrimaryButtonUrl))
+                                    {
+                                        <a href="@slide.PrimaryButtonUrl" class="btn btn-cta btn-lg">@slide.PrimaryButtonText</a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(slide.SecondaryButtonText) && !string.IsNullOrEmpty(slide.SecondaryButtonUrl))
+                                    {
+                                        <a href="@slide.SecondaryButtonUrl" class="btn btn-outline-light btn-lg">@slide.SecondaryButtonText</a>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    @if (Model.ShowIndicators && slideCount > 1)
+                    {
+                        <div class="hero-indicators">
+                            @for (var i = 0; i < slideCount; i++)
+                            {
+                                <button class="hero-indicator @(i == 0 ? "active" : "")" data-slide="@i" aria-label="Go to slide @(i + 1)"></button>
+                            }
+                        </div>
+                    }
+                }
+            </div>
+
+            @* Right side - Contact Form *@
+            @if (Model.ShowContactForm)
+            {
+                <div class="hero-form-wrapper">
+                    <div class="hero-contact-form">
+                        @if (!string.IsNullOrEmpty(Model.ContactFormTitle))
+                        {
+                            <h3 class="hero-form-title">@Model.ContactFormTitle</h3>
+                        }
+
+                        <form id="hero-contact-form-@heroId"
+                              method="post"
+                              action="/workflows/invoke/contact-form-workflow"
+                              class="mcr-hero-form">
+                            @Html.AntiForgeryToken()
+
+                            @if (!string.IsNullOrEmpty(Model.ContactFormRecipientEmail))
+                            {
+                                <input type="hidden" name="recipientEmail" value="@Model.ContactFormRecipientEmail" />
+                            }
+
+                            <div class="form-group">
+                                <label for="name-@heroId" class="form-label">Name <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="name-@heroId" name="name" required
+                                       placeholder="Enter your name" autocomplete="name" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email-@heroId" class="form-label">Email <span class="required">*</span></label>
+                                <input type="email" class="form-control" id="email-@heroId" name="email" required
+                                       placeholder="Enter your email" autocomplete="email" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone-@heroId" class="form-label">Phone <span class="required">*</span></label>
+                                <input type="tel" class="form-control" id="phone-@heroId" name="phone" required
+                                       placeholder="Enter your phone" autocomplete="tel" />
+                            </div>
+
+                            @if (Model.ShowDepartmentInForm)
+                            {
+                                <div class="form-group">
+                                    <label for="department-@heroId" class="form-label">Department</label>
+                                    <select class="form-select" id="department-@heroId" name="department">
+                                        <option disabled selected value="">Select Department</option>
+                                        <option value="Visas">Visas &amp; Immigration</option>
+                                        <option value="Divorce">Divorce &amp; Family Law</option>
+                                        <option value="Personal">Personal Injury</option>
+                                        <option value="Litigation">Litigation &amp; Disputes</option>
+                                        <option value="Debt">Debt &amp; Insolvency</option>
+                                    </select>
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <label for="message-@heroId" class="form-label">Message</label>
+                                <textarea class="form-control" id="message-@heroId" name="message" rows="3"
+                                          placeholder="How can we help?"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-hero-submit">
+                                    <span class="btn-text">Send Message</span>
+                                    <span class="btn-loading" style="display:none;">
+                                        <i class="fas fa-spinner fa-spin"></i> Sending...
+                                    </span>
+                                </button>
+                            </div>
+
+                            <div class="form-messages">
+                                <div class="alert alert-success" style="display:none;" role="alert">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    <span class="message-text">Thank you! We'll be in touch soon.</span>
+                                </div>
+                                <div class="alert alert-danger" style="display:none;" role="alert">
+                                    <i class="fas fa-exclamation-circle me-2"></i>
+                                    <span class="message-text"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<script>
+(function() {
+    const heroSection = document.getElementById('@heroId');
+    if (!heroSection) return;
+
+    const slider = heroSection.querySelector('.hero-slider');
+    if (!slider) return;
+
+    const slides = slider.querySelectorAll('.hero-slide');
+    const indicators = heroSection.querySelectorAll('.hero-indicator');
+    const autoplay = slider.dataset.autoplay === 'true';
+    const interval = parseInt(slider.dataset.interval) || 5000;
+
+    if (slides.length <= 1) return;
+
+    let currentSlide = 0;
+    let slideTimer = null;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+        indicators.forEach((indicator, i) => {
+            indicator.classList.toggle('active', i === index);
+        });
+        currentSlide = index;
+    }
+
+    function nextSlide() {
+        const next = (currentSlide + 1) % slides.length;
+        showSlide(next);
+    }
+
+    function startAutoplay() {
+        if (autoplay && slides.length > 1) {
+            slideTimer = setInterval(nextSlide, interval);
+        }
+    }
+
+    function stopAutoplay() {
+        if (slideTimer) {
+            clearInterval(slideTimer);
+            slideTimer = null;
+        }
+    }
+
+    // Indicator click handlers
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            stopAutoplay();
+            showSlide(index);
+            startAutoplay();
+        });
+    });
+
+    // Pause on hover
+    heroSection.addEventListener('mouseenter', stopAutoplay);
+    heroSection.addEventListener('mouseleave', startAutoplay);
+
+    // Start autoplay
+    startAutoplay();
+
+    // Hero form submission
+    const heroForm = heroSection.querySelector('.mcr-hero-form');
+    if (heroForm) {
+        heroForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const btnText = heroForm.querySelector('.btn-text');
+            const btnLoading = heroForm.querySelector('.btn-loading');
+            const submitBtn = heroForm.querySelector('button[type="submit"]');
+            const successAlert = heroForm.querySelector('.alert-success');
+            const errorAlert = heroForm.querySelector('.alert-danger');
+            const errorMsg = errorAlert.querySelector('.message-text');
+
+            // Show loading state
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            submitBtn.disabled = true;
+            successAlert.style.display = 'none';
+            errorAlert.style.display = 'none';
+
+            try {
+                const formData = new FormData(heroForm);
+                const response = await fetch(heroForm.action, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    successAlert.style.display = 'flex';
+                    heroForm.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                errorMsg.textContent = 'Sorry, there was an error. Please try again.';
+                errorAlert.style.display = 'flex';
+            } finally {
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+    }
+})();
+</script>
