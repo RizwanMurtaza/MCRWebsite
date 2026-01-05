@@ -1,0 +1,321 @@
+@using OrchardCore.ContentManagement
+@{
+    var contentItem = Model.ContentItem as ContentItem;
+    var homePart = contentItem?.Content["HomePage"];
+    var serviceCards = contentItem?.Content["ServiceCards"]?["ContentItems"];
+    var testimonials = contentItem?.Content["Testimonials"]?["ContentItems"];
+    var featureBoxes = contentItem?.Content["FeatureBoxes"]?["ContentItems"];
+
+    // Hero Section
+    var heroTitle = homePart?["HeroTitle"]?["Text"]?.ToString();
+    var heroSubtitle = homePart?["HeroSubtitle"]?["Text"]?.ToString();
+    var heroBackgroundImage = GetMediaPath(homePart?["HeroBackgroundImage"]);
+    var heroPrimaryButtonText = homePart?["HeroPrimaryButtonText"]?["Text"]?.ToString();
+    var heroPrimaryButtonUrl = homePart?["HeroPrimaryButtonUrl"]?["Text"]?.ToString();
+    var heroSecondaryButtonText = homePart?["HeroSecondaryButtonText"]?["Text"]?.ToString();
+    var heroSecondaryButtonUrl = homePart?["HeroSecondaryButtonUrl"]?["Text"]?.ToString();
+    var showHeroForm = homePart?["ShowHeroForm"]?["Value"]?.ToObject<bool>() ?? false;
+    var heroFormTitle = homePart?["HeroFormTitle"]?["Text"]?.ToString();
+
+    // Services Section
+    var servicesSectionTitle = homePart?["ServicesSectionTitle"]?["Text"]?.ToString();
+    var servicesSectionSubtitle = homePart?["ServicesSectionSubtitle"]?["Text"]?.ToString();
+    var showServicesSection = homePart?["ShowServicesSection"]?["Value"]?.ToObject<bool>() ?? false;
+
+    // Testimonials Section
+    var testimonialsSectionTitle = homePart?["TestimonialsSectionTitle"]?["Text"]?.ToString();
+    var testimonialsSectionSubtitle = homePart?["TestimonialsSectionSubtitle"]?["Text"]?.ToString();
+    var showTestimonialsSection = homePart?["ShowTestimonialsSection"]?["Value"]?.ToObject<bool>() ?? false;
+
+    // Features Section
+    var featuresSectionTitle = homePart?["FeaturesSectionTitle"]?["Text"]?.ToString();
+    var featuresSectionSubtitle = homePart?["FeaturesSectionSubtitle"]?["Text"]?.ToString();
+    var showFeaturesSection = homePart?["ShowFeaturesSection"]?["Value"]?.ToObject<bool>() ?? false;
+
+    // CTA Section
+    var ctaSectionTitle = homePart?["CtaSectionTitle"]?["Text"]?.ToString();
+    var ctaSectionText = homePart?["CtaSectionText"]?["Text"]?.ToString();
+    var ctaButtonText = homePart?["CtaButtonText"]?["Text"]?.ToString();
+    var ctaButtonUrl = homePart?["CtaButtonUrl"]?["Text"]?.ToString();
+    var showCtaSection = homePart?["ShowCtaSection"]?["Value"]?.ToObject<bool>() ?? false;
+    var ctaBackgroundImage = GetMediaPath(homePart?["CtaBackgroundImage"]);
+}
+
+@functions {
+    string GetMediaPath(dynamic field)
+    {
+        if (field == null) return null;
+        var paths = field["Paths"];
+        if (paths != null)
+        {
+            foreach (var path in paths)
+            {
+                if (path != null)
+                {
+                    return "/media/" + path.ToString();
+                }
+            }
+        }
+        return null;
+    }
+}
+
+@* Hero Section *@
+@if (!string.IsNullOrEmpty(heroTitle))
+{
+    <section class="hero-section" @(string.IsNullOrEmpty(heroBackgroundImage) ? "" : $"style=\"background-image: url('{heroBackgroundImage}');\"")>
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <h1 class="hero-title">@heroTitle</h1>
+                    @if (!string.IsNullOrEmpty(heroSubtitle))
+                    {
+                        <p class="hero-subtitle">@heroSubtitle</p>
+                    }
+                    @if (!string.IsNullOrEmpty(heroPrimaryButtonText) || !string.IsNullOrEmpty(heroSecondaryButtonText))
+                    {
+                        <div class="hero-buttons">
+                            @if (!string.IsNullOrEmpty(heroPrimaryButtonText))
+                            {
+                                <a href="@heroPrimaryButtonUrl" class="btn btn-primary btn-lg">@heroPrimaryButtonText</a>
+                            }
+                            @if (!string.IsNullOrEmpty(heroSecondaryButtonText))
+                            {
+                                <a href="@heroSecondaryButtonUrl" class="btn btn-outline-light btn-lg">@heroSecondaryButtonText</a>
+                            }
+                        </div>
+                    }
+                </div>
+                @if (showHeroForm)
+                {
+                    <div class="hero-form-wrapper">
+                        <form id="heroContactForm" action="/contact" method="post" class="hero-form">
+                            @if (!string.IsNullOrEmpty(heroFormTitle))
+                            {
+                                <div class="hero-form-title">@heroFormTitle</div>
+                            }
+                            <div class="form-group">
+                                <label for="contact-name">Name <span class="required">*</span></label>
+                                <input id="contact-name" class="form-control" type="text" name="name" placeholder="Enter your name" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Email <span class="required">*</span></label>
+                                <input id="contact-email" class="form-control" type="email" name="email" placeholder="Enter your email" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-phone">Phone <span class="required">*</span></label>
+                                <input id="contact-phone" class="form-control" type="tel" name="phone" placeholder="Enter your phone" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message">Message</label>
+                                <textarea id="contact-message" class="form-control" name="message" placeholder="How can we help?" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+@* Services Section *@
+@if (showServicesSection && serviceCards != null)
+{
+    <section id="services" class="services-section section">
+        <div class="container">
+            @if (!string.IsNullOrEmpty(servicesSectionTitle))
+            {
+                <div class="section-header text-center">
+                    <h2 class="section-title">@servicesSectionTitle</h2>
+                    @if (!string.IsNullOrEmpty(servicesSectionSubtitle))
+                    {
+                        <p class="section-subtitle">@servicesSectionSubtitle</p>
+                    }
+                </div>
+            }
+            <div class="row g-4">
+                @foreach (var card in serviceCards)
+                {
+                    var cardTitle = card["ServiceCard"]?["Title"]?["Text"]?.ToString();
+                    var cardDesc = card["ServiceCard"]?["Description"]?["Text"]?.ToString();
+                    var cardIcon = card["ServiceCard"]?["IconClass"]?["Text"]?.ToString();
+                    var cardImage = GetMediaPath(card["ServiceCard"]?["Image"]);
+                    var cardLinkUrl = card["ServiceCard"]?["LinkUrl"]?["Text"]?.ToString();
+                    var cardLinkText = card["ServiceCard"]?["LinkText"]?["Text"]?.ToString();
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            @if (!string.IsNullOrEmpty(cardImage))
+                            {
+                                <div class="service-card-image">
+                                    <img src="@cardImage" alt="@cardTitle" loading="lazy" />
+                                </div>
+                            }
+                            else if (!string.IsNullOrEmpty(cardIcon))
+                            {
+                                <div class="service-card-icon">
+                                    <i class="@cardIcon"></i>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(cardTitle))
+                            {
+                                <h3 class="service-card-title">@cardTitle</h3>
+                            }
+                            @if (!string.IsNullOrEmpty(cardDesc))
+                            {
+                                <p class="service-card-description">@cardDesc</p>
+                            }
+                            @if (!string.IsNullOrEmpty(cardLinkUrl) && !string.IsNullOrEmpty(cardLinkText))
+                            {
+                                <a href="@cardLinkUrl" class="service-card-link">
+                                    @cardLinkText <i class="fas fa-arrow-right"></i>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+@* Features Section *@
+@if (showFeaturesSection && featureBoxes != null)
+{
+    <section class="features-section section bg-light">
+        <div class="container">
+            @if (!string.IsNullOrEmpty(featuresSectionTitle))
+            {
+                <div class="section-header text-center">
+                    <h2 class="section-title">@featuresSectionTitle</h2>
+                    @if (!string.IsNullOrEmpty(featuresSectionSubtitle))
+                    {
+                        <p class="section-subtitle">@featuresSectionSubtitle</p>
+                    }
+                </div>
+            }
+            <div class="row g-4">
+                @foreach (var feature in featureBoxes)
+                {
+                    var featureTitle = feature["FeatureBox"]?["Title"]?["Text"]?.ToString();
+                    var featureDesc = feature["FeatureBox"]?["Description"]?["Text"]?.ToString();
+                    var featureIcon = feature["FeatureBox"]?["IconClass"]?["Text"]?.ToString();
+                    var featureImage = GetMediaPath(feature["FeatureBox"]?["Image"]);
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="feature-box text-center">
+                            @if (!string.IsNullOrEmpty(featureImage))
+                            {
+                                <div class="feature-box-image">
+                                    <img src="@featureImage" alt="@featureTitle" loading="lazy" />
+                                </div>
+                            }
+                            else if (!string.IsNullOrEmpty(featureIcon))
+                            {
+                                <div class="feature-box-icon">
+                                    <i class="@featureIcon"></i>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(featureTitle))
+                            {
+                                <h4 class="feature-box-title">@featureTitle</h4>
+                            }
+                            @if (!string.IsNullOrEmpty(featureDesc))
+                            {
+                                <p class="feature-box-description">@featureDesc</p>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+@* Testimonials Section *@
+@if (showTestimonialsSection && testimonials != null)
+{
+    <section class="testimonials-section section">
+        <div class="container">
+            @if (!string.IsNullOrEmpty(testimonialsSectionTitle))
+            {
+                <div class="section-header text-center">
+                    <h2 class="section-title">@testimonialsSectionTitle</h2>
+                    @if (!string.IsNullOrEmpty(testimonialsSectionSubtitle))
+                    {
+                        <p class="section-subtitle">@testimonialsSectionSubtitle</p>
+                    }
+                </div>
+            }
+            <div class="row g-4">
+                @foreach (var testimonial in testimonials)
+                {
+                    var quote = testimonial["Testimonial"]?["Quote"]?["Text"]?.ToString();
+                    var authorName = testimonial["Testimonial"]?["AuthorName"]?["Text"]?.ToString();
+                    var authorTitle = testimonial["Testimonial"]?["AuthorTitle"]?["Text"]?.ToString();
+                    var authorImage = GetMediaPath(testimonial["Testimonial"]?["AuthorImage"]);
+                    var rating = testimonial["Testimonial"]?["Rating"]?["Value"]?.ToObject<int>() ?? 0;
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="testimonial-card">
+                            @if (rating > 0)
+                            {
+                                <div class="testimonial-rating">
+                                    @for (int i = 0; i < rating; i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                    @for (int i = rating; i < 5; i++)
+                                    {
+                                        <i class="far fa-star"></i>
+                                    }
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(quote))
+                            {
+                                <blockquote class="testimonial-quote">@quote</blockquote>
+                            }
+                            <div class="testimonial-author">
+                                @if (!string.IsNullOrEmpty(authorImage))
+                                {
+                                    <img src="@authorImage" alt="@authorName" class="testimonial-author-image" loading="lazy" />
+                                }
+                                <div class="testimonial-author-info">
+                                    @if (!string.IsNullOrEmpty(authorName))
+                                    {
+                                        <strong class="testimonial-author-name">@authorName</strong>
+                                    }
+                                    @if (!string.IsNullOrEmpty(authorTitle))
+                                    {
+                                        <span class="testimonial-author-title">@authorTitle</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+@* CTA Section *@
+@if (showCtaSection && !string.IsNullOrEmpty(ctaSectionTitle))
+{
+    <section class="cta-section" @(string.IsNullOrEmpty(ctaBackgroundImage) ? "" : $"style=\"background-image: url('{ctaBackgroundImage}');\"")>
+        <div class="container">
+            <div class="cta-content text-center">
+                <h2 class="cta-title">@ctaSectionTitle</h2>
+                @if (!string.IsNullOrEmpty(ctaSectionText))
+                {
+                    <p class="cta-text">@ctaSectionText</p>
+                }
+                @if (!string.IsNullOrEmpty(ctaButtonText) && !string.IsNullOrEmpty(ctaButtonUrl))
+                {
+                    <a href="@ctaButtonUrl" class="btn btn-secondary btn-lg">@ctaButtonText</a>
+                }
+            </div>
+        </div>
+    </section>
+}

@@ -9,5 +9,11 @@
     "TenantId": "4nrmwc0jq5rvz7m2x4ppmv1dmv",
     "RequestUrlHost": "mcrsolicitors.localhost:5001",
     "State": "Running"
+  },
+  "mcrtest": {
+    "VersionId": "4587zkj1gvzxszemev3zfa1m5p",
+    "TenantId": "465dvd2ne6ayb27fsfmh0kmsmg",
+    "RequestUrlHost": "mcrtest.localhost:5001",
+    "State": "Running"
   }
 }

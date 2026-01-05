@@ -1,0 +1,173 @@
+{
+  "name": "MCR Theme HomePage",
+  "displayName": "MCR Theme - Home Page Content",
+  "description": "Creates a sample home page with hero, services, testimonials, and features",
+  "author": "MCR Solicitors",
+  "version": "1.0.0",
+  "issetuprecipe": false,
+  "categories": ["Content"],
+  "tags": ["homepage", "landing"],
+  "steps": [
+    {
+      "name": "content",
+      "data": [
+        {
+          "ContentItemId": "homepage000000001",
+          "ContentType": "HomePage",
+          "DisplayText": "Home",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Home" },
+          "AutoroutePart": { "Path": "", "SetHomepage": true },
+          "HomePage": {
+            "HeroTitle": { "Text": "Expert Legal Services You Can Trust" },
+            "HeroSubtitle": { "Text": "Award-winning solicitors providing professional legal advice for immigration, family law, and personal injury matters across Manchester and the UK." },
+            "HeroPrimaryButtonText": { "Text": "Free Consultation" },
+            "HeroPrimaryButtonUrl": { "Text": "/contact-us" },
+            "HeroSecondaryButtonText": { "Text": "Our Services" },
+            "HeroSecondaryButtonUrl": { "Text": "#services" },
+            "ShowHeroForm": { "Value": true },
+            "HeroFormTitle": { "Text": "Request a Callback" },
+            "ServicesSectionTitle": { "Text": "Our Legal Services" },
+            "ServicesSectionSubtitle": { "Text": "We provide comprehensive legal support across multiple practice areas" },
+            "ShowServicesSection": { "Value": true },
+            "TestimonialsSectionTitle": { "Text": "What Our Clients Say" },
+            "TestimonialsSectionSubtitle": { "Text": "Read testimonials from clients we have helped" },
+            "ShowTestimonialsSection": { "Value": true },
+            "FeaturesSectionTitle": { "Text": "Why Choose Us" },
+            "FeaturesSectionSubtitle": { "Text": "Trusted legal expertise with a personal approach" },
+            "ShowFeaturesSection": { "Value": true },
+            "CtaSectionTitle": { "Text": "Need Legal Advice?" },
+            "CtaSectionText": { "Text": "Contact us today for a free initial consultation. Our expert solicitors are ready to help you with your legal matters." },
+            "CtaButtonText": { "Text": "Contact Us Now" },
+            "CtaButtonUrl": { "Text": "/contact-us" },
+            "ShowCtaSection": { "Value": true }
+          },
+          "ServiceCards": {
+            "ContentItems": [
+              {
+                "ContentItemId": "servicecard00001",
+                "ContentType": "ServiceCard",
+                "ServiceCard": {
+                  "Title": { "Text": "Immigration Law" },
+                  "Description": { "Text": "Expert visa and immigration advice for individuals and businesses. We handle all types of UK visa applications." },
+                  "IconClass": { "Text": "fas fa-passport" },
+                  "LinkUrl": { "Text": "/immigration" },
+                  "LinkText": { "Text": "Learn More" },
+                  "DisplayOrder": { "Value": 1 }
+                }
+              },
+              {
+                "ContentItemId": "servicecard00002",
+                "ContentType": "ServiceCard",
+                "ServiceCard": {
+                  "Title": { "Text": "Family Law" },
+                  "Description": { "Text": "Compassionate support through divorce, child arrangements, and financial settlements. We put families first." },
+                  "IconClass": { "Text": "fas fa-users" },
+                  "LinkUrl": { "Text": "/family-law" },
+                  "LinkText": { "Text": "Learn More" },
+                  "DisplayOrder": { "Value": 2 }
+                }
+              },
+              {
+                "ContentItemId": "servicecard00003",
+                "ContentType": "ServiceCard",
+                "ServiceCard": {
+                  "Title": { "Text": "Personal Injury" },
+                  "Description": { "Text": "No win, no fee claims for accidents and injuries. Get the compensation you deserve." },
+                  "IconClass": { "Text": "fas fa-user-injured" },
+                  "LinkUrl": { "Text": "/personal-injury" },
+                  "LinkText": { "Text": "Learn More" },
+                  "DisplayOrder": { "Value": 3 }
+                }
+              }
+            ]
+          },
+          "Testimonials": {
+            "ContentItems": [
+              {
+                "ContentItemId": "testimonial0001",
+                "ContentType": "Testimonial",
+                "Testimonial": {
+                  "Quote": { "Text": "MCR Solicitors handled my spouse visa application with incredible professionalism. They kept me informed throughout the process and my visa was approved first time!" },
+                  "AuthorName": { "Text": "Sarah M." },
+                  "AuthorTitle": { "Text": "Manchester" },
+                  "Rating": { "Value": 5 },
+                  "DisplayOrder": { "Value": 1 }
+                }
+              },
+              {
+                "ContentItemId": "testimonial0002",
+                "ContentType": "Testimonial",
+                "Testimonial": {
+                  "Quote": { "Text": "During a very difficult divorce, the team at MCR provided compassionate and expert guidance. They fought for what was fair and achieved an excellent outcome." },
+                  "AuthorName": { "Text": "James T." },
+                  "AuthorTitle": { "Text": "Stockport" },
+                  "Rating": { "Value": 5 },
+                  "DisplayOrder": { "Value": 2 }
+                }
+              },
+              {
+                "ContentItemId": "testimonial0003",
+                "ContentType": "Testimonial",
+                "Testimonial": {
+                  "Quote": { "Text": "After my accident at work, MCR Solicitors secured compensation that helped me through my recovery. Professional service from start to finish." },
+                  "AuthorName": { "Text": "David K." },
+                  "AuthorTitle": { "Text": "Salford" },
+                  "Rating": { "Value": 5 },
+                  "DisplayOrder": { "Value": 3 }
+                }
+              }
+            ]
+          },
+          "FeatureBoxes": {
+            "ContentItems": [
+              {
+                "ContentItemId": "featurebox0001",
+                "ContentType": "FeatureBox",
+                "FeatureBox": {
+                  "Title": { "Text": "Lexcel Accredited" },
+                  "Description": { "Text": "Awarded the Law Society's Lexcel quality mark for excellence in legal practice management" },
+                  "IconClass": { "Text": "fas fa-award" },
+                  "DisplayOrder": { "Value": 1 }
+                }
+              },
+              {
+                "ContentItemId": "featurebox0002",
+                "ContentType": "FeatureBox",
+                "FeatureBox": {
+                  "Title": { "Text": "SRA Regulated" },
+                  "Description": { "Text": "Fully authorised and regulated by the Solicitors Regulation Authority" },
+                  "IconClass": { "Text": "fas fa-shield-alt" },
+                  "DisplayOrder": { "Value": 2 }
+                }
+              },
+              {
+                "ContentItemId": "featurebox0003",
+                "ContentType": "FeatureBox",
+                "FeatureBox": {
+                  "Title": { "Text": "Free Consultation" },
+                  "Description": { "Text": "Get expert legal advice with no obligation. We offer free initial consultations for all enquiries" },
+                  "IconClass": { "Text": "fas fa-comments" },
+                  "DisplayOrder": { "Value": 3 }
+                }
+              },
+              {
+                "ContentItemId": "featurebox0004",
+                "ContentType": "FeatureBox",
+                "FeatureBox": {
+                  "Title": { "Text": "Multilingual Team" },
+                  "Description": { "Text": "Our solicitors speak multiple languages to serve our diverse client base" },
+                  "IconClass": { "Text": "fas fa-globe" },
+                  "DisplayOrder": { "Value": 4 }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

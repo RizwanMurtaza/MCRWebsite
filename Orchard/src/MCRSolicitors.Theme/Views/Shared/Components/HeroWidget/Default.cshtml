@@ -29,35 +29,45 @@
             @if (Model.ShowContactForm)
             {
                 <div class="hero-form-wrapper">
-                    <form action="/contact" method="post" class="hero-form">
+                    <form id="heroContactForm" action="/contact" method="post" class="hero-form">
                         <div class="hero-form-title">@Model.FormTitle</div>
+
                         <div class="form-group">
-                            <label for="contact-name">Name</label>
-                            <input id="contact-name" class="form-control" type="text" name="name" placeholder="Enter your name" required />
+                            <label for="contact-name">Name <span class="required">*</span></label>
+                            <input id="contact-name" class="form-control" type="text" name="name" placeholder="Enter your name" data-required="true" />
+                            <span class="field-validation-error" data-valmsg-for="name"></span>
                         </div>
+
                         <div class="form-group">
-                            <label for="contact-email">Email</label>
-                            <input id="contact-email" class="form-control" type="email" name="email" placeholder="Enter your email" required />
+                            <label for="contact-email">Email <span class="required">*</span></label>
+                            <input id="contact-email" class="form-control" type="text" name="email" placeholder="Enter your email" data-required="true" data-type="email" />
+                            <span class="field-validation-error" data-valmsg-for="email"></span>
                         </div>
+
                         <div class="form-group">
-                            <label for="contact-phone">Phone Number</label>
-                            <input id="contact-phone" class="form-control" type="tel" name="phone" placeholder="Enter your phone number" required />
+                            <label for="contact-phone">Phone Number <span class="required">*</span></label>
+                            <input id="contact-phone" class="form-control" type="text" name="phone" placeholder="Enter your phone number" data-required="true" data-type="tel" />
+                            <span class="field-validation-error" data-valmsg-for="phone"></span>
                         </div>
+
                         <div class="form-group">
-                            <label for="contact-department">Department</label>
-                            <select id="contact-department" class="form-control" name="department" required>
-                                <option value="" disabled selected>Select Department</option>
+                            <label for="contact-department">Department <span class="required">*</span></label>
+                            <select id="contact-department" class="form-control" name="department" data-required="true">
+                                <option value="">Select Department</option>
                                 <option value="Visas">Visas & Immigration</option>
                                 <option value="Divorce">Divorce & Family Law</option>
                                 <option value="Personal">Personal Injury</option>
                                 <option value="Litigation">Litigation & Disputes</option>
                                 <option value="Debt">Debt & Insolvency</option>
                             </select>
+                            <span class="field-validation-error" data-valmsg-for="department"></span>
                         </div>
+
                         <div class="form-group">
                             <label for="contact-message">Message</label>
                             <textarea id="contact-message" class="form-control" name="message" placeholder="Enter your message" rows="3"></textarea>
                         </div>
+
                         <button type="submit" class="btn btn-primary btn-submit">Get Free Consultation</button>
                     </form>
                 </div>
@@ -65,3 +75,111 @@
         </div>
     </div>
 </section>
+
+<script>
+(function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('heroContactForm');
+        if (!form) return;
+
+        var validationMessages = {
+            name: 'Please enter your name',
+            email: 'Please enter a valid email address',
+            phone: 'Please enter a valid phone number (min 10 digits)',
+            department: 'Please select a department'
+        };
+
+        var requiredFields = form.querySelectorAll('[data-required="true"]');
+
+        // Real-time validation on blur
+        requiredFields.forEach(function(field) {
+            field.addEventListener('blur', function() {
+                validateField(field);
+            });
+
+            field.addEventListener('input', function() {
+                if (field.classList.contains('is-invalid')) {
+                    validateField(field);
+                }
+            });
+
+            // For select elements
+            field.addEventListener('change', function() {
+                validateField(field);
+            });
+        });
+
+        // Form submission validation
+        form.addEventListener('submit', function(e) {
+            var isValid = true;
+
+            requiredFields.forEach(function(field) {
+                if (!validateField(field)) {
+                    isValid = false;
+                }
+            });
+
+            if (!isValid) {
+                e.preventDefault();
+                e.stopPropagation();
+                // Focus on first error
+                var firstError = form.querySelector('.is-invalid');
+                if (firstError) {
+                    firstError.focus();
+                }
+                return false;
+            }
+        });
+
+        function validateField(field) {
+            var fieldName = field.name;
+            var errorSpan = form.querySelector('[data-valmsg-for="' + fieldName + '"]');
+            var isValid = true;
+            var errorMessage = '';
+            var value = field.value ? field.value.trim() : '';
+
+            // Reset state
+            field.classList.remove('is-invalid', 'is-valid');
+            if (errorSpan) {
+                errorSpan.textContent = '';
+                errorSpan.style.display = 'none';
+            }
+
+            // Check if empty (required)
+            if (field.getAttribute('data-required') === 'true' && !value) {
+                isValid = false;
+                errorMessage = validationMessages[fieldName] || 'This field is required';
+            }
+            // Email validation
+            else if (field.getAttribute('data-type') === 'email' && value) {
+                var emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+                if (!emailRegex.test(value)) {
+                    isValid = false;
+                    errorMessage = validationMessages.email;
+                }
+            }
+            // Phone validation
+            else if (field.getAttribute('data-type') === 'tel' && value) {
+                var digitsOnly = value.replace(/[^0-9]/g, '');
+                if (digitsOnly.length < 10) {
+                    isValid = false;
+                    errorMessage = validationMessages.phone;
+                }
+            }
+
+            // Apply validation state
+            if (!isValid) {
+                field.classList.add('is-invalid');
+                if (errorSpan) {
+                    errorSpan.textContent = errorMessage;
+                    errorSpan.style.display = 'block';
+                }
+            } else if (value) {
+                field.classList.add('is-valid');
+            }
+
+            return isValid;
+        }
+    });
+})();
+</script>

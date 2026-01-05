@@ -1,0 +1,99 @@
+@model MCR.Theme.ViewComponents.FooterViewModel
+
+<footer class="mcr-footer">
+    @if (Model.Columns.Any())
+    {
+        <div class="footer-main">
+            <div class="container">
+                <div class="row footer-columns">
+                    @foreach (var column in Model.Columns)
+                    {
+                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            @if (!string.IsNullOrEmpty(column.Title))
+                            {
+                                <h4 class="footer-column-title">@column.Title</h4>
+                            }
+                            @if (column.Items.Any())
+                            {
+                                <ul class="footer-list">
+                                    @foreach (var item in column.Items)
+                                    {
+                                        <li class="footer-item footer-item-@item.ItemType">
+                                            @switch (item.ItemType)
+                                            {
+                                                case "link":
+                                                    if (!string.IsNullOrEmpty(item.Url))
+                                                    {
+                                                        <a href="@item.Url" @(item.OpenInNewTab ? "target=\"_blank\" rel=\"noopener noreferrer\"" : "")>
+                                                            @item.Text
+                                                        </a>
+                                                    }
+                                                    else if (!string.IsNullOrEmpty(item.Text))
+                                                    {
+                                                        <span>@item.Text</span>
+                                                    }
+                                                    break;
+
+                                                case "image":
+                                                    if (!string.IsNullOrEmpty(item.ImageUrl))
+                                                    {
+                                                        var imgWidth = item.ImageWidth > 0 ? $"width=\"{item.ImageWidth}\"" : "";
+                                                        var imgHeight = item.ImageHeight > 0 ? $"height=\"{item.ImageHeight}\"" : "";
+                                                        <img src="@item.ImageUrl"
+                                                             alt="@item.ImageAlt"
+                                                             @Html.Raw(imgWidth)
+                                                             @Html.Raw(imgHeight)
+                                                             class="footer-image"
+                                                             loading="lazy" />
+                                                    }
+                                                    break;
+
+                                                default:
+                                                    if (!string.IsNullOrEmpty(item.Text))
+                                                    {
+                                                        <p class="footer-text">@item.Text</p>
+                                                    }
+                                                    break;
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (Model.ShowCompanyDescription && !string.IsNullOrEmpty(Model.CompanyDescription))
+    {
+        <div class="footer-company-info">
+            <div class="container">
+                <p class="company-description">@Model.CompanyDescription</p>
+            </div>
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.CopyrightText) || !string.IsNullOrEmpty(Model.CompanyName))
+    {
+        <div class="footer-bottom">
+            <div class="container">
+                <p class="copyright-text">
+                    @if (!string.IsNullOrEmpty(Model.CopyrightText))
+                    {
+                        @Model.CopyrightText
+                    }
+                    @if (Model.CopyrightYear > 0)
+                    {
+                        <text> @Model.CopyrightYear</text>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.CompanyName))
+                    {
+                        <text> @Model.CompanyName</text>
+                    }
+                </p>
+            </div>
+        </div>
+    }
+</footer>

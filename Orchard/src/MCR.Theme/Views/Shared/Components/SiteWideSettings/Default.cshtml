@@ -1,0 +1,129 @@
+@model MCR.Theme.ViewComponents.SiteWideSettingsViewModel
+
+@* Meta Tags *@
+@if (!string.IsNullOrEmpty(Model.MetaDescription))
+{
+    <meta name="description" content="@Model.MetaDescription" />
+}
+@if (!string.IsNullOrEmpty(Model.MetaKeywords))
+{
+    <meta name="keywords" content="@Model.MetaKeywords" />
+}
+
+@* Open Graph Tags *@
+@if (!string.IsNullOrEmpty(Model.OgSiteName))
+{
+    <meta property="og:site_name" content="@Model.OgSiteName" />
+}
+@if (!string.IsNullOrEmpty(Model.MetaTitle))
+{
+    <meta property="og:title" content="@Model.MetaTitle" />
+}
+@if (!string.IsNullOrEmpty(Model.MetaDescription))
+{
+    <meta property="og:description" content="@Model.MetaDescription" />
+}
+@if (!string.IsNullOrEmpty(Model.OgImage))
+{
+    <meta property="og:image" content="@Model.OgImage" />
+    @if (!string.IsNullOrEmpty(Model.OgImageAlt))
+    {
+        <meta property="og:image:alt" content="@Model.OgImageAlt" />
+    }
+}
+<meta property="og:type" content="website" />
+
+@* Twitter Card Tags *@
+<meta name="twitter:card" content="summary_large_image" />
+@if (!string.IsNullOrEmpty(Model.TwitterHandle))
+{
+    <meta name="twitter:site" content="@Model.TwitterHandle" />
+}
+@if (!string.IsNullOrEmpty(Model.MetaTitle))
+{
+    <meta name="twitter:title" content="@Model.MetaTitle" />
+}
+@if (!string.IsNullOrEmpty(Model.MetaDescription))
+{
+    <meta name="twitter:description" content="@Model.MetaDescription" />
+}
+@if (!string.IsNullOrEmpty(Model.OgImage))
+{
+    <meta name="twitter:image" content="@Model.OgImage" />
+}
+
+@* Theme Color *@
+@if (!string.IsNullOrEmpty(Model.ThemeColor))
+{
+    <meta name="theme-color" content="@Model.ThemeColor" />
+}
+
+@* Favicon and Icons *@
+@if (!string.IsNullOrEmpty(Model.FaviconUrl))
+{
+    <link rel="icon" type="image/x-icon" href="@Model.FaviconUrl" />
+    <link rel="shortcut icon" href="@Model.FaviconUrl" />
+}
+@if (!string.IsNullOrEmpty(Model.AppleTouchIconUrl))
+{
+    <link rel="apple-touch-icon" href="@Model.AppleTouchIconUrl" />
+}
+
+@* JSON-LD Structured Data *@
+@if (Model.HasOrganizationData)
+{
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "Organization",
+        @if (!string.IsNullOrEmpty(Model.OrganizationName))
+        {
+            <text>"name": "@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(Model.OrganizationName))",</text>
+        }
+        @if (!string.IsNullOrEmpty(Model.OrganizationLogo))
+        {
+            <text>"logo": "@Model.OrganizationLogo",</text>
+        }
+        @if (!string.IsNullOrEmpty(Model.OrganizationPhone))
+        {
+            <text>"telephone": "@Model.OrganizationPhone",</text>
+        }
+        @if (!string.IsNullOrEmpty(Model.OrganizationEmail))
+        {
+            <text>"email": "@Model.OrganizationEmail",</text>
+        }
+        @if (!string.IsNullOrEmpty(Model.OrganizationAddress))
+        {
+            <text>"address": {
+            "@@type": "PostalAddress",
+            "streetAddress": "@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(Model.OrganizationAddress))"
+        },</text>
+        }
+        "@@type": "LegalService"
+    }
+    </script>
+}
+
+@* Google Analytics *@
+@if (!string.IsNullOrEmpty(Model.GoogleAnalyticsId))
+{
+    <script async src="https://www.googletagmanager.com/gtag/js?id=@Model.GoogleAnalyticsId"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '@Model.GoogleAnalyticsId');
+    </script>
+}
+
+@* Google Tag Manager *@
+@if (!string.IsNullOrEmpty(Model.GoogleTagManagerId))
+{
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','@Model.GoogleTagManagerId');
+    </script>
+}

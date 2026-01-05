@@ -62,14 +62,57 @@
 
             @if (!string.IsNullOrEmpty(Model.PhoneNumber))
             {
+                var phoneLink = Model.PhoneNumber.Replace(" ", "").Replace("-", "");
                 <div class="navbar-contact d-none d-lg-flex">
-                    <a href="tel:@Model.PhoneNumber.Replace(" ", "").Replace("-", "")" class="nav-phone">
+                    <a href="tel:@phoneLink" class="nav-phone">
                         <i class="fas fa-phone"></i> @Model.PhoneNumber
                     </a>
                 </div>
             }
 
-            @if (!string.IsNullOrEmpty(Model.CtaButtonText))
+            @if (Model.ShowSocialIcons)
+            {
+                <div class="navbar-social d-none d-lg-flex">
+                    @if (!string.IsNullOrEmpty(Model.FacebookUrl))
+                    {
+                        <a href="@Model.FacebookUrl" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.TwitterUrl))
+                    {
+                        <a href="@Model.TwitterUrl" target="_blank" rel="noopener" aria-label="Twitter" class="social-icon">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.LinkedInUrl))
+                    {
+                        <a href="@Model.LinkedInUrl" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.InstagramUrl))
+                    {
+                        <a href="@Model.InstagramUrl" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.TikTokUrl))
+                    {
+                        <a href="@Model.TikTokUrl" target="_blank" rel="noopener" aria-label="TikTok" class="social-icon">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.YouTubeUrl))
+                    {
+                        <a href="@Model.YouTubeUrl" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    }
+                </div>
+            }
+
+            @if (Model.ShowCtaButton && !string.IsNullOrEmpty(Model.CtaButtonText))
             {
                 <a href="@Model.CtaButtonUrl" class="btn btn-primary nav-cta ms-3">@Model.CtaButtonText</a>
             }

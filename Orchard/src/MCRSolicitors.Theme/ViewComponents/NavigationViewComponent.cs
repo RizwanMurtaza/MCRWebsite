@@ -66,6 +66,14 @@ public class NavigationViewComponent : ViewComponent
             PhoneNumber = GetFieldValue(navSettings, "NavigationSettings", "PhoneNumber") ?? "0161 552 2617",
             CtaButtonText = GetFieldValue(navSettings, "NavigationSettings", "CtaButtonText") ?? "Free Consultation",
             CtaButtonUrl = GetFieldValue(navSettings, "NavigationSettings", "CtaButtonUrl") ?? "/contact-us",
+            ShowCtaButton = GetBoolFieldValue(navSettings, "NavigationSettings", "ShowCtaButton"),
+            FacebookUrl = GetFieldValue(navSettings, "NavigationSettings", "FacebookUrl"),
+            TwitterUrl = GetFieldValue(navSettings, "NavigationSettings", "TwitterUrl"),
+            LinkedInUrl = GetFieldValue(navSettings, "NavigationSettings", "LinkedInUrl"),
+            InstagramUrl = GetFieldValue(navSettings, "NavigationSettings", "InstagramUrl"),
+            TikTokUrl = GetFieldValue(navSettings, "NavigationSettings", "TikTokUrl"),
+            YouTubeUrl = GetFieldValue(navSettings, "NavigationSettings", "YouTubeUrl"),
+            ShowSocialIcons = GetBoolFieldValue(navSettings, "NavigationSettings", "ShowSocialIcons"),
             MenuItems = topLevelItems
         };
 
@@ -83,9 +91,27 @@ public class NavigationViewComponent : ViewComponent
         if (field == null) return null;
 
         // Handle MediaField (has Paths array)
-        if (field["Paths"] != null && field["Paths"].HasValues)
+        var paths = field["Paths"];
+        if (paths != null)
         {
-            return "/media/" + field["Paths"][0]?.ToString();
+            try
+            {
+                var pathsArray = paths as System.Collections.IEnumerable;
+                if (pathsArray != null)
+                {
+                    foreach (var path in pathsArray)
+                    {
+                        if (path != null)
+                        {
+                            return "/media/" + path.ToString();
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // Not an array, continue to text handling
+            }
         }
 
         // Handle TextField
@@ -120,6 +146,14 @@ public class NavigationViewModel
     public string? PhoneNumber { get; set; }
     public string? CtaButtonText { get; set; }
     public string? CtaButtonUrl { get; set; }
+    public bool ShowCtaButton { get; set; } = true;
+    public string? FacebookUrl { get; set; }
+    public string? TwitterUrl { get; set; }
+    public string? LinkedInUrl { get; set; }
+    public string? InstagramUrl { get; set; }
+    public string? TikTokUrl { get; set; }
+    public string? YouTubeUrl { get; set; }
+    public bool ShowSocialIcons { get; set; } = false;
     public List<MenuItemViewModel> MenuItems { get; set; } = new();
 }
 

@@ -1,0 +1,84 @@
+@model MCR.Theme.ViewComponents.TopBarViewModel
+
+@if (Model.ShowTopBar)
+{
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-left">
+                    @if (Model.ShowHours && !string.IsNullOrEmpty(Model.BusinessHours))
+                    {
+                        <span class="top-bar-item top-bar-hours">
+                            <i class="fas fa-clock" aria-hidden="true"></i>
+                            <span>@Model.BusinessHours</span>
+                        </span>
+                    }
+                    @if (Model.ShowAddress && !string.IsNullOrEmpty(Model.Address))
+                    {
+                        <span class="top-bar-item top-bar-address">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            <span>@Model.Address</span>
+                        </span>
+                    }
+                </div>
+                <div class="top-bar-right">
+                    @if (Model.ShowPhone && !string.IsNullOrEmpty(Model.PhoneNumber))
+                    {
+                        <a href="tel:@Model.PhoneNumber" class="top-bar-item top-bar-phone">
+                            <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                            <span>@(Model.PhoneNumberDisplay ?? Model.PhoneNumber)</span>
+                        </a>
+                    }
+                    @if (Model.ShowEmail && !string.IsNullOrEmpty(Model.Email))
+                    {
+                        <a href="mailto:@Model.Email" class="top-bar-item top-bar-email">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <span>@Model.Email</span>
+                        </a>
+                    }
+                    @if (Model.ShowSocialIcons && Model.HasAnySocialUrl)
+                    {
+                        <div class="top-bar-social">
+                            @if (!string.IsNullOrEmpty(Model.FacebookUrl))
+                            {
+                                <a href="@Model.FacebookUrl" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.TwitterUrl))
+                            {
+                                <a href="@Model.TwitterUrl" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
+                                    <i class="fab fa-x-twitter"></i>
+                                </a>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.LinkedInUrl))
+                            {
+                                <a href="@Model.LinkedInUrl" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.InstagramUrl))
+                            {
+                                <a href="@Model.InstagramUrl" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.TikTokUrl))
+                            {
+                                <a href="@Model.TikTokUrl" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok">
+                                    <i class="fab fa-tiktok"></i>
+                                </a>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.YouTubeUrl))
+                            {
+                                <a href="@Model.YouTubeUrl" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}

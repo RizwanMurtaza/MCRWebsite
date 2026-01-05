@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MCR.Theme\MCR.Theme.csproj" />
     <ProjectReference Include="..\MCRSolicitors.Theme\MCRSolicitors.Theme.csproj" />
     <ProjectReference Include="..\Starter.Theme\Starter.Theme.csproj" />
   </ItemGroup>
