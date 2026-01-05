@@ -138,7 +138,9 @@
                 "Content": {
                   "Expression": "{\"success\": true, \"message\": \"Thank you! Your message has been sent successfully.\"}"
                 },
-                "ContentType": "application/json"
+                "ContentType": {
+                  "Expression": "application/json"
+                }
               }
             },
             {
@@ -155,7 +157,9 @@
                 "Content": {
                   "Expression": "{\"success\": false, \"message\": \"Please complete the captcha verification.\"}"
                 },
-                "ContentType": "application/json"
+                "ContentType": {
+                  "Expression": "application/json"
+                }
               }
             }
           ],

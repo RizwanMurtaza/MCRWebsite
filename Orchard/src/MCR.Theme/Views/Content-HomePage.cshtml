@@ -188,7 +188,7 @@
 
                             <form id="hero-contact-form-@heroId"
                                   method="post"
-                                  action="/workflows/Invoke?token=CfDJ8LOemXJtfbxMhgsh7X12NS7s7KqS5-1_LjnSBh1xuERMhDjv4fCv1hHfSPNto_muh1mco1pLqRfo-0gfZcVVKOKBFh0y-O2E6kBBwGZcBAHNTmRCrv08PREVrLk5vedIODMnhRB5DANDzlcHYt9PmwV7dHi2WaU1lALWNlPybVaL1vN8puGwxq0QShAlhkQx2Dl7jVO6g0q_vPSUFOjaK502oT4WvXlDQPpzlO7SqPl4"
+                                  action="/workflows/Invoke?token=CfDJ8LOemXJtfbxMhgsh7X12NS5MGQP3wAsOQMr6Mri1wko10jviWgvSPFFmxI0M0yNAdbaxr2XNQOSrfXlnIONspURuizNQxGXItYq9xFjxjKDVsApQJKg8VZ57qV0KxxyR9NEgpS5Cy7h4L0qQBLrgKjkyFV7weearM7Sc5a3gdgV45L5VPgMI9OdED4H9SmEn3o_MA1Of0T_hyhAf1FFOM9fO9NHtMZZX4aKRF1iI7JOP"
                                   class="mcr-hero-form">
                                 @Html.AntiForgeryToken()
 
@@ -356,14 +356,23 @@
                         body: formData
                     });
 
-                    if (response.ok) {
+                    // Try to parse JSON response from workflow
+                    let result = null;
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        result = await response.json();
+                    }
+
+                    if (response.ok && (!result || result.success !== false)) {
                         successAlert.style.display = 'flex';
                         heroForm.reset();
                     } else {
-                        throw new Error('Form submission failed');
+                        // Show error message from workflow if available
+                        const message = result?.message || 'Form submission failed. Please try again.';
+                        throw new Error(message);
                     }
                 } catch (error) {
-                    errorMsg.textContent = 'Sorry, there was an error. Please try again.';
+                    errorMsg.textContent = error.message || 'Sorry, there was an error. Please try again.';
                     errorAlert.style.display = 'flex';
                 } finally {
                     btnText.style.display = 'inline';
