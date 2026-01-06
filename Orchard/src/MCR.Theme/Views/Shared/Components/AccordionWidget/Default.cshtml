@@ -1,0 +1,130 @@
+@model MCR.Theme.ViewComponents.AccordionWidgetViewModel
+
+@{
+    var accordionId = "accordion-" + Guid.NewGuid().ToString("N").Substring(0, 8);
+    var dataParent = Model.AllowMultipleOpen ? "" : $"#{accordionId}";
+}
+
+<section class="mcr-accordion-section py-5 @Model.CssClass">
+    <div class="container">
+        @if (!string.IsNullOrEmpty(Model.SectionTitle))
+        {
+            <div class="text-center mb-5">
+                <h2 class="section-title">@Model.SectionTitle</h2>
+                @if (!string.IsNullOrEmpty(Model.SectionSubtitle))
+                {
+                    <p class="section-subtitle text-muted">@Model.SectionSubtitle</p>
+                }
+            </div>
+        }
+
+        <div class="accordion mcr-accordion" id="@accordionId">
+            @foreach (var item in Model.Items)
+            {
+                var itemId = $"item-{Guid.NewGuid().ToString("N").Substring(0, 8)}";
+                var isOpen = item.IsOpenByDefault;
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button @(isOpen ? "" : "collapsed")" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#@itemId"
+                                aria-expanded="@(isOpen ? "true" : "false")" aria-controls="@itemId">
+                            @item.Title
+                        </button>
+                    </h3>
+                    <div id="@itemId" class="accordion-collapse collapse @(isOpen ? "show" : "")"
+                         @(string.IsNullOrEmpty(dataParent) ? "" : $"data-bs-parent=\"{dataParent}\"")>
+                        <div class="accordion-body">
+                            @Html.Raw(item.Content)
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .mcr-accordion-section {
+        background-color: #f8f9fa;
+    }
+
+    .mcr-accordion-section .section-title {
+        color: #0d2137;
+        font-weight: 600;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 15px;
+    }
+
+    .mcr-accordion-section .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #b8860b, #d4a84b);
+    }
+
+    .mcr-accordion .accordion-item {
+        border: none;
+        margin-bottom: 1rem;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .mcr-accordion .accordion-button {
+        background-color: #ffffff;
+        color: #0d2137;
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 1.25rem 1.5rem;
+        border: none;
+    }
+
+    .mcr-accordion .accordion-button:not(.collapsed) {
+        background-color: #0d2137;
+        color: #ffffff;
+        box-shadow: none;
+    }
+
+    .mcr-accordion .accordion-button:not(.collapsed)::after {
+        filter: brightness(0) invert(1);
+    }
+
+    .mcr-accordion .accordion-button:focus {
+        box-shadow: none;
+        border-color: transparent;
+    }
+
+    .mcr-accordion .accordion-button::after {
+        background-size: 1rem;
+    }
+
+    .mcr-accordion .accordion-body {
+        padding: 1.5rem;
+        background-color: #ffffff;
+        color: #4a5568;
+        line-height: 1.8;
+    }
+
+    .mcr-accordion .accordion-body a {
+        color: #b8860b;
+        text-decoration: none;
+    }
+
+    .mcr-accordion .accordion-body a:hover {
+        color: #0d2137;
+        text-decoration: underline;
+    }
+
+    .mcr-accordion-section.bg-white {
+        background-color: #ffffff;
+    }
+
+    .mcr-accordion-section.bg-white .mcr-accordion .accordion-item {
+        border: 1px solid #e2e8f0;
+    }
+</style>

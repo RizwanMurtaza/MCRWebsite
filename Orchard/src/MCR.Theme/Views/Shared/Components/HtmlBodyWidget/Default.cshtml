@@ -1,0 +1,93 @@
+@model MCR.Theme.ViewComponents.HtmlBodyWidgetViewModel
+
+<section class="mcr-content-section py-5 @Model.CssClass">
+    <div class="container">
+        @if (!string.IsNullOrEmpty(Model.SectionTitle))
+        {
+            <h2 class="section-title mb-4">@Model.SectionTitle</h2>
+        }
+        @if (!string.IsNullOrEmpty(Model.Content))
+        {
+            <div class="content-body">
+                @Html.Raw(Model.Content)
+            </div>
+        }
+    </div>
+</section>
+
+<style>
+    .mcr-content-section {
+        background-color: #ffffff;
+    }
+
+    .mcr-content-section .section-title {
+        color: #0d2137;
+        font-weight: 600;
+        position: relative;
+        padding-bottom: 15px;
+    }
+
+    .mcr-content-section .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #b8860b, #d4a84b);
+    }
+
+    .mcr-content-section .content-body {
+        color: #4a5568;
+        line-height: 1.8;
+    }
+
+    .mcr-content-section .content-body h3,
+    .mcr-content-section .content-body h4 {
+        color: #0d2137;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .mcr-content-section .content-body p {
+        margin-bottom: 1rem;
+    }
+
+    .mcr-content-section .content-body ul,
+    .mcr-content-section .content-body ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .mcr-content-section .content-body li {
+        margin-bottom: 0.5rem;
+    }
+
+    .mcr-content-section .content-body a {
+        color: #b8860b;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .mcr-content-section .content-body a:hover {
+        color: #0d2137;
+        text-decoration: underline;
+    }
+
+    .mcr-content-section.bg-light {
+        background-color: #f8f9fa;
+    }
+
+    .mcr-content-section.bg-dark {
+        background-color: #0d2137;
+    }
+
+    .mcr-content-section.bg-dark .section-title,
+    .mcr-content-section.bg-dark .content-body {
+        color: #ffffff;
+    }
+
+    .mcr-content-section.bg-dark .content-body a {
+        color: #d4a84b;
+    }
+</style>

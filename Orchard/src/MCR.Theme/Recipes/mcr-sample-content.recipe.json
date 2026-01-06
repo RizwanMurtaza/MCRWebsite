@@ -1,13 +1,13 @@
 {
   "name": "MCR Sample Content",
-  "displayName": "MCR Theme - Sample Home Page Content",
-  "description": "Creates a sample Home Page with Hero, Services, Features, Team, Testimonials, and CTA sections",
+  "displayName": "MCR Theme - Sample Content & Pages",
+  "description": "Creates the Home Page with sample content plus all website pages based on the menu structure",
   "author": "MCR Solicitors",
   "website": "https://mcrsolicitors.co.uk",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "issetuprecipe": false,
   "categories": ["Content"],
-  "tags": ["mcr", "solicitors", "sample", "content"],
+  "tags": ["mcr", "solicitors", "sample", "content", "pages"],
   "steps": [
     {
       "name": "Content",
@@ -364,6 +364,1696 @@
                   "Alignment": "Justify",
                   "Size": 100
                 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-about-us-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "About Us",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "About Us" },
+          "AutoroutePart": { "Path": "about-us", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "About MCR Solicitors | Expert Legal Services in Manchester",
+            "MetaDescription": "Learn about MCR Solicitors, a LEXCEL accredited law firm providing expert immigration, family law, and personal injury services in Manchester since 2010.",
+            "MetaKeywords": "about MCR Solicitors, Manchester solicitors, legal services Manchester, immigration lawyers, family law solicitors"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-about-hero-001",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": {
+                  "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" }
+                },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-about-001",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "About MCR Solicitors" },
+                        "Subheadline": { "Text": "Trusted legal expertise in Manchester since 2010. LEXCEL accredited and committed to achieving the best outcomes for our clients." },
+                        "PrimaryButtonText": { "Text": "Contact Us" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-about-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Who We Are" },
+                  "Content": { "Html": "<p>MCR Solicitors is a LEXCEL accredited law firm based in Manchester, providing expert legal services since 2010. We specialise in Immigration Law, Family Law, and Personal Injury claims.</p><h3>Our Mission</h3><p>To provide accessible, professional legal services that put our clients first. We believe everyone deserves quality legal representation, regardless of their background or circumstances.</p><h3>Why Choose MCR Solicitors?</h3><ul><li><strong>LEXCEL Accredited</strong> - The Law Society's quality mark for legal practice management and client care</li><li><strong>SRA Regulated</strong> - Fully regulated by the Solicitors Regulation Authority</li><li><strong>Expert Team</strong> - Solicitors with years of experience in their specialist areas</li><li><strong>Client Focused</strong> - We take time to understand your needs and keep you informed</li><li><strong>Transparent Pricing</strong> - Clear fee structures with no hidden costs</li></ul><h3>Our Values</h3><p><strong>Integrity</strong> - We act honestly and ethically in all our dealings.</p><p><strong>Excellence</strong> - We strive for the highest standards in everything we do.</p><p><strong>Compassion</strong> - We understand our clients are often going through difficult times.</p><p><strong>Accessibility</strong> - We make legal services approachable and understandable.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-about-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Get in Touch" },
+                  "SectionText": { "Text": "We'd love to hear from you. Contact us today to discuss how we can help with your legal needs." },
+                  "ButtonText": { "Text": "Contact Us" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-contact-us-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Contact Us",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Contact Us" },
+          "AutoroutePart": { "Path": "contact-us", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Contact MCR Solicitors | Get Legal Help Today",
+            "MetaDescription": "Contact MCR Solicitors in Manchester for expert legal advice. Call 0161 466 1280 or visit us at 1024 Stockport Road, Manchester M19 3WX.",
+            "MetaKeywords": "contact MCR Solicitors, Manchester solicitors contact, legal advice Manchester, free consultation"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-contact-hero-001",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": {
+                  "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" }
+                },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-contact-001",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Contact Us" },
+                        "Subheadline": { "Text": "Get in touch with our expert legal team. We're here to help with all your legal needs." },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-contact-form-001",
+                "ContentType": "ContactFormWidget",
+                "ContactFormWidget": {
+                  "FormTitle": { "Text": "Send Us a Message" },
+                  "FormSubtitle": { "Text": "Fill out the form below and we'll get back to you within 24 hours." },
+                  "ShowDepartment": { "Value": true },
+                  "DepartmentRequired": { "Value": false },
+                  "SubmitButtonText": { "Text": "Send Message" },
+                  "SuccessMessage": { "Text": "Thank you for your message. We will contact you shortly." },
+                  "RecipientEmail": { "Text": "info@mcrsolicitors.co.uk" },
+                  "WorkflowUrl": { "Text": "/workflows/invoke/contactformworkflow001" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-immigration-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Immigration",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Immigration" },
+          "AutoroutePart": { "Path": "immigration", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Immigration Solicitors Manchester | UK Visa & Immigration Services",
+            "MetaDescription": "Expert immigration solicitors in Manchester. We handle UK family visas, work visas, business visas, asylum claims, and appeals. Contact us for professional immigration advice.",
+            "MetaKeywords": "immigration solicitors Manchester, UK visa lawyers, immigration advice, visa applications, work permits UK"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-immigration-hero-001",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": {
+                  "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" }
+                },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-immigration-001",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Immigration Services" },
+                        "Subheadline": { "Text": "Expert immigration advice and representation. From visa applications to asylum claims, we guide you through every step of your immigration journey." },
+                        "PrimaryButtonText": { "Text": "Get Advice" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "SecondaryButtonText": { "Text": "Our Services" },
+                        "SecondaryButtonUrl": { "Text": "#services" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-immigration-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Comprehensive Immigration Services" },
+                  "Content": { "Html": "<p>MCR Solicitors provides expert immigration advice and representation for individuals, families, and businesses. Our experienced immigration team handles all types of UK visa and immigration matters.</p><h3>Our Immigration Services</h3><ul><li><a href='/uk-family-visas'><strong>UK Family Visas</strong></a> - Spouse, partner, parent, and child visas</li><li><a href='/uk-work-visas'><strong>UK Work Visas</strong></a> - Skilled Worker, sponsor licences, and work permits</li><li><a href='/business-investment-visas'><strong>Business & Investment Visas</strong></a> - Innovator, Start-up, and investor routes</li><li><a href='/british-citizenship'><strong>British Citizenship</strong></a> - Naturalisation and registration applications</li><li><a href='/asylum-human-rights'><strong>Asylum & Human Rights</strong></a> - Protection claims and refugee status</li><li><a href='/visa-extensions-variations'><strong>Visa Extensions</strong></a> - Extending or switching your visa</li><li><a href='/indefinite-leave-to-remain'><strong>Indefinite Leave to Remain</strong></a> - Settlement applications</li><li><a href='/appeals-administrative-review'><strong>Appeals</strong></a> - Challenging Home Office decisions</li></ul><h3>Why Choose Our Immigration Team?</h3><p>Our immigration solicitors have a deep understanding of UK immigration law and Home Office procedures. We provide clear, practical advice and work tirelessly to achieve the best possible outcome for your case.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-immigration-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Expert Immigration Advice" },
+                  "SectionText": { "Text": "Whatever your immigration needs, our specialist team is here to help. Contact us for a consultation." },
+                  "ButtonText": { "Text": "Book Consultation" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-family-law-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Family Law",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Family Law" },
+          "AutoroutePart": { "Path": "family-law", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Family Law Solicitors Manchester | Divorce & Child Custody Lawyers",
+            "MetaDescription": "Compassionate family law solicitors in Manchester. We handle divorce, child custody, financial settlements, and domestic abuse cases with sensitivity and expertise.",
+            "MetaKeywords": "family law solicitors Manchester, divorce lawyers, child custody solicitors, family solicitors, matrimonial law"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-family-hero-001",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": {
+                  "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" }
+                },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-family-001",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Family Law Services" },
+                        "Subheadline": { "Text": "Sensitive and professional family law advice. We understand the emotional challenges you face and provide compassionate legal support." },
+                        "PrimaryButtonText": { "Text": "Speak to Us" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-family-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Compassionate Family Law Support" },
+                  "Content": { "Html": "<p>Family matters require sensitivity, understanding, and expert legal knowledge. Our family law team provides compassionate, professional support during what can be the most challenging times of your life.</p><h3>Our Family Law Services</h3><ul><li><a href='/getting-a-divorce'><strong>Divorce</strong></a> - No-fault divorce proceedings handled with care</li><li><a href='/judicial-separation'><strong>Judicial Separation</strong></a> - An alternative when divorce isn't suitable</li><li><a href='/financial-settlements'><strong>Financial Settlements</strong></a> - Fair division of assets and property</li><li><a href='/child-custody-access'><strong>Child Arrangements</strong></a> - Custody, access, and parenting plans</li><li><a href='/domestic-abuse'><strong>Domestic Abuse</strong></a> - Emergency protection and injunctions</li><li><a href='/prenuptial-postnuptial-agreements'><strong>Pre/Post-Nuptial Agreements</strong></a> - Protecting your assets</li></ul><h3>Our Approach</h3><p>We understand that every family situation is unique. We take time to listen and understand your circumstances, then work with you to find the best way forward. Where possible, we encourage mediation and negotiation, but we're fully prepared to represent you in court when necessary.</p><h3>Children Come First</h3><p>In all matters involving children, we prioritise their welfare and wellbeing above all else, working to achieve outcomes that protect and nurture family relationships.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-family-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Sensitive, Expert Support" },
+                  "SectionText": { "Text": "Our family law team is here to help you through difficult times. Contact us for a confidential consultation." },
+                  "ButtonText": { "Text": "Get Support" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-personal-injury-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Personal Injury",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Personal Injury" },
+          "AutoroutePart": { "Path": "personal-injury", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Personal Injury Solicitors Manchester | No Win No Fee Claims",
+            "MetaDescription": "Expert personal injury solicitors in Manchester. No win, no fee representation for road traffic accidents, workplace injuries, and medical negligence claims.",
+            "MetaKeywords": "personal injury solicitors Manchester, no win no fee, accident claims, compensation lawyers, injury claims"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-injury-hero-001",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": {
+                  "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" }
+                },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-injury-001",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Personal Injury Claims" },
+                        "Subheadline": { "Text": "Injured through no fault of your own? We fight for the compensation you deserve. No win, no fee representation available." },
+                        "PrimaryButtonText": { "Text": "Free Assessment" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-injury-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Fighting for Fair Compensation" },
+                  "Content": { "Html": "<p>If you've been injured through no fault of your own, you deserve compensation. MCR Solicitors' personal injury team works on a No Win, No Fee basis, meaning there's no financial risk to you.</p><h3>Our Personal Injury Services</h3><ul><li><a href='/road-traffic-accident-claims'><strong>Road Traffic Accidents</strong></a> - Car, motorcycle, cyclist, and pedestrian injuries</li><li><a href='/workplace-injury-claims'><strong>Workplace Injuries</strong></a> - Accidents at work and industrial diseases</li><li><a href='/medical-negligence'><strong>Medical Negligence</strong></a> - Clinical negligence and hospital errors</li></ul><h3>What We Can Claim For</h3><ul><li>Pain, suffering, and loss of amenity</li><li>Loss of earnings (past and future)</li><li>Medical expenses and treatment costs</li><li>Care and assistance</li><li>Travel expenses</li><li>Property damage</li></ul><h3>No Win, No Fee</h3><p>We understand that when you're injured, the last thing you need is financial stress. That's why we offer No Win, No Fee agreements (Conditional Fee Agreements). If your claim isn't successful, you won't pay a penny in legal fees.</p><h3>Time Limits</h3><p>Personal injury claims must generally be made within 3 years of the accident. Don't delay - contact us today to protect your right to compensation.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-injury-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "No Win, No Fee" },
+                  "SectionText": { "Text": "Get the compensation you deserve with no financial risk. Call us for a free case assessment." },
+                  "ButtonText": { "Text": "Free Assessment" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-uk-family-visas-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "UK Family Visas",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "UK Family Visas" },
+          "AutoroutePart": { "Path": "uk-family-visas", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "UK Family Visa Applications | Spouse & Partner Visas Manchester",
+            "MetaDescription": "Expert help with UK family visa applications. We assist with spouse visas, partner visas, parent visas, and child visas. High success rates and professional guidance.",
+            "MetaKeywords": "UK family visa, spouse visa UK, partner visa, family reunion visa, immigration solicitors"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-familyvisa-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-familyvisa-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "UK Family Visas" },
+                        "Subheadline": { "Text": "Reunite with your loved ones in the UK. Our experienced immigration solicitors help families navigate the visa process with high success rates." },
+                        "PrimaryButtonText": { "Text": "Start Your Application" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "SecondaryButtonText": { "Text": "Call Us Now" },
+                        "SecondaryButtonUrl": { "Text": "tel:+441615522617" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-familyvisa-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Family Visa Services" },
+                  "Content": { "Html": "<p>At MCR Solicitors, we understand that being separated from family members is one of the most difficult experiences you can face. Our dedicated immigration team has helped hundreds of families reunite in the UK through successful visa applications.</p><h3>Types of Family Visas We Handle</h3><ul><li><strong>Spouse/Partner Visas</strong> - For married partners or those in civil partnerships</li><li><strong>Fiancé(e) Visas</strong> - For couples planning to marry in the UK</li><li><strong>Unmarried Partner Visas</strong> - For couples who have lived together for 2+ years</li><li><strong>Parent Visas</strong> - For parents of children settled in the UK</li><li><strong>Child Visas</strong> - For children joining parents in the UK</li><li><strong>Adult Dependent Relative Visas</strong> - For elderly relatives requiring care</li></ul><h3>Why Choose MCR Solicitors?</h3><p>Our immigration specialists have an exceptional track record with family visa applications. We understand the stringent requirements and work meticulously to ensure your application meets all Home Office criteria.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-familyvisa-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Ready to Reunite Your Family?" },
+                  "SectionText": { "Text": "Book a consultation with our immigration experts today. We'll assess your eligibility and guide you through the entire application process." },
+                  "ButtonText": { "Text": "Book Free Consultation" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-uk-work-visas-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "UK Work Visas",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "UK Work Visas" },
+          "AutoroutePart": { "Path": "uk-work-visas", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "UK Work Visa Applications | Skilled Worker Visas Manchester",
+            "MetaDescription": "Professional assistance with UK work visa applications. Skilled Worker visas, sponsor licences, and employment-based immigration. Expert guidance from experienced solicitors.",
+            "MetaKeywords": "UK work visa, Skilled Worker visa, work permit UK, sponsor licence, employment visa"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-workvisa-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-workvisa-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "UK Work Visas" },
+                        "Subheadline": { "Text": "Build your career in the UK. Our immigration experts help professionals and businesses navigate the Skilled Worker visa system successfully." },
+                        "PrimaryButtonText": { "Text": "Check Eligibility" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-workvisa-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Work Visa Services" },
+                  "Content": { "Html": "<p>MCR Solicitors provides expert guidance for individuals seeking to work in the UK and businesses looking to sponsor overseas workers. We handle all types of work-related immigration matters.</p><h3>Our Work Visa Services Include</h3><ul><li><strong>Skilled Worker Visas</strong> - The main route for skilled professionals</li><li><strong>Sponsor Licence Applications</strong> - Help businesses become approved sponsors</li><li><strong>Global Talent Visas</strong> - For leaders and potential leaders in their fields</li><li><strong>Intra-Company Transfer Visas</strong> - For multinational company transfers</li><li><strong>Health and Care Worker Visas</strong> - Fast-track route for healthcare professionals</li><li><strong>Senior or Specialist Worker Visas</strong> - For high-level business transfers</li></ul><h3>For Employers</h3><p>We assist businesses of all sizes with sponsor licence applications and compliance. Our team ensures your organisation meets all Home Office requirements to sponsor overseas workers.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-workvisa-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Start Your UK Career" },
+                  "SectionText": { "Text": "Whether you're a professional seeking employment or a business needing to sponsor staff, we're here to help." },
+                  "ButtonText": { "Text": "Get Expert Advice" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-business-visas-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Business & Investment Visas",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Business & Investment Visas" },
+          "AutoroutePart": { "Path": "business-investment-visas", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "UK Business & Investment Visas | Innovator & Start-up Visas",
+            "MetaDescription": "Expert guidance on UK business and investment visas. Innovator Founder visas, Start-up visas, and investor routes. Build your business future in the UK.",
+            "MetaKeywords": "UK business visa, Innovator visa, investment visa UK, entrepreneur visa, Start-up visa"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-bizvisa-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-bizvisa-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Business & Investment Visas" },
+                        "Subheadline": { "Text": "Establish and grow your business in the UK. Expert guidance on Innovator Founder visas, investor routes, and business immigration." },
+                        "PrimaryButtonText": { "Text": "Explore Options" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-bizvisa-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Business Immigration Services" },
+                  "Content": { "Html": "<p>MCR Solicitors helps entrepreneurs, investors, and business professionals establish themselves in the UK. We provide comprehensive guidance on all business immigration routes.</p><h3>Business Visa Categories</h3><ul><li><strong>Innovator Founder Visa</strong> - For experienced entrepreneurs with innovative business ideas</li><li><strong>Start-up Visa</strong> - For those starting a business in the UK for the first time</li><li><strong>Expansion Worker Visa</strong> - For overseas businesses establishing a UK presence</li><li><strong>UK Ancestry Visa</strong> - For Commonwealth citizens with UK-born grandparents</li><li><strong>Global Business Mobility Visas</strong> - Various routes for international business activities</li></ul><h3>Endorsement Body Introductions</h3><p>We work with approved endorsement bodies to help you secure the endorsement required for Innovator Founder and Start-up visas.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-bizvisa-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Ready to Start Your UK Business?" },
+                  "SectionText": { "Text": "Let our business immigration specialists assess your options and create a tailored strategy for your UK business venture." },
+                  "ButtonText": { "Text": "Schedule Consultation" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-citizenship-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "British Citizenship & Naturalisation",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "British Citizenship & Naturalisation" },
+          "AutoroutePart": { "Path": "british-citizenship", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "British Citizenship Applications | Naturalisation Solicitors Manchester",
+            "MetaDescription": "Expert assistance with British citizenship and naturalisation applications. Registration, naturalisation, and citizenship by descent. Achieve your goal of becoming British.",
+            "MetaKeywords": "British citizenship, naturalisation UK, citizenship application, become British citizen, UK passport"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-citizenship-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-citizenship-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "British Citizenship & Naturalisation" },
+                        "Subheadline": { "Text": "Make the UK your permanent home. Our expert solicitors guide you through the citizenship application process with care and precision." },
+                        "PrimaryButtonText": { "Text": "Start Your Journey" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-citizenship-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Paths to British Citizenship" },
+                  "Content": { "Html": "<p>Becoming a British citizen is a significant milestone that opens doors to permanent residency, voting rights, and the ability to hold a British passport. MCR Solicitors has helped hundreds of clients successfully navigate the naturalisation process.</p><h3>Who Can Apply?</h3><ul><li><strong>Naturalisation</strong> - For those who have lived in the UK for 5+ years (or 3 years if married to a British citizen)</li><li><strong>Registration</strong> - For British nationals overseas, certain children, and those with specific entitlements</li><li><strong>Citizenship by Descent</strong> - For those born abroad to British parents</li><li><strong>Stateless Persons</strong> - Special provisions for those without nationality</li></ul><h3>Requirements for Naturalisation</h3><p>To qualify for naturalisation, you typically need to demonstrate:</p><ul><li>Indefinite Leave to Remain (ILR) or EU Settled Status</li><li>5 years' continuous residence (3 if spouse of British citizen)</li><li>Good character and no serious criminal convictions</li><li>Knowledge of English language and Life in the UK</li><li>Intention to continue living in the UK</li></ul><h3>Our Services Include</h3><p>We provide comprehensive support including eligibility assessment, document preparation, form completion, and representation throughout your application.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-citizenship-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Ready to Become British?" },
+                  "SectionText": { "Text": "Book a consultation to discuss your eligibility and start your journey to British citizenship today." },
+                  "ButtonText": { "Text": "Check Your Eligibility" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-asylum-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Asylum & Human Rights",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Asylum & Human Rights" },
+          "AutoroutePart": { "Path": "asylum-human-rights", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Asylum & Human Rights Claims | Refugee Solicitors Manchester",
+            "MetaDescription": "Compassionate legal support for asylum seekers and human rights claims. We protect the rights of refugees and vulnerable individuals seeking protection in the UK.",
+            "MetaKeywords": "asylum solicitors, refugee lawyers, human rights claims, asylum application UK, protection claims"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-asylum-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-asylum-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Asylum & Human Rights" },
+                        "Subheadline": { "Text": "Compassionate legal support when you need it most. We protect the rights of those seeking safety and protection in the UK." },
+                        "PrimaryButtonText": { "Text": "Get Help Now" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-asylum-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Seeking Protection in the UK" },
+                  "Content": { "Html": "<p>If you fear persecution in your home country, you may be entitled to claim asylum in the UK. Our experienced asylum solicitors provide sensitive, expert representation to help you secure the protection you need.</p><h3>Who Can Claim Asylum?</h3><p>Under the 1951 Refugee Convention, asylum may be granted to those who:</p><ul><li>Face persecution due to race, religion, nationality, political opinion, or membership of a social group</li><li>Cannot safely return to their home country</li><li>Have a well-founded fear of serious harm</li></ul><h3>Our Asylum Services</h3><ul><li><strong>Fresh Asylum Claims</strong> - Initial applications for those newly arrived in the UK</li><li><strong>Further Submissions</strong> - Fresh claims based on new evidence or circumstances</li><li><strong>Human Rights Applications</strong> - Article 3 and Article 8 claims under the European Convention</li><li><strong>Humanitarian Protection</strong> - For those who don't qualify as refugees but need protection</li><li><strong>Appeal Representation</strong> - First-tier and Upper Tribunal appeals</li></ul><h3>Urgent Cases</h3><p>If you are in immigration detention or facing imminent removal, contact us immediately. We can act quickly to protect your rights.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-asylum-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "You Are Not Alone" },
+                  "SectionText": { "Text": "Our compassionate team is here to help you through this difficult time. Contact us for a confidential consultation." },
+                  "ButtonText": { "Text": "Speak to Our Team" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-visa-extensions-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Visa Extensions & Variations",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Visa Extensions & Variations" },
+          "AutoroutePart": { "Path": "visa-extensions-variations", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "UK Visa Extensions & Variations | Immigration Solicitors Manchester",
+            "MetaDescription": "Professional help with extending or varying your UK visa. Maintain your legal status and avoid complications with expert immigration advice.",
+            "MetaKeywords": "visa extension UK, visa variation, extend stay UK, change visa category, immigration help"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-extension-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-extension-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Visa Extensions & Variations" },
+                        "Subheadline": { "Text": "Stay legal, stay protected. Expert help extending your visa or switching to a different category to maintain your status in the UK." },
+                        "PrimaryButtonText": { "Text": "Extend Your Visa" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-extension-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Extending or Changing Your Visa" },
+                  "Content": { "Html": "<p>If your visa is approaching its expiry date, or your circumstances have changed and you need to switch visa categories, MCR Solicitors can help. Timely action is crucial to avoid becoming an overstayer.</p><h3>Common Extension Applications</h3><ul><li><strong>Spouse/Partner Visa Extensions</strong> - Extending your initial 2.5-year visa</li><li><strong>Skilled Worker Visa Extensions</strong> - Continuing your employment in the UK</li><li><strong>Student Visa Extensions</strong> - For ongoing studies or PhD students</li><li><strong>Graduate Visa Applications</strong> - Post-study work visa after completing your degree</li><li><strong>Long Residence Applications</strong> - For those with 10+ years continuous residence</li></ul><h3>Switching Visa Categories</h3><p>You may be able to switch to a different visa category from within the UK. Common switches include:</p><ul><li>Student to Skilled Worker</li><li>Graduate to Skilled Worker</li><li>Visitor to Spouse (in limited circumstances)</li><li>Any visa to Family route</li></ul><h3>Why Timing Matters</h3><p>You must apply before your current visa expires. Once your visa is valid, your leave is protected under Section 3C while your application is pending.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-extension-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Don't Let Your Visa Expire" },
+                  "SectionText": { "Text": "Contact us today to discuss your extension or switching options. Early action gives you the best chance of success." },
+                  "ButtonText": { "Text": "Get Started" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-appeals-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Appeals & Administrative Review",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Appeals & Administrative Review" },
+          "AutoroutePart": { "Path": "appeals-administrative-review", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Immigration Appeals | Administrative Review Solicitors Manchester",
+            "MetaDescription": "Challenge Home Office decisions with expert legal representation. Immigration appeals, administrative reviews, and judicial reviews. Don't give up on your case.",
+            "MetaKeywords": "immigration appeal, administrative review, challenge visa refusal, Home Office appeal, tribunal representation"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-appeals-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-appeals-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Appeals & Administrative Review" },
+                        "Subheadline": { "Text": "Don't give up. If your visa application was refused, we can help you challenge the decision and fight for the outcome you deserve." },
+                        "PrimaryButtonText": { "Text": "Challenge a Decision" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-appeals-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Challenging Immigration Decisions" },
+                  "Content": { "Html": "<p>Receiving a refusal from the Home Office can be devastating, but it's often not the end of the road. MCR Solicitors has an excellent track record of overturning unfair decisions through appeals and administrative reviews.</p><h3>Types of Challenges</h3><ul><li><strong>First-tier Tribunal Appeals</strong> - Full appeal hearings for human rights, asylum, and EEA cases</li><li><strong>Upper Tribunal Appeals</strong> - Appeals on points of law against First-tier decisions</li><li><strong>Administrative Reviews</strong> - Challenging errors in points-based system decisions</li><li><strong>Judicial Reviews</strong> - Challenging unlawful Home Office decisions in the High Court</li><li><strong>Fresh Applications</strong> - Submitting new applications with additional evidence</li></ul><h3>Time Limits Apply</h3><p>Appeals and administrative reviews have strict time limits:</p><ul><li>Administrative Review: 14 days (UK) or 28 days (overseas)</li><li>Appeal: Usually 14 days from decision date</li><li>Judicial Review: Within 3 months</li></ul><h3>Our Success Rate</h3><p>Our experienced advocates have successfully overturned countless unfair refusals. We carefully analyse decisions to identify grounds for challenge and build compelling cases.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-appeals-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Refused? Let's Fight Back" },
+                  "SectionText": { "Text": "Time is critical. Contact us immediately to discuss your options for challenging the decision." },
+                  "ButtonText": { "Text": "Urgent Consultation" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-ilr-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Indefinite Leave to Remain (ILR)",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Indefinite Leave to Remain (ILR)" },
+          "AutoroutePart": { "Path": "indefinite-leave-to-remain", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "ILR Applications | Indefinite Leave to Remain Solicitors Manchester",
+            "MetaDescription": "Expert help with Indefinite Leave to Remain (ILR) applications. Settlement in the UK, permanent residence rights, and pathway to citizenship.",
+            "MetaKeywords": "ILR application, indefinite leave to remain, settlement UK, permanent residence, UK settlement visa"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-ilr-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-ilr-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Indefinite Leave to Remain" },
+                        "Subheadline": { "Text": "Secure your future in the UK with permanent settlement. ILR gives you the freedom to live and work without restrictions." },
+                        "PrimaryButtonText": { "Text": "Apply for ILR" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-ilr-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Permanent Settlement in the UK" },
+                  "Content": { "Html": "<p>Indefinite Leave to Remain (ILR), also known as settlement, allows you to live and work in the UK without any immigration restrictions. It's a crucial step on the path to British citizenship.</p><h3>Routes to ILR</h3><ul><li><strong>5-Year Route</strong> - Spouse/Partner visas, Skilled Worker visas, and most work visas</li><li><strong>10-Year Long Residence</strong> - Continuous lawful residence for 10 years</li><li><strong>Ancestry</strong> - After 5 years on an Ancestry visa</li><li><strong>Asylum/Humanitarian Protection</strong> - After 5 years of protection status</li><li><strong>Domestic Violence</strong> - Early settlement for victims leaving abusive relationships</li></ul><h3>Key Requirements</h3><p>Most ILR applications require you to demonstrate:</p><ul><li>Continuous residence for the qualifying period</li><li>No excessive absences from the UK</li><li>Knowledge of English (B1 level or above)</li><li>Life in the UK test pass</li><li>Good character and no criminal record concerns</li></ul><h3>Benefits of ILR</h3><p>With ILR, you can work without restrictions, access public funds, and apply for British citizenship after 12 months.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-ilr-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Secure Your Settlement" },
+                  "SectionText": { "Text": "Let us help you with your ILR application. We'll ensure every requirement is met for the best chance of success." },
+                  "ButtonText": { "Text": "Start Your Application" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-deportation-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Deportation & Removal",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Deportation & Removal" },
+          "AutoroutePart": { "Path": "deportation-removal", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Deportation Defence | Removal Appeals Solicitors Manchester",
+            "MetaDescription": "Urgent legal help if you're facing deportation or removal from the UK. We fight to protect your rights and keep families together.",
+            "MetaKeywords": "deportation defence, removal appeal, immigration detention, deportation solicitors, stop deportation"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-deportation-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-deportation-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Deportation & Removal Defence" },
+                        "Subheadline": { "Text": "Facing removal from the UK? We provide urgent legal support to protect your rights and fight for your right to stay." },
+                        "PrimaryButtonText": { "Text": "Urgent Help" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-deportation-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Fighting Deportation & Removal" },
+                  "Content": { "Html": "<p>If you're facing deportation or removal from the UK, you need expert legal representation immediately. MCR Solicitors provides urgent assistance to those facing removal, including those in immigration detention.</p><h3>When We Can Help</h3><ul><li><strong>Deportation Orders</strong> - Challenging deportation decisions for foreign criminals</li><li><strong>Removal Decisions</strong> - Fighting removal for overstayers or those with refused applications</li><li><strong>Detention Cases</strong> - Bail applications and challenging unlawful detention</li><li><strong>Emergency Injunctions</strong> - Stopping imminent removals</li><li><strong>Fresh Claims</strong> - Submitting new human rights or asylum claims</li></ul><h3>Grounds for Challenge</h3><p>Deportation may be challenged on grounds including:</p><ul><li>Family life in the UK (Article 8 ECHR)</li><li>Risk of harm in your home country (Article 3 ECHR)</li><li>Unduly harsh impact on British citizen children</li><li>Rehabilitation and reduced risk to public</li><li>Private life established over many years</li></ul><h3>Emergency Assistance</h3><p>If you have removal directions set, contact us immediately. We can act urgently to apply for injunctions to stop removal while your case is considered.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-deportation-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Time Is Critical" },
+                  "SectionText": { "Text": "If you or a loved one is facing removal, contact us immediately for urgent legal assistance. We're available 24/7 for emergencies." },
+                  "ButtonText": { "Text": "Emergency Contact" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-eea-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "EEA & EU Applications",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "EEA & EU Applications" },
+          "AutoroutePart": { "Path": "eea-eu-applications", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "EU Settlement Scheme | EEA Applications Manchester",
+            "MetaDescription": "Help with EU Settlement Scheme applications, late applications, and EEA family permits. Protecting EU citizens' rights in the UK post-Brexit.",
+            "MetaKeywords": "EU Settlement Scheme, EUSS, EEA application, EU citizens UK, Brexit immigration"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-eea-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-eea-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "EEA & EU Applications" },
+                        "Subheadline": { "Text": "Protecting EU citizens' rights in the UK post-Brexit. Expert help with EUSS applications, late applications, and family permits." },
+                        "PrimaryButtonText": { "Text": "Get Advice" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-eea-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "EU Settlement Scheme & EEA Rights" },
+                  "Content": { "Html": "<p>Following Brexit, EU citizens and their family members need to secure their immigration status in the UK. MCR Solicitors has extensive experience helping EU nationals protect their rights under the EU Settlement Scheme.</p><h3>Our EU/EEA Services</h3><ul><li><strong>Late EUSS Applications</strong> - Helping those who missed the deadline with valid reasons</li><li><strong>Pre-Settled to Settled Status</strong> - Upgrading to permanent status after 5 years</li><li><strong>EUSS Family Permits</strong> - Bringing family members to the UK</li><li><strong>Joining Family Members</strong> - Applications to join EU citizens in the UK</li><li><strong>Derivative Rights</strong> - Zambrano, Chen, and Ibrahim carers</li><li><strong>Administrative Reviews</strong> - Challenging EUSS refusals</li></ul><h3>Late Applications</h3><p>If you missed the 30 June 2021 deadline, you may still be able to apply if you have reasonable grounds. We can assess your case and help submit a late application with supporting evidence.</p><h3>Common Issues</h3><p>We help with complex cases including gaps in residence, criminal convictions, incomplete documentation, and derivative rights claims.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-eea-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Protect Your EU Rights" },
+                  "SectionText": { "Text": "Don't let Brexit uncertainty affect your future. Contact us to secure your status in the UK." },
+                  "ButtonText": { "Text": "Book Consultation" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-divorce-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Getting a Divorce",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Getting a Divorce" },
+          "AutoroutePart": { "Path": "getting-a-divorce", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Divorce Solicitors Manchester | No-Fault Divorce Experts",
+            "MetaDescription": "Experienced divorce solicitors in Manchester. We guide you through no-fault divorce proceedings with compassion and professionalism. Protect your interests.",
+            "MetaKeywords": "divorce solicitors Manchester, no-fault divorce, divorce proceedings, matrimonial solicitors, end marriage"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-divorce-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-divorce-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Getting a Divorce" },
+                        "Subheadline": { "Text": "Navigate divorce with compassion and expertise. We guide you through the process with sensitivity, protecting your interests every step of the way." },
+                        "PrimaryButtonText": { "Text": "Speak Confidentially" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-divorce-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Understanding the Divorce Process" },
+                  "Content": { "Html": "<p>Divorce is one of the most challenging experiences you can face. At MCR Solicitors, we provide compassionate, expert guidance to help you through this difficult time while protecting your interests and those of your children.</p><h3>No-Fault Divorce</h3><p>Since April 2022, England and Wales have introduced no-fault divorce. This means:</p><ul><li>No need to blame your spouse or prove wrongdoing</li><li>Joint applications are now possible</li><li>A simpler, less confrontational process</li><li>20-week reflection period before conditional order</li><li>6 weeks before final order can be applied for</li></ul><h3>The Divorce Process</h3><ol><li><strong>Application</strong> - File divorce application with the court</li><li><strong>Acknowledgement</strong> - Respondent acknowledges receipt</li><li><strong>Conditional Order</strong> - First decree after 20-week wait</li><li><strong>Final Order</strong> - Divorce is finalised after 6 more weeks</li></ol><h3>Related Matters</h3><p>Divorce proceedings don't automatically resolve finances or children arrangements. We can advise on financial settlements, child arrangements, and ancillary matters.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-divorce-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Take the First Step" },
+                  "SectionText": { "Text": "A confidential discussion with one of our family law specialists can help you understand your options and the way forward." },
+                  "ButtonText": { "Text": "Book Consultation" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-judicial-sep-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Judicial Separation",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Judicial Separation" },
+          "AutoroutePart": { "Path": "judicial-separation", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Judicial Separation Solicitors | Legal Separation Manchester",
+            "MetaDescription": "Expert advice on judicial separation. An alternative to divorce that allows you to live separately while remaining legally married. Understand your options.",
+            "MetaKeywords": "judicial separation, legal separation, separation agreement, separation solicitors, marriage separation"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-judicial-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-judicial-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Judicial Separation" },
+                        "Subheadline": { "Text": "An alternative to divorce that allows you to live separately while remaining legally married. Understand your options with expert guidance." },
+                        "PrimaryButtonText": { "Text": "Learn More" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-judicial-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "What is Judicial Separation?" },
+                  "Content": { "Html": "<p>Judicial separation is a legal process that formally recognises a couple's separation without ending the marriage. It may be suitable for those who don't want or can't obtain a divorce.</p><h3>When to Consider Judicial Separation</h3><ul><li><strong>Religious Reasons</strong> - If your faith prohibits divorce</li><li><strong>Not Married Long Enough</strong> - You can't divorce until married for one year</li><li><strong>Uncertain About Divorce</strong> - Need time apart before final decision</li><li><strong>Pension and Inheritance</strong> - To protect certain spousal rights</li></ul><h3>How It Differs from Divorce</h3><p>Unlike divorce:</p><ul><li>You remain legally married</li><li>Cannot remarry</li><li>May retain certain spousal rights (pensions, inheritance)</li><li>No minimum marriage duration required</li></ul><h3>Financial Orders</h3><p>As with divorce, you can obtain financial orders including maintenance, property division, and pension sharing through judicial separation proceedings.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-judicial-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Explore Your Options" },
+                  "SectionText": { "Text": "Not sure whether divorce or judicial separation is right for you? Our family law team can explain the differences and help you decide." },
+                  "ButtonText": { "Text": "Get Advice" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-financial-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Financial Settlements",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Financial Settlements" },
+          "AutoroutePart": { "Path": "financial-settlements", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Financial Settlements in Divorce | Asset Division Solicitors Manchester",
+            "MetaDescription": "Expert help with financial settlements in divorce. Fair division of assets, property, pensions, and maintenance. Protect your financial future.",
+            "MetaKeywords": "financial settlement divorce, asset division, matrimonial assets, pension sharing, divorce finances"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-financial-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-financial-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Financial Settlements" },
+                        "Subheadline": { "Text": "Protect your financial future. Expert guidance on dividing assets, property, pensions, and maintenance in divorce." },
+                        "PrimaryButtonText": { "Text": "Get Expert Advice" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-financial-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Dividing Assets in Divorce" },
+                  "Content": { "Html": "<p>Financial settlements in divorce can be complex, especially when significant assets are involved. MCR Solicitors helps you achieve a fair outcome that protects your financial future.</p><h3>What Can Be Divided?</h3><ul><li><strong>Property</strong> - Family home and other properties</li><li><strong>Pensions</strong> - Often the second largest asset after the home</li><li><strong>Savings & Investments</strong> - Bank accounts, shares, and investments</li><li><strong>Business Assets</strong> - Company shares and business interests</li><li><strong>Debts</strong> - Joint debts and liabilities</li></ul><h3>Factors Considered</h3><p>The court considers various factors when determining a fair settlement:</p><ul><li>Length of the marriage</li><li>Each party's earning capacity</li><li>Contributions (financial and non-financial)</li><li>Needs of any children</li><li>Standard of living during marriage</li><li>Age and health of both parties</li></ul><h3>Types of Orders</h3><p>We can help you obtain lump sum orders, property transfer orders, pension sharing orders, and periodical payments (maintenance).</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-financial-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Protect Your Financial Future" },
+                  "SectionText": { "Text": "Don't leave your financial settlement to chance. Our expert team will fight for a fair division of assets." },
+                  "ButtonText": { "Text": "Discuss Your Case" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-child-custody-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Child Custody & Access",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Child Custody & Access" },
+          "AutoroutePart": { "Path": "child-custody-access", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Child Custody Solicitors Manchester | Child Arrangement Orders",
+            "MetaDescription": "Expert child custody and access solicitors. We prioritise your children's welfare while protecting your parental rights. Child arrangement orders and contact disputes.",
+            "MetaKeywords": "child custody solicitors, child arrangement orders, contact orders, parental rights, child access"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-custody-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-custody-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Child Custody & Access" },
+                        "Subheadline": { "Text": "Putting your children first. Expert help with child arrangements that prioritise your children's welfare while protecting your parental rights." },
+                        "PrimaryButtonText": { "Text": "Get Help" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-custody-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Child Arrangement Orders" },
+                  "Content": { "Html": "<p>When parents separate, deciding where children will live and how they'll spend time with each parent can be difficult. MCR Solicitors helps families reach arrangements that work for everyone, especially the children.</p><h3>Types of Child Arrangements</h3><ul><li><strong>Live With Orders</strong> - Determines where the child primarily lives</li><li><strong>Spend Time With Orders</strong> - Previously called contact or access orders</li><li><strong>Specific Issue Orders</strong> - For specific decisions about the child's upbringing</li><li><strong>Prohibited Steps Orders</strong> - Preventing a parent from taking certain actions</li></ul><h3>The Welfare Principle</h3><p>Courts prioritise the child's welfare above all else. Factors considered include:</p><ul><li>The child's wishes and feelings (age-dependent)</li><li>Physical, emotional, and educational needs</li><li>Effect of any change in circumstances</li><li>The child's background and characteristics</li><li>Risk of harm to the child</li><li>Capability of each parent</li></ul><h3>Our Approach</h3><p>We encourage mediation and negotiation where possible, but we're ready to represent you in court if agreement can't be reached.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-custody-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Your Children Come First" },
+                  "SectionText": { "Text": "Let us help you create child arrangements that protect your relationship with your children while serving their best interests." },
+                  "ButtonText": { "Text": "Speak to a Specialist" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-domestic-abuse-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Domestic Abuse",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Domestic Abuse" },
+          "AutoroutePart": { "Path": "domestic-abuse", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Domestic Abuse Solicitors | Non-Molestation Orders Manchester",
+            "MetaDescription": "Urgent legal protection from domestic abuse. Non-molestation orders, occupation orders, and emergency injunctions. We're here to help you feel safe.",
+            "MetaKeywords": "domestic abuse solicitors, non-molestation order, occupation order, domestic violence help, restraining order"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-abuse-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-abuse-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Domestic Abuse Support" },
+                        "Subheadline": { "Text": "You are not alone. We provide urgent legal protection and compassionate support to help you feel safe again." },
+                        "PrimaryButtonText": { "Text": "Get Help Now" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-abuse-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Legal Protection from Domestic Abuse" },
+                  "Content": { "Html": "<p>If you're experiencing domestic abuse, you deserve protection and support. MCR Solicitors provides urgent, confidential help to secure your safety and that of your children.</p><h3>What is Domestic Abuse?</h3><p>Domestic abuse includes:</p><ul><li>Physical violence or threats</li><li>Emotional or psychological abuse</li><li>Controlling or coercive behaviour</li><li>Financial abuse</li><li>Sexual abuse</li><li>Stalking and harassment</li></ul><h3>Legal Protection Available</h3><ul><li><strong>Non-Molestation Orders</strong> - Prohibiting abusive behaviour and contact</li><li><strong>Occupation Orders</strong> - Determining who can live in the family home</li><li><strong>Emergency Injunctions</strong> - Same-day protection in urgent cases</li><li><strong>Power of Arrest</strong> - Attached to orders for immediate police action</li></ul><h3>Confidential Support</h3><p>We understand how difficult it can be to reach out. All consultations are strictly confidential. We can arrange safe meeting places and times.</p><h3>Emergency Help</h3><p>If you are in immediate danger, call 999. For non-emergency support, contact us and we can often obtain protection orders within 24-48 hours.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-abuse-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "You Deserve to Feel Safe" },
+                  "SectionText": { "Text": "Take the first step to protection. Contact us confidentially for immediate help and support." },
+                  "ButtonText": { "Text": "Confidential Contact" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-prenuptial-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Pre-Nuptial & Post-Nuptial Agreements",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Pre-Nuptial & Post-Nuptial Agreements" },
+          "AutoroutePart": { "Path": "prenuptial-postnuptial-agreements", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Pre-Nuptial Agreements | Post-Nuptial Agreements Manchester",
+            "MetaDescription": "Protect your assets with professionally drafted pre-nuptial and post-nuptial agreements. Fair, enforceable agreements that provide peace of mind.",
+            "MetaKeywords": "prenuptial agreement, postnuptial agreement, prenup solicitors, marriage contract, protect assets"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-prenup-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-prenup-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Pre-Nuptial & Post-Nuptial Agreements" },
+                        "Subheadline": { "Text": "Protect your future together. Professional drafting of fair, enforceable agreements that give both parties peace of mind." },
+                        "PrimaryButtonText": { "Text": "Get Advice" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-prenup-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Protecting Your Assets" },
+                  "Content": { "Html": "<p>Pre-nuptial and post-nuptial agreements are increasingly common among couples who want clarity about their financial arrangements should their relationship end. MCR Solicitors drafts fair, balanced agreements designed to stand up in court.</p><h3>Pre-Nuptial Agreements</h3><p>Made before marriage, these agreements set out how assets will be divided if you divorce. They can protect:</p><ul><li>Pre-marital assets and savings</li><li>Business interests and shares</li><li>Inheritance expectations</li><li>Family wealth</li><li>Future earnings from specific assets</li></ul><h3>Post-Nuptial Agreements</h3><p>Made after marriage, these serve similar purposes and may be appropriate when:</p><ul><li>Circumstances have changed since marriage</li><li>One spouse receives an inheritance</li><li>A business becomes more valuable</li><li>You didn't have a pre-nup but wish you had</li></ul><h3>Making Agreements Enforceable</h3><p>To maximise enforceability, agreements should be:</p><ul><li>Entered into freely without pressure</li><li>Made with full financial disclosure</li><li>Signed with independent legal advice for both parties</li><li>Fair to both parties' needs</li></ul>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-prenup-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Plan for Your Future" },
+                  "SectionText": { "Text": "A professionally drafted agreement can protect both parties and avoid disputes later. Contact us to discuss your situation." },
+                  "ButtonText": { "Text": "Discuss Options" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-rta-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Road Traffic Accident Claims",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Road Traffic Accident Claims" },
+          "AutoroutePart": { "Path": "road-traffic-accident-claims", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Road Traffic Accident Claims | Car Accident Solicitors Manchester",
+            "MetaDescription": "Expert road traffic accident solicitors. No win, no fee representation for car accidents, motorcycle accidents, and pedestrian injuries. Maximum compensation.",
+            "MetaKeywords": "road traffic accident claims, car accident solicitors, RTA claims, whiplash compensation, vehicle accident"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-rta-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-rta-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Road Traffic Accident Claims" },
+                        "Subheadline": { "Text": "Injured in a road accident? Get the compensation you deserve. No win, no fee representation for drivers, passengers, cyclists, and pedestrians." },
+                        "PrimaryButtonText": { "Text": "Start Your Claim" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-rta-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Road Accident Compensation Claims" },
+                  "Content": { "Html": "<p>If you've been injured in a road traffic accident that wasn't your fault, you may be entitled to compensation. MCR Solicitors helps victims of car accidents, motorcycle accidents, cyclist injuries, and pedestrian accidents claim what they're owed.</p><h3>Types of Road Accidents We Handle</h3><ul><li><strong>Car Accidents</strong> - Collisions, rear-end shunts, T-bone accidents</li><li><strong>Motorcycle Accidents</strong> - Often resulting in serious injuries</li><li><strong>Cyclist Accidents</strong> - Injuries caused by vehicles</li><li><strong>Pedestrian Accidents</strong> - Hit by cars, vans, or lorries</li><li><strong>Passenger Claims</strong> - Injuries to vehicle passengers</li><li><strong>Hit and Run</strong> - Claims through the MIB</li></ul><h3>What You Can Claim For</h3><ul><li>Pain and suffering</li><li>Loss of earnings</li><li>Medical expenses</li><li>Rehabilitation costs</li><li>Travel expenses</li><li>Vehicle damage and hire car costs</li></ul><h3>No Win, No Fee</h3><p>We operate on a no win, no fee basis, meaning you only pay if your claim succeeds. There's no financial risk in pursuing your claim.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-rta-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Get Maximum Compensation" },
+                  "SectionText": { "Text": "Don't settle for less. Our experienced personal injury team will fight for every penny you're entitled to." },
+                  "ButtonText": { "Text": "Free Claim Assessment" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-workplace-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Workplace Injury Claims",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Workplace Injury Claims" },
+          "AutoroutePart": { "Path": "workplace-injury-claims", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Workplace Injury Claims | Accident at Work Solicitors Manchester",
+            "MetaDescription": "Injured at work? Claim the compensation you deserve. Expert workplace injury solicitors handling accidents, industrial diseases, and employer negligence.",
+            "MetaKeywords": "workplace injury claims, accident at work solicitors, employer negligence, industrial injury, work accident compensation"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-workplace-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-workplace-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Workplace Injury Claims" },
+                        "Subheadline": { "Text": "Injured at work? Your employer has a duty of care. We help you claim compensation for workplace accidents and industrial diseases." },
+                        "PrimaryButtonText": { "Text": "Claim Now" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-workplace-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Accidents at Work" },
+                  "Content": { "Html": "<p>Employers have a legal duty to provide a safe working environment. If you've been injured at work due to your employer's negligence or failure to follow safety regulations, you may be entitled to compensation.</p><h3>Common Workplace Injuries</h3><ul><li><strong>Slips, Trips and Falls</strong> - Wet floors, obstacles, uneven surfaces</li><li><strong>Manual Handling Injuries</strong> - Back injuries, muscle strains</li><li><strong>Falls from Height</strong> - Ladder accidents, scaffolding falls</li><li><strong>Machinery Accidents</strong> - Equipment failures, inadequate guards</li><li><strong>Repetitive Strain Injuries</strong> - RSI, carpal tunnel syndrome</li><li><strong>Industrial Diseases</strong> - Asbestosis, vibration white finger, occupational deafness</li></ul><h3>Your Rights</h3><p>You can claim compensation even if you're still employed. It's illegal for employers to dismiss or treat you unfairly for making a claim. Your employer's insurance covers compensation payments.</p><h3>Time Limits</h3><p>You generally have 3 years from the date of injury (or date of knowledge for diseases) to make a claim. Don't delay in seeking advice.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-workplace-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Your Employer Should Be Held Accountable" },
+                  "SectionText": { "Text": "Don't suffer in silence. Contact us for a free, confidential assessment of your workplace injury claim." },
+                  "ButtonText": { "Text": "Free Assessment" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-medical-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Medical Negligence",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Medical Negligence" },
+          "AutoroutePart": { "Path": "medical-negligence", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Medical Negligence Solicitors | Clinical Negligence Claims Manchester",
+            "MetaDescription": "Expert medical negligence solicitors. We handle clinical negligence claims against hospitals, GPs, and healthcare providers. Get the answers and compensation you deserve.",
+            "MetaKeywords": "medical negligence solicitors, clinical negligence claims, hospital negligence, GP negligence, misdiagnosis"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-medical-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-medical-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Medical Negligence Claims" },
+                        "Subheadline": { "Text": "When medical care goes wrong. Expert solicitors helping victims of clinical negligence get answers, justice, and compensation." },
+                        "PrimaryButtonText": { "Text": "Discuss Your Case" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-medical-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Clinical Negligence Claims" },
+                  "Content": { "Html": "<p>Medical negligence occurs when healthcare professionals fail to provide an acceptable standard of care, causing harm to the patient. These cases are complex and require specialist legal expertise.</p><h3>Types of Medical Negligence</h3><ul><li><strong>Misdiagnosis or Delayed Diagnosis</strong> - Cancer, heart conditions, infections</li><li><strong>Surgical Errors</strong> - Wrong site surgery, post-operative complications</li><li><strong>Birth Injuries</strong> - Cerebral palsy, Erb's palsy, brain injuries</li><li><strong>Medication Errors</strong> - Wrong drug, wrong dose, adverse reactions</li><li><strong>A&amp;E Failures</strong> - Missed fractures, delayed treatment</li><li><strong>GP Negligence</strong> - Failure to refer, missed symptoms</li></ul><h3>What You Need to Prove</h3><p>A successful claim requires evidence that:</p><ul><li>The healthcare provider owed you a duty of care</li><li>They breached that duty (fell below acceptable standards)</li><li>The breach caused your injury or made it worse</li><li>You suffered quantifiable harm as a result</li></ul><h3>Time Limits</h3><p>You generally have 3 years from the date of negligence (or date of knowledge) to bring a claim. Different rules apply for children and those lacking mental capacity.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-medical-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Get the Answers You Deserve" },
+                  "SectionText": { "Text": "Medical negligence claims are about more than money - they're about accountability and preventing future harm. Let us help you." },
+                  "ButtonText": { "Text": "Free Case Review" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-complaints-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Complaints Procedure",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Complaints Procedure" },
+          "AutoroutePart": { "Path": "complaints-procedure", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Complaints Procedure | MCR Solicitors",
+            "MetaDescription": "Our complaints procedure at MCR Solicitors. We take client feedback seriously and are committed to resolving any concerns promptly and fairly.",
+            "MetaKeywords": "complaints procedure, solicitors complaints, legal ombudsman, client feedback"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-complaints-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-complaints-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Complaints Procedure" },
+                        "Subheadline": { "Text": "We are committed to providing excellent service. If we have fallen short, we want to know so we can put things right." },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-complaints-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Our Complaints Procedure" },
+                  "Content": { "Html": "<p>At MCR Solicitors, we strive to provide excellent service to all our clients. However, if you are unhappy with any aspect of our service, we want to hear from you so we can resolve the issue.</p><h3>How to Make a Complaint</h3><p>If you have a complaint, please contact us in one of the following ways:</p><ul><li><strong>In Writing:</strong> MCR Solicitors, 1024 Stockport Road, Manchester, M19 3WX</li><li><strong>By Email:</strong> complaints@mcrsolicitors.co.uk</li><li><strong>By Telephone:</strong> 0161 466 1280</li></ul><h3>What Happens Next</h3><ol><li>We will acknowledge your complaint within 2 working days</li><li>We will investigate your complaint thoroughly</li><li>We will provide a detailed written response within 8 weeks</li><li>If you remain dissatisfied, you may escalate to the Legal Ombudsman</li></ol><h3>The Legal Ombudsman</h3><p>If we cannot resolve your complaint to your satisfaction within 8 weeks, you may contact the Legal Ombudsman:</p><ul><li>Website: www.legalombudsman.org.uk</li><li>Email: enquiries@legalombudsman.org.uk</li><li>Telephone: 0300 555 0333</li></ul><p>Complaints must normally be made to the Legal Ombudsman within 6 months of our final response and within 6 years of the act or omission.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-privacy-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Privacy Policy",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Privacy Policy" },
+          "AutoroutePart": { "Path": "privacy-policy", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Privacy Policy | MCR Solicitors",
+            "MetaDescription": "MCR Solicitors privacy policy. Learn how we collect, use, and protect your personal data in accordance with GDPR and data protection laws.",
+            "MetaKeywords": "privacy policy, data protection, GDPR, personal data, solicitors privacy"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-privacy-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-privacy-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Privacy Policy" },
+                        "Subheadline": { "Text": "Your privacy is important to us. Learn how we collect, use, and protect your personal information." },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-privacy-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "How We Protect Your Data" },
+                  "Content": { "Html": "<p>MCR Solicitors is committed to protecting your privacy and handling your personal data responsibly and in accordance with the UK General Data Protection Regulation (UK GDPR) and Data Protection Act 2018.</p><h3>Information We Collect</h3><ul><li>Name, address, and contact details</li><li>Information relevant to your legal matter</li><li>Identification documents for verification</li><li>Payment information</li><li>Website usage data through cookies</li></ul><h3>How We Use Your Information</h3><p>We use your personal data to:</p><ul><li>Provide legal services and advice</li><li>Communicate with you about your case</li><li>Comply with regulatory and legal obligations</li><li>Improve our services</li><li>Send relevant updates (with your consent)</li></ul><h3>Your Rights</h3><p>Under GDPR, you have the right to:</p><ul><li>Access your personal data</li><li>Correct inaccurate information</li><li>Request deletion of your data</li><li>Restrict or object to processing</li><li>Data portability</li><li>Withdraw consent at any time</li></ul><h3>Data Security</h3><p>We implement appropriate technical and organisational measures to protect your personal data against unauthorised access, alteration, disclosure, or destruction.</p><h3>Contact Us</h3><p>For privacy-related enquiries, contact our Data Protection Officer at dpo@mcrsolicitors.co.uk</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-disclaimer-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Disclaimer",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Disclaimer" },
+          "AutoroutePart": { "Path": "disclaimer", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Legal Disclaimer | MCR Solicitors",
+            "MetaDescription": "Legal disclaimer for MCR Solicitors website. Important information about the use of this website and the limitations of the information provided.",
+            "MetaKeywords": "legal disclaimer, terms of use, website disclaimer, solicitors disclaimer"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-disclaimer-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-disclaimer-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Legal Disclaimer" },
+                        "Subheadline": { "Text": "Important information about the use of this website and its content." },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-disclaimer-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Website Disclaimer" },
+                  "Content": { "Html": "<p>The information provided on this website is for general informational purposes only and does not constitute legal advice.</p><h3>No Solicitor-Client Relationship</h3><p>Using this website or contacting MCR Solicitors through this website does not create a solicitor-client relationship. A formal relationship is only established once we have agreed to act on your behalf and confirmed this in writing.</p><h3>No Legal Advice</h3><p>The content on this website is intended to provide general information about legal matters. It should not be relied upon as a substitute for specific legal advice relevant to your circumstances. Legal issues are often complex and individual, and professional advice should always be sought.</p><h3>Accuracy of Information</h3><p>While we endeavour to keep the information on this website accurate and up-to-date, we make no warranties or representations about:</p><ul><li>The accuracy, completeness, or reliability of the content</li><li>The suitability of the information for any particular purpose</li><li>The availability of the website</li></ul><h3>External Links</h3><p>This website may contain links to external sites. MCR Solicitors is not responsible for the content or privacy practices of these external websites.</p><h3>Limitation of Liability</h3><p>To the fullest extent permitted by law, MCR Solicitors excludes all liability for any loss or damage arising from your use of this website or reliance on its content.</p><h3>Regulatory Information</h3><p>MCR Solicitors is authorised and regulated by the Solicitors Regulation Authority (SRA). Our SRA number can be verified on the SRA website.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-cookie-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Cookie Policy",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Cookie Policy" },
+          "AutoroutePart": { "Path": "cookie-policy", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Cookie Policy | MCR Solicitors",
+            "MetaDescription": "MCR Solicitors cookie policy. Learn about the cookies we use on our website and how to manage your cookie preferences.",
+            "MetaKeywords": "cookie policy, cookies, website cookies, cookie preferences, GDPR cookies"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-cookie-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-cookie-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Cookie Policy" },
+                        "Subheadline": { "Text": "Learn about the cookies we use and how to manage your preferences." },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-cookie-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "About Cookies" },
+                  "Content": { "Html": "<p>This website uses cookies to improve your experience and help us understand how you use our site. This policy explains what cookies are, how we use them, and how you can manage your preferences.</p><h3>What Are Cookies?</h3><p>Cookies are small text files stored on your device when you visit a website. They help websites remember your preferences and understand how you use the site.</p><h3>Types of Cookies We Use</h3><h4>Essential Cookies</h4><p>These cookies are necessary for the website to function properly. They enable core functionality such as security, network management, and accessibility. You cannot opt out of these cookies.</p><h4>Analytics Cookies</h4><p>We use Google Analytics to understand how visitors interact with our website. These cookies collect anonymous information including:</p><ul><li>Pages visited and time spent</li><li>How you arrived at our site</li><li>Your general location (country/city level)</li><li>Device and browser information</li></ul><h4>Functional Cookies</h4><p>These cookies remember choices you make to improve your experience, such as language preferences or form data.</p><h3>Managing Cookies</h3><p>You can control and/or delete cookies through your browser settings. You can delete all cookies that are already on your computer and set most browsers to prevent them from being placed. However, if you do this, you may have to manually adjust some preferences every time you visit, and some services and functionalities may not work.</p><h3>More Information</h3><p>For more information about cookies and how to manage them, visit <a href='https://www.aboutcookies.org/' target='_blank'>www.aboutcookies.org</a>.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
               }
             ]
           }

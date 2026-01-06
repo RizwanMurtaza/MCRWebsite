@@ -2211,24 +2211,47 @@ a:hover {
 /* ==========================================================================
    Contact Form Widget Styles
    ========================================================================== */
+
+/* Section wrapper for standalone contact form */
+.contact-form-section {
+    background: linear-gradient(180deg, var(--mcr-gray-50) 0%, var(--mcr-white) 100%);
+}
+
 .contact-form-widget {
     background: var(--mcr-white);
-    padding: var(--mcr-spacing-2xl);
+    padding: var(--mcr-spacing-2xl) var(--mcr-spacing-3xl);
     border-radius: var(--mcr-radius-xl);
-    box-shadow: var(--mcr-shadow-lg);
+    box-shadow: 0 10px 40px rgba(13, 33, 55, 0.12);
+    border-top: 4px solid var(--mcr-accent);
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .contact-form-widget .form-title {
     font-family: var(--mcr-font-heading);
     font-size: var(--mcr-text-2xl);
     color: var(--mcr-primary);
-    margin-bottom: var(--mcr-spacing-sm);
+    margin-bottom: var(--mcr-spacing-xs);
+    position: relative;
+    padding-bottom: var(--mcr-spacing-md);
+}
+
+.contact-form-widget .form-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--mcr-accent);
+    border-radius: 2px;
 }
 
 .contact-form-widget .form-subtitle {
     color: var(--mcr-gray-600);
     margin-bottom: var(--mcr-spacing-xl);
     line-height: 1.6;
+    font-size: var(--mcr-text-base);
 }
 
 .mcr-contact-form .form-group {
@@ -2237,37 +2260,47 @@ a:hover {
 
 .mcr-contact-form .form-label {
     display: block;
-    font-weight: 500;
-    color: var(--mcr-gray-700);
+    font-weight: 600;
+    color: var(--mcr-primary);
     margin-bottom: var(--mcr-spacing-xs);
     font-size: var(--mcr-text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 
 .mcr-contact-form .required {
-    color: #dc3545;
+    color: var(--mcr-accent);
     margin-left: 2px;
+    font-weight: 700;
 }
 
 .mcr-contact-form .form-control,
 .mcr-contact-form .form-select {
     width: 100%;
-    padding: var(--mcr-spacing-sm) var(--mcr-spacing-md);
+    padding: var(--mcr-spacing-md) var(--mcr-spacing-lg);
     font-size: var(--mcr-text-base);
     font-family: var(--mcr-font-primary);
-    border: 1px solid var(--mcr-gray-300);
+    border: 2px solid var(--mcr-gray-200);
     border-radius: var(--mcr-radius-md);
-    background-color: var(--mcr-white);
-    transition: border-color var(--mcr-transition-fast), box-shadow var(--mcr-transition-fast);
+    background-color: var(--mcr-gray-50);
+    transition: all var(--mcr-transition-fast);
 }
 
 .mcr-contact-form .form-control::placeholder {
     color: var(--mcr-gray-400);
 }
 
+.mcr-contact-form .form-control:hover,
+.mcr-contact-form .form-select:hover {
+    border-color: var(--mcr-gray-300);
+    background-color: var(--mcr-white);
+}
+
 .mcr-contact-form .form-control:focus,
 .mcr-contact-form .form-select:focus {
     border-color: var(--mcr-accent);
-    box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.15);
+    background-color: var(--mcr-white);
+    box-shadow: 0 0 0 4px rgba(184, 134, 11, 0.1);
     outline: none;
 }
 
@@ -2284,15 +2317,23 @@ a:hover {
 .mcr-contact-form .form-select {
     cursor: pointer;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23374151' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%230d2137' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
-    background-position: right 0.75rem center;
+    background-position: right 1rem center;
     background-size: 16px 12px;
     padding-right: 2.5rem;
 }
 
+.mcr-contact-form .form-select option {
+    padding: var(--mcr-spacing-md);
+}
+
 .mcr-contact-form .recaptcha-container {
-    margin-top: var(--mcr-spacing-md);
+    margin-top: var(--mcr-spacing-lg);
+    padding: var(--mcr-spacing-md);
+    background: var(--mcr-gray-50);
+    border-radius: var(--mcr-radius-md);
+    display: inline-block;
 }
 
 /* ReCaptcha responsive scaling */
@@ -2311,14 +2352,40 @@ a:hover {
 .mcr-contact-form .btn-cta {
     width: 100%;
     padding: var(--mcr-spacing-md) var(--mcr-spacing-xl);
-    font-size: var(--mcr-text-base);
-    font-weight: 600;
-    margin-top: var(--mcr-spacing-md);
+    font-size: var(--mcr-text-lg);
+    font-weight: 700;
+    margin-top: var(--mcr-spacing-lg);
+    background: linear-gradient(135deg, var(--mcr-accent) 0%, #9a7209 100%);
+    border: none;
+    color: var(--mcr-white);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all var(--mcr-transition-normal);
+}
+
+.mcr-contact-form .btn-cta:hover {
+    background: linear-gradient(135deg, #c9980d 0%, var(--mcr-accent) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(184, 134, 11, 0.4);
 }
 
 .mcr-contact-form .btn-cta:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .contact-form-widget {
+        padding: var(--mcr-spacing-xl);
+    }
+
+    .mcr-contact-form .form-control,
+    .mcr-contact-form .form-select {
+        padding: var(--mcr-spacing-sm) var(--mcr-spacing-md);
+    }
 }
 
 .mcr-contact-form .btn-loading {
@@ -2389,11 +2456,16 @@ a:hover {
    ========================================================================== */
 .hero-banner {
     position: relative;
-    min-height: 600px;
+    min-height: auto;
     display: flex;
     align-items: center;
     background: linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%);
     overflow: hidden;
+}
+
+/* Full-height hero only when there's a contact form (homepage style) */
+.hero-banner.hero-with-form {
+    min-height: 500px;
 }
 
 .hero-banner .hero-overlay {
@@ -2416,6 +2488,11 @@ a:hover {
     display: flex;
     align-items: center;
     gap: var(--mcr-spacing-3xl);
+    padding: var(--mcr-spacing-2xl) 0;
+}
+
+/* More padding for hero with contact form */
+.hero-banner.hero-with-form .hero-content-wrapper {
     padding: var(--mcr-spacing-3xl) 0;
 }
 
@@ -2433,18 +2510,27 @@ a:hover {
 /* Slider Styles */
 .hero-slider {
     position: relative;
+    min-height: auto;
+}
+
+/* Larger slider height when there's a form */
+.hero-banner.hero-with-form .hero-slider {
     min-height: 300px;
 }
 
 .hero-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
     transition: opacity 0.6s ease, transform 0.6s ease, visibility 0.6s ease;
+}
+
+/* Use absolute positioning only when there are multiple slides */
+.hero-banner.hero-with-form .hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 .hero-slide.active {
@@ -2454,19 +2540,37 @@ a:hover {
     transform: translateY(0);
 }
 
+.hero-banner.hero-with-form .hero-slide.active {
+    position: relative;
+}
+
 .hero-headline {
     font-family: var(--mcr-font-heading);
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
     font-weight: 700;
     color: var(--mcr-white);
     line-height: 1.2;
+    margin-bottom: var(--mcr-spacing-md);
+}
+
+/* Larger headline for homepage with form */
+.hero-banner.hero-with-form .hero-headline {
+    font-size: clamp(2rem, 5vw, 3.5rem);
     margin-bottom: var(--mcr-spacing-lg);
 }
 
 .hero-subheadline {
     font-family: var(--mcr-font-primary);
-    font-size: var(--mcr-text-lg);
+    font-size: var(--mcr-text-base);
     color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    margin-bottom: var(--mcr-spacing-lg);
+    max-width: 600px;
+}
+
+/* Larger subheadline for homepage with form */
+.hero-banner.hero-with-form .hero-subheadline {
+    font-size: var(--mcr-text-lg);
     line-height: 1.7;
     margin-bottom: var(--mcr-spacing-xl);
     max-width: 540px;
@@ -2556,93 +2660,153 @@ a:hover {
 
 /* Hero Contact Form */
 .hero-form-wrapper {
-    flex: 0 0 420px;
-    max-width: 420px;
+    flex: 0 0 320px;
+    max-width: 320px;
+    display: flex;
+    align-self: stretch;
 }
 
 .hero-contact-form {
     background: var(--mcr-white);
-    border-radius: var(--mcr-radius-xl);
-    padding: var(--mcr-spacing-xl);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-    border-top: 4px solid var(--mcr-accent);
+    border-radius: var(--mcr-radius-md);
+    padding: 24px 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border-top: 3px solid var(--mcr-accent);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
-@media (min-width: 992px) {
-    .hero-contact-form {
-        padding: var(--mcr-spacing-2xl);
-    }
-}
-
-.hero-form-title {
+.hero-contact-form .form-title {
     font-family: var(--mcr-font-heading);
-    font-size: var(--mcr-text-xl);
+    font-size: 16px;
     font-weight: 600;
     color: var(--mcr-primary);
-    text-align: center;
-    margin-bottom: var(--mcr-spacing-lg);
+    margin-bottom: 4px;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.hero-contact-form .form-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--mcr-accent);
+}
+
+.hero-contact-form .form-subtitle {
+    font-size: 12px;
+    color: var(--mcr-gray-600);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.mcr-hero-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .mcr-hero-form .form-group {
-    margin-bottom: var(--mcr-spacing-md);
+    margin-bottom: 10px;
 }
 
 .mcr-hero-form .form-label {
     display: block;
-    font-size: var(--mcr-text-sm);
-    font-weight: 500;
-    color: var(--mcr-gray-700);
-    margin-bottom: var(--mcr-spacing-xs);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--mcr-primary);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
 }
 
 .mcr-hero-form .required {
-    color: #dc3545;
+    color: var(--mcr-accent);
+    font-weight: 700;
 }
 
 .mcr-hero-form .form-control,
 .mcr-hero-form .form-select {
     width: 100%;
-    padding: 10px 14px;
-    font-size: var(--mcr-text-sm);
+    padding: 8px 10px !important;
+    font-size: 13px !important;
     font-family: var(--mcr-font-primary);
     border: 1px solid var(--mcr-gray-300);
-    border-radius: var(--mcr-radius-md);
+    border-radius: 4px;
     background: var(--mcr-white);
-    transition: border-color var(--mcr-transition-fast), box-shadow var(--mcr-transition-fast);
+    transition: all var(--mcr-transition-fast);
+    height: auto !important;
+    min-height: 0 !important;
+    line-height: 1.4 !important;
 }
 
 .mcr-hero-form .form-control::placeholder {
-    color: var(--mcr-gray-400);
+    color: var(--mcr-gray-500) !important;
+    font-size: 12px !important;
+    opacity: 1 !important;
 }
 
 .mcr-hero-form .form-control:focus,
 .mcr-hero-form .form-select:focus {
     border-color: var(--mcr-accent);
-    box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.15);
+    background: var(--mcr-white);
+    box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.1);
     outline: none;
 }
 
 .mcr-hero-form textarea.form-control {
-    min-height: 80px;
-    resize: vertical;
+    min-height: 60px !important;
+    flex: 1;
+    resize: none;
+}
+
+.mcr-hero-form .form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%230d2137' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 10px 8px;
+    padding-right: 24px;
+}
+
+.mcr-hero-form .recaptcha-group {
+    margin-top: auto;
+    padding-top: 8px;
+}
+
+.mcr-hero-form .g-recaptcha {
+    transform: scale(0.85);
+    transform-origin: left top;
+    margin-bottom: -15px;
+    height: 65px;
+    overflow: hidden;
 }
 
 .mcr-hero-form .btn-hero-submit {
     width: 100%;
-    padding: var(--mcr-spacing-md);
-    font-size: var(--mcr-text-base);
-    font-weight: 600;
-    background: var(--mcr-primary);
-    color: var(--mcr-white);
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    background: var(--mcr-accent);
+    color: var(--mcr-primary);
     border: none;
-    border-radius: var(--mcr-radius-md);
+    border-radius: 4px;
     cursor: pointer;
     transition: all var(--mcr-transition-fast);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 4px;
 }
 
 .mcr-hero-form .btn-hero-submit:hover {
-    background: var(--mcr-primary-dark);
+    background: #a07a0a;
+    color: var(--mcr-white);
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.4);
 }
 
 .mcr-hero-form .btn-hero-submit:disabled {
@@ -2654,25 +2818,26 @@ a:hover {
 .mcr-hero-form .btn-loading {
     display: inline-flex;
     align-items: center;
-    gap: var(--mcr-spacing-sm);
+    gap: 6px;
 }
 
 .mcr-hero-form .form-messages {
-    margin-top: var(--mcr-spacing-md);
+    margin-top: 8px;
 }
 
 .mcr-hero-form .alert {
     display: flex;
     align-items: flex-start;
-    padding: var(--mcr-spacing-sm) var(--mcr-spacing-md);
-    border-radius: var(--mcr-radius-md);
-    font-size: var(--mcr-text-sm);
-    line-height: 1.4;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    line-height: 1.3;
 }
 
 .mcr-hero-form .alert i {
-    margin-top: 2px;
+    margin-top: 1px;
     flex-shrink: 0;
+    font-size: 11px;
 }
 
 .mcr-hero-form .alert-success {
@@ -2687,20 +2852,11 @@ a:hover {
     border: 1px solid #f5c6cb;
 }
 
-/* ReCaptcha Styling */
-.mcr-hero-form .recaptcha-group {
-    margin-bottom: var(--mcr-spacing-md);
-}
-
-.mcr-hero-form .g-recaptcha {
-    transform-origin: left top;
-}
-
-/* Scale ReCaptcha on smaller screens to fit in form */
+/* Scale ReCaptcha on smaller screens */
 @media (max-width: 400px) {
     .mcr-hero-form .g-recaptcha {
-        transform: scale(0.85);
-        margin-bottom: -10px;
+        transform: scale(0.7);
+        margin-bottom: -25px;
     }
 }
 
@@ -2712,8 +2868,8 @@ a:hover {
 
     .hero-banner .hero-content-wrapper {
         flex-direction: column;
-        gap: var(--mcr-spacing-xl);
-        padding: var(--mcr-spacing-xl) 0;
+        gap: var(--mcr-spacing-lg);
+        padding: var(--mcr-spacing-lg) 0;
     }
 
     .hero-banner.hero-with-form .hero-text-content {
@@ -2748,47 +2904,114 @@ a:hover {
 
 @media (max-width: 767.98px) {
     .hero-banner .hero-content-wrapper {
-        padding: var(--mcr-spacing-lg) 0;
+        padding: var(--mcr-spacing-md) 0;
     }
 
     .hero-headline {
-        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        font-size: 1.5rem;
     }
 
     .hero-subheadline {
-        font-size: var(--mcr-text-base);
+        font-size: var(--mcr-text-sm);
+        margin-bottom: var(--mcr-spacing-md);
     }
 
     .hero-buttons {
-        flex-direction: column;
-        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: var(--mcr-spacing-sm);
     }
 
     .hero-buttons .btn {
-        width: 100%;
-        text-align: center;
+        padding: var(--mcr-spacing-sm) var(--mcr-spacing-md);
+        font-size: var(--mcr-text-sm);
     }
 
     .hero-slider {
-        min-height: 280px;
-    }
-
-    .hero-contact-form {
-        padding: var(--mcr-spacing-lg);
-    }
-}
-
-@media (max-width: 575.98px) {
-    .hero-slider {
-        min-height: 320px;
+        min-height: auto;
     }
 
     .hero-contact-form {
         padding: var(--mcr-spacing-md);
     }
 
-    .hero-form-title {
+    /* Contact form mobile styles */
+    .contact-form-widget {
+        padding: var(--mcr-spacing-lg);
+        margin: 0 var(--mcr-spacing-sm);
+    }
+
+    .contact-form-widget .form-title {
+        font-size: var(--mcr-text-xl);
+    }
+
+    .mcr-contact-form .form-label {
+        font-size: 12px;
+    }
+
+    .mcr-contact-form .form-control,
+    .mcr-contact-form .form-select {
+        padding: var(--mcr-spacing-sm) var(--mcr-spacing-md);
+        font-size: var(--mcr-text-sm);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hero-banner .hero-content-wrapper {
+        padding: var(--mcr-spacing-sm) 0;
+    }
+
+    .hero-headline {
+        font-size: 1.35rem;
+        margin-bottom: var(--mcr-spacing-sm);
+    }
+
+    .hero-subheadline {
+        font-size: 13px;
+        line-height: 1.5;
+        margin-bottom: var(--mcr-spacing-sm);
+    }
+
+    .hero-buttons .btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    .hero-slider {
+        min-height: auto;
+    }
+
+    .hero-contact-form {
+        padding: var(--mcr-spacing-sm);
+    }
+
+    .hero-contact-form .form-title {
+        font-size: var(--mcr-text-base);
+    }
+
+    /* Contact form extra small screens */
+    .contact-form-widget {
+        padding: var(--mcr-spacing-md);
+        border-radius: var(--mcr-radius-lg);
+    }
+
+    .contact-form-widget .form-title {
         font-size: var(--mcr-text-lg);
+        padding-bottom: var(--mcr-spacing-sm);
+    }
+
+    .contact-form-widget .form-subtitle {
+        font-size: var(--mcr-text-sm);
+        margin-bottom: var(--mcr-spacing-md);
+    }
+
+    .mcr-contact-form .form-group {
+        margin-bottom: var(--mcr-spacing-md);
+    }
+
+    .mcr-contact-form .btn-cta {
+        padding: var(--mcr-spacing-sm) var(--mcr-spacing-md);
+        font-size: var(--mcr-text-base);
     }
 }
 

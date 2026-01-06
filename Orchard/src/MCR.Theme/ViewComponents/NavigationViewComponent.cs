@@ -65,11 +65,13 @@ public class NavigationViewComponent : ViewComponent
 
     private MenuItemViewModel ParseMenuItem(dynamic menuItem)
     {
+        var rawUrl = menuItem["LinkMenuItemPart"]?["Url"]?.ToString() ?? "#";
+
         var item = new MenuItemViewModel
         {
             Id = menuItem["ContentItemId"]?.ToString() ?? "",
             Name = menuItem["LinkMenuItemPart"]?["Name"]?.ToString() ?? "",
-            Url = menuItem["LinkMenuItemPart"]?["Url"]?.ToString() ?? "#",
+            Url = NormalizeUrl(rawUrl),
             OpenInNewTab = menuItem["LinkMenuItemPart"]?["Target"]?.ToString() == "_blank"
         };
 
@@ -119,6 +121,18 @@ public class NavigationViewComponent : ViewComponent
     {
         if (part == null) return false;
         return part[fieldName]?["Value"]?.GetValue<bool>() ?? false;
+    }
+
+    private static string NormalizeUrl(string url)
+    {
+        if (string.IsNullOrEmpty(url) || url == "#")
+            return url;
+
+        // Remove ~/ prefix if present (ASP.NET app-relative paths)
+        if (url.StartsWith("~/"))
+            return url.Substring(1); // Returns /path instead of ~/path
+
+        return url;
     }
 }
 

@@ -4,7 +4,7 @@
   "description": "Sets up all content types and features required for MCR Theme",
   "author": "MCR Solicitors",
   "website": "https://mcrsolicitors.co.uk",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "issetuprecipe": false,
   "categories": ["Theme"],
   "tags": ["mcr", "solicitors", "legal", "contenttypes"],
@@ -60,7 +60,7 @@
             { "PartName": "AutoroutePart", "Name": "AutoroutePart", "Settings": { "ContentTypePartSettings": { "Position": "1" }, "AutoroutePartSettings": { "AllowCustomPath": true, "ShowHomepageOption": true } } },
             { "PartName": "SeoMetaPart", "Name": "SeoMetaPart", "Settings": { "ContentTypePartSettings": { "Position": "2" } } },
             { "PartName": "HomePage", "Name": "HomePage", "Settings": { "ContentTypePartSettings": { "Position": "3" } } },
-            { "PartName": "FlowPart", "Name": "FlowPart", "Settings": { "ContentTypePartSettings": { "Position": "4" }, "FlowPartSettings": { "ContainedContentTypes": ["HeroBannerWidget", "ServicesSectionWidget", "FeaturesSectionWidget", "TeamSectionWidget", "TestimonialsSectionWidget", "CtaSectionWidget", "ContactFormWidget"] } } }
+            { "PartName": "FlowPart", "Name": "FlowPart", "Settings": { "ContentTypePartSettings": { "Position": "4" }, "FlowPartSettings": { "ContainedContentTypes": ["HeroBannerWidget", "ServicesSectionWidget", "FeaturesSectionWidget", "TeamSectionWidget", "TestimonialsSectionWidget", "CtaSectionWidget", "ContactFormWidget", "HtmlBodyWidget", "TextWithImageWidget", "AccordionWidget", "BulletListWidget"] } } }
           ]
         },
         {
@@ -80,7 +80,7 @@
             { "PartName": "AutoroutePart", "Name": "AutoroutePart", "Settings": { "ContentTypePartSettings": { "Position": "1" }, "AutoroutePartSettings": { "AllowCustomPath": true, "Pattern": "{{ ContentItem | display_text | slugify }}" } } },
             { "PartName": "SeoMetaPart", "Name": "SeoMetaPart", "Settings": { "ContentTypePartSettings": { "Position": "2" } } },
             { "PartName": "ContentPage", "Name": "ContentPage", "Settings": { "ContentTypePartSettings": { "Position": "3" } } },
-            { "PartName": "FlowPart", "Name": "FlowPart", "Settings": { "ContentTypePartSettings": { "Position": "4" }, "FlowPartSettings": { "ContainedContentTypes": ["HeroBannerWidget", "ServicesSectionWidget", "FeaturesSectionWidget", "TeamSectionWidget", "TestimonialsSectionWidget", "CtaSectionWidget", "ContactFormWidget"] } } }
+            { "PartName": "FlowPart", "Name": "FlowPart", "Settings": { "ContentTypePartSettings": { "Position": "4" }, "FlowPartSettings": { "ContainedContentTypes": ["HeroBannerWidget", "ServicesSectionWidget", "FeaturesSectionWidget", "TeamSectionWidget", "TestimonialsSectionWidget", "CtaSectionWidget", "ContactFormWidget", "HtmlBodyWidget", "TextWithImageWidget", "AccordionWidget", "BulletListWidget"] } } }
           ]
         },
         {
@@ -182,6 +182,56 @@
           "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
           "ContentTypePartDefinitionRecords": [
             { "PartName": "ContactFormWidget", "Name": "ContactFormWidget", "Settings": {} }
+          ]
+        },
+        {
+          "Name": "HtmlBodyWidget",
+          "DisplayName": "Rich Text Content Section",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "HtmlBodyWidget", "Name": "HtmlBodyWidget", "Settings": {} }
+          ]
+        },
+        {
+          "Name": "TextWithImageWidget",
+          "DisplayName": "Text with Image Section",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "TextWithImageWidget", "Name": "TextWithImageWidget", "Settings": {} }
+          ]
+        },
+        {
+          "Name": "AccordionWidget",
+          "DisplayName": "Accordion/FAQ Section",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "AccordionWidget", "Name": "AccordionWidget", "Settings": {} },
+            { "PartName": "BagPart", "Name": "BagPart", "Settings": { "BagPartSettings": { "ContainedContentTypes": ["AccordionItem"] } } }
+          ]
+        },
+        {
+          "Name": "AccordionItem",
+          "DisplayName": "Accordion Item",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "AccordionItem", "Name": "AccordionItem", "Settings": {} }
+          ]
+        },
+        {
+          "Name": "BulletListWidget",
+          "DisplayName": "Bullet List Section",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "BulletListWidget", "Name": "BulletListWidget", "Settings": {} },
+            { "PartName": "BagPart", "Name": "BagPart", "Settings": { "BagPartSettings": { "ContainedContentTypes": ["BulletListItem"] } } }
+          ]
+        },
+        {
+          "Name": "BulletListItem",
+          "DisplayName": "Bullet List Item",
+          "Settings": { "ContentTypeSettings": { "Stereotype": "Widget" } },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "BulletListItem", "Name": "BulletListItem", "Settings": {} }
           ]
         },
         {
@@ -437,6 +487,67 @@
             { "FieldName": "TextField", "Name": "OrganizationEmail", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Email (JSON-LD)", "Position": "11" } } },
             { "FieldName": "TextField", "Name": "OrganizationSraNumber", "Settings": { "ContentPartFieldSettings": { "DisplayName": "SRA Number", "Position": "12", "Hint": "Solicitors Regulation Authority ID" } } },
             { "FieldName": "TextField", "Name": "OrganizationOpeningHours", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Opening Hours (JSON-LD)", "Position": "13", "Hint": "e.g., Mo-Fr 09:00-17:30" } } }
+          ]
+        },
+        {
+          "Name": "HtmlBodyWidget",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "SectionTitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Title", "Position": "0" } } },
+            { "FieldName": "HtmlField", "Name": "Content", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Content", "Position": "1", "Editor": "Trumbowyg" }, "HtmlFieldSettings": { "SanitizeHtml": false } } },
+            { "FieldName": "TextField", "Name": "CssClass", "Settings": { "ContentPartFieldSettings": { "DisplayName": "CSS Class", "Position": "2" } } }
+          ]
+        },
+        {
+          "Name": "TextWithImageWidget",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "SectionTitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Title", "Position": "0" } } },
+            { "FieldName": "HtmlField", "Name": "Content", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Content", "Position": "1", "Editor": "Trumbowyg" }, "HtmlFieldSettings": { "SanitizeHtml": false } } },
+            { "FieldName": "MediaField", "Name": "Image", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Image", "Position": "2" }, "MediaFieldSettings": { "Multiple": false } } },
+            { "FieldName": "TextField", "Name": "ImageAlt", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Image Alt Text", "Position": "3" } } },
+            { "FieldName": "TextField", "Name": "ImagePosition", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Image Position", "Position": "4", "Hint": "left or right" } } },
+            { "FieldName": "TextField", "Name": "CssClass", "Settings": { "ContentPartFieldSettings": { "DisplayName": "CSS Class", "Position": "5" } } }
+          ]
+        },
+        {
+          "Name": "AccordionWidget",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "SectionTitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Title", "Position": "0" } } },
+            { "FieldName": "TextField", "Name": "SectionSubtitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Subtitle", "Position": "1" } } },
+            { "FieldName": "BooleanField", "Name": "AllowMultipleOpen", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Allow Multiple Open", "Position": "2" }, "BooleanFieldSettings": { "Label": "Allow multiple accordion items open at once" } } },
+            { "FieldName": "TextField", "Name": "CssClass", "Settings": { "ContentPartFieldSettings": { "DisplayName": "CSS Class", "Position": "3" } } }
+          ]
+        },
+        {
+          "Name": "AccordionItem",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "Title", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Title/Question", "Position": "0" }, "TextFieldSettings": { "Required": true } } },
+            { "FieldName": "HtmlField", "Name": "Content", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Content/Answer", "Position": "1", "Editor": "Trumbowyg" }, "HtmlFieldSettings": { "SanitizeHtml": false } } },
+            { "FieldName": "BooleanField", "Name": "IsOpenByDefault", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Open by Default", "Position": "2" }, "BooleanFieldSettings": { "Label": "Show this item expanded by default" } } },
+            { "FieldName": "NumericField", "Name": "DisplayOrder", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Display Order", "Position": "3" }, "NumericFieldSettings": { "Minimum": 1, "DefaultValue": "1" } } }
+          ]
+        },
+        {
+          "Name": "BulletListWidget",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "SectionTitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Title", "Position": "0" } } },
+            { "FieldName": "TextField", "Name": "SectionSubtitle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Section Subtitle", "Position": "1" } } },
+            { "FieldName": "TextField", "Name": "ListStyle", "Settings": { "ContentPartFieldSettings": { "DisplayName": "List Style", "Position": "2", "Hint": "check, arrow, bullet, number" } } },
+            { "FieldName": "TextField", "Name": "Columns", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Columns", "Position": "3", "Hint": "1, 2, or 3" } } },
+            { "FieldName": "TextField", "Name": "CssClass", "Settings": { "ContentPartFieldSettings": { "DisplayName": "CSS Class", "Position": "4" } } }
+          ]
+        },
+        {
+          "Name": "BulletListItem",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "Text", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Item Text", "Position": "0" }, "TextFieldSettings": { "Required": true } } },
+            { "FieldName": "TextField", "Name": "Url", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Link URL (optional)", "Position": "1" } } },
+            { "FieldName": "NumericField", "Name": "DisplayOrder", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Display Order", "Position": "2" }, "NumericFieldSettings": { "Minimum": 1, "DefaultValue": "1" } } }
           ]
         },
         {

@@ -3,4 +3,8 @@
     ContentItem contentItem = Model.ContentItem;
 }
 
-@await Component.InvokeAsync("ContactFormWidget", new { contentItem = contentItem })
+<section class="contact-form-section py-5">
+    <div class="container">
+        @await Component.InvokeAsync("ContactFormWidget", new { contentItem = contentItem })
+    </div>
+</section>

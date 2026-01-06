@@ -1,0 +1,39 @@
+@using OrchardCore.ContentManagement
+@using OrchardCore.DisplayManagement
+@model dynamic
+
+@{
+    var contentItem = Model.ContentItem as ContentItem;
+    var title = contentItem?.DisplayText ?? "Page";
+}
+
+@*
+    ContentPage renders page content using FlowPart.
+    Each section widget (HeroBannerWidget, HtmlBodyWidget, etc.)
+    is rendered via its Widget-{ContentType}.cshtml shape override.
+
+    The admin can:
+    - Add sections via "Add Widget" in the FlowPart editor
+    - Reorder sections by drag-and-drop
+    - Remove sections as needed
+    - Each section is self-contained with its own content and styling
+*@
+
+@* If no FlowPart content exists, show a placeholder with the page title *@
+@if (Model.Content.FlowPart != null)
+{
+    @await DisplayAsync(Model.Content.FlowPart)
+}
+else
+{
+    <section class="page-header py-5 bg-light">
+        <div class="container">
+            <h1 class="display-5">@title</h1>
+        </div>
+    </section>
+    <section class="page-content py-5">
+        <div class="container">
+            <p class="text-muted">Content coming soon...</p>
+        </div>
+    </section>
+}

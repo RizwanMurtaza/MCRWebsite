@@ -93,7 +93,7 @@
                 "ContentItemId": "linkmenu001home00001",
                 "LinkMenuItemPart": {
                   "Name": "Home",
-                  "Url": "~/"
+                  "Url": "/"
                 }
               },
               {
@@ -101,49 +101,49 @@
                 "ContentItemId": "linkmenu002immigrat1",
                 "LinkMenuItemPart": {
                   "Name": "Immigration",
-                  "Url": "~/immigration"
+                  "Url": "/immigration"
                 },
                 "MenuItemsListPart": {
                   "MenuItems": [
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu003familyvi",
-                      "LinkMenuItemPart": { "Name": "Family Visas UK", "Url": "~/uk-family-visas" }
+                      "LinkMenuItemPart": { "Name": "Family Visas UK", "Url": "/uk-family-visas" }
                     },
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu004workvis1",
-                      "LinkMenuItemPart": { "Name": "Work Visas UK", "Url": "~/uk-work-visas" }
+                      "LinkMenuItemPart": { "Name": "Work Visas UK", "Url": "/uk-work-visas" }
                     },
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu005business",
-                      "LinkMenuItemPart": { "Name": "Business Visas UK", "Url": "~/business-investment-visas" }
+                      "LinkMenuItemPart": { "Name": "Business Visas UK", "Url": "/business-investment-visas" }
                     },
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu006visitor1",
-                      "LinkMenuItemPart": { "Name": "Visitor Visas UK", "Url": "~/visitor-visas-uk" }
+                      "LinkMenuItemPart": { "Name": "Visitor Visas UK", "Url": "/visitor-visas-uk" }
                     },
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu007ilr00001",
-                      "LinkMenuItemPart": { "Name": "Settle in the UK (ILR)", "Url": "~/indefinite-leave-to-remain-ilr" }
+                      "LinkMenuItemPart": { "Name": "Settle in the UK (ILR)", "Url": "/indefinite-leave-to-remain-ilr" }
                     },
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu008british1",
-                      "LinkMenuItemPart": { "Name": "British Citizenship", "Url": "~/british-citizenship" }
+                      "LinkMenuItemPart": { "Name": "British Citizenship", "Url": "/british-citizenship" }
                     },
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu009student1",
-                      "LinkMenuItemPart": { "Name": "Student Visas UK", "Url": "~/student-visas-uk" }
+                      "LinkMenuItemPart": { "Name": "Student Visas UK", "Url": "/student-visas-uk" }
                     },
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu010other001",
-                      "LinkMenuItemPart": { "Name": "Other Immigration", "Url": "~/other-immigration-applications" }
+                      "LinkMenuItemPart": { "Name": "Other Immigration", "Url": "/other-immigration-applications" }
                     }
                   ]
                 }
@@ -153,39 +153,39 @@
                 "ContentItemId": "linkmenu011familyla",
                 "LinkMenuItemPart": {
                   "Name": "Family Law",
-                  "Url": "~/family-law"
+                  "Url": "/family-law"
                 },
                 "MenuItemsListPart": {
                   "MenuItems": [
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu012divorce1",
-                      "LinkMenuItemPart": { "Name": "Getting a Divorce", "Url": "~/getting-a-divorce" }
+                      "LinkMenuItemPart": { "Name": "Getting a Divorce", "Url": "/getting-a-divorce" }
                     },
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu013judicia1",
-                      "LinkMenuItemPart": { "Name": "Judicial Separation", "Url": "~/judicial-separation" }
+                      "LinkMenuItemPart": { "Name": "Judicial Separation", "Url": "/judicial-separation" }
                     },
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu014financi1",
-                      "LinkMenuItemPart": { "Name": "Divorce Financial Settlement", "Url": "~/divorce-financial-settlement" }
+                      "LinkMenuItemPart": { "Name": "Divorce Financial Settlement", "Url": "/divorce-financial-settlement" }
                     },
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu015childor1",
-                      "LinkMenuItemPart": { "Name": "Child Arrangement Orders", "Url": "~/child-arrangement-orders" }
+                      "LinkMenuItemPart": { "Name": "Child Arrangement Orders", "Url": "/child-arrangement-orders" }
                     },
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu016nonmole1",
-                      "LinkMenuItemPart": { "Name": "Non-Molestation Orders", "Url": "~/non-molestation-occupation-orders" }
+                      "LinkMenuItemPart": { "Name": "Non-Molestation Orders", "Url": "/non-molestation-occupation-orders" }
                     },
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu017prenup01",
-                      "LinkMenuItemPart": { "Name": "Prenuptial Agreements", "Url": "~/prenuptial-agreements" }
+                      "LinkMenuItemPart": { "Name": "Prenuptial Agreements", "Url": "/prenuptial-agreements" }
                     }
                   ]
                 }
@@ -195,34 +195,34 @@
                 "ContentItemId": "linkmenu018persona1",
                 "LinkMenuItemPart": {
                   "Name": "Personal Injury",
-                  "Url": "~/personal-injury"
+                  "Url": "/personal-injury"
                 },
                 "MenuItemsListPart": {
                   "MenuItems": [
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu019roadtra1",
-                      "LinkMenuItemPart": { "Name": "Road Traffic Accidents", "Url": "~/road-traffic-accident-claims" }
+                      "LinkMenuItemPart": { "Name": "Road Traffic Accidents", "Url": "/road-traffic-accident-claims" }
                     },
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu020acciden1",
-                      "LinkMenuItemPart": { "Name": "Accident at Work", "Url": "~/accident-at-work-claims" }
+                      "LinkMenuItemPart": { "Name": "Accident at Work", "Url": "/accident-at-work-claims" }
                     },
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu021whiplas",
-                      "LinkMenuItemPart": { "Name": "Whiplash Injury", "Url": "~/whiplash-injury-claims" }
+                      "LinkMenuItemPart": { "Name": "Whiplash Injury", "Url": "/whiplash-injury-claims" }
                     },
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu022medical1",
-                      "LinkMenuItemPart": { "Name": "Medical Negligence", "Url": "~/medical-negligence-claims" }
+                      "LinkMenuItemPart": { "Name": "Medical Negligence", "Url": "/medical-negligence-claims" }
                     },
                     {
                       "ContentType": "LinkMenuItem",
                       "ContentItemId": "linkmenu023slipstr1",
-                      "LinkMenuItemPart": { "Name": "Slips, Trips & Falls", "Url": "~/slips-trips-falls-claims" }
+                      "LinkMenuItemPart": { "Name": "Slips, Trips & Falls", "Url": "/slips-trips-falls-claims" }
                     }
                   ]
                 }
@@ -232,7 +232,7 @@
                 "ContentItemId": "linkmenu024aboutus1",
                 "LinkMenuItemPart": {
                   "Name": "About Us",
-                  "Url": "~/about-us"
+                  "Url": "/about-us"
                 }
               },
               {
@@ -240,7 +240,7 @@
                 "ContentItemId": "linkmenu025contact1",
                 "LinkMenuItemPart": {
                   "Name": "Contact",
-                  "Url": "~/contact-us"
+                  "Url": "/contact-us"
                 }
               }
             ]

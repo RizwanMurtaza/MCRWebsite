@@ -1,0 +1,7 @@
+@using OrchardCore.ContentManagement
+
+@{
+    var contentItem = Model.ContentItem as ContentItem;
+}
+
+@await Component.InvokeAsync("TextWithImageWidget", new { contentItem })
