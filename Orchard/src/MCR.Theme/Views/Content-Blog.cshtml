@@ -1,0 +1,28 @@
+@using OrchardCore.ContentManagement
+@using OrchardCore.ContentManagement.Display
+@using OrchardCore.DisplayManagement
+@using OrchardCore.DisplayManagement.Views
+@model OrchardCore.ContentManagement.ContentItem
+
+@{
+    var title = Model.DisplayText ?? "Blog";
+    var description = Model.Content.Blog?.Description?.Text?.ToString();
+}
+
+<section class="blog-header">
+    <div class="container">
+        <div class="blog-header-content">
+            <h1 class="blog-title">@title</h1>
+            @if (!string.IsNullOrEmpty(description))
+            {
+                <p class="blog-description">@description</p>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="blog-listing section">
+    <div class="container">
+        @await DisplayAsync(Model.Content.ListPart)
+    </div>
+</section>

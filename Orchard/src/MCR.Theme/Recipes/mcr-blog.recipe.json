@@ -1,0 +1,341 @@
+{
+  "name": "MCR Blog",
+  "displayName": "MCR Theme - Blog Setup",
+  "description": "Sets up blog functionality with content types, navigation, and sample SEO-optimized blog posts for MCR Solicitors",
+  "author": "MCR Solicitors",
+  "website": "https://mcrsolicitors.co.uk",
+  "version": "1.0.0",
+  "issetuprecipe": false,
+  "categories": ["Theme", "Blog"],
+  "tags": ["mcr", "solicitors", "legal", "blog"],
+  "steps": [
+    {
+      "name": "feature",
+      "enable": [
+        "OrchardCore.Contents",
+        "OrchardCore.ContentFields",
+        "OrchardCore.Title",
+        "OrchardCore.Autoroute",
+        "OrchardCore.Html",
+        "OrchardCore.Markdown",
+        "OrchardCore.Media",
+        "OrchardCore.Lists",
+        "OrchardCore.Taxonomies",
+        "OrchardCore.Seo",
+        "OrchardCore.Alias",
+        "OrchardCore.PublishLater"
+      ]
+    },
+    {
+      "name": "ContentDefinition",
+      "ContentTypes": [
+        {
+          "Name": "Blog",
+          "DisplayName": "Blog",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Creatable": true,
+              "Listable": true,
+              "Draftable": true,
+              "Versionable": true,
+              "Securable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "TitlePart", "Name": "TitlePart", "Settings": { "ContentTypePartSettings": { "Position": "0" } } },
+            { "PartName": "AliasPart", "Name": "AliasPart", "Settings": { "ContentTypePartSettings": { "Position": "1" }, "AliasPartSettings": { "Pattern": "{{ ContentItem | display_text | slugify }}" } } },
+            { "PartName": "AutoroutePart", "Name": "AutoroutePart", "Settings": { "ContentTypePartSettings": { "Position": "2" }, "AutoroutePartSettings": { "AllowCustomPath": true, "Pattern": "{{ ContentItem | display_text | slugify }}" } } },
+            { "PartName": "SeoMetaPart", "Name": "SeoMetaPart", "Settings": { "ContentTypePartSettings": { "Position": "3" } } },
+            { "PartName": "Blog", "Name": "Blog", "Settings": { "ContentTypePartSettings": { "Position": "4" } } },
+            { "PartName": "ListPart", "Name": "ListPart", "Settings": { "ContentTypePartSettings": { "Position": "5" }, "ListPartSettings": { "PageSize": 10, "ContainedContentTypes": ["BlogPost"] } } }
+          ]
+        },
+        {
+          "Name": "BlogPost",
+          "DisplayName": "Blog Post",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Creatable": false,
+              "Listable": true,
+              "Draftable": true,
+              "Versionable": true,
+              "Securable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "TitlePart", "Name": "TitlePart", "Settings": { "ContentTypePartSettings": { "Position": "0" } } },
+            { "PartName": "AutoroutePart", "Name": "AutoroutePart", "Settings": { "ContentTypePartSettings": { "Position": "1" }, "AutoroutePartSettings": { "AllowCustomPath": true, "Pattern": "blog/{{ ContentItem | display_text | slugify }}" } } },
+            { "PartName": "SeoMetaPart", "Name": "SeoMetaPart", "Settings": { "ContentTypePartSettings": { "Position": "2" } } },
+            { "PartName": "BlogPost", "Name": "BlogPost", "Settings": { "ContentTypePartSettings": { "Position": "3" } } },
+            { "PartName": "HtmlBodyPart", "Name": "HtmlBodyPart", "Settings": { "ContentTypePartSettings": { "Position": "4", "Editor": "Trumbowyg" } } },
+            { "PartName": "ContainedPart", "Name": "ContainedPart", "Settings": { "ContentTypePartSettings": { "Position": "5" } } },
+            { "PartName": "PublishLaterPart", "Name": "PublishLaterPart", "Settings": { "ContentTypePartSettings": { "Position": "6" } } }
+          ]
+        },
+        {
+          "Name": "BlogCategory",
+          "DisplayName": "Blog Category",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Creatable": true,
+              "Listable": true,
+              "Draftable": false,
+              "Versionable": false
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            { "PartName": "TitlePart", "Name": "TitlePart", "Settings": { "ContentTypePartSettings": { "Position": "0" } } },
+            { "PartName": "AutoroutePart", "Name": "AutoroutePart", "Settings": { "ContentTypePartSettings": { "Position": "1" }, "AutoroutePartSettings": { "AllowCustomPath": true, "Pattern": "blog/category/{{ ContentItem | display_text | slugify }}" } } },
+            { "PartName": "BlogCategory", "Name": "BlogCategory", "Settings": { "ContentTypePartSettings": { "Position": "2" } } }
+          ]
+        }
+      ],
+      "ContentParts": [
+        {
+          "Name": "Blog",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "Description", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Blog Description", "Position": "0", "Editor": "TextArea" } } },
+            { "FieldName": "MediaField", "Name": "HeaderImage", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Header Image", "Position": "1" }, "MediaFieldSettings": { "Multiple": false } } }
+          ]
+        },
+        {
+          "Name": "BlogPost",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "Excerpt", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Excerpt/Summary", "Position": "0", "Editor": "TextArea", "Hint": "Brief summary for listings and SEO (150-160 chars recommended)" } } },
+            { "FieldName": "MediaField", "Name": "FeaturedImage", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Featured Image", "Position": "1" }, "MediaFieldSettings": { "Multiple": false } } },
+            { "FieldName": "TextField", "Name": "FeaturedImageAlt", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Featured Image Alt Text", "Position": "2" } } },
+            { "FieldName": "TextField", "Name": "Author", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Author Name", "Position": "3" } } },
+            { "FieldName": "TextField", "Name": "Category", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Category", "Position": "4", "Hint": "e.g., Immigration, Family Law, Personal Injury" } } },
+            { "FieldName": "TextField", "Name": "Tags", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Tags", "Position": "5", "Hint": "Comma-separated tags" } } },
+            { "FieldName": "NumericField", "Name": "ReadTime", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Read Time (minutes)", "Position": "6" }, "NumericFieldSettings": { "Minimum": 1, "DefaultValue": "5" } } },
+            { "FieldName": "BooleanField", "Name": "IsFeatured", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Featured Post", "Position": "7" }, "BooleanFieldSettings": { "Label": "Show as featured post" } } }
+          ]
+        },
+        {
+          "Name": "BlogCategory",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            { "FieldName": "TextField", "Name": "Description", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Category Description", "Position": "0", "Editor": "TextArea" } } },
+            { "FieldName": "TextField", "Name": "IconClass", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Icon Class", "Position": "1", "Hint": "Font Awesome class e.g., fas fa-gavel" } } },
+            { "FieldName": "NumericField", "Name": "DisplayOrder", "Settings": { "ContentPartFieldSettings": { "DisplayName": "Display Order", "Position": "2" } } }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "content",
+      "data": [
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "Blog",
+          "DisplayText": "Blog",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": { "Title": "Blog" },
+          "AliasPart": { "Alias": "blog" },
+          "AutoroutePart": { "Path": "blog", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Legal News & Insights",
+            "MetaDescription": "Expert legal advice, news, and insights from MCR Solicitors Manchester. Stay informed about UK immigration, family law, personal injury, and employment law."
+          },
+          "Blog": {
+            "Description": { "Text": "Expert legal insights, news, and advice from our experienced solicitors in Manchester. Stay informed about changes in UK law and get practical guidance for your legal matters." }
+          },
+          "ListPart": {}
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "BlogPost",
+          "DisplayText": "Understanding UK Spouse Visa Requirements in 2024: A Complete Guide",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "TitlePart": { "Title": "Understanding UK Spouse Visa Requirements in 2024: A Complete Guide" },
+          "AutoroutePart": { "Path": "blog/uk-spouse-visa-requirements-2024-complete-guide", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "UK Spouse Visa Requirements 2024 | Complete Guide | MCR Solicitors",
+            "MetaDescription": "Everything you need to know about UK spouse visa requirements in 2024. Income thresholds, documents needed, processing times & expert tips from Manchester immigration solicitors."
+          },
+          "BlogPost": {
+            "Excerpt": { "Text": "Planning to bring your spouse to the UK? Our comprehensive guide covers the latest 2024 requirements including the new income threshold, required documents, and step-by-step application process." },
+            "Author": { "Text": "MCR Solicitors Immigration Team" },
+            "Category": { "Text": "Immigration" },
+            "Tags": { "Text": "spouse visa, UK immigration, family visa, partner visa, immigration requirements" },
+            "ReadTime": { "Value": 8 },
+            "IsFeatured": { "Value": true }
+          },
+          "HtmlBodyPart": {
+            "Html": "<h2>Introduction to UK Spouse Visas</h2><p>Bringing your spouse or partner to live with you in the United Kingdom is a significant step that requires careful planning and understanding of the immigration rules. The UK spouse visa (also known as a partner visa) allows the husband, wife, civil partner, or unmarried partner of a British citizen or person settled in the UK to join them.</p><h2>Key Requirements for 2024</h2><p>The UK government has updated the financial requirements for spouse visas. Here are the essential criteria you must meet:</p><h3>Financial Requirement</h3><p>As of April 2024, the minimum income threshold has increased significantly. The sponsor must demonstrate:</p><ul><li>Minimum annual income of £29,000 (increased from £18,600)</li><li>Additional income if sponsoring dependent children</li><li>Evidence of consistent income for at least 6 months</li></ul><h3>Relationship Evidence</h3><p>You must prove your relationship is genuine and subsisting through:</p><ul><li>Marriage or civil partnership certificate</li><li>Evidence of living together</li><li>Joint financial commitments (bank accounts, bills, tenancy)</li><li>Communication records and photographs</li></ul><h3>English Language Requirement</h3><p>The applicant must demonstrate English language ability at A1 level or higher by:</p><ul><li>Passing an approved English language test</li><li>Having a degree taught in English</li><li>Being a national of a majority English-speaking country</li></ul><h3>Accommodation</h3><p>You must prove you have adequate accommodation that:</p><ul><li>Is not overcrowded</li><li>Meets housing standards</li><li>Is available without recourse to public funds</li></ul><h2>Application Process</h2><p>The spouse visa application involves several steps:</p><ol><li><strong>Online Application:</strong> Complete form VAF4A on the gov.uk website</li><li><strong>Document Submission:</strong> Upload all supporting documents</li><li><strong>Biometrics Appointment:</strong> Attend a visa application centre for fingerprints and photograph</li><li><strong>Processing:</strong> Standard processing takes up to 24 weeks</li><li><strong>Decision:</strong> Receive your visa decision via email</li></ol><h2>How MCR Solicitors Can Help</h2><p>Our experienced immigration team in Manchester has helped hundreds of families reunite in the UK. We offer:</p><ul><li>Free initial consultation to assess your eligibility</li><li>Complete application preparation and document checking</li><li>Liaison with the Home Office on your behalf</li><li>Appeal support if your application is refused</li></ul><p>Contact us today on <strong>0161 466 1280</strong> to discuss your spouse visa application.</p>"
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "BlogPost",
+          "DisplayText": "What to Do If Your UK Visa Application Is Refused: Your Options Explained",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "TitlePart": { "Title": "What to Do If Your UK Visa Application Is Refused: Your Options Explained" },
+          "AutoroutePart": { "Path": "blog/uk-visa-refused-options-explained", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "UK Visa Refused? Your Options Explained | Appeals & Reviews | MCR Solicitors",
+            "MetaDescription": "Visa application refused? Learn about administrative review, appeals, and fresh applications. Expert guidance from Manchester immigration solicitors on overturning refusals."
+          },
+          "BlogPost": {
+            "Excerpt": { "Text": "Receiving a visa refusal can be devastating, but it's not necessarily the end of the road. Learn about your options including administrative review, appeals, and making a fresh application." },
+            "Author": { "Text": "MCR Solicitors Immigration Team" },
+            "Category": { "Text": "Immigration" },
+            "Tags": { "Text": "visa refusal, immigration appeal, administrative review, visa rejection, immigration advice" },
+            "ReadTime": { "Value": 6 },
+            "IsFeatured": { "Value": false }
+          },
+          "HtmlBodyPart": {
+            "Html": "<h2>Understanding Your Visa Refusal</h2><p>A visa refusal can feel like a major setback, but understanding why your application was refused is the first step towards a successful outcome. The Home Office must provide reasons for any refusal, which will help determine your next steps.</p><h2>Common Reasons for Visa Refusals</h2><ul><li><strong>Insufficient financial evidence:</strong> Not meeting income thresholds or providing inadequate documentation</li><li><strong>Relationship concerns:</strong> Doubts about the genuineness of relationships</li><li><strong>Document issues:</strong> Missing, incorrect, or suspected fraudulent documents</li><li><strong>Immigration history:</strong> Previous overstays or breaches of visa conditions</li><li><strong>English language:</strong> Failing to meet language requirements</li></ul><h2>Your Options After Refusal</h2><h3>1. Administrative Review</h3><p>An administrative review is available for most visa categories and involves a senior caseworker reviewing the original decision. This is suitable when:</p><ul><li>You believe a casework error was made</li><li>Evidence was overlooked or misunderstood</li><li>The decision contradicts Home Office policy</li></ul><p>Administrative reviews must be requested within 28 days and cost £80.</p><h3>2. Appeal to the First-tier Tribunal</h3><p>Appeals are available for certain visa types, particularly those involving human rights claims. An appeal allows you to:</p><ul><li>Present your case before an independent judge</li><li>Submit new evidence</li><li>Have witnesses give testimony</li></ul><p>Appeals typically take 6-12 months and require strong legal representation.</p><h3>3. Fresh Application</h3><p>Sometimes, making a new application is the best option, especially if:</p><ul><li>Circumstances have changed since the original application</li><li>You can now provide stronger evidence</li><li>The refusal reasons can be clearly addressed</li></ul><h2>Time Limits Are Critical</h2><p>It's essential to act quickly after receiving a refusal:</p><ul><li><strong>Administrative Review:</strong> 28 days (14 days if in the UK)</li><li><strong>Appeals:</strong> 28 days from date of decision (14 days if in the UK)</li></ul><h2>Get Expert Help</h2><p>At MCR Solicitors, our immigration team has extensive experience in overturning visa refusals. We offer:</p><ul><li>Free assessment of your refusal letter</li><li>Advice on the strongest route forward</li><li>Full representation for reviews and appeals</li></ul><p>Don't let a refusal be the end of your journey. Call us on <strong>0161 466 1280</strong> for immediate advice.</p>"
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "BlogPost",
+          "DisplayText": "Divorce in the UK: A Step-by-Step Guide to the No-Fault Divorce Process",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "TitlePart": { "Title": "Divorce in the UK: A Step-by-Step Guide to the No-Fault Divorce Process" },
+          "AutoroutePart": { "Path": "blog/uk-no-fault-divorce-guide", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "UK No-Fault Divorce Guide 2024 | Step-by-Step Process | MCR Solicitors",
+            "MetaDescription": "Complete guide to no-fault divorce in the UK. Learn about the process, costs, timelines, and how to protect your interests. Expert family law advice from Manchester solicitors."
+          },
+          "BlogPost": {
+            "Excerpt": { "Text": "The UK's no-fault divorce law has transformed how couples end their marriages. This comprehensive guide explains the new process, what to expect, and how to protect your interests throughout." },
+            "Author": { "Text": "MCR Solicitors Family Law Team" },
+            "Category": { "Text": "Family Law" },
+            "Tags": { "Text": "divorce, no-fault divorce, family law, separation, marriage dissolution" },
+            "ReadTime": { "Value": 7 },
+            "IsFeatured": { "Value": true }
+          },
+          "HtmlBodyPart": {
+            "Html": "<h2>What Is No-Fault Divorce?</h2><p>Since April 2022, England and Wales have operated under a no-fault divorce system. This means couples can now end their marriage without having to blame one another or prove fault. The only ground for divorce is that the marriage has irretrievably broken down.</p><h2>Key Changes Under the New Law</h2><ul><li><strong>No blame required:</strong> You simply state the marriage has broken down</li><li><strong>Joint applications:</strong> Couples can apply together</li><li><strong>No contesting:</strong> The divorce itself cannot be contested</li><li><strong>New terminology:</strong> 'Petitioner' becomes 'Applicant', 'Decree Nisi' becomes 'Conditional Order'</li></ul><h2>The Divorce Process Step by Step</h2><h3>Step 1: Application</h3><p>Start by completing the divorce application online or by post. You can apply:</p><ul><li>As a sole applicant</li><li>Jointly with your spouse</li></ul><p>The court fee is currently £593.</p><h3>Step 2: Acknowledgement</h3><p>If you apply alone, your spouse receives the application and must acknowledge receipt within 14 days. They cannot contest the divorce, only dispute jurisdiction or validity of the marriage.</p><h3>Step 3: 20-Week Reflection Period</h3><p>After the application is issued, there's a mandatory 20-week waiting period. This allows time for:</p><ul><li>Reflection on the decision</li><li>Negotiating financial settlements</li><li>Arranging child custody matters</li></ul><h3>Step 4: Conditional Order</h3><p>After 20 weeks, you can apply for a Conditional Order. The court will grant this if satisfied the marriage has broken down.</p><h3>Step 5: Final Order</h3><p>Six weeks after the Conditional Order, you can apply for the Final Order. This legally ends your marriage.</p><h2>Financial Matters and Children</h2><p>The divorce process is separate from:</p><ul><li><strong>Financial settlements:</strong> Division of assets, property, pensions, and maintenance</li><li><strong>Child arrangements:</strong> Where children live and how often they see each parent</li></ul><p>It's crucial to resolve these matters properly, ideally before the Final Order.</p><h2>Protecting Your Interests</h2><p>Even with no-fault divorce, you should:</p><ul><li>Seek legal advice early</li><li>Understand your financial position</li><li>Consider mediation for disputes</li><li>Obtain a Consent Order for financial agreements</li></ul><h2>How We Can Help</h2><p>Our family law team at MCR Solicitors provides compassionate, practical support throughout your divorce. We offer:</p><ul><li>Fixed-fee divorce packages</li><li>Financial settlement negotiations</li><li>Child arrangement advice</li><li>Court representation when needed</li></ul><p>Call us on <strong>0161 466 1280</strong> for a confidential consultation.</p>"
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "BlogPost",
+          "DisplayText": "Child Custody and Arrangements: Understanding Your Rights as a Parent",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "TitlePart": { "Title": "Child Custody and Arrangements: Understanding Your Rights as a Parent" },
+          "AutoroutePart": { "Path": "blog/child-custody-arrangements-parental-rights", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Child Custody & Arrangements UK | Parental Rights Guide | MCR Solicitors",
+            "MetaDescription": "Understanding child custody and arrangements in the UK. Learn about parental responsibility, residence orders, and contact rights. Expert family law guidance from Manchester."
+          },
+          "BlogPost": {
+            "Excerpt": { "Text": "When parents separate, arranging care for children is often the most emotionally challenging aspect. This guide explains your rights, the different types of arrangements, and how courts make decisions about children." },
+            "Author": { "Text": "MCR Solicitors Family Law Team" },
+            "Category": { "Text": "Family Law" },
+            "Tags": { "Text": "child custody, child arrangements, parental rights, family court, contact order" },
+            "ReadTime": { "Value": 6 },
+            "IsFeatured": { "Value": false }
+          },
+          "HtmlBodyPart": {
+            "Html": "<h2>Understanding Parental Responsibility</h2><p>Parental responsibility means all the rights, duties, powers, and responsibilities that a parent has for their child. This includes decisions about:</p><ul><li>Where the child lives</li><li>Education and schooling</li><li>Medical treatment</li><li>Religious upbringing</li><li>Travel and passports</li></ul><h3>Who Has Parental Responsibility?</h3><ul><li><strong>Mothers:</strong> Automatically have parental responsibility</li><li><strong>Married fathers:</strong> Automatically have parental responsibility</li><li><strong>Unmarried fathers:</strong> Have parental responsibility if named on the birth certificate (from December 2003) or through court order/agreement</li></ul><h2>Types of Child Arrangements</h2><h3>Child Arrangements Orders</h3><p>Since 2014, the terms 'custody' and 'access' have been replaced. Courts now make Child Arrangements Orders that specify:</p><ul><li><strong>Who the child lives with:</strong> This determines the child's main residence</li><li><strong>Who the child spends time with:</strong> This covers contact with the non-resident parent</li></ul><h3>Common Arrangements</h3><ul><li><strong>Shared care:</strong> Children spend roughly equal time with both parents</li><li><strong>Primary residence:</strong> Children live mainly with one parent, with regular contact with the other</li><li><strong>Supervised contact:</strong> Time with a parent is supervised, often at a contact centre</li></ul><h2>How Courts Make Decisions</h2><p>When parents cannot agree, the court decides based on the <strong>child's welfare</strong>, which is the paramount consideration. The court considers the 'welfare checklist':</p><ol><li>The child's physical, emotional, and educational needs</li><li>The likely effect of any change in circumstances</li><li>The child's age, sex, background, and relevant characteristics</li><li>Any harm the child has suffered or is at risk of suffering</li><li>How capable each parent is of meeting the child's needs</li><li>The range of powers available to the court</li></ol><h2>Reaching Agreement Without Court</h2><p>Courts expect parents to try to reach agreement before litigation. Options include:</p><ul><li><strong>Mediation:</strong> A neutral mediator helps you reach agreement</li><li><strong>Collaborative law:</strong> Each parent has a lawyer, but everyone commits to avoiding court</li><li><strong>Direct negotiation:</strong> Parents agree arrangements themselves, possibly with legal advice</li></ul><h2>When You Need a Court Order</h2><p>You may need to apply to court if:</p><ul><li>The other parent refuses to allow contact</li><li>You have concerns about the child's safety</li><li>You cannot agree on arrangements despite trying mediation</li><li>One parent wants to relocate with the child</li></ul><h2>Expert Support From MCR Solicitors</h2><p>Our family law team understands how difficult these situations are. We provide:</p><ul><li>Initial advice on your rights and options</li><li>Mediation and negotiation support</li><li>Court applications and representation</li><li>Enforcement of existing orders</li></ul><p>Call us on <strong>0161 466 1280</strong> to discuss your situation in confidence.</p>"
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "BlogPost",
+          "DisplayText": "Workplace Accident Claims: What Every Employee Should Know",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "TitlePart": { "Title": "Workplace Accident Claims: What Every Employee Should Know" },
+          "AutoroutePart": { "Path": "blog/workplace-accident-claims-employee-guide", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Workplace Accident Claims UK | Employee Rights Guide | MCR Solicitors",
+            "MetaDescription": "Been injured at work? Learn about your rights to compensation, what to do after an accident, time limits, and how to make a successful claim. Manchester personal injury solicitors."
+          },
+          "BlogPost": {
+            "Excerpt": { "Text": "If you've been injured at work due to your employer's negligence, you have the right to claim compensation. This guide explains what to do after a workplace accident and how to protect your claim." },
+            "Author": { "Text": "MCR Solicitors Personal Injury Team" },
+            "Category": { "Text": "Personal Injury" },
+            "Tags": { "Text": "workplace accident, work injury, compensation claim, employer negligence, personal injury" },
+            "ReadTime": { "Value": 5 },
+            "IsFeatured": { "Value": true }
+          },
+          "HtmlBodyPart": {
+            "Html": "<h2>Your Employer's Duty of Care</h2><p>Every employer in the UK has a legal duty to provide a safe working environment. This includes:</p><ul><li>Maintaining safe premises and equipment</li><li>Providing adequate training and supervision</li><li>Conducting risk assessments</li><li>Providing appropriate personal protective equipment (PPE)</li><li>Implementing safe systems of work</li></ul><h2>Common Workplace Accidents</h2><p>We regularly handle claims involving:</p><ul><li><strong>Slips, trips, and falls:</strong> Wet floors, uneven surfaces, obstacles</li><li><strong>Manual handling injuries:</strong> Lifting, carrying, repetitive strain</li><li><strong>Falls from height:</strong> Ladders, scaffolding, roofs</li><li><strong>Machinery accidents:</strong> Inadequate guarding, lack of training</li><li><strong>Exposure to hazardous substances:</strong> Chemicals, asbestos, dust</li></ul><h2>What to Do After a Workplace Accident</h2><h3>1. Report the Accident</h3><p>Ensure the accident is recorded in your employer's accident book. This creates an official record that can support your claim.</p><h3>2. Seek Medical Attention</h3><p>Get medical treatment as soon as possible. Your medical records will be important evidence.</p><h3>3. Gather Evidence</h3><ul><li>Take photographs of the accident scene</li><li>Note the names of any witnesses</li><li>Keep records of any expenses</li><li>Document how the injury affects your daily life</li></ul><h3>4. Don't Sign Anything</h3><p>Your employer may ask you to sign statements or documents. Always seek legal advice before signing anything.</p><h2>What Compensation Can You Claim?</h2><p>A successful claim can include:</p><ul><li><strong>General damages:</strong> Compensation for pain, suffering, and loss of amenity</li><li><strong>Special damages:</strong> Financial losses including lost earnings, medical expenses, travel costs</li><li><strong>Future losses:</strong> If your injury affects your long-term earning capacity</li><li><strong>Care and assistance:</strong> If you need help with daily activities</li></ul><h2>Time Limits for Claims</h2><p>You generally have <strong>three years</strong> from the date of the accident to start court proceedings. However, you should seek advice as soon as possible because:</p><ul><li>Evidence can deteriorate or disappear</li><li>Witnesses' memories fade</li><li>Your employer must keep records for a limited time</li></ul><h2>Will I Lose My Job?</h2><p>Many employees worry about claiming against their employer. It's important to know:</p><ul><li>It's illegal to dismiss someone for making a legitimate claim</li><li>Most claims are handled by insurance companies</li><li>Unfair dismissal laws protect you</li></ul><h2>No Win, No Fee Claims</h2><p>We offer workplace accident claims on a No Win, No Fee basis, meaning:</p><ul><li>No upfront costs to you</li><li>If we don't win, you don't pay</li><li>Success fees are capped by law</li></ul><p>Call MCR Solicitors on <strong>0161 466 1280</strong> for a free consultation about your workplace accident.</p>"
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "BlogPost",
+          "DisplayText": "Slip, Trip and Fall Claims: Proving Liability and Maximising Compensation",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "TitlePart": { "Title": "Slip, Trip and Fall Claims: Proving Liability and Maximising Compensation" },
+          "AutoroutePart": { "Path": "blog/slip-trip-fall-claims-guide", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Slip, Trip & Fall Claims UK | Proving Liability Guide | MCR Solicitors",
+            "MetaDescription": "Injured in a slip, trip or fall? Learn how to prove liability, what compensation you could receive, and how Manchester personal injury solicitors can help your claim."
+          },
+          "BlogPost": {
+            "Excerpt": { "Text": "Slips, trips and falls are among the most common accidents in the UK. If you've been injured due to someone else's negligence, you may be entitled to significant compensation." },
+            "Author": { "Text": "MCR Solicitors Personal Injury Team" },
+            "Category": { "Text": "Personal Injury" },
+            "Tags": { "Text": "slip and fall, trip accident, public liability, compensation claim, personal injury" },
+            "ReadTime": { "Value": 5 },
+            "IsFeatured": { "Value": false }
+          },
+          "HtmlBodyPart": {
+            "Html": "<h2>Understanding Slip, Trip and Fall Claims</h2><p>Property owners, occupiers, and businesses have a duty of care to ensure their premises are reasonably safe for visitors. When they fail in this duty and you're injured, you have the right to claim compensation.</p><h2>Where Do These Accidents Happen?</h2><p>Common locations for slip, trip and fall accidents include:</p><ul><li><strong>Supermarkets and shops:</strong> Wet floors, spilled products, damaged flooring</li><li><strong>Public pavements:</strong> Uneven surfaces, potholes, raised flagstones</li><li><strong>Workplaces:</strong> Cables, wet surfaces, cluttered walkways</li><li><strong>Restaurants and pubs:</strong> Spilled drinks, worn carpets, poor lighting</li><li><strong>Public buildings:</strong> Stairs, escalators, poorly maintained floors</li></ul><h2>Proving Your Claim</h2><p>To succeed in a slip, trip or fall claim, you must prove:</p><ol><li><strong>Duty of care:</strong> The defendant owed you a duty to keep the premises safe</li><li><strong>Breach:</strong> They failed to meet that duty</li><li><strong>Causation:</strong> Their breach caused your accident</li><li><strong>Damage:</strong> You suffered injury or loss as a result</li></ol><h3>What Evidence Do You Need?</h3><ul><li>Photographs of the hazard and accident scene</li><li>Witness statements</li><li>CCTV footage (request this quickly as it may be deleted)</li><li>Accident report if completed</li><li>Medical records documenting your injuries</li></ul><h2>Common Defences You May Face</h2><p>Defendants often argue:</p><ul><li><strong>No knowledge:</strong> They didn't know about the hazard</li><li><strong>Reasonable inspection:</strong> They had adequate inspection systems</li><li><strong>Contributory negligence:</strong> You were partially to blame</li><li><strong>Obvious hazard:</strong> You should have seen and avoided it</li></ul><h2>Types of Injuries</h2><p>Slip, trip and fall accidents can cause serious injuries including:</p><ul><li>Broken bones and fractures</li><li>Head and brain injuries</li><li>Back and spinal injuries</li><li>Soft tissue damage</li><li>Psychological trauma</li></ul><h2>Compensation Amounts</h2><p>The value of your claim depends on:</p><ul><li>Severity of your injuries</li><li>Length of recovery</li><li>Impact on your life and work</li><li>Financial losses incurred</li></ul><p>Typical compensation ranges from a few thousand pounds for minor injuries to hundreds of thousands for serious, life-changing injuries.</p><h2>Time Limits</h2><p>You have <strong>three years</strong> from the date of the accident to start court proceedings. For claims against local authorities for pavement defects, it's important to act quickly as they may have defence under Section 58 of the Highways Act.</p><h2>How MCR Solicitors Can Help</h2><p>Our experienced personal injury team will:</p><ul><li>Investigate your accident thoroughly</li><li>Gather and preserve evidence</li><li>Obtain expert medical evidence</li><li>Negotiate with insurers for maximum compensation</li></ul><p>Contact us on <strong>0161 466 1280</strong> for a free, no-obligation assessment of your claim.</p>"
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "BlogPost",
+          "DisplayText": "UK Student Visa Guide: Requirements, Costs and Application Process",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "TitlePart": { "Title": "UK Student Visa Guide: Requirements, Costs and Application Process" },
+          "AutoroutePart": { "Path": "blog/uk-student-visa-guide-requirements", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "UK Student Visa Guide 2024 | Requirements & Costs | MCR Solicitors",
+            "MetaDescription": "Complete guide to UK Student visas. Learn about eligibility, financial requirements, CAS, application process and post-study work options. Expert immigration advice Manchester."
+          },
+          "BlogPost": {
+            "Excerpt": { "Text": "Planning to study in the UK? Our comprehensive guide covers everything you need to know about Student visas, from eligibility requirements to the application process and post-study work opportunities." },
+            "Author": { "Text": "MCR Solicitors Immigration Team" },
+            "Category": { "Text": "Immigration" },
+            "Tags": { "Text": "student visa, study in UK, Tier 4, CAS, international students, graduate visa" },
+            "ReadTime": { "Value": 7 },
+            "IsFeatured": { "Value": false }
+          },
+          "HtmlBodyPart": {
+            "Html": "<h2>Overview of UK Student Visas</h2><p>The UK Student visa (formerly Tier 4) allows international students to study at recognised educational institutions in the United Kingdom. Whether you're pursuing undergraduate, postgraduate, or professional qualifications, understanding the visa requirements is essential for a successful application.</p><h2>Eligibility Requirements</h2><h3>1. Confirmation of Acceptance for Studies (CAS)</h3><p>Before applying, you must have a valid CAS from a licensed Student sponsor (your university or college). The CAS must:</p><ul><li>Be issued no more than 6 months before your application</li><li>Contain accurate information about your course</li><li>Include your personal details correctly</li></ul><h3>2. Financial Requirements</h3><p>You must prove you can support yourself financially:</p><ul><li><strong>Course fees:</strong> First year's fees (or full fees if less than a year)</li><li><strong>Living costs:</strong> £1,334 per month in London, £1,023 outside London</li><li><strong>Funds held for 28 consecutive days:</strong> In your bank account or official financial sponsor</li></ul><h3>3. English Language</h3><p>You must demonstrate English proficiency at the required level (B2 for degree courses). This can be through:</p><ul><li>Approved Secure English Language Test (SELT)</li><li>Degree taught in English from a majority English-speaking country</li><li>Being a national of a majority English-speaking country</li></ul><h2>Application Process</h2><h3>Step 1: Receive Your CAS</h3><p>Once you've accepted an unconditional offer and paid any deposit, your institution will issue your CAS.</p><h3>Step 2: Apply Online</h3><p>Complete the online application at gov.uk. You can apply up to 6 months before your course starts.</p><h3>Step 3: Gather Documents</h3><p>Required documents typically include:</p><ul><li>Valid passport</li><li>CAS reference number</li><li>Financial evidence</li><li>English language test certificate</li><li>Tuberculosis test results (if applicable)</li></ul><h3>Step 4: Attend Biometrics Appointment</h3><p>Visit a visa application centre to provide fingerprints and photograph.</p><h3>Step 5: Wait for Decision</h3><p>Standard processing takes approximately 3 weeks. Priority services are available.</p><h2>Costs</h2><ul><li><strong>Application fee:</strong> £490 (outside UK)</li><li><strong>Immigration Health Surcharge:</strong> £776 per year of study</li><li><strong>Priority service (optional):</strong> Additional fees apply</li></ul><h2>Working While Studying</h2><p>Student visa holders can work:</p><ul><li><strong>Term time:</strong> Up to 20 hours per week</li><li><strong>Holidays:</strong> Full-time</li><li><strong>Work placements:</strong> As part of your course</li></ul><h2>After Your Studies: Graduate Route</h2><p>The Graduate visa allows you to stay and work in the UK after completing your degree:</p><ul><li><strong>2 years:</strong> For undergraduate and master's graduates</li><li><strong>3 years:</strong> For PhD graduates</li><li>No sponsorship required</li><li>Work in any job at any skill level</li></ul><h2>Expert Immigration Advice</h2><p>MCR Solicitors helps students navigate the visa process. We offer:</p><ul><li>CAS and document checking</li><li>Application preparation and submission</li><li>Advice on financial requirements</li><li>Representation for refusals or issues</li></ul><p>Call us on <strong>0161 466 1280</strong> to discuss your student visa application.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Menu",
+      "data": [
+        {
+          "name": "main-menu",
+          "items": [
+            {
+              "name": "Blog",
+              "url": "/blog",
+              "priority": 6
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
