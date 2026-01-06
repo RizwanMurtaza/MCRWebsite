@@ -81,6 +81,32 @@
                       }
                     },
                     {
+                      "ContentItemId": "4heroslide000000003",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Family Law Experts" },
+                        "Subheadline": { "Text": "Compassionate support through divorce, child custody, and family disputes. We're here for you." },
+                        "PrimaryButtonText": { "Text": "Family Law Services" },
+                        "PrimaryButtonUrl": { "Text": "/family-law" },
+                        "SecondaryButtonText": { "Text": "Book Consultation" },
+                        "SecondaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 3 }
+                      }
+                    },
+                    {
+                      "ContentItemId": "4heroslide000000004",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Personal Injury Claims" },
+                        "Subheadline": { "Text": "No win, no fee. Get the compensation you deserve for accidents and injuries." },
+                        "PrimaryButtonText": { "Text": "Start Your Claim" },
+                        "PrimaryButtonUrl": { "Text": "/personal-injury" },
+                        "SecondaryButtonText": { "Text": "Learn More" },
+                        "SecondaryButtonUrl": { "Text": "/personal-injury/how-it-works" },
+                        "DisplayOrder": { "Value": 4 }
+                      }
+                    },
+                    {
                       "ContentItemId": "4herocontactform01",
                       "ContentType": "ContactFormWidget",
                       "ContactFormWidget": {
@@ -152,6 +178,42 @@
                         "LinkUrl": { "Text": "/personal-injury" },
                         "LinkText": { "Text": "Learn More" },
                         "DisplayOrder": { "Value": 3 }
+                      }
+                    },
+                    {
+                      "ContentItemId": "4servicecard000004",
+                      "ContentType": "ServiceCard",
+                      "ServiceCard": {
+                        "Title": { "Text": "UK Visa Appeals" },
+                        "Description": { "Text": "Expert representation for visa refusals and immigration appeals." },
+                        "IconClass": { "Text": "fas fa-gavel" },
+                        "LinkUrl": { "Text": "/immigration/appeals" },
+                        "LinkText": { "Text": "Learn More" },
+                        "DisplayOrder": { "Value": 4 }
+                      }
+                    },
+                    {
+                      "ContentItemId": "4servicecard000005",
+                      "ContentType": "ServiceCard",
+                      "ServiceCard": {
+                        "Title": { "Text": "Divorce & Separation" },
+                        "Description": { "Text": "Compassionate guidance through divorce proceedings and settlements." },
+                        "IconClass": { "Text": "fas fa-heart-broken" },
+                        "LinkUrl": { "Text": "/family-law/divorce" },
+                        "LinkText": { "Text": "Learn More" },
+                        "DisplayOrder": { "Value": 5 }
+                      }
+                    },
+                    {
+                      "ContentItemId": "4servicecard000006",
+                      "ContentType": "ServiceCard",
+                      "ServiceCard": {
+                        "Title": { "Text": "Work Accidents" },
+                        "Description": { "Text": "Claim compensation for workplace injuries and accidents." },
+                        "IconClass": { "Text": "fas fa-hard-hat" },
+                        "LinkUrl": { "Text": "/personal-injury/work-accidents" },
+                        "LinkText": { "Text": "Learn More" },
+                        "DisplayOrder": { "Value": 6 }
                       }
                     }
                   ]

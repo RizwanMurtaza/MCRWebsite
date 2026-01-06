@@ -26,16 +26,16 @@
 
         @if (isHeroForm)
         {
-            @* Compact hero form layout *@
-            <div class="row g-1">
-                <div class="col-6">
+            @* Compact hero form layout - stacks on mobile, side-by-side on desktop *@
+            <div class="row g-1 g-md-2">
+                <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="name-@formId" class="form-label">Name <span class="required">*</span></label>
                         <input type="text" class="form-control" id="name-@formId" name="name" required
                                placeholder="Your name" autocomplete="name" />
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="email-@formId" class="form-label">Email <span class="required">*</span></label>
                         <input type="email" class="form-control" id="email-@formId" name="email" required
@@ -44,8 +44,8 @@
                 </div>
             </div>
 
-            <div class="row g-1">
-                <div class="col-6">
+            <div class="row g-1 g-md-2">
+                <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="phone-@formId" class="form-label">Phone <span class="required">*</span></label>
                         <input type="tel" class="form-control" id="phone-@formId" name="phone" required
@@ -54,7 +54,7 @@
                 </div>
                 @if (Model.ShowDepartment)
                 {
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="dept-@formId" class="form-label">Department</label>
                             <select class="form-select" id="dept-@formId" name="department">
