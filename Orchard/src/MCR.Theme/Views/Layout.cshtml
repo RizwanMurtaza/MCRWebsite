@@ -1,10 +1,10 @@
 @using OrchardCore
 @using OrchardCore.Settings
+@using Microsoft.AspNetCore.Html
 @inject ISiteService SiteService
 @{
     var site = await SiteService.GetSiteSettingsAsync();
     var siteName = site.SiteName ?? "";
-    var pageTitle = ViewData["Title"]?.ToString() ?? siteName;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -12,10 +12,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    @* Page Title *@
-    <title>@pageTitle@(!string.IsNullOrEmpty(pageTitle) && !string.IsNullOrEmpty(siteName) && pageTitle != siteName ? $" | {siteName}" : "")</title>
+    @* Page Title - uses Orchard's title segments which include SeoMetaPart PageTitle *@
+    <title>@RenderTitleSegments(new HtmlString(siteName), "after", new HtmlString(" | "))</title>
 
-    @* SEO and Site-Wide Settings *@
+    @* SEO Meta Tags - rendered by Orchard's SeoMetaPart *@
+    <resources type="Meta" />
+     
+    @* Site-Wide Settings (favicon, theme-color, JSON-LD, GTM) *@
     @await Component.InvokeAsync("SiteWideSettings")
 
     @* Bootstrap 5 CSS *@
@@ -33,7 +36,6 @@
     <link rel="stylesheet" href="/MCR.Theme/css/theme.css" asp-append-version="true" />
 
     @* Orchard Core Resources *@
-    <resources type="Meta" />
     <resources type="HeadLink" />
     <resources type="HeadScript" />
     <resources type="Stylesheet" />

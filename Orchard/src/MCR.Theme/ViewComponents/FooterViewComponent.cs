@@ -53,7 +53,7 @@ public class FooterViewComponent : ViewComponent
         };
 
         // Get items from BagPart
-        var bagPart = item.Content["FooterItems"]?["ContentItems"];
+        var bagPart = item.Content["BagPart"]?["ContentItems"];
         if (bagPart != null)
         {
             foreach (var bagItem in bagPart)

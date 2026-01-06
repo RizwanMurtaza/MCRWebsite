@@ -28,9 +28,56 @@
                 </div>
             }
 
+            @* Mobile horizontal scroll view - visible only on mobile *@
+            <div class="team-mobile-scroll d-sm-none">
+                @foreach (var member in Model.TeamMembers)
+                {
+                    <div class="team-member-item-mobile">
+                        <div class="team-card">
+                            @if (!string.IsNullOrEmpty(member.Photo))
+                            {
+                                <div class="member-photo">
+                                    <img src="@member.Photo" alt="@member.Name" loading="lazy" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="member-photo placeholder-photo">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            }
+                            <div class="member-info">
+                                @if (!string.IsNullOrEmpty(member.Name))
+                                {
+                                    <h4 class="member-name">@member.Name</h4>
+                                }
+                                @if (!string.IsNullOrEmpty(member.Role))
+                                {
+                                    <p class="member-role">@member.Role</p>
+                                }
+                                @if (!string.IsNullOrEmpty(member.LinkedInUrl) || !string.IsNullOrEmpty(member.EmailAddress))
+                                {
+                                    <div class="member-social">
+                                        @if (!string.IsNullOrEmpty(member.LinkedInUrl))
+                                        {
+                                            <a href="@member.LinkedInUrl" target="_blank" rel="noopener" class="social-link"><i class="fab fa-linkedin"></i></a>
+                                        }
+                                        @if (!string.IsNullOrEmpty(member.EmailAddress))
+                                        {
+                                            <a href="mailto:@member.EmailAddress" class="social-link"><i class="fas fa-envelope"></i></a>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @* Desktop carousel - hidden on mobile *@
             @if (teamSlides.Count > 0)
             {
-                <div id="@teamCarouselId" class="carousel slide team-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+                <div id="@teamCarouselId" class="carousel slide team-carousel d-none d-sm-block" data-bs-ride="carousel" data-bs-interval="5000">
                     @* Carousel Indicators *@
                     <div class="carousel-indicators">
                         @for (int i = 0; i < teamSlides.Count; i++)
@@ -45,10 +92,10 @@
                         {
                             var slide = teamSlides[slideIndex];
                             <div class="carousel-item @(slideIndex == 0 ? "active" : "")">
-                                <div class="row justify-content-center">
+                                <div class="row justify-content-center team-row-desktop">
                                     @foreach (var member in slide)
                                     {
-                                        <div class="col-lg-3 col-md-4 col-6 team-member-item">
+                                        <div class="col-lg-3 col-md-4 col-sm-6 team-member-item">
                                             <div class="team-card">
                                                 @if (!string.IsNullOrEmpty(member.Photo))
                                                 {

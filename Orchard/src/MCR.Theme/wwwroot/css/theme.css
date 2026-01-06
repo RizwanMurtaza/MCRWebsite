@@ -1676,6 +1676,67 @@ a:hover {
     }
 }
 
+/* Team Mobile Horizontal Scroll */
+.team-mobile-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 12px;
+    padding: 10px 0 20px;
+    margin: 0 -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.team-mobile-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.team-member-item-mobile {
+    flex: 0 0 auto;
+    width: 160px;
+    scroll-snap-align: start;
+}
+
+.team-member-item-mobile .team-card {
+    height: 100%;
+}
+
+.team-member-item-mobile .member-photo {
+    height: 140px;
+}
+
+.team-member-item-mobile .member-info {
+    padding: var(--mcr-spacing-sm);
+}
+
+.team-member-item-mobile .member-name {
+    font-size: var(--mcr-text-sm);
+    margin-bottom: var(--mcr-spacing-xs);
+}
+
+.team-member-item-mobile .member-role {
+    font-size: 10px;
+    letter-spacing: 0.3px;
+}
+
+.team-member-item-mobile .member-bio {
+    display: none;
+}
+
+.team-member-item-mobile .member-social {
+    padding-top: var(--mcr-spacing-xs);
+}
+
+.team-member-item-mobile .social-link {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+}
+
 /* ==========================================================================
    Testimonials - Premium Client Reviews Section
    ========================================================================== */
@@ -1839,6 +1900,146 @@ a:hover {
     color: var(--mcr-accent);
 }
 
+/* Quote icon styling */
+.testimonial-quote-icon {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 2rem;
+    color: var(--mcr-accent);
+    opacity: 0.25;
+    z-index: 0;
+}
+
+/* Google Reviews Badge */
+.google-reviews-badge {
+    margin-top: var(--mcr-spacing-lg);
+}
+
+.google-badge-link {
+    display: inline-flex;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.google-badge-link:hover {
+    transform: translateY(-2px);
+}
+
+.google-badge-content {
+    display: flex;
+    align-items: center;
+    gap: var(--mcr-spacing-md);
+    background: var(--mcr-white);
+    padding: var(--mcr-spacing-sm) var(--mcr-spacing-lg);
+    border-radius: var(--mcr-radius-full);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--mcr-gray-200);
+}
+
+.google-logo {
+    height: 24px;
+    width: auto;
+}
+
+.google-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.google-stars {
+    display: flex;
+    gap: 2px;
+}
+
+.google-stars i {
+    color: #fbbc04;
+    font-size: 14px;
+}
+
+.google-rating-text {
+    font-size: 12px;
+    color: var(--mcr-gray-600);
+}
+
+.google-rating-text strong {
+    color: var(--mcr-primary);
+}
+
+/* Testimonials Carousel */
+.testimonials-carousel {
+    position: relative;
+    overflow: hidden;
+    margin-top: var(--mcr-spacing-lg);
+}
+
+.testimonials-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.testimonial-slide {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+    padding: 0 var(--mcr-spacing-sm);
+    box-sizing: border-box;
+}
+
+.testimonials-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--mcr-spacing-md);
+    margin-top: var(--mcr-spacing-xl);
+}
+
+.testimonial-nav-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--mcr-radius-full);
+    background: var(--mcr-white);
+    border: 2px solid var(--mcr-gray-200);
+    color: var(--mcr-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.testimonial-nav-btn:hover {
+    background: var(--mcr-primary);
+    border-color: var(--mcr-primary);
+    color: var(--mcr-white);
+}
+
+.testimonials-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.testimonial-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: var(--mcr-radius-full);
+    background: var(--mcr-gray-300);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.testimonial-dot:hover {
+    background: var(--mcr-gray-400);
+}
+
+.testimonial-dot.active {
+    background: var(--mcr-accent);
+    transform: scale(1.2);
+}
+
 /* Responsive adjustments */
 @media (max-width: 991px) {
     .testimonials-section {
@@ -1847,6 +2048,11 @@ a:hover {
 
     .testimonial-card {
         padding: var(--mcr-spacing-lg);
+    }
+
+    .testimonial-slide {
+        flex: 0 0 50%;
+        max-width: 50%;
     }
 }
 
@@ -1869,6 +2075,22 @@ a:hover {
 
     .testimonial-quote {
         font-size: var(--mcr-text-sm);
+    }
+
+    .google-badge-content {
+        flex-direction: column;
+        gap: var(--mcr-spacing-xs);
+        padding: var(--mcr-spacing-md) var(--mcr-spacing-lg);
+        border-radius: var(--mcr-radius-xl);
+    }
+
+    .google-rating {
+        align-items: center;
+    }
+
+    .testimonial-slide {
+        flex: 0 0 100%;
+        max-width: 100%;
     }
 }
 

@@ -15,6 +15,10 @@ public class TestimonialsSectionWidgetViewComponent : ViewComponent
             SectionTitle = GetDynamicValue(GetDynamicValue(part, "SectionTitle"), "Text")?.ToString(),
             SectionSubtitle = GetDynamicValue(GetDynamicValue(part, "SectionSubtitle"), "Text")?.ToString(),
             CssClass = GetDynamicValue(GetDynamicValue(part, "CssClass"), "Text")?.ToString(),
+            ShowGoogleReviews = GetBoolValue(GetDynamicValue(GetDynamicValue(part, "ShowGoogleReviews"), "Value")),
+            GoogleReviewsUrl = GetDynamicValue(GetDynamicValue(part, "GoogleReviewsUrl"), "Text")?.ToString(),
+            GoogleReviewCount = GetIntValue(GetDynamicValue(GetDynamicValue(part, "GoogleReviewCount"), "Value"), 0),
+            GoogleAverageRating = GetDecimalValue(GetDynamicValue(GetDynamicValue(part, "GoogleAverageRating"), "Value"), 0),
             Testimonials = new List<TestimonialViewModel>()
         };
 
@@ -92,6 +96,38 @@ public class TestimonialsSectionWidgetViewComponent : ViewComponent
             return defaultValue;
         }
     }
+
+    private decimal GetDecimalValue(dynamic? value, decimal defaultValue)
+    {
+        if (value == null) return defaultValue;
+        try
+        {
+            if (value is decimal decVal) return decVal;
+            if (value is double dblVal) return (decimal)dblVal;
+            if (value is int intVal) return intVal;
+            if (decimal.TryParse(value.ToString(), out decimal result)) return result;
+            return defaultValue;
+        }
+        catch
+        {
+            return defaultValue;
+        }
+    }
+
+    private bool GetBoolValue(dynamic? value)
+    {
+        if (value == null) return false;
+        try
+        {
+            if (value is bool boolVal) return boolVal;
+            if (bool.TryParse(value.ToString(), out bool result)) return result;
+            return false;
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }
 
 public class TestimonialsSectionWidgetViewModel
@@ -99,6 +135,10 @@ public class TestimonialsSectionWidgetViewModel
     public string? SectionTitle { get; set; }
     public string? SectionSubtitle { get; set; }
     public string? CssClass { get; set; }
+    public bool ShowGoogleReviews { get; set; }
+    public string? GoogleReviewsUrl { get; set; }
+    public int GoogleReviewCount { get; set; }
+    public decimal GoogleAverageRating { get; set; }
     public List<TestimonialViewModel> Testimonials { get; set; } = new();
 }
 

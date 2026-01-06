@@ -1,62 +1,15 @@
 @model MCR.Theme.ViewComponents.SiteWideSettingsViewModel
 
-@* Meta Tags *@
-@if (!string.IsNullOrEmpty(Model.MetaDescription))
-{
-    <meta name="description" content="@Model.MetaDescription" />
-}
-@if (!string.IsNullOrEmpty(Model.MetaKeywords))
-{
-    <meta name="keywords" content="@Model.MetaKeywords" />
-}
+@*
+    SiteWideSettings outputs ONLY:
+    - Favicon and icons
+    - Theme color
+    - JSON-LD structured data (Organization)
+    - Google Tag Manager
 
-@* Open Graph Tags *@
-@if (!string.IsNullOrEmpty(Model.OgSiteName))
-{
-    <meta property="og:site_name" content="@Model.OgSiteName" />
-}
-@if (!string.IsNullOrEmpty(Model.MetaTitle))
-{
-    <meta property="og:title" content="@Model.MetaTitle" />
-}
-@if (!string.IsNullOrEmpty(Model.MetaDescription))
-{
-    <meta property="og:description" content="@Model.MetaDescription" />
-}
-@if (!string.IsNullOrEmpty(Model.OgImage))
-{
-    <meta property="og:image" content="@Model.OgImage" />
-    @if (!string.IsNullOrEmpty(Model.OgImageAlt))
-    {
-        <meta property="og:image:alt" content="@Model.OgImageAlt" />
-    }
-}
-<meta property="og:type" content="website" />
-
-@* Twitter Card Tags *@
-<meta name="twitter:card" content="summary_large_image" />
-@if (!string.IsNullOrEmpty(Model.TwitterHandle))
-{
-    <meta name="twitter:site" content="@Model.TwitterHandle" />
-}
-@if (!string.IsNullOrEmpty(Model.MetaTitle))
-{
-    <meta name="twitter:title" content="@Model.MetaTitle" />
-}
-@if (!string.IsNullOrEmpty(Model.MetaDescription))
-{
-    <meta name="twitter:description" content="@Model.MetaDescription" />
-}
-@if (!string.IsNullOrEmpty(Model.OgImage))
-{
-    <meta name="twitter:image" content="@Model.OgImage" />
-}
-
-@* Theme Color *@
-@if (!string.IsNullOrEmpty(Model.ThemeColor))
-{
-    <meta name="theme-color" content="@Model.ThemeColor" />
-}
+    SEO meta tags (description, keywords, og:*, twitter:*) are handled by
+    Orchard's SeoMetaPart which outputs via <resources type="Meta" />
+*@
 
 @* Favicon and Icons *@
 @if (!string.IsNullOrEmpty(Model.FaviconUrl))
@@ -69,13 +22,19 @@
     <link rel="apple-touch-icon" href="@Model.AppleTouchIconUrl" />
 }
 
-@* JSON-LD Structured Data *@
+@* Theme Color *@
+@if (!string.IsNullOrEmpty(Model.ThemeColor))
+{
+    <meta name="theme-color" content="@Model.ThemeColor" />
+}
+
+@* JSON-LD Structured Data - Organization/LegalService *@
 @if (Model.HasOrganizationData)
 {
     <script type="application/ld+json">
     {
         "@@context": "https://schema.org",
-        "@@type": "Organization",
+        "@@type": "LegalService",
         @if (!string.IsNullOrEmpty(Model.OrganizationName))
         {
             <text>"name": "@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(Model.OrganizationName))",</text>
@@ -86,7 +45,7 @@
         }
         @if (!string.IsNullOrEmpty(Model.OrganizationPhone))
         {
-            <text>"telephone": "@Model.OrganizationPhone",</text>
+            <text>"telephone": "@Html.Raw(Model.OrganizationPhone)",</text>
         }
         @if (!string.IsNullOrEmpty(Model.OrganizationEmail))
         {
@@ -99,24 +58,12 @@
             "streetAddress": "@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(Model.OrganizationAddress))"
         },</text>
         }
-        "@@type": "LegalService"
+        "url": "@Context.Request.Scheme://@Context.Request.Host"
     }
     </script>
 }
 
-@* Google Analytics *@
-@if (!string.IsNullOrEmpty(Model.GoogleAnalyticsId))
-{
-    <script async src="https://www.googletagmanager.com/gtag/js?id=@Model.GoogleAnalyticsId"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '@Model.GoogleAnalyticsId');
-    </script>
-}
-
-@* Google Tag Manager *@
+@* Google Tag Manager - Head Script *@
 @if (!string.IsNullOrEmpty(Model.GoogleTagManagerId))
 {
     <script>

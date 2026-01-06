@@ -2,9 +2,12 @@
 
 @if (Model.Testimonials.Any())
 {
-    <section class="testimonials-section section @Model.CssClass">
+    var sectionId = "testimonials-" + Guid.NewGuid().ToString("N").Substring(0, 8);
+    var showCarousel = Model.Testimonials.Count > 6;
+
+    <section class="testimonials-section section @Model.CssClass" id="@sectionId">
         <div class="container">
-            @if (!string.IsNullOrEmpty(Model.SectionTitle) || !string.IsNullOrEmpty(Model.SectionSubtitle))
+            @if (!string.IsNullOrEmpty(Model.SectionTitle) || !string.IsNullOrEmpty(Model.SectionSubtitle) || Model.ShowGoogleReviews)
             {
                 <div class="section-header text-center">
                     @if (!string.IsNullOrEmpty(Model.SectionTitle))
@@ -15,50 +18,231 @@
                     {
                         <p class="section-subtitle">@Model.SectionSubtitle</p>
                     }
+                    @if (Model.ShowGoogleReviews && Model.GoogleReviewCount > 0)
+                    {
+                        <div class="google-reviews-badge">
+                            <a href="@Model.GoogleReviewsUrl" target="_blank" rel="noopener noreferrer" class="google-badge-link">
+                                <div class="google-badge-content">
+                                    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google" class="google-logo" />
+                                    <div class="google-rating">
+                                        <div class="google-stars">
+                                            @{
+                                                var fullStars = (int)Math.Floor(Model.GoogleAverageRating);
+                                                var hasHalfStar = (Model.GoogleAverageRating - fullStars) >= 0.5m;
+                                            }
+                                            @for (int i = 0; i < fullStars; i++)
+                                            {
+                                                <i class="fas fa-star"></i>
+                                            }
+                                            @if (hasHalfStar)
+                                            {
+                                                <i class="fas fa-star-half-alt"></i>
+                                            }
+                                            @for (int i = fullStars + (hasHalfStar ? 1 : 0); i < 5; i++)
+                                            {
+                                                <i class="far fa-star"></i>
+                                            }
+                                        </div>
+                                        <span class="google-rating-text">
+                                            <strong>@Model.GoogleAverageRating.ToString("0.0")</strong> based on <strong>@Model.GoogleReviewCount</strong> reviews
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
                 </div>
             }
-            <div class="row g-4">
-                @foreach (var testimonial in Model.Testimonials)
-                {
-                    <div class="col-lg-4 col-md-6">
-                        <div class="testimonial-card">
-                            @if (testimonial.Rating > 0)
-                            {
-                                <div class="testimonial-rating">
-                                    @for (int i = 0; i < testimonial.Rating; i++)
+
+            @if (showCarousel)
+            {
+                <div class="testimonials-carousel" data-section="@sectionId">
+                    <div class="testimonials-track">
+                        @foreach (var testimonial in Model.Testimonials)
+                        {
+                            <div class="testimonial-slide">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-quote-icon"><i class="fas fa-quote-left"></i></div>
+                                    @if (testimonial.Rating > 0)
                                     {
-                                        <i class="fas fa-star"></i>
+                                        <div class="testimonial-rating">
+                                            @for (int i = 0; i < testimonial.Rating; i++)
+                                            {
+                                                <i class="fas fa-star"></i>
+                                            }
+                                        </div>
                                     }
-                                    @for (int i = testimonial.Rating; i < 5; i++)
+                                    @if (!string.IsNullOrEmpty(testimonial.Quote))
                                     {
-                                        <i class="far fa-star"></i>
+                                        <blockquote class="testimonial-quote">@testimonial.Quote</blockquote>
                                     }
+                                    <div class="testimonial-author">
+                                        @if (!string.IsNullOrEmpty(testimonial.AuthorImage))
+                                        {
+                                            <img src="@testimonial.AuthorImage" alt="@testimonial.AuthorName" class="testimonial-author-image" loading="lazy" />
+                                        }
+                                        <div class="testimonial-author-info">
+                                            @if (!string.IsNullOrEmpty(testimonial.AuthorName))
+                                            {
+                                                <strong class="testimonial-author-name">@testimonial.AuthorName</strong>
+                                            }
+                                            @if (!string.IsNullOrEmpty(testimonial.AuthorTitle))
+                                            {
+                                                <span class="testimonial-author-title">@testimonial.AuthorTitle</span>
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
-                            }
-                            @if (!string.IsNullOrEmpty(testimonial.Quote))
-                            {
-                                <blockquote class="testimonial-quote">@testimonial.Quote</blockquote>
-                            }
-                            <div class="testimonial-author">
-                                @if (!string.IsNullOrEmpty(testimonial.AuthorImage))
+                            </div>
+                        }
+                    </div>
+                    <div class="testimonials-nav">
+                        <button class="testimonial-nav-btn prev" aria-label="Previous testimonials">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="testimonials-dots"></div>
+                        <button class="testimonial-nav-btn next" aria-label="Next testimonials">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row g-4">
+                    @foreach (var testimonial in Model.Testimonials)
+                    {
+                        <div class="col-lg-4 col-md-6">
+                            <div class="testimonial-card">
+                                <div class="testimonial-quote-icon"><i class="fas fa-quote-left"></i></div>
+                                @if (testimonial.Rating > 0)
                                 {
-                                    <img src="@testimonial.AuthorImage" alt="@testimonial.AuthorName" class="testimonial-author-image" loading="lazy" />
+                                    <div class="testimonial-rating">
+                                        @for (int i = 0; i < testimonial.Rating; i++)
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
+                                    </div>
                                 }
-                                <div class="testimonial-author-info">
-                                    @if (!string.IsNullOrEmpty(testimonial.AuthorName))
+                                @if (!string.IsNullOrEmpty(testimonial.Quote))
+                                {
+                                    <blockquote class="testimonial-quote">@testimonial.Quote</blockquote>
+                                }
+                                <div class="testimonial-author">
+                                    @if (!string.IsNullOrEmpty(testimonial.AuthorImage))
                                     {
-                                        <strong class="testimonial-author-name">@testimonial.AuthorName</strong>
+                                        <img src="@testimonial.AuthorImage" alt="@testimonial.AuthorName" class="testimonial-author-image" loading="lazy" />
                                     }
-                                    @if (!string.IsNullOrEmpty(testimonial.AuthorTitle))
-                                    {
-                                        <span class="testimonial-author-title">@testimonial.AuthorTitle</span>
-                                    }
+                                    <div class="testimonial-author-info">
+                                        @if (!string.IsNullOrEmpty(testimonial.AuthorName))
+                                        {
+                                            <strong class="testimonial-author-name">@testimonial.AuthorName</strong>
+                                        }
+                                        @if (!string.IsNullOrEmpty(testimonial.AuthorTitle))
+                                        {
+                                            <span class="testimonial-author-title">@testimonial.AuthorTitle</span>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                }
-            </div>
+                    }
+                </div>
+            }
         </div>
     </section>
+
+    @if (showCarousel)
+    {
+        <script>
+        (function() {
+            const section = document.getElementById('@sectionId');
+            if (!section) return;
+
+            const carousel = section.querySelector('.testimonials-carousel');
+            const track = carousel.querySelector('.testimonials-track');
+            const slides = track.querySelectorAll('.testimonial-slide');
+            const prevBtn = carousel.querySelector('.prev');
+            const nextBtn = carousel.querySelector('.next');
+            const dotsContainer = carousel.querySelector('.testimonials-dots');
+
+            const totalSlides = slides.length;
+            let slidesPerView = 3;
+            let currentIndex = 0;
+
+            function updateSlidesPerView() {
+                if (window.innerWidth < 576) {
+                    slidesPerView = 1;
+                } else if (window.innerWidth < 992) {
+                    slidesPerView = 2;
+                } else {
+                    slidesPerView = 3;
+                }
+            }
+
+            function getMaxIndex() {
+                return Math.max(0, totalSlides - slidesPerView);
+            }
+
+            function updateCarousel() {
+                const slideWidth = 100 / slidesPerView;
+                slides.forEach(slide => {
+                    slide.style.flex = `0 0 ${slideWidth}%`;
+                    slide.style.maxWidth = `${slideWidth}%`;
+                });
+                const offset = currentIndex * (100 / slidesPerView);
+                track.style.transform = `translateX(-${offset}%)`;
+                updateDots();
+            }
+
+            function createDots() {
+                dotsContainer.innerHTML = '';
+                const numDots = Math.ceil(totalSlides / slidesPerView);
+                for (let i = 0; i < numDots; i++) {
+                    const dot = document.createElement('button');
+                    dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
+                    dot.setAttribute('aria-label', `Go to page ${i + 1}`);
+                    dot.addEventListener('click', () => {
+                        currentIndex = i * slidesPerView;
+                        if (currentIndex > getMaxIndex()) currentIndex = getMaxIndex();
+                        updateCarousel();
+                    });
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            function updateDots() {
+                const dots = dotsContainer.querySelectorAll('.testimonial-dot');
+                const activeDotIndex = Math.floor(currentIndex / slidesPerView);
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === activeDotIndex);
+                });
+            }
+
+            function goToPrev() {
+                currentIndex = Math.max(0, currentIndex - slidesPerView);
+                updateCarousel();
+            }
+
+            function goToNext() {
+                currentIndex = Math.min(getMaxIndex(), currentIndex + slidesPerView);
+                updateCarousel();
+            }
+
+            prevBtn.addEventListener('click', goToPrev);
+            nextBtn.addEventListener('click', goToNext);
+
+            window.addEventListener('resize', () => {
+                updateSlidesPerView();
+                if (currentIndex > getMaxIndex()) currentIndex = getMaxIndex();
+                createDots();
+                updateCarousel();
+            });
+
+            updateSlidesPerView();
+            createDots();
+            updateCarousel();
+        })();
+        </script>
+    }
 }
