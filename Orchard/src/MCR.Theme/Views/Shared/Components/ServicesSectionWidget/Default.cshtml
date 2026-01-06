@@ -1,0 +1,57 @@
+@model MCR.Theme.ViewComponents.ServicesSectionWidgetViewModel
+
+@if (Model.ServiceCards.Any())
+{
+    <section id="services" class="services-section section @Model.CssClass">
+        <div class="container">
+            @if (!string.IsNullOrEmpty(Model.SectionTitle) || !string.IsNullOrEmpty(Model.SectionSubtitle))
+            {
+                <div class="section-header text-center">
+                    @if (!string.IsNullOrEmpty(Model.SectionTitle))
+                    {
+                        <h2 class="section-title">@Model.SectionTitle</h2>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.SectionSubtitle))
+                    {
+                        <p class="section-subtitle">@Model.SectionSubtitle</p>
+                    }
+                </div>
+            }
+            <div class="row g-4">
+                @foreach (var card in Model.ServiceCards)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            @if (!string.IsNullOrEmpty(card.Image))
+                            {
+                                <div class="service-card-image">
+                                    <img src="@card.Image" alt="@card.Title" loading="lazy" />
+                                </div>
+                            }
+                            else if (!string.IsNullOrEmpty(card.IconClass))
+                            {
+                                <div class="service-card-icon">
+                                    <i class="@card.IconClass"></i>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(card.Title))
+                            {
+                                <h3 class="service-card-title">@card.Title</h3>
+                            }
+                            @if (!string.IsNullOrEmpty(card.Description))
+                            {
+                                <p class="service-card-description">@card.Description</p>
+                            }
+                            @if (!string.IsNullOrEmpty(card.LinkUrl) && !string.IsNullOrEmpty(card.LinkText))
+                            {
+                                <a href="@card.LinkUrl" class="service-card-link">
+                                    @card.LinkText <i class="fas fa-arrow-right"></i>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}

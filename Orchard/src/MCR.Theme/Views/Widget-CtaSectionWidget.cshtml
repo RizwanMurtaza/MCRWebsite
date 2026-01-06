@@ -1,0 +1,6 @@
+@using OrchardCore.ContentManagement
+@{
+    ContentItem contentItem = Model.ContentItem;
+}
+
+@await Component.InvokeAsync("CtaSectionWidget", new { contentItem = contentItem })

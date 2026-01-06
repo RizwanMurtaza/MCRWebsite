@@ -1,0 +1,24 @@
+@model MCR.Theme.ViewComponents.CtaSectionWidgetViewModel
+
+@if (!string.IsNullOrEmpty(Model.SectionTitle))
+{
+    var backgroundStyle = !string.IsNullOrEmpty(Model.BackgroundImage)
+        ? $"background-image: url('{Model.BackgroundImage}');"
+        : "";
+
+    <section class="cta-section @Model.CssClass" style="@backgroundStyle">
+        <div class="container">
+            <div class="cta-content text-center">
+                <h2 class="cta-title">@Model.SectionTitle</h2>
+                @if (!string.IsNullOrEmpty(Model.SectionText))
+                {
+                    <p class="cta-text">@Model.SectionText</p>
+                }
+                @if (!string.IsNullOrEmpty(Model.ButtonText) && !string.IsNullOrEmpty(Model.ButtonUrl))
+                {
+                    <a href="@Model.ButtonUrl" class="btn btn-secondary btn-lg">@Model.ButtonText</a>
+                }
+            </div>
+        </div>
+    </section>
+}

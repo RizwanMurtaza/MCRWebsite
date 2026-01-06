@@ -1,6 +1,6 @@
 @model MCR.Theme.ViewComponents.ContactFormWidgetViewModel
 
-<div class="contact-form-widget">
+<div class="contact-form-widget @Model.CssClass">
     @if (!string.IsNullOrEmpty(Model.FormTitle))
     {
         <h3 class="form-title">@Model.FormTitle</h3>
@@ -12,7 +12,7 @@
 
     <form id="contact-form-@Guid.NewGuid().ToString("N").Substring(0, 8)"
           method="post"
-          action="/workflows/invoke/contact-form-workflow"
+          action="@Model.WorkflowUrl"
           class="mcr-contact-form">
         @Html.AntiForgeryToken()
 

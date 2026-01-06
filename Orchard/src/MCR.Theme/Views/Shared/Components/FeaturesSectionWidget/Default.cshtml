@@ -1,0 +1,51 @@
+@model MCR.Theme.ViewComponents.FeaturesSectionWidgetViewModel
+
+@if (Model.FeatureBoxes.Any())
+{
+    <section class="features-section section bg-light @Model.CssClass">
+        <div class="container">
+            @if (!string.IsNullOrEmpty(Model.SectionTitle) || !string.IsNullOrEmpty(Model.SectionSubtitle))
+            {
+                <div class="section-header text-center">
+                    @if (!string.IsNullOrEmpty(Model.SectionTitle))
+                    {
+                        <h2 class="section-title">@Model.SectionTitle</h2>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.SectionSubtitle))
+                    {
+                        <p class="section-subtitle">@Model.SectionSubtitle</p>
+                    }
+                </div>
+            }
+            <div class="row g-4">
+                @foreach (var feature in Model.FeatureBoxes)
+                {
+                    <div class="col-lg-3 col-md-6">
+                        <div class="feature-box text-center">
+                            @if (!string.IsNullOrEmpty(feature.Image))
+                            {
+                                <div class="feature-box-image">
+                                    <img src="@feature.Image" alt="@feature.Title" loading="lazy" />
+                                </div>
+                            }
+                            else if (!string.IsNullOrEmpty(feature.IconClass))
+                            {
+                                <div class="feature-box-icon">
+                                    <i class="@feature.IconClass"></i>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(feature.Title))
+                            {
+                                <h4 class="feature-box-title">@feature.Title</h4>
+                            }
+                            @if (!string.IsNullOrEmpty(feature.Description))
+                            {
+                                <p class="feature-box-description">@feature.Description</p>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}

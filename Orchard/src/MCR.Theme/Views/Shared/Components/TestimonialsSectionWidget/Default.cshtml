@@ -1,0 +1,64 @@
+@model MCR.Theme.ViewComponents.TestimonialsSectionWidgetViewModel
+
+@if (Model.Testimonials.Any())
+{
+    <section class="testimonials-section section @Model.CssClass">
+        <div class="container">
+            @if (!string.IsNullOrEmpty(Model.SectionTitle) || !string.IsNullOrEmpty(Model.SectionSubtitle))
+            {
+                <div class="section-header text-center">
+                    @if (!string.IsNullOrEmpty(Model.SectionTitle))
+                    {
+                        <h2 class="section-title">@Model.SectionTitle</h2>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.SectionSubtitle))
+                    {
+                        <p class="section-subtitle">@Model.SectionSubtitle</p>
+                    }
+                </div>
+            }
+            <div class="row g-4">
+                @foreach (var testimonial in Model.Testimonials)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="testimonial-card">
+                            @if (testimonial.Rating > 0)
+                            {
+                                <div class="testimonial-rating">
+                                    @for (int i = 0; i < testimonial.Rating; i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                    @for (int i = testimonial.Rating; i < 5; i++)
+                                    {
+                                        <i class="far fa-star"></i>
+                                    }
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(testimonial.Quote))
+                            {
+                                <blockquote class="testimonial-quote">@testimonial.Quote</blockquote>
+                            }
+                            <div class="testimonial-author">
+                                @if (!string.IsNullOrEmpty(testimonial.AuthorImage))
+                                {
+                                    <img src="@testimonial.AuthorImage" alt="@testimonial.AuthorName" class="testimonial-author-image" loading="lazy" />
+                                }
+                                <div class="testimonial-author-info">
+                                    @if (!string.IsNullOrEmpty(testimonial.AuthorName))
+                                    {
+                                        <strong class="testimonial-author-name">@testimonial.AuthorName</strong>
+                                    }
+                                    @if (!string.IsNullOrEmpty(testimonial.AuthorTitle))
+                                    {
+                                        <span class="testimonial-author-title">@testimonial.AuthorTitle</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}

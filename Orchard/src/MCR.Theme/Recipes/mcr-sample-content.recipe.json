@@ -1,0 +1,374 @@
+{
+  "name": "MCR Sample Content",
+  "displayName": "MCR Theme - Sample Home Page Content",
+  "description": "Creates a sample Home Page with Hero, Services, Features, Team, Testimonials, and CTA sections",
+  "author": "MCR Solicitors",
+  "website": "https://mcrsolicitors.co.uk",
+  "version": "1.0.2",
+  "issetuprecipe": false,
+  "categories": ["Content"],
+  "tags": ["mcr", "solicitors", "sample", "content"],
+  "steps": [
+    {
+      "name": "Content",
+      "data": [
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "HomePage",
+          "DisplayText": "Home",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": {
+            "Title": "Home"
+          },
+          "AutoroutePart": {
+            "Path": "",
+            "SetHomepage": true
+          },
+          "HomePage": {
+            "MetaTitle": { "Text": "MCR Solicitors - Expert Legal Services in Manchester" },
+            "MetaDescription": { "Text": "MCR Solicitors offers expert legal services in Immigration, Family Law, and Personal Injury. Contact us for a free consultation." },
+            "MetaKeywords": { "Text": "solicitors manchester, immigration lawyer, family law, personal injury" }
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "4herowidget00000001",
+                "ContentItemVersionId": null,
+                "ContentType": "HeroBannerWidget",
+                "DisplayText": null,
+                "Latest": false,
+                "Published": false,
+                "ModifiedUtc": "2025-01-06T12:00:00.0000000Z",
+                "PublishedUtc": null,
+                "CreatedUtc": null,
+                "Owner": null,
+                "Author": "admin",
+                "HeroBannerWidget": {
+                  "BackgroundColor": { "Text": "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)" },
+                  "SlideInterval": { "Value": 5000 },
+                  "AutoPlay": { "Value": true },
+                  "ShowIndicators": { "Value": true }
+                },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "4heroslide000000001",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Expert Legal Solutions for Your Peace of Mind" },
+                        "Subheadline": { "Text": "Trusted solicitors in Manchester providing expert advice in Immigration, Family Law, and Personal Injury cases." },
+                        "PrimaryButtonText": { "Text": "Free Consultation" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "SecondaryButtonText": { "Text": "Our Services" },
+                        "SecondaryButtonUrl": { "Text": "#services" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    },
+                    {
+                      "ContentItemId": "4heroslide000000002",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Immigration Law Specialists" },
+                        "Subheadline": { "Text": "Navigate the UK immigration system with confidence. Expert visa and settlement advice." },
+                        "PrimaryButtonText": { "Text": "Immigration Services" },
+                        "PrimaryButtonUrl": { "Text": "/immigration" },
+                        "SecondaryButtonText": { "Text": "Call Us" },
+                        "SecondaryButtonUrl": { "Text": "tel:01614661280" },
+                        "DisplayOrder": { "Value": 2 }
+                      }
+                    },
+                    {
+                      "ContentItemId": "4herocontactform01",
+                      "ContentType": "ContactFormWidget",
+                      "ContactFormWidget": {
+                        "FormTitle": { "Text": "Get Free Consultation" },
+                        "FormSubtitle": { "Text": "Fill in your details and we'll call you back" },
+                        "ShowDepartment": { "Value": true },
+                        "DepartmentRequired": { "Value": false },
+                        "SubmitButtonText": { "Text": "Request Callback" },
+                        "SuccessMessage": { "Text": "Thank you! We will contact you within 24 hours." },
+                        "RecipientEmail": { "Text": "info@mcrsolicitors.co.uk" }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": {
+                  "Alignment": "Justify",
+                  "Size": 100
+                }
+              },
+              {
+                "ContentItemId": "4serviceswidget001",
+                "ContentItemVersionId": null,
+                "ContentType": "ServicesSectionWidget",
+                "DisplayText": null,
+                "Latest": false,
+                "Published": false,
+                "ModifiedUtc": "2025-01-06T12:00:00.0000000Z",
+                "PublishedUtc": null,
+                "CreatedUtc": null,
+                "Owner": null,
+                "Author": "admin",
+                "ServicesSectionWidget": {
+                  "SectionTitle": { "Text": "Our Legal Services" },
+                  "SectionSubtitle": { "Text": "Comprehensive legal solutions tailored to your needs" }
+                },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "4servicecard000001",
+                      "ContentType": "ServiceCard",
+                      "ServiceCard": {
+                        "Title": { "Text": "Immigration Law" },
+                        "Description": { "Text": "Expert guidance on visas, settlement, citizenship and all immigration matters." },
+                        "IconClass": { "Text": "fas fa-passport" },
+                        "LinkUrl": { "Text": "/immigration" },
+                        "LinkText": { "Text": "Learn More" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    },
+                    {
+                      "ContentItemId": "4servicecard000002",
+                      "ContentType": "ServiceCard",
+                      "ServiceCard": {
+                        "Title": { "Text": "Family Law" },
+                        "Description": { "Text": "Sensitive handling of divorce, child arrangements, and financial settlements." },
+                        "IconClass": { "Text": "fas fa-users" },
+                        "LinkUrl": { "Text": "/family-law" },
+                        "LinkText": { "Text": "Learn More" },
+                        "DisplayOrder": { "Value": 2 }
+                      }
+                    },
+                    {
+                      "ContentItemId": "4servicecard000003",
+                      "ContentType": "ServiceCard",
+                      "ServiceCard": {
+                        "Title": { "Text": "Personal Injury" },
+                        "Description": { "Text": "No win, no fee representation for accident and injury claims." },
+                        "IconClass": { "Text": "fas fa-user-injured" },
+                        "LinkUrl": { "Text": "/personal-injury" },
+                        "LinkText": { "Text": "Learn More" },
+                        "DisplayOrder": { "Value": 3 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": {
+                  "Alignment": "Justify",
+                  "Size": 100
+                }
+              },
+              {
+                "ContentItemId": "4featureswidget001",
+                "ContentItemVersionId": null,
+                "ContentType": "FeaturesSectionWidget",
+                "DisplayText": null,
+                "Latest": false,
+                "Published": false,
+                "ModifiedUtc": "2025-01-06T12:00:00.0000000Z",
+                "PublishedUtc": null,
+                "CreatedUtc": null,
+                "Owner": null,
+                "Author": "admin",
+                "FeaturesSectionWidget": {
+                  "SectionTitle": { "Text": "Why Choose MCR Solicitors?" },
+                  "SectionSubtitle": { "Text": "We are committed to providing exceptional legal services" }
+                },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "4featurebox000001",
+                      "ContentType": "FeatureBox",
+                      "FeatureBox": {
+                        "Title": { "Text": "Expert Team" },
+                        "Description": { "Text": "Our solicitors have years of experience in their specialist areas." },
+                        "IconClass": { "Text": "fas fa-award" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    },
+                    {
+                      "ContentItemId": "4featurebox000002",
+                      "ContentType": "FeatureBox",
+                      "FeatureBox": {
+                        "Title": { "Text": "Client Focused" },
+                        "Description": { "Text": "We put our clients first and tailor our approach to your needs." },
+                        "IconClass": { "Text": "fas fa-handshake" },
+                        "DisplayOrder": { "Value": 2 }
+                      }
+                    },
+                    {
+                      "ContentItemId": "4featurebox000003",
+                      "ContentType": "FeatureBox",
+                      "FeatureBox": {
+                        "Title": { "Text": "Transparent Pricing" },
+                        "Description": { "Text": "Clear, upfront pricing with no hidden fees or surprises." },
+                        "IconClass": { "Text": "fas fa-pound-sign" },
+                        "DisplayOrder": { "Value": 3 }
+                      }
+                    },
+                    {
+                      "ContentItemId": "4featurebox000004",
+                      "ContentType": "FeatureBox",
+                      "FeatureBox": {
+                        "Title": { "Text": "SRA Regulated" },
+                        "Description": { "Text": "Fully regulated by the Solicitors Regulation Authority." },
+                        "IconClass": { "Text": "fas fa-shield-alt" },
+                        "DisplayOrder": { "Value": 4 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": {
+                  "Alignment": "Justify",
+                  "Size": 100
+                }
+              },
+              {
+                "ContentItemId": "4teamwidget0000001",
+                "ContentItemVersionId": null,
+                "ContentType": "TeamSectionWidget",
+                "DisplayText": null,
+                "Latest": false,
+                "Published": false,
+                "ModifiedUtc": "2025-01-06T12:00:00.0000000Z",
+                "PublishedUtc": null,
+                "CreatedUtc": null,
+                "Owner": null,
+                "Author": "admin",
+                "TeamSectionWidget": {
+                  "SectionTitle": { "Text": "Meet Our Team" },
+                  "SectionSubtitle": { "Text": "Dedicated professionals committed to your success" }
+                },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "4teammember000001",
+                      "ContentType": "TeamMember",
+                      "TeamMember": {
+                        "Name": { "Text": "Sarah Johnson" },
+                        "Role": { "Text": "Senior Immigration Solicitor" },
+                        "Bio": { "Text": "Sarah has over 15 years of experience in immigration law." },
+                        "LinkedInUrl": { "Text": "https://linkedin.com" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    },
+                    {
+                      "ContentItemId": "4teammember000002",
+                      "ContentType": "TeamMember",
+                      "TeamMember": {
+                        "Name": { "Text": "David Williams" },
+                        "Role": { "Text": "Family Law Partner" },
+                        "Bio": { "Text": "David specializes in complex divorce and child custody cases." },
+                        "LinkedInUrl": { "Text": "https://linkedin.com" },
+                        "DisplayOrder": { "Value": 2 }
+                      }
+                    },
+                    {
+                      "ContentItemId": "4teammember000003",
+                      "ContentType": "TeamMember",
+                      "TeamMember": {
+                        "Name": { "Text": "Emma Thompson" },
+                        "Role": { "Text": "Personal Injury Solicitor" },
+                        "Bio": { "Text": "Emma has secured millions in compensation for her clients." },
+                        "LinkedInUrl": { "Text": "https://linkedin.com" },
+                        "DisplayOrder": { "Value": 3 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": {
+                  "Alignment": "Justify",
+                  "Size": 100
+                }
+              },
+              {
+                "ContentItemId": "4testimonialsw0001",
+                "ContentItemVersionId": null,
+                "ContentType": "TestimonialsSectionWidget",
+                "DisplayText": null,
+                "Latest": false,
+                "Published": false,
+                "ModifiedUtc": "2025-01-06T12:00:00.0000000Z",
+                "PublishedUtc": null,
+                "CreatedUtc": null,
+                "Owner": null,
+                "Author": "admin",
+                "TestimonialsSectionWidget": {
+                  "SectionTitle": { "Text": "What Our Clients Say" },
+                  "SectionSubtitle": { "Text": "Real feedback from real clients" }
+                },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "4testimonial00001",
+                      "ContentType": "Testimonial",
+                      "Testimonial": {
+                        "Quote": { "Text": "MCR Solicitors handled my spouse visa application with professionalism and care. I couldn't have asked for better support during such a stressful time." },
+                        "AuthorName": { "Text": "Ahmed K." },
+                        "AuthorTitle": { "Text": "Manchester" },
+                        "Rating": { "Value": 5 },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    },
+                    {
+                      "ContentItemId": "4testimonial00002",
+                      "ContentType": "Testimonial",
+                      "Testimonial": {
+                        "Quote": { "Text": "The team helped me through my divorce with compassion and expertise. They fought for a fair settlement and kept me informed throughout." },
+                        "AuthorName": { "Text": "Jennifer M." },
+                        "AuthorTitle": { "Text": "Salford" },
+                        "Rating": { "Value": 5 },
+                        "DisplayOrder": { "Value": 2 }
+                      }
+                    },
+                    {
+                      "ContentItemId": "4testimonial00003",
+                      "ContentType": "Testimonial",
+                      "Testimonial": {
+                        "Quote": { "Text": "After my accident at work, MCR Solicitors secured compensation that exceeded my expectations. Highly recommend their personal injury team." },
+                        "AuthorName": { "Text": "Michael R." },
+                        "AuthorTitle": { "Text": "Bolton" },
+                        "Rating": { "Value": 5 },
+                        "DisplayOrder": { "Value": 3 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": {
+                  "Alignment": "Justify",
+                  "Size": 100
+                }
+              },
+              {
+                "ContentItemId": "4ctawidget00000001",
+                "ContentItemVersionId": null,
+                "ContentType": "CtaSectionWidget",
+                "DisplayText": null,
+                "Latest": false,
+                "Published": false,
+                "ModifiedUtc": "2025-01-06T12:00:00.0000000Z",
+                "PublishedUtc": null,
+                "CreatedUtc": null,
+                "Owner": null,
+                "Author": "admin",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Ready to Get Started?" },
+                  "SectionText": { "Text": "Contact us today for a free, no-obligation consultation. Our expert team is ready to help you with your legal matters." },
+                  "ButtonText": { "Text": "Contact Us Now" },
+                  "ButtonUrl": { "Text": "/contact-us" }
+                },
+                "FlowMetadata": {
+                  "Alignment": "Justify",
+                  "Size": 100
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
