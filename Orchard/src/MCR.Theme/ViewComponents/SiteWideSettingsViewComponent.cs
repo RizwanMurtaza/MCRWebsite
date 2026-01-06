@@ -48,6 +48,8 @@ public class SiteWideSettingsViewComponent : ViewComponent
             OrganizationName = GetFieldValue(settings, "SiteWideSettings", "OrganizationName"),
             OrganizationLogo = GetMediaPath(settings, "SiteWideSettings", "OrganizationLogo"),
             OrganizationAddress = GetFieldValue(settings, "SiteWideSettings", "OrganizationAddress"),
+            OrganizationPostcode = GetFieldValue(settings, "SiteWideSettings", "OrganizationPostcode"),
+            OrganizationCity = GetFieldValue(settings, "SiteWideSettings", "OrganizationCity"),
             OrganizationPhone = GetFieldValue(settings, "SiteWideSettings", "OrganizationPhone"),
             OrganizationEmail = GetFieldValue(settings, "SiteWideSettings", "OrganizationEmail")
         };
@@ -124,6 +126,8 @@ public class SiteWideSettingsViewModel
     public string? OrganizationName { get; set; }
     public string? OrganizationLogo { get; set; }
     public string? OrganizationAddress { get; set; }
+    public string? OrganizationPostcode { get; set; }
+    public string? OrganizationCity { get; set; }
     public string? OrganizationPhone { get; set; }
     public string? OrganizationEmail { get; set; }
 

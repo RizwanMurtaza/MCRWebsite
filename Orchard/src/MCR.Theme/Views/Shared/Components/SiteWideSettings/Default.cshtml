@@ -51,11 +51,27 @@
         {
             <text>"email": "@Model.OrganizationEmail",</text>
         }
-        @if (!string.IsNullOrEmpty(Model.OrganizationAddress))
+        @if (!string.IsNullOrEmpty(Model.OrganizationAddress) || !string.IsNullOrEmpty(Model.OrganizationPostcode) || !string.IsNullOrEmpty(Model.OrganizationCity))
         {
             <text>"address": {
-            "@@type": "PostalAddress",
-            "streetAddress": "@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(Model.OrganizationAddress))"
+            "@@type": "PostalAddress"</text>
+            if (!string.IsNullOrEmpty(Model.OrganizationAddress))
+            {
+                <text>,
+            "streetAddress": "@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(Model.OrganizationAddress))"</text>
+            }
+            if (!string.IsNullOrEmpty(Model.OrganizationCity))
+            {
+                <text>,
+            "addressLocality": "@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(Model.OrganizationCity))"</text>
+            }
+            if (!string.IsNullOrEmpty(Model.OrganizationPostcode))
+            {
+                <text>,
+            "postalCode": "@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(Model.OrganizationPostcode))"</text>
+            }
+            <text>,
+            "addressCountry": "GB"
         },</text>
         }
         "url": "@Context.Request.Scheme://@Context.Request.Host"

@@ -61,11 +61,11 @@
           "ThemeColor": { "Text": "#1a365d" },
           "OrganizationName": { "Text": "MCR Solicitors" },
           "OrganizationType": { "Text": "LegalService" },
-          "OrganizationAddress": { "Text": "Manchester, United Kingdom" },
+          "OrganizationAddress": { "Text": "First Floor, 1024 Stockport Rd" },
           "OrganizationCity": { "Text": "Manchester" },
-          "OrganizationPostcode": { "Text": "" },
+          "OrganizationPostcode": { "Text": "M19 3WX" },
           "OrganizationCountry": { "Text": "GB" },
-          "OrganizationPhone": { "Text": "+44 161 552 2617" },
+          "OrganizationPhone": { "Text": "+44 161 466 1280" },
           "OrganizationEmail": { "Text": "info@mcrsolicitors.co.uk" },
           "OrganizationSraNumber": { "Text": "648878" },
           "OrganizationOpeningHours": { "Text": "Mo-Fr 09:00-17:30" }
@@ -304,7 +304,7 @@
                         "PrimaryButtonText": { "Text": "Start Your Claim" },
                         "PrimaryButtonUrl": { "Text": "/personal-injury" },
                         "SecondaryButtonText": { "Text": "Learn More" },
-                        "SecondaryButtonUrl": { "Text": "/personal-injury/how-it-works" },
+                        "SecondaryButtonUrl": { "Text": "/personal-injury" },
                         "DisplayOrder": { "Value": 4 }
                       }
                     },
@@ -389,7 +389,7 @@
                         "Title": { "Text": "UK Visa Appeals" },
                         "Description": { "Text": "Expert representation for visa refusals and immigration appeals." },
                         "IconClass": { "Text": "fas fa-gavel" },
-                        "LinkUrl": { "Text": "/immigration/appeals" },
+                        "LinkUrl": { "Text": "/appeals-administrative-review" },
                         "LinkText": { "Text": "Learn More" },
                         "DisplayOrder": { "Value": 4 }
                       }
@@ -401,7 +401,7 @@
                         "Title": { "Text": "Divorce & Separation" },
                         "Description": { "Text": "Compassionate guidance through divorce proceedings and settlements." },
                         "IconClass": { "Text": "fas fa-heart-broken" },
-                        "LinkUrl": { "Text": "/family-law/divorce" },
+                        "LinkUrl": { "Text": "/getting-a-divorce" },
                         "LinkText": { "Text": "Learn More" },
                         "DisplayOrder": { "Value": 5 }
                       }
@@ -413,7 +413,7 @@
                         "Title": { "Text": "Work Accidents" },
                         "Description": { "Text": "Claim compensation for workplace injuries and accidents." },
                         "IconClass": { "Text": "fas fa-hard-hat" },
-                        "LinkUrl": { "Text": "/personal-injury/work-accidents" },
+                        "LinkUrl": { "Text": "/workplace-injury-claims" },
                         "LinkText": { "Text": "Learn More" },
                         "DisplayOrder": { "Value": 6 }
                       }
@@ -2485,6 +2485,326 @@
                   "SectionTitle": { "Text": "About Cookies" },
                   "Content": { "Html": "<p>This website uses cookies to improve your experience and help us understand how you use our site. This policy explains what cookies are, how we use them, and how you can manage your preferences.</p><h3>What Are Cookies?</h3><p>Cookies are small text files stored on your device when you visit a website. They help websites remember your preferences and understand how you use the site.</p><h3>Types of Cookies We Use</h3><h4>Essential Cookies</h4><p>These cookies are necessary for the website to function properly. They enable core functionality such as security, network management, and accessibility. You cannot opt out of these cookies.</p><h4>Analytics Cookies</h4><p>We use Google Analytics to understand how visitors interact with our website. These cookies collect anonymous information including:</p><ul><li>Pages visited and time spent</li><li>How you arrived at our site</li><li>Your general location (country/city level)</li><li>Device and browser information</li></ul><h4>Functional Cookies</h4><p>These cookies remember choices you make to improve your experience, such as language preferences or form data.</p><h3>Managing Cookies</h3><p>You can control and/or delete cookies through your browser settings. You can delete all cookies that are already on your computer and set most browsers to prevent them from being placed. However, if you do this, you may have to manually adjust some preferences every time you visit, and some services and functionalities may not work.</p><h3>More Information</h3><p>For more information about cookies and how to manage them, visit <a href='https://www.aboutcookies.org/' target='_blank'>www.aboutcookies.org</a>.</p>" },
                   "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-student-visa-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Student Visas",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Student Visas" },
+          "AutoroutePart": { "Path": "student-visas", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "UK Student Visa Applications | Tier 4 Study Visa Solicitors Manchester",
+            "MetaDescription": "Expert assistance with UK student visa applications. We help international students obtain Tier 4 study visas, student route visas, and short-term study visas. High success rates.",
+            "MetaKeywords": "UK student visa, Tier 4 visa, study visa UK, international student visa, student route visa, study in UK, Manchester immigration solicitors"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-student-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-student-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "UK Student Visa Applications" },
+                        "Subheadline": { "Text": "Expert guidance for international students seeking to study in the United Kingdom." },
+                        "PrimaryButtonText": { "Text": "Free Consultation" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-student-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Study in the UK" },
+                  "Content": { "Html": "<p>The United Kingdom is home to some of the world's most prestigious universities and educational institutions. Our experienced immigration solicitors help international students navigate the complex UK visa system to achieve their educational goals.</p><h3>Student Route Visa (formerly Tier 4)</h3><p>The Student Route visa allows you to study full-time courses in the UK. Key requirements include:</p><ul><li>Confirmation of Acceptance for Studies (CAS) from a licensed sponsor</li><li>Proof of English language proficiency (IELTS, TOEFL, or equivalent)</li><li>Evidence of sufficient funds to cover tuition fees and living costs</li><li>Valid passport and tuberculosis test results (if applicable)</li></ul><h3>Types of Student Visas We Handle</h3><h4>Student Visa (General)</h4><p>For courses lasting longer than 6 months at degree level or above, or longer than 11 months below degree level.</p><h4>Child Student Visa</h4><p>For children aged 4-17 attending independent schools in the UK.</p><h4>Short-term Study Visa</h4><p>For short courses lasting up to 6 months (or 11 months for English language courses).</p><h3>Why Choose MCR Solicitors?</h3><ul><li>High success rate with student visa applications</li><li>Expert guidance on documentation and requirements</li><li>Support with CAS applications and university communications</li><li>Assistance with dependent visa applications</li><li>Post-study work visa advice (Graduate Route)</li></ul><h3>Graduate Route Visa</h3><p>After completing your studies, you may be eligible for the Graduate Route visa, allowing you to stay and work in the UK for 2 years (3 years for PhD graduates). We can advise on your options and assist with your application.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-student-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Ready to Start Your UK Education Journey?" },
+                  "SectionContent": { "Text": "Contact our expert immigration team today for a free consultation about your student visa application." },
+                  "PrimaryButtonText": { "Text": "Book Free Consultation" },
+                  "PrimaryButtonUrl": { "Text": "/contact-us" },
+                  "SecondaryButtonText": { "Text": "Call Us Now" },
+                  "SecondaryButtonUrl": { "Text": "tel:+441615522617" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-visitor-visa-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Visitor Visas",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Visitor Visas" },
+          "AutoroutePart": { "Path": "visitor-visas", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "UK Visitor Visa Applications | Tourist & Business Visa Solicitors Manchester",
+            "MetaDescription": "Expert help with UK visitor visa applications. We assist with tourist visas, business visitor visas, family visit visas, and medical visitor visas. Professional guidance from Manchester immigration solicitors.",
+            "MetaKeywords": "UK visitor visa, tourist visa UK, business visitor visa, family visit visa, standard visitor visa, UK visit visa application, Manchester immigration solicitors"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-visitor-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-visitor-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "UK Visitor Visa Applications" },
+                        "Subheadline": { "Text": "Professional assistance for tourism, business visits, and family reunions in the UK." },
+                        "PrimaryButtonText": { "Text": "Free Consultation" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-visitor-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Visit the United Kingdom" },
+                  "Content": { "Html": "<p>Whether you're planning a holiday, visiting family, attending business meetings, or seeking medical treatment in the UK, our experienced immigration solicitors can help you obtain the right visitor visa.</p><h3>Standard Visitor Visa</h3><p>The Standard Visitor Visa covers most visit purposes and allows stays of up to 6 months. You can apply for this visa if you want to:</p><ul><li>Visit family and friends</li><li>Have a holiday or travel around the UK</li><li>Attend business meetings, conferences, or training</li><li>Receive private medical treatment</li><li>Take part in sports or creative events</li><li>Study a short course (up to 6 months)</li></ul><h3>Types of Visitor Visas</h3><h4>Tourist Visa</h4><p>For leisure travel, sightseeing, and holidays in the UK. Perfect for experiencing British culture, history, and attractions.</p><h4>Family Visit Visa</h4><p>Visit relatives and family members living in the UK. We can help demonstrate your genuine intention to return home.</p><h4>Business Visitor Visa</h4><p>Attend meetings, conferences, negotiations, or training. Not for employment but for legitimate business activities.</p><h4>Medical Visitor Visa</h4><p>Receive private medical treatment at UK hospitals or clinics. We assist with medical documentation requirements.</p><h3>Long-term Visit Visas</h3><p>If you're a frequent visitor to the UK, you may benefit from a long-term Standard Visitor visa valid for 2, 5, or 10 years. Each visit can last up to 6 months.</p><h3>Our Visitor Visa Services</h3><ul><li>Assessment of your eligibility and circumstances</li><li>Preparation of supporting documentation</li><li>Guidance on financial evidence requirements</li><li>Sponsor letter preparation assistance</li><li>Application review and submission support</li><li>Representation for visa refusal appeals</li></ul>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-visitor-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Planning Your UK Visit?" },
+                  "SectionContent": { "Text": "Let our expert immigration team help you with your visitor visa application. Contact us for a free initial consultation." },
+                  "PrimaryButtonText": { "Text": "Book Free Consultation" },
+                  "PrimaryButtonUrl": { "Text": "/contact-us" },
+                  "SecondaryButtonText": { "Text": "Call Us Now" },
+                  "SecondaryButtonUrl": { "Text": "tel:+441615522617" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-spouse-visa-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Spouse Visa UK",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Spouse Visa UK" },
+          "AutoroutePart": { "Path": "spouse-visa", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "UK Spouse Visa Applications | Partner Visa Solicitors Manchester",
+            "MetaDescription": "Expert assistance with UK spouse visa and partner visa applications. We help couples reunite in the UK with high success rates. Experienced Manchester immigration solicitors.",
+            "MetaKeywords": "UK spouse visa, partner visa UK, marriage visa, fiancé visa, unmarried partner visa, spouse visa requirements, Manchester immigration solicitors"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-spouse-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-spouse-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "UK Spouse & Partner Visas" },
+                        "Subheadline": { "Text": "Reunite with your loved one in the United Kingdom. Expert guidance through every step." },
+                        "PrimaryButtonText": { "Text": "Free Consultation" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-spouse-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Bringing Your Partner to the UK" },
+                  "Content": { "Html": "<p>Being separated from your spouse or partner is incredibly difficult. Our compassionate and experienced immigration solicitors understand the emotional challenges involved and are dedicated to helping couples reunite in the UK as quickly as possible.</p><h3>UK Spouse Visa Requirements</h3><p>To bring your spouse or civil partner to the UK, you'll need to meet several requirements:</p><ul><li><strong>Relationship requirement:</strong> You must be legally married or in a civil partnership</li><li><strong>Financial requirement:</strong> Minimum income of £18,600 per year (higher with dependents)</li><li><strong>Accommodation requirement:</strong> Adequate housing without recourse to public funds</li><li><strong>English language requirement:</strong> Your partner must pass an approved English test</li><li><strong>Genuine relationship:</strong> Evidence that your relationship is genuine and subsisting</li></ul><h3>Types of Partner Visas</h3><h4>Spouse Visa</h4><p>For legally married couples where one partner is a British citizen or has settled status in the UK.</p><h4>Civil Partner Visa</h4><p>For couples in a legally recognised civil partnership.</p><h4>Unmarried Partner Visa</h4><p>For couples who have been living together in a relationship akin to marriage for at least 2 years.</p><h4>Fiancé(e) Visa</h4><p>For those planning to marry their British partner within 6 months of arrival in the UK.</p><h3>The Application Process</h3><ol><li>Initial assessment of eligibility</li><li>Gathering supporting documentation</li><li>Completing the online application</li><li>Attending biometric appointment</li><li>Visa decision (usually within 12 weeks)</li></ol><h3>Path to Settlement</h3><p>After 5 years on a spouse visa (or 2.5 years if married for 4+ years), you can apply for Indefinite Leave to Remain (ILR), and then British citizenship after 12 months.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-spouse-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Ready to Bring Your Partner to the UK?" },
+                  "SectionContent": { "Text": "Contact our specialist immigration team today. We'll assess your case and guide you through the spouse visa process." },
+                  "PrimaryButtonText": { "Text": "Book Free Consultation" },
+                  "PrimaryButtonUrl": { "Text": "/contact-us" },
+                  "SecondaryButtonText": { "Text": "Call Us Now" },
+                  "SecondaryButtonUrl": { "Text": "tel:+441615522617" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-child-arrange-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Child Arrangements",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Child Arrangements" },
+          "AutoroutePart": { "Path": "child-arrangements", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Child Arrangement Orders | Custody & Access Solicitors Manchester",
+            "MetaDescription": "Expert family law solicitors helping parents with child arrangement orders, custody disputes, and contact arrangements. Putting children's welfare first. Manchester family lawyers.",
+            "MetaKeywords": "child arrangement orders, child custody, child access, contact orders, residence orders, family law solicitors, Manchester family lawyers"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-child-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-child-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Child Arrangement Orders" },
+                        "Subheadline": { "Text": "Protecting your children's welfare and your parental rights through separation." },
+                        "PrimaryButtonText": { "Text": "Free Consultation" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-child-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Putting Children First" },
+                  "Content": { "Html": "<p>When parents separate, deciding on arrangements for children can be one of the most difficult and emotional challenges. Our experienced family law solicitors are here to help you reach agreements that put your children's welfare first.</p><h3>What Are Child Arrangement Orders?</h3><p>Child Arrangement Orders (formerly known as Residence and Contact Orders) are court orders that determine:</p><ul><li><strong>Who the child lives with</strong> (previously called a residence order)</li><li><strong>When the child spends time with each parent</strong> (previously called a contact order)</li><li>Other specific issues about the child's upbringing</li></ul><h3>Types of Arrangements We Help With</h3><h4>Living Arrangements</h4><p>Determining where your child will primarily live, whether with one parent or shared between both.</p><h4>Contact Arrangements</h4><p>Establishing regular contact schedules including weekends, holidays, and special occasions.</p><h4>Specific Issue Orders</h4><p>Resolving disagreements about education, medical treatment, religious upbringing, or international travel.</p><h4>Prohibited Steps Orders</h4><p>Preventing a parent from taking certain actions, such as moving abroad with the child.</p><h3>Our Approach</h3><p>We always encourage parents to reach amicable agreements through negotiation or mediation where possible. This is usually better for children and less stressful for everyone involved. However, when agreement isn't possible, we provide robust representation in court proceedings.</p><h3>The Court's Priority</h3><p>The court's paramount consideration is always the child's welfare. Factors considered include:</p><ul><li>The child's physical, emotional, and educational needs</li><li>The likely effect of any change in circumstances</li><li>The child's age, sex, background, and relevant characteristics</li><li>Any harm the child has suffered or is at risk of suffering</li><li>The capability of each parent to meet the child's needs</li></ul>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-child-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Need Help With Child Arrangements?" },
+                  "SectionContent": { "Text": "Our compassionate family law team can help you navigate this difficult time. Contact us for confidential advice." },
+                  "PrimaryButtonText": { "Text": "Book Free Consultation" },
+                  "PrimaryButtonUrl": { "Text": "/contact-us" },
+                  "SecondaryButtonText": { "Text": "Call Us Now" },
+                  "SecondaryButtonUrl": { "Text": "tel:+441615522617" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "page-slip-trip-001",
+          "ContentType": "ContentPage",
+          "DisplayText": "Slip, Trip & Fall Claims",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUserId')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": { "Title": "Slip, Trip & Fall Claims" },
+          "AutoroutePart": { "Path": "slip-trip-fall-claims", "SetHomepage": false },
+          "SeoMetaPart": {
+            "PageTitle": "Slip, Trip & Fall Claims | Accident Compensation Solicitors Manchester",
+            "MetaDescription": "No win, no fee slip, trip and fall compensation claims. Expert personal injury solicitors helping victims of accidents in public places, workplaces, and shops. Manchester accident lawyers.",
+            "MetaKeywords": "slip trip fall claims, accident compensation, public liability claims, slip accident solicitors, trip hazard claims, fall injury compensation, Manchester personal injury lawyers"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "widget-slip-hero",
+                "ContentType": "HeroBannerWidget",
+                "HeroBannerWidget": { "BackgroundColor": { "Text": "linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%)" } },
+                "BagPart": {
+                  "ContentItems": [
+                    {
+                      "ContentItemId": "slide-slip-1",
+                      "ContentType": "HeroBannerSlide",
+                      "HeroBannerSlide": {
+                        "Headline": { "Text": "Slip, Trip & Fall Claims" },
+                        "Subheadline": { "Text": "No win, no fee. Get the compensation you deserve for your accident." },
+                        "PrimaryButtonText": { "Text": "Start Your Claim" },
+                        "PrimaryButtonUrl": { "Text": "/contact-us" },
+                        "DisplayOrder": { "Value": 1 }
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-slip-content",
+                "ContentType": "HtmlBodyWidget",
+                "HtmlBodyWidget": {
+                  "SectionTitle": { "Text": "Accident Compensation Claims" },
+                  "Content": { "Html": "<p>Slips, trips, and falls are among the most common accidents in the UK, often resulting in serious injuries. If you've been injured due to someone else's negligence, you may be entitled to compensation.</p><h3>Common Causes of Slip, Trip & Fall Accidents</h3><ul><li>Wet or slippery floors without warning signs</li><li>Uneven pavements or flooring</li><li>Poor lighting in public areas</li><li>Obstacles or debris in walkways</li><li>Loose carpets or damaged flooring</li><li>Missing or broken handrails</li><li>Ice and snow on paths (if not properly treated)</li></ul><h3>Where Do These Accidents Happen?</h3><h4>Public Places</h4><p>Supermarkets, shopping centres, restaurants, pubs, and other public venues have a duty of care to visitors.</p><h4>Workplaces</h4><p>Employers must ensure safe working conditions. Workplace slip, trip, and fall accidents may entitle you to compensation.</p><h4>Public Highways</h4><p>Local authorities are responsible for maintaining pavements and roads in a safe condition.</p><h4>Private Property</h4><p>Property owners and occupiers have responsibilities to ensure their premises are safe for visitors.</p><h3>What Compensation Can You Claim?</h3><ul><li>Pain and suffering</li><li>Loss of earnings (past and future)</li><li>Medical expenses and rehabilitation costs</li><li>Travel expenses for medical appointments</li><li>Care and assistance costs</li><li>Adaptations to your home or vehicle</li></ul><h3>No Win, No Fee</h3><p>We handle slip, trip, and fall claims on a no win, no fee basis. This means you won't pay any legal fees unless your claim is successful. There's no financial risk to you.</p><h3>Time Limits</h3><p>You generally have 3 years from the date of your accident to make a claim. Don't delay – contact us today for a free assessment of your case.</p>" },
+                  "CssClass": { "Text": "" }
+                },
+                "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
+              },
+              {
+                "ContentItemId": "widget-slip-cta",
+                "ContentType": "CtaSectionWidget",
+                "CtaSectionWidget": {
+                  "SectionTitle": { "Text": "Had a Slip, Trip or Fall Accident?" },
+                  "SectionContent": { "Text": "Find out if you have a claim. Our expert personal injury team offers free, no-obligation assessments." },
+                  "PrimaryButtonText": { "Text": "Start Your Claim" },
+                  "PrimaryButtonUrl": { "Text": "/contact-us" },
+                  "SecondaryButtonText": { "Text": "Call Us Now" },
+                  "SecondaryButtonUrl": { "Text": "tel:+441615522617" }
                 },
                 "FlowMetadata": { "Alignment": "Justify", "Size": 100 }
               }
