@@ -1,7 +1,24 @@
 @using OrchardCore.ContentManagement
-
 @{
     var contentItem = Model.ContentItem as ContentItem;
+    var part = contentItem?.Content["HtmlBodyWidget"];
+
+    var sectionTitle = part?["SectionTitle"]?["Text"]?.ToString();
+    var content = part?["Content"]?["Html"]?.ToString();
+    var cssClass = part?["CssClass"]?["Text"]?.ToString();
 }
 
-@await Component.InvokeAsync("HtmlBodyWidget", new { contentItem })
+<section class="mcr-content-section py-5 @cssClass">
+    <div class="container">
+        @if (!string.IsNullOrEmpty(sectionTitle))
+        {
+            <h2 class="section-title mb-4">@sectionTitle</h2>
+        }
+        @if (!string.IsNullOrEmpty(content))
+        {
+            <div class="content-body">
+                @Html.Raw(content)
+            </div>
+        }
+    </div>
+</section>

@@ -1,7 +1,59 @@
 @using OrchardCore.ContentManagement
-
 @{
     var contentItem = Model.ContentItem as ContentItem;
+    var part = contentItem?.Content["TextWithImageWidget"];
+
+    var sectionTitle = part?["SectionTitle"]?["Text"]?.ToString();
+    var content = part?["Content"]?["Html"]?.ToString();
+    var imageAlt = part?["ImageAlt"]?["Text"]?.ToString();
+    var imagePosition = part?["ImagePosition"]?["Text"]?.ToString() ?? "right";
+    var cssClass = part?["CssClass"]?["Text"]?.ToString();
+
+    // Get image
+    string? imageUrl = null;
+    var paths = part?["Image"]?["Paths"];
+    if (paths != null)
+    {
+        foreach (var path in paths)
+        {
+            if (path != null)
+            {
+                imageUrl = "/media/" + path.ToString();
+                break;
+            }
+        }
+    }
+
+    var imageLeft = imagePosition?.ToLower() == "left";
+    var orderClass = imageLeft ? "" : "order-lg-2";
+    var textOrderClass = imageLeft ? "" : "order-lg-1";
 }
 
-@await Component.InvokeAsync("TextWithImageWidget", new { contentItem })
+<section class="mcr-text-image-section py-5 @cssClass">
+    <div class="container">
+        @if (!string.IsNullOrEmpty(sectionTitle))
+        {
+            <h2 class="section-title text-center mb-5">@sectionTitle</h2>
+        }
+        <div class="row align-items-center">
+            @if (!string.IsNullOrEmpty(imageUrl))
+            {
+                <div class="col-lg-6 @orderClass mb-4 mb-lg-0">
+                    <div class="image-wrapper">
+                        <img src="@imageUrl" alt="@(imageAlt ?? sectionTitle ?? "Image")" class="img-fluid rounded shadow" />
+                    </div>
+                </div>
+            }
+            <div class="@(string.IsNullOrEmpty(imageUrl) ? "col-12" : "col-lg-6") @textOrderClass">
+                <div class="content-wrapper">
+                    @if (!string.IsNullOrEmpty(content))
+                    {
+                        <div class="content-body">
+                            @Html.Raw(content)
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

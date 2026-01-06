@@ -128,7 +128,7 @@
       "name": "content",
       "data": [
         {
-          "ContentItemId": "[js: uuid()]",
+          "ContentItemId": "mcrblog0000000001",
           "ContentType": "Blog",
           "DisplayText": "Blog",
           "Latest": true,
@@ -154,6 +154,7 @@
           "Owner": "[js: parameters('AdminUserId')]",
           "TitlePart": { "Title": "Understanding UK Spouse Visa Requirements in 2024: A Complete Guide" },
           "AutoroutePart": { "Path": "blog/uk-spouse-visa-requirements-2024-complete-guide", "SetHomepage": false },
+          "ContainedPart": { "ListContentItemId": "mcrblog0000000001", "Order": 0 },
           "SeoMetaPart": {
             "PageTitle": "UK Spouse Visa Requirements 2024 | Complete Guide | MCR Solicitors",
             "MetaDescription": "Everything you need to know about UK spouse visa requirements in 2024. Income thresholds, documents needed, processing times & expert tips from Manchester immigration solicitors."
@@ -179,6 +180,7 @@
           "Owner": "[js: parameters('AdminUserId')]",
           "TitlePart": { "Title": "What to Do If Your UK Visa Application Is Refused: Your Options Explained" },
           "AutoroutePart": { "Path": "blog/uk-visa-refused-options-explained", "SetHomepage": false },
+          "ContainedPart": { "ListContentItemId": "mcrblog0000000001", "Order": 1 },
           "SeoMetaPart": {
             "PageTitle": "UK Visa Refused? Your Options Explained | Appeals & Reviews | MCR Solicitors",
             "MetaDescription": "Visa application refused? Learn about administrative review, appeals, and fresh applications. Expert guidance from Manchester immigration solicitors on overturning refusals."
@@ -204,6 +206,7 @@
           "Owner": "[js: parameters('AdminUserId')]",
           "TitlePart": { "Title": "Divorce in the UK: A Step-by-Step Guide to the No-Fault Divorce Process" },
           "AutoroutePart": { "Path": "blog/uk-no-fault-divorce-guide", "SetHomepage": false },
+          "ContainedPart": { "ListContentItemId": "mcrblog0000000001", "Order": 2 },
           "SeoMetaPart": {
             "PageTitle": "UK No-Fault Divorce Guide 2024 | Step-by-Step Process | MCR Solicitors",
             "MetaDescription": "Complete guide to no-fault divorce in the UK. Learn about the process, costs, timelines, and how to protect your interests. Expert family law advice from Manchester solicitors."
@@ -229,6 +232,7 @@
           "Owner": "[js: parameters('AdminUserId')]",
           "TitlePart": { "Title": "Child Custody and Arrangements: Understanding Your Rights as a Parent" },
           "AutoroutePart": { "Path": "blog/child-custody-arrangements-parental-rights", "SetHomepage": false },
+          "ContainedPart": { "ListContentItemId": "mcrblog0000000001", "Order": 3 },
           "SeoMetaPart": {
             "PageTitle": "Child Custody & Arrangements UK | Parental Rights Guide | MCR Solicitors",
             "MetaDescription": "Understanding child custody and arrangements in the UK. Learn about parental responsibility, residence orders, and contact rights. Expert family law guidance from Manchester."
@@ -254,6 +258,7 @@
           "Owner": "[js: parameters('AdminUserId')]",
           "TitlePart": { "Title": "Workplace Accident Claims: What Every Employee Should Know" },
           "AutoroutePart": { "Path": "blog/workplace-accident-claims-employee-guide", "SetHomepage": false },
+          "ContainedPart": { "ListContentItemId": "mcrblog0000000001", "Order": 4 },
           "SeoMetaPart": {
             "PageTitle": "Workplace Accident Claims UK | Employee Rights Guide | MCR Solicitors",
             "MetaDescription": "Been injured at work? Learn about your rights to compensation, what to do after an accident, time limits, and how to make a successful claim. Manchester personal injury solicitors."
@@ -279,6 +284,7 @@
           "Owner": "[js: parameters('AdminUserId')]",
           "TitlePart": { "Title": "Slip, Trip and Fall Claims: Proving Liability and Maximising Compensation" },
           "AutoroutePart": { "Path": "blog/slip-trip-fall-claims-guide", "SetHomepage": false },
+          "ContainedPart": { "ListContentItemId": "mcrblog0000000001", "Order": 5 },
           "SeoMetaPart": {
             "PageTitle": "Slip, Trip & Fall Claims UK | Proving Liability Guide | MCR Solicitors",
             "MetaDescription": "Injured in a slip, trip or fall? Learn how to prove liability, what compensation you could receive, and how Manchester personal injury solicitors can help your claim."
@@ -304,6 +310,7 @@
           "Owner": "[js: parameters('AdminUserId')]",
           "TitlePart": { "Title": "UK Student Visa Guide: Requirements, Costs and Application Process" },
           "AutoroutePart": { "Path": "blog/uk-student-visa-guide-requirements", "SetHomepage": false },
+          "ContainedPart": { "ListContentItemId": "mcrblog0000000001", "Order": 6 },
           "SeoMetaPart": {
             "PageTitle": "UK Student Visa Guide 2024 | Requirements & Costs | MCR Solicitors",
             "MetaDescription": "Complete guide to UK Student visas. Learn about eligibility, financial requirements, CAS, application process and post-study work options. Expert immigration advice Manchester."
@@ -319,21 +326,6 @@
           "HtmlBodyPart": {
             "Html": "<h2>Overview of UK Student Visas</h2><p>The UK Student visa (formerly Tier 4) allows international students to study at recognised educational institutions in the United Kingdom. Whether you're pursuing undergraduate, postgraduate, or professional qualifications, understanding the visa requirements is essential for a successful application.</p><h2>Eligibility Requirements</h2><h3>1. Confirmation of Acceptance for Studies (CAS)</h3><p>Before applying, you must have a valid CAS from a licensed Student sponsor (your university or college). The CAS must:</p><ul><li>Be issued no more than 6 months before your application</li><li>Contain accurate information about your course</li><li>Include your personal details correctly</li></ul><h3>2. Financial Requirements</h3><p>You must prove you can support yourself financially:</p><ul><li><strong>Course fees:</strong> First year's fees (or full fees if less than a year)</li><li><strong>Living costs:</strong> £1,334 per month in London, £1,023 outside London</li><li><strong>Funds held for 28 consecutive days:</strong> In your bank account or official financial sponsor</li></ul><h3>3. English Language</h3><p>You must demonstrate English proficiency at the required level (B2 for degree courses). This can be through:</p><ul><li>Approved Secure English Language Test (SELT)</li><li>Degree taught in English from a majority English-speaking country</li><li>Being a national of a majority English-speaking country</li></ul><h2>Application Process</h2><h3>Step 1: Receive Your CAS</h3><p>Once you've accepted an unconditional offer and paid any deposit, your institution will issue your CAS.</p><h3>Step 2: Apply Online</h3><p>Complete the online application at gov.uk. You can apply up to 6 months before your course starts.</p><h3>Step 3: Gather Documents</h3><p>Required documents typically include:</p><ul><li>Valid passport</li><li>CAS reference number</li><li>Financial evidence</li><li>English language test certificate</li><li>Tuberculosis test results (if applicable)</li></ul><h3>Step 4: Attend Biometrics Appointment</h3><p>Visit a visa application centre to provide fingerprints and photograph.</p><h3>Step 5: Wait for Decision</h3><p>Standard processing takes approximately 3 weeks. Priority services are available.</p><h2>Costs</h2><ul><li><strong>Application fee:</strong> £490 (outside UK)</li><li><strong>Immigration Health Surcharge:</strong> £776 per year of study</li><li><strong>Priority service (optional):</strong> Additional fees apply</li></ul><h2>Working While Studying</h2><p>Student visa holders can work:</p><ul><li><strong>Term time:</strong> Up to 20 hours per week</li><li><strong>Holidays:</strong> Full-time</li><li><strong>Work placements:</strong> As part of your course</li></ul><h2>After Your Studies: Graduate Route</h2><p>The Graduate visa allows you to stay and work in the UK after completing your degree:</p><ul><li><strong>2 years:</strong> For undergraduate and master's graduates</li><li><strong>3 years:</strong> For PhD graduates</li><li>No sponsorship required</li><li>Work in any job at any skill level</li></ul><h2>Expert Immigration Advice</h2><p>MCR Solicitors helps students navigate the visa process. We offer:</p><ul><li>CAS and document checking</li><li>Application preparation and submission</li><li>Advice on financial requirements</li><li>Representation for refusals or issues</li></ul><p>Call us on <strong>0161 466 1280</strong> to discuss your student visa application.</p>"
           }
-        }
-      ]
-    },
-    {
-      "name": "Menu",
-      "data": [
-        {
-          "name": "main-menu",
-          "items": [
-            {
-              "name": "Blog",
-              "url": "/blog",
-              "priority": 6
-            }
-          ]
         }
       ]
     }

@@ -1,0 +1,113 @@
+@using OrchardCore.ContentManagement
+@{
+    var contentItem = Model.ContentItem as ContentItem;
+    var part = contentItem?.Content?["BlogPost"];
+
+    var title = contentItem?.DisplayText ?? "Blog Post";
+    var excerpt = part?["Excerpt"]?["Text"]?.ToString();
+    var author = part?["Author"]?["Text"]?.ToString();
+    var category = part?["Category"]?["Text"]?.ToString();
+
+    int readTime = 5;
+    var readTimeVal = part?["ReadTime"]?["Value"];
+    if (readTimeVal != null)
+    {
+        int.TryParse(readTimeVal.ToString(), out readTime);
+    }
+
+    bool isFeatured = false;
+    var isFeaturedVal = part?["IsFeatured"]?["Value"];
+    if (isFeaturedVal != null)
+    {
+        bool.TryParse(isFeaturedVal.ToString(), out isFeatured);
+    }
+
+    var featuredImageAlt = part?["FeaturedImageAlt"]?["Text"]?.ToString() ?? title;
+
+    // Get URL
+    var url = contentItem?.Content?["AutoroutePart"]?["Path"]?.ToString();
+    if (!string.IsNullOrEmpty(url) && !url.StartsWith("/"))
+    {
+        url = "/" + url;
+    }
+
+    // Get featured image
+    string? featuredImage = null;
+    var featuredImagePaths = part?["FeaturedImage"]?["Paths"];
+    if (featuredImagePaths != null)
+    {
+        foreach (var path in featuredImagePaths)
+        {
+            if (path != null)
+            {
+                featuredImage = "/media/" + path.ToString();
+                break;
+            }
+        }
+    }
+
+    // Format date
+    var publishedDate = contentItem?.PublishedUtc?.ToString("dd MMM yyyy") ?? DateTime.Now.ToString("dd MMM yyyy");
+
+    // Truncate excerpt if too long
+    if (!string.IsNullOrEmpty(excerpt) && excerpt.Length > 160)
+    {
+        excerpt = excerpt.Substring(0, 157) + "...";
+    }
+}
+
+<article class="blog-card @(isFeatured ? "featured" : "")">
+    <a href="@url" class="blog-card-image @(string.IsNullOrEmpty(featuredImage) ? "placeholder" : "")">
+        @if (!string.IsNullOrEmpty(featuredImage))
+        {
+            <img src="@featuredImage" alt="@featuredImageAlt" loading="lazy" />
+        }
+        else
+        {
+            <div class="placeholder-content">
+                @{
+                    var iconClass = category?.ToLower() switch
+                    {
+                        "immigration" => "fas fa-passport",
+                        "family law" => "fas fa-users",
+                        "personal injury" => "fas fa-briefcase-medical",
+                        _ => "fas fa-balance-scale"
+                    };
+                }
+                <i class="@iconClass"></i>
+                <span class="placeholder-category">@(category ?? "Legal")</span>
+            </div>
+        }
+        @if (isFeatured)
+        {
+            <span class="featured-badge"><i class="fas fa-star"></i> Featured</span>
+        }
+    </a>
+    <div class="blog-card-content">
+        <div class="blog-card-meta">
+            @if (!string.IsNullOrEmpty(category))
+            {
+                <span class="post-category">@category</span>
+            }
+            <span class="post-date"><i class="far fa-calendar-alt"></i> @publishedDate</span>
+        </div>
+        <h3 class="blog-card-title">
+            <a href="@url">@title</a>
+        </h3>
+        @if (!string.IsNullOrEmpty(excerpt))
+        {
+            <p class="blog-card-excerpt">@excerpt</p>
+        }
+        <div class="blog-card-footer">
+            @if (!string.IsNullOrEmpty(author))
+            {
+                <span class="post-author"><i class="far fa-user"></i> @author</span>
+            }
+            else
+            {
+                <span class="post-read-time"><i class="far fa-clock"></i> @readTime min read</span>
+            }
+            <a href="@url" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+</article>

@@ -1,7 +1,76 @@
 @using OrchardCore.ContentManagement
-
+@using System.Linq
 @{
     var contentItem = Model.ContentItem as ContentItem;
+    var part = contentItem?.Content["AccordionWidget"];
+    var itemsBag = contentItem?.Content["BagPart"]?["ContentItems"];
+
+    var sectionTitle = part?["SectionTitle"]?["Text"]?.ToString();
+    var sectionSubtitle = part?["SectionSubtitle"]?["Text"]?.ToString();
+    var allowMultipleOpen = (bool?)part?["AllowMultipleOpen"]?["Value"] ?? false;
+    var cssClass = part?["CssClass"]?["Text"]?.ToString();
+
+    var accordionId = "accordion-" + Guid.NewGuid().ToString("N").Substring(0, 8);
+    var dataParent = allowMultipleOpen ? "" : $"#{accordionId}";
+
+    // Build items list
+    var items = new List<(string Title, string Content, bool IsOpen, int Order)>();
+    if (itemsBag != null)
+    {
+        foreach (var item in itemsBag)
+        {
+            var itemPart = item?["AccordionItem"];
+            if (itemPart != null)
+            {
+                var title = itemPart?["Title"]?["Text"]?.ToString() ?? "";
+                var itemContent = itemPart?["Content"]?["Html"]?.ToString() ?? "";
+                var isOpen = (bool?)itemPart?["IsOpenByDefault"]?["Value"] ?? false;
+                var orderVal = itemPart?["DisplayOrder"]?["Value"];
+                int order = 1;
+                if (orderVal != null)
+                {
+                    int.TryParse(orderVal.ToString(), out order);
+                }
+                items.Add((title, itemContent, isOpen, order));
+            }
+        }
+    }
+    items.Sort((a, b) => a.Order.CompareTo(b.Order));
 }
 
-@await Component.InvokeAsync("AccordionWidget", new { contentItem })
+<section class="mcr-accordion-section py-5 @cssClass">
+    <div class="container">
+        @if (!string.IsNullOrEmpty(sectionTitle))
+        {
+            <div class="text-center mb-5">
+                <h2 class="section-title">@sectionTitle</h2>
+                @if (!string.IsNullOrEmpty(sectionSubtitle))
+                {
+                    <p class="section-subtitle text-muted">@sectionSubtitle</p>
+                }
+            </div>
+        }
+
+        <div class="accordion mcr-accordion" id="@accordionId">
+            @foreach (var item in items)
+            {
+                var itemId = $"item-{Guid.NewGuid().ToString("N").Substring(0, 8)}";
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button @(item.IsOpen ? "" : "collapsed")" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#@itemId"
+                                aria-expanded="@(item.IsOpen ? "true" : "false")" aria-controls="@itemId">
+                            @item.Title
+                        </button>
+                    </h3>
+                    <div id="@itemId" class="accordion-collapse collapse @(item.IsOpen ? "show" : "")"
+                         @(string.IsNullOrEmpty(dataParent) ? "" : $"data-bs-parent=\"{dataParent}\"")>
+                        <div class="accordion-body">
+                            @Html.Raw(item.Content)
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

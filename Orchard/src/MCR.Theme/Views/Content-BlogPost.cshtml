@@ -1,0 +1,123 @@
+@using OrchardCore.ContentManagement
+@{
+    var contentItem = Model.ContentItem as ContentItem;
+    var part = contentItem?.Content?["BlogPost"];
+
+    var title = contentItem?.DisplayText ?? "Blog Post";
+    var excerpt = part?["Excerpt"]?["Text"]?.ToString();
+    var author = part?["Author"]?["Text"]?.ToString();
+    var category = part?["Category"]?["Text"]?.ToString();
+    var tags = part?["Tags"]?["Text"]?.ToString();
+
+    int readTime = 5;
+    var readTimeVal = part?["ReadTime"]?["Value"];
+    if (readTimeVal != null)
+    {
+        int.TryParse(readTimeVal.ToString(), out readTime);
+    }
+
+    var featuredImageAlt = part?["FeaturedImageAlt"]?["Text"]?.ToString() ?? title;
+
+    // Get featured image
+    string? featuredImage = null;
+    var featuredImagePaths = part?["FeaturedImage"]?["Paths"];
+    if (featuredImagePaths != null)
+    {
+        foreach (var path in featuredImagePaths)
+        {
+            if (path != null)
+            {
+                featuredImage = "/media/" + path.ToString();
+                break;
+            }
+        }
+    }
+
+    // Format date
+    var publishedDate = contentItem?.PublishedUtc?.ToString("dd MMMM yyyy") ?? DateTime.Now.ToString("dd MMMM yyyy");
+
+    // Split tags
+    var tagList = new List<string>();
+    if (!string.IsNullOrEmpty(tags))
+    {
+        foreach (var tag in tags.Split(','))
+        {
+            var trimmed = tag.Trim();
+            if (!string.IsNullOrEmpty(trimmed))
+            {
+                tagList.Add(trimmed);
+            }
+        }
+    }
+}
+
+<article class="blog-post-detail">
+    <header class="blog-post-header">
+        <div class="container">
+            <div class="blog-post-meta">
+                @if (!string.IsNullOrEmpty(category))
+                {
+                    <span class="post-category">@category</span>
+                }
+                <span class="post-date"><i class="far fa-calendar-alt"></i> @publishedDate</span>
+                <span class="post-read-time"><i class="far fa-clock"></i> @readTime min read</span>
+            </div>
+            <h1 class="blog-post-title">@title</h1>
+            @if (!string.IsNullOrEmpty(excerpt))
+            {
+                <p class="blog-post-excerpt">@excerpt</p>
+            }
+            @if (!string.IsNullOrEmpty(author))
+            {
+                <div class="post-author">
+                    <i class="far fa-user"></i> By <strong>@author</strong>
+                </div>
+            }
+        </div>
+    </header>
+
+    @if (!string.IsNullOrEmpty(featuredImage))
+    {
+        <div class="blog-post-featured-image">
+            <div class="container">
+                <img src="@featuredImage" alt="@featuredImageAlt" class="img-fluid" loading="lazy" />
+            </div>
+        </div>
+    }
+
+    <div class="blog-post-content section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="post-body">
+                        @await DisplayAsync(Model.Content["HtmlBodyPart"])
+                    </div>
+
+                    @if (tagList.Count > 0)
+                    {
+                        <div class="post-tags">
+                            <strong><i class="fas fa-tags"></i> Tags:</strong>
+                            @foreach (var tag in tagList)
+                            {
+                                <span class="tag">@tag</span>
+                            }
+                        </div>
+                    }
+
+                    <div class="post-cta">
+                        <div class="cta-box">
+                            <h3>Need Legal Advice?</h3>
+                            <p>Our experienced solicitors are here to help. Contact us today for a free initial consultation.</p>
+                            <a href="/contact" class="btn btn-cta">Get In Touch</a>
+                            <span class="cta-phone">or call <a href="tel:+441614661280">0161 466 1280</a></span>
+                        </div>
+                    </div>
+
+                    <div class="post-navigation">
+                        <a href="/blog" class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i> Back to Blog</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>

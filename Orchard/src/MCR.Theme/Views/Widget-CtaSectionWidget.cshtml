@@ -1,6 +1,49 @@
 @using OrchardCore.ContentManagement
 @{
-    ContentItem contentItem = Model.ContentItem;
+    var contentItem = Model.ContentItem as ContentItem;
+    var part = contentItem?.Content["CtaSectionWidget"];
+
+    var sectionTitle = part?["SectionTitle"]?["Text"]?.ToString();
+    var sectionText = part?["SectionText"]?["Text"]?.ToString();
+    var buttonText = part?["ButtonText"]?["Text"]?.ToString();
+    var buttonUrl = part?["ButtonUrl"]?["Text"]?.ToString();
+    var cssClass = part?["CssClass"]?["Text"]?.ToString();
+
+    // Get background image
+    string? backgroundImage = null;
+    var paths = part?["BackgroundImage"]?["Paths"];
+    if (paths != null)
+    {
+        foreach (var path in paths)
+        {
+            if (path != null)
+            {
+                backgroundImage = "/media/" + path.ToString();
+                break;
+            }
+        }
+    }
+
+    var backgroundStyle = !string.IsNullOrEmpty(backgroundImage)
+        ? $"background-image: url('{backgroundImage}');"
+        : "";
 }
 
-@await Component.InvokeAsync("CtaSectionWidget", new { contentItem = contentItem })
+@if (!string.IsNullOrEmpty(sectionTitle))
+{
+    <section class="cta-section @cssClass" style="@backgroundStyle">
+        <div class="container">
+            <div class="cta-content text-center">
+                <h2 class="cta-title">@sectionTitle</h2>
+                @if (!string.IsNullOrEmpty(sectionText))
+                {
+                    <p class="cta-text">@sectionText</p>
+                }
+                @if (!string.IsNullOrEmpty(buttonText) && !string.IsNullOrEmpty(buttonUrl))
+                {
+                    <a href="@buttonUrl" class="btn btn-secondary btn-lg">@buttonText</a>
+                }
+            </div>
+        </div>
+    </section>
+}

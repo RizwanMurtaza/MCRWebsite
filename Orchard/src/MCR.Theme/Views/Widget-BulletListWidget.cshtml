@@ -1,7 +1,107 @@
 @using OrchardCore.ContentManagement
-
+@using System.Linq
 @{
     var contentItem = Model.ContentItem as ContentItem;
+    var part = contentItem?.Content["BulletListWidget"];
+    var itemsBag = contentItem?.Content["BagPart"]?["ContentItems"];
+
+    var sectionTitle = part?["SectionTitle"]?["Text"]?.ToString();
+    var sectionSubtitle = part?["SectionSubtitle"]?["Text"]?.ToString();
+    var listStyle = part?["ListStyle"]?["Text"]?.ToString() ?? "bullet";
+    var columns = part?["Columns"]?["Text"]?.ToString() ?? "1";
+    var cssClass = part?["CssClass"]?["Text"]?.ToString();
+
+    // Build items list
+    var items = new List<(string Text, string Url, int Order)>();
+    if (itemsBag != null)
+    {
+        foreach (var item in itemsBag)
+        {
+            var itemPart = item?["BulletListItem"];
+            if (itemPart != null)
+            {
+                var text = itemPart?["Text"]?["Text"]?.ToString() ?? "";
+                var url = itemPart?["Url"]?["Text"]?.ToString() ?? "";
+                var orderVal = itemPart?["DisplayOrder"]?["Value"];
+                int order = 1;
+                if (orderVal != null)
+                {
+                    int.TryParse(orderVal.ToString(), out order);
+                }
+                items.Add((text, url, order));
+            }
+        }
+    }
+    items.Sort((a, b) => a.Order.CompareTo(b.Order));
+
+    var columnClass = columns switch
+    {
+        "2" => "col-md-6",
+        "3" => "col-md-4",
+        _ => "col-12"
+    };
+
+    var listStyleClass = listStyle?.ToLower() switch
+    {
+        "check" => "list-check",
+        "arrow" => "list-arrow",
+        "number" => "list-numbered",
+        _ => "list-bullet"
+    };
 }
 
-@await Component.InvokeAsync("BulletListWidget", new { contentItem })
+<section class="mcr-bullet-list-section py-5 @cssClass">
+    <div class="container">
+        @if (!string.IsNullOrEmpty(sectionTitle))
+        {
+            <div class="text-center mb-5">
+                <h2 class="section-title">@sectionTitle</h2>
+                @if (!string.IsNullOrEmpty(sectionSubtitle))
+                {
+                    <p class="section-subtitle text-muted">@sectionSubtitle</p>
+                }
+            </div>
+        }
+
+        <div class="row">
+            @if (columns == "1")
+            {
+                <div class="col-12">
+                    <ul class="mcr-list @listStyleClass">
+                        @foreach (var item in items)
+                        {
+                            <li>
+                                @if (!string.IsNullOrEmpty(item.Url))
+                                {
+                                    <a href="@item.Url">@item.Text</a>
+                                }
+                                else
+                                {
+                                    @item.Text
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+            else
+            {
+                @foreach (var item in items)
+                {
+                    <div class="@columnClass mb-3">
+                        <div class="mcr-list-item @listStyleClass">
+                            @if (!string.IsNullOrEmpty(item.Url))
+                            {
+                                <a href="@item.Url">@item.Text</a>
+                            }
+                            else
+                            {
+                                @item.Text
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>

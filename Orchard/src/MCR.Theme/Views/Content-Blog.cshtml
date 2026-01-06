@@ -1,12 +1,8 @@
 @using OrchardCore.ContentManagement
-@using OrchardCore.ContentManagement.Display
-@using OrchardCore.DisplayManagement
-@using OrchardCore.DisplayManagement.Views
-@model OrchardCore.ContentManagement.ContentItem
-
 @{
-    var title = Model.DisplayText ?? "Blog";
-    var description = Model.Content.Blog?.Description?.Text?.ToString();
+    var contentItem = Model.ContentItem as ContentItem;
+    var title = contentItem?.DisplayText ?? "Blog";
+    var description = contentItem?.Content?["Blog"]?["Description"]?["Text"]?.ToString();
 }
 
 <section class="blog-header">
@@ -23,6 +19,8 @@
 
 <section class="blog-listing section">
     <div class="container">
-        @await DisplayAsync(Model.Content.ListPart)
+        <div class="blog-grid">
+            @await DisplayAsync(Model.Content["ListPart"])
+        </div>
     </div>
 </section>
